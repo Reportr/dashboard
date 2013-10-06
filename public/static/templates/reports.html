@@ -1,0 +1,11 @@
+<div class="row">
+	<% _.each(reports, function(report) { %>
+	<div class="col-lg-12">
+		<div class="event-summary">
+			<%= view.component("events.chart.line", {
+				"report": report
+			}) %>
+		</div>
+	</div>
+	<% }); %>
+</div>

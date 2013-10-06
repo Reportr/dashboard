@@ -1,0 +1,150 @@
+#dashboard {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	background: #eee;
+
+	#lateralbar {
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		top: 0px;
+		width: 50px;
+		z-index: 10;
+		background: #3498db;
+		.transition(all .4s);
+		overflow: hidden;
+
+		.opened {
+			display: none;
+		}
+
+		&:hover, &.open {
+			width: 340px;
+
+			.opened {
+				display: block;
+			}
+		}
+
+		/* Search bar for models */
+		.search {
+			position: absolute;
+			right: 15px;
+			left: 50px;
+			top: 15px;
+			width: auto;
+			background: #fff;
+			outline: none !important;
+			border: none;
+			color: #2980b9;
+			padding: 8px;
+		}
+
+		/* Actions */
+		.menu-action {
+			display: block;
+			position: absolute;
+			width: 30px;
+			height: 30px;
+			color: #fff;
+			line-height: 30px;
+			font-size: 30px;
+			opacity: 0.6;
+			text-align: center;
+
+			&:hover {
+				text-decoration: none;
+				opacity: 1;
+			}
+
+			&.action-dashboard {
+				top: 18px;
+				left: 10px;
+			}
+
+			&.action-logout {
+				bottom: 10px;
+				left: 10px;
+			}
+		}
+
+		/* Models */
+		.models {
+			position: absolute;
+			right: 15px;
+			left: 50px;
+			bottom: 15px;
+			top: 65px;
+			width: 275px;
+		}
+	}
+
+
+	#panel {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		top: 0px;
+		width: 450px;
+		border-left: 2px solid #ddd;
+		background: #fff;
+
+		.title {
+			position: absolute;
+			right: 0px;
+			left: 0px;
+			top: 0px;
+			padding: 15px;
+			background: #f8f8f8;
+			border-bottom: 2px solid #ddd;
+
+			h3 {
+				margin: 0px;
+				font-weight: 200;
+			}
+		}
+
+		.events {
+			position: absolute;
+			bottom: 47px;
+			right: 0px;
+			left: 0px;
+			top: 58px;
+			overflow-y: auto;
+		}
+
+		.token {
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			left: 0px;
+			padding: 10px;
+			border-top: 1px solid #eee;
+			background: #f8f8f8;
+
+			input {
+				width: 100%;
+			}
+		}
+	}
+
+	#body {
+		position: absolute;
+		bottom: 0px;
+		right: 452px;
+		top: 0px;
+		left: 50px;
+		padding: 15px;
+		overflow-y: auto;
+
+		.event-summary {
+			background: #fff;
+			border-radius: 8px;
+			padding: 15px;
+			margin-bottom: 20px;
+		}
+	}
+}

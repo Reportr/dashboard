@@ -1,0 +1,52 @@
+<div class="chart-header">
+	<img src="<%- model.icon() %>" class="model-icon"/>
+	<div class="btn-group pull-right">
+		<a href="#" class="btn btn-default action-toggle-options"><i class="icon-cog"></i></a>
+		<a href="#" class="btn btn-default action-report-remove"><i class="icon-remove"></i></a>
+	</div>
+	<h3 class="model-name"><%- model.get('name') %></h3>
+	<p class="model-description"><%- model.get('description') %></p>
+</div>
+<div class="chart-options">
+	<!-- Transformations -->
+	<select class="pull-right select-transform">
+		<% _.each(transforms, function(f, name) { %>
+			<option value="<%- name %>" <% if (name == settings.transform) { %>selected<% } %>><%- name %></option>
+		<% }); %>
+	</select>
+
+	<!-- Period -->
+	<select class="pull-right select-period">
+		<% _.each(periods, function(t, name) { %>
+			<option value="<%- t %>" <% if (t == settings.period) { %>selected<% } %>><%- name %></option>
+		<% }); %>
+	</select>
+
+	<!-- Interval -->
+	<select class="pull-right select-interval">
+		<% _.each(intervals, function(t, name) { %>
+			<option value="<%- t %>" <% if (t == settings.interval) { %>selected<% } %>><%- name %></option>
+		<% }); %>
+	</select>
+
+	<!-- Properties -->
+	<% if (_.size(properties) > 0) { %>
+	<div class="select-properties">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="" <% if (_.contains(settings.properties, null)) { %>checked<% } %>>
+				Default
+			</label>
+		</div>
+		<% _.each(properties, function(name) { %>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" value="<%- name %>" <% if (_.contains(settings.properties, name)) { %>checked<% } %>>
+					<%- name %>
+				</label>
+			</div>
+		<% }); %>
+	</div>
+	<% } %>
+</div>
+<div style="width: 100%; height: 300px;" class="chart"></div>

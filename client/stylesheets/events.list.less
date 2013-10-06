@@ -1,0 +1,49 @@
+.events-list {
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+
+	.event-item {
+		padding: 10px 15px;
+		border-bottom: 1px solid #ddd;
+		.clearfix();
+		cursor: pointer !important;
+
+		&:hover {
+			background: #fafafa;
+		}
+
+		.model-icon {
+			width: 36px;
+			height: 36px;
+			float: left;
+			margin-right: 8px;
+		}
+
+		.badge {
+			float: right;
+			padding: 12px;
+		}
+
+		p {
+			margin: 0px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+
+			&.model-name {
+				font-weight: 400;
+			}
+			&.model-description {
+				font-size: 12px;
+			}
+		}
+	}
+
+	.hr-list-message-more {
+		text-align: center;
+		background: #eee;
+		margin: 0px;
+		cursor: pointer;
+	}
+}

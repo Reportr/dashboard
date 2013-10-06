@@ -1,0 +1,25 @@
+{
+    "name": "reportr",
+    "description": "Your life personal dashboard.",
+    "version": "0.0.1",
+    "author": "samypesse@gmail.com",
+    "dependencies": {
+        "q": "0.9.6",
+        "underscore": "1.4.4",
+        "event-stream": "3.0.11",
+        "readable-stream": "1.0.2",
+        "request": "2.27.0",
+        "mongoose": "3.6.20",
+        "eventemitter2": "0.4.13",
+        "express": "3.3.5",
+        "socket.io": "0.9.16",
+        "hr.js": "0.1.1",
+        "uuid": "1.4.1"
+    },
+    "bin": {
+        "run": "./bin/run.js"
+    },
+    "devDependencies": {
+        "socket.io-client": "0.9.16"
+    }
+}
