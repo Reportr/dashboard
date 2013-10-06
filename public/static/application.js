@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381081854464,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381082635358,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -33501,7 +33501,7 @@ define('views/events.chart.line',[
             'limit': 100,
             'transform': 'sum',
             'properties': [null],
-            'period': 7*24*60*60*1000,
+            'period': -1,
             'interval': 60*60*1000
         },
         events: {
@@ -33524,6 +33524,7 @@ define('views/events.chart.line',[
         },
         dataPeriods: {
             'Last 10 minutes': 10*60*1000,
+            'Last 30 minutes': 30*60*1000,
             'Last hour': 60*60*1000,
             'Last day': 24*60*60*1000,
             'Last week': 7*24*60*60*1000,
@@ -33534,7 +33535,9 @@ define('views/events.chart.line',[
         dataLimits: [100, 300, 500, 1000, 2000, 10000],
         dataIntervals: {
             'Minute': 60*1000,
+            '10 Minutes': 10*60*1000,
             'Hour': 60*60*1000,
+            '6 Hours': 60*60*1000,
             'Day': 24*60*60*1000,
             'Week': 7*24*60*60*1000,
             'Month': 30*24*60*60*1000,
