@@ -122,7 +122,7 @@ Here is a list of trackers, I already build or I want to build.
 
 #### Track your web navigation
 
-On Google Chrome, opne the extensions settings and add an unpacked extension from the directory *examples/javascript/chrome*.
+On Google Chrome, open the extensions settings and add an unpacked extension from the directory *examples/javascript/chrome*.
 Define your host and token in the popup and that's it!
 
 Note: For your own reportr instance, you need to modify the *manifest.json* to change the permissions.
