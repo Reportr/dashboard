@@ -6,7 +6,7 @@ exports.config = {
     "base": __dirname,
 
     // Application name
-    "name": "Report.me",
+    "name": "Report",
 
     // Mode debug
     "debug": config.debug,
