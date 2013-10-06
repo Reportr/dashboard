@@ -29,6 +29,14 @@
 		<% }); %>
 	</select>
 
+	<!-- Limits -->
+	<select class="pull-right select-limit">
+		<% _.each(limits, function(v) { %>
+			<option value="<%- v %>" <% if (v == settings.limit) { %>selected<% } %>><%- v %> events</option>
+		<% }); %>
+	</select>
+	
+
 	<!-- Properties -->
 	<% if (_.size(properties) > 0) { %>
 	<div class="select-properties">

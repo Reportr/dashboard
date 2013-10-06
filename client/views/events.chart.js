@@ -33,10 +33,11 @@ define([
             // Create events collection
             this.collection = new Events({
                 'eventName': this.eventName,
-                'namespace': this.eventNamespace
+                'namespace': this.eventNamespace,
+                'limit': this.settings.limit || 100
             });
             this.collection.on("add remove",  _.throttle(this.updateChart, 500), this);
-            this.collection.getSpecific();
+            this.updateData();
             return this;
         },
 
@@ -54,6 +55,16 @@ define([
          */
         updateChart: function() {
             return this.render();
+        },
+
+        /*
+         *  Load events data
+         */
+        updateData: function() {
+            this.collection.options.limit = this.settings.limit || 100;
+            this.collection.reset([]);
+            this.collection.getSpecific();
+            return this;
         },
 
         /*

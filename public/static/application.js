@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381072850542,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381081854464,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29903,10 +29903,11 @@ define('views/events.chart',[
             // Create events collection
             this.collection = new Events({
                 'eventName': this.eventName,
-                'namespace': this.eventNamespace
+                'namespace': this.eventNamespace,
+                'limit': this.settings.limit || 100
             });
             this.collection.on("add remove",  _.throttle(this.updateChart, 500), this);
-            this.collection.getSpecific();
+            this.updateData();
             return this;
         },
 
@@ -29924,6 +29925,16 @@ define('views/events.chart',[
          */
         updateChart: function() {
             return this.render();
+        },
+
+        /*
+         *  Load events data
+         */
+        updateData: function() {
+            this.collection.options.limit = this.settings.limit || 100;
+            this.collection.reset([]);
+            this.collection.getSpecific();
+            return this;
         },
 
         /*
@@ -33487,6 +33498,7 @@ define('views/events.chart.line',[
         className: "events-chart-line",
         template: "events.chart.line.html",
         defaultSettings: {
+            'limit': 100,
             'transform': 'sum',
             'properties': [null],
             'period': 7*24*60*60*1000,
@@ -33499,6 +33511,7 @@ define('views/events.chart.line',[
 
             // Options
             'change .select-transform': 'actionSelectTransform',
+            'change .select-limit': 'actionSelectLimit',
             'change .select-properties input': 'actionSelectProperty',
             'change .select-interval': 'actionSelectInterval',
             'change .select-period': 'actionSelectPeriod'
@@ -33518,6 +33531,7 @@ define('views/events.chart.line',[
             'Last year': 12*30*24*60*60*1000,
             'All': -1
         },
+        dataLimits: [100, 300, 500, 1000, 2000, 10000],
         dataIntervals: {
             'Minute': 60*1000,
             'Hour': 60*60*1000,
@@ -33550,6 +33564,7 @@ define('views/events.chart.line',[
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
                 'properties': this.collection.properties(),
+                'limits': this.dataLimits,
 
                 'settings': this.settings
             };
@@ -33642,6 +33657,15 @@ define('views/events.chart.line',[
             this.settings.interval = parseInt(this.$(".select-interval").val());
             this.saveSettings();
             this.updateChart();
+        },
+
+        /*
+         *  (action) Select interval
+         */
+        actionSelectLimit: function(e) {
+            this.settings.limit = parseInt(this.$(".select-limit").val());
+            this.saveSettings();
+            this.updateData();
         },
 
         /*

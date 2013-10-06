@@ -23,6 +23,7 @@ define([
         className: "events-chart-line",
         template: "events.chart.line.html",
         defaultSettings: {
+            'limit': 100,
             'transform': 'sum',
             'properties': [null],
             'period': 7*24*60*60*1000,
@@ -35,6 +36,7 @@ define([
 
             // Options
             'change .select-transform': 'actionSelectTransform',
+            'change .select-limit': 'actionSelectLimit',
             'change .select-properties input': 'actionSelectProperty',
             'change .select-interval': 'actionSelectInterval',
             'change .select-period': 'actionSelectPeriod'
@@ -54,6 +56,7 @@ define([
             'Last year': 12*30*24*60*60*1000,
             'All': -1
         },
+        dataLimits: [100, 300, 500, 1000, 2000, 10000],
         dataIntervals: {
             'Minute': 60*1000,
             'Hour': 60*60*1000,
@@ -86,6 +89,7 @@ define([
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
                 'properties': this.collection.properties(),
+                'limits': this.dataLimits,
 
                 'settings': this.settings
             };
@@ -178,6 +182,15 @@ define([
             this.settings.interval = parseInt(this.$(".select-interval").val());
             this.saveSettings();
             this.updateChart();
+        },
+
+        /*
+         *  (action) Select interval
+         */
+        actionSelectLimit: function(e) {
+            this.settings.limit = parseInt(this.$(".select-limit").val());
+            this.saveSettings();
+            this.updateData();
         },
 
         /*
