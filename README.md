@@ -1,6 +1,6 @@
 # Reportr : Your life's personal dashboard.
 
-Reportr is a complete application whick works like a dashboard for tracking events in your life (using a very simpel API). With a simple interface, it can track and show your online activity (with trackers like Fcaebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
+Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it can track and show your online activity (with trackers like Fcaebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
 
@@ -10,11 +10,11 @@ The project is entirely open source and you can host your own Reportr instance o
 
 * Host your own Reportr instance and keep your data private
 * Track events from anywhere (web server, client application, connected hardware, ...)
-* It's very simple to track an event : HTTP API
-* Simple but powerful web dashboard
+* It's very simple to track an event: HTTP API
+* Simple, but powerful web dashboard
 * Realtime display
 * One place for all your personal analytics data
-* Very simple to export data for analytics (machien learning, ...)
+* Very simple to export data for analytics (machine learning, ...)
 
 ## How to host your own Reportr instance ?
 
@@ -44,15 +44,15 @@ Open the file **config.js** and adapt the web configuration to your server confi
 
 ## APIs
 
-Reportr use an http REST API to track event and manage models.
+Reportr use a HTTP REST API to track event and manage models.
 
-Data are always JSON encoded and Base64 encoded and pass as a "*data*" argument. You can pass a "*callback*" arguments for using HTTP API in a client side application.
+Data are always JSON encoded and Base64 encoded and passed as a "*data*" argument. You can pass a "*callback*" arguments for using HTTP API in a client side application.
 
-You can found in the *examples* directory some library to use Reportr in Python and Javascript. To build the client library, you will need 'browserify' (npm install -g browserify).
+You can get some libraries to use Reportr in Python and Javascript in the *examples* directory. To build the Javascript client library, you will need 'browserify' (npm install -g browserify).
 
 #### Track events
 
-Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaterssuch as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
+Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaters such as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
 
 ```
 <host>/api/<token>/events/track
@@ -78,7 +78,7 @@ Events are definied by 'event', 'namespace' and 'properties'. You can alse speci
 
 #### Define models
 
-Events models define information about how to present and display an event
+Events models define information about how to display an event in the dashboard.
 
 ```
 <host>/api/<token>/model/set
@@ -100,7 +100,7 @@ Events models define information about how to present and display an event
 
 #### Special properties for events
 
-When you track events using the api, you can define some specials properties that can be use by reportr for advanced used. Special properties begin with '$'.
+When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '$'.
 
 ```
 $lat : latitude for location
