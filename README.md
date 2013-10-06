@@ -1,7 +1,7 @@
 # Reportr
 > "Your life's personal dashboard."
 
-Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it can track and show your online activity (with trackers like Fcaebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
+Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity (with trackers for Facebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
 
