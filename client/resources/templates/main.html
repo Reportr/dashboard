@@ -5,7 +5,6 @@
 	<!-- Lateral bar -->
 	<div id="lateralbar">
 		<!-- Action -->
-		<a href="#" class="menu-action action-dashboard"><i class="icon-bar-chart"></i></a>
 		<a href="#" class="menu-action action-logout"><i class="icon-signout"></i></a>
 
 		<!-- Models -->
@@ -14,25 +13,6 @@
 			<%= view.component("models.list", {
 				'collection': user.models
 			}, "models") %>
-		</div>
-	</div>
-
-	<!-- Right panel -->
-	<div id="panel">
-		<div class="title">
-			<h3>Live View</h3>
-		</div>
-		<div class="events">
-			<%= view.component("events.list", {
-				'collection': {
-					'loader': 'getLast',
-					'limit': 50,
-					'allEvents': true
-				}
-			}, "events") %>
-		</div>
-		<div class="token">
-			<input type="text" readonly value="<%- user.get('token') %>" />
 		</div>
 	</div>
 

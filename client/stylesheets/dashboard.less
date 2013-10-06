@@ -11,29 +11,17 @@
 		bottom: 0px;
 		left: 0px;
 		top: 0px;
-		width: 50px;
+		width: 320px;
 		z-index: 10;
 		background: #3498db;
 		.transition(all .4s);
 		overflow: hidden;
 
-		.opened {
-			display: none;
-		}
-
-		&:hover, &.open {
-			width: 340px;
-
-			.opened {
-				display: block;
-			}
-		}
-
 		/* Search bar for models */
 		.search {
 			position: absolute;
 			right: 15px;
-			left: 50px;
+			left: 15px;
 			top: 15px;
 			width: auto;
 			background: #fff;
@@ -75,68 +63,18 @@
 		.models {
 			position: absolute;
 			right: 15px;
-			left: 50px;
-			bottom: 15px;
+			left: 15px;
+			bottom: 45px;
 			top: 65px;
-			width: 275px;
-		}
-	}
-
-
-	#panel {
-		position: absolute;
-		bottom: 0px;
-		right: 0px;
-		top: 0px;
-		width: 450px;
-		border-left: 2px solid #ddd;
-		background: #fff;
-
-		.title {
-			position: absolute;
-			right: 0px;
-			left: 0px;
-			top: 0px;
-			padding: 15px;
-			background: #f8f8f8;
-			border-bottom: 2px solid #ddd;
-
-			h3 {
-				margin: 0px;
-				font-weight: 200;
-			}
-		}
-
-		.events {
-			position: absolute;
-			bottom: 47px;
-			right: 0px;
-			left: 0px;
-			top: 58px;
-			overflow-y: auto;
-		}
-
-		.token {
-			position: absolute;
-			bottom: 0px;
-			right: 0px;
-			left: 0px;
-			padding: 10px;
-			border-top: 1px solid #eee;
-			background: #f8f8f8;
-
-			input {
-				width: 100%;
-			}
 		}
 	}
 
 	#body {
 		position: absolute;
 		bottom: 0px;
-		right: 452px;
+		right: 0px;
 		top: 0px;
-		left: 50px;
+		left: 320px;
 		padding: 15px;
 		overflow-y: auto;
 

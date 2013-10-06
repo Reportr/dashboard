@@ -22,6 +22,10 @@ define([
 
             // Add new model in realtime
             notifications.on("models:new", function(e) {
+                var model = this.getModel(e.report(), null);
+                if (model != null) {
+                    this.remove(model);
+                }
                 this.add(e);
             }, this);
             return this;
@@ -52,11 +56,13 @@ define([
         getModel: function(e, def) {
             if (!_.isString(e)) e = e.report();
 
-            def = def || new EventModel({}, {
-                "name": e,
-                "event": e.split("/")[1],
-                "namespace": e.split("/")[0]
-            });
+            if (def !== null) {
+                def = def || new EventModel({}, {
+                    "name": e,
+                    "event": e.split("/")[1],
+                    "namespace": e.split("/")[0]
+                });   
+            }
 
             return this.reduce(function(memo, model) {
                 if (model.report() == e) memo = model;

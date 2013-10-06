@@ -1,4 +1,4 @@
-# Reportr : Your life personal dashboard.
+# Reportr : Your life's personal dashboard.
 
 Reportr is a complete application whick works like a dashboard for tracking your events in your life. With a simple interface, it can track and show your online activity (with trackers like Fcaebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
 
@@ -38,6 +38,8 @@ You can found in the *examples* directory some library to use Reportr in Python 
 
 #### Track events
 
+Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaterssuch as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
+
 ```
 <host>/api/<token>/events/track
 
@@ -53,6 +55,10 @@ You can found in the *examples* directory some library to use Reportr in Python 
 #### List events
 
 ```
+# List last events
+<host>/api/<token>/events/last
+
+# List specific events
 <host>/api/<token>/events/<namespace>/<event>
 ```
 
