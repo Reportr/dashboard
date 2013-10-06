@@ -34,7 +34,7 @@ Reportr use an http REST API to track event and manage models.
 
 Data are always JSON encoded and Base64 encoded and pass as a "*data*" argument. You can pass a "*callback*" arguments for using HTTP API in a client side application.
 
-You can found in the *examples* directory some library to use Reportr in Python and Javascript.
+You can found in the *examples* directory some library to use Reportr in Python and Javascript. To build the client library, you will need 'browserify' (npm install -g browserify).
 
 #### Track events
 

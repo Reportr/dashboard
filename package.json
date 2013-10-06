@@ -20,6 +20,7 @@
         "run": "./bin/run.js"
     },
     "devDependencies": {
+        "browser-request": "0.2.1",
         "socket.io-client": "0.9.16"
     }
 }

@@ -23,7 +23,11 @@ define([
          *  Return icon
          */
         icon: function() {
-            return this.get('icon') || '/static/images/models/default.png';
+            var icon = this.get('icon', "");
+            if (icon.length > 0 && icon[0] == '$') {
+                icon = '/static/images/models/'+icon.slice(1)+'.png';
+            }
+            return icon || '/static/images/models/default.png';
         }
     });
 
