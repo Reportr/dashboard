@@ -68,7 +68,7 @@ class Reportr(Session):
 
         return super(Reportr, self).request(method, url, **req_kwargs)
 
-    def track(self, event, namespace="main", properties={}):
+    def track(self, event, namespace="main", **kwargs):
         """
         Track an event
 
@@ -76,12 +76,10 @@ class Reportr(Session):
         :param namespace: namespace for the event
         :param properties: properties for the event
         """
+        kwargs["event"] = event
+        kwargs["namespace"] = namespace
         return self.request("get", "api/"+self.token+"/events/track", params={
-            "data": base64.b64encode(json.dumps({
-                'event': event,
-                'namespace': namespace,
-                'properties': properties
-            }))
+            "data": base64.b64encode(json.dumps(kwargs))
         })
 
     def model(self, event, namespace="main", **kwargs):
