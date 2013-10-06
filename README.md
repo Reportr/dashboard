@@ -4,6 +4,8 @@ Reportr is a complete application which works like a dashboard for tracking even
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
 
+A simple instance of Reportr runs at [www.reportr.io][http://www.reportr.io]. This is a very small instance and you can't use it yet for tracking a lot of events, but I'll probably scale this in the future.
+
 [![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
 
 ## Why Reportr is great ?
