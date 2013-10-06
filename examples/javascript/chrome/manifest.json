@@ -2,11 +2,15 @@
     "manifest_version": 2,
 
     "name": "Reportr Tracker",
-    "description": "This extension demonstrates how to track browser navigation with Reportr.",
+    "description": "Track your web navigation to your Reportr.",
+    "icons": {
+        "128": "icon.png"
+    },
     "version": "1.0",
-    "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:5000; object-src 'self'",
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
     "permissions": [
+        "http://www.reportr.io/",
         "history", "storage"
     ],
     "browser_action": {

@@ -22,5 +22,9 @@
     "devDependencies": {
         "browser-request": "0.2.1",
         "socket.io-client": "0.9.16"
+    },
+    "engines": {
+        "node": "0.8.x",
+        "npm":  "1.1.x"
     }
 }

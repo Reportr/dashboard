@@ -5,7 +5,7 @@ module.exports =  {
 	/* Server configuration */
 	"web": {
 		/* (string) Hostname for the application */
-		"host": "reportr.me",
+		"host": "reportr.io",
 
 		/* (boolean) Secure https mode */
 		"secure": false,
@@ -17,11 +17,5 @@ module.exports =  {
 	/* Database configuration */
 	"database": {
 		"url": process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
-	},
-
-	/* Users configuration */
-	"users": {
-		/* (int) Max number of users */
-		"max": 1000
 	},
 };

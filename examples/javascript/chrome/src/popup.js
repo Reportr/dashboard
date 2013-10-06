@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var startTracking = function(cHost, cToken) {
-		cHost = cHost || "";
+		cHost = cHost || "http://www.reportr.io";
 		cToken = cToken || "";
 
 		// Save in storage

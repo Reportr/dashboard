@@ -7,9 +7,10 @@ var _ = require('Underscore');
 var Q = require('Q');
 var jsonp = require('./jsonp');
 
-var Reportr = function(host, token) {
+var Reportr = function(host, token, mode) {
 	this.host = host;
 	this.token = token;
+	this.jsonp = jsonp[mode || 'browser']
 };
 
 
@@ -35,7 +36,7 @@ Reportr.prototype.track = function(eventNamespace, eventName, properties, option
 	// Base64 encode
 	data = (new Buffer(data)).toString('base64');
 
-	jsonp(this.host+"/api/"+this.token+"/events/track?callback=?&data="+data, function(err, data) {
+	this.jsonp(this.host+"/api/"+this.token+"/events/track?callback=?&data="+data, function(err, data) {
 		if (!err) return deferred.resolve(data);
         deferred.reject(err);
 	});
@@ -63,7 +64,7 @@ Reportr.prototype.model = function(eventNamespace, eventName, options) {
 	// Base64 encode
 	data = (new Buffer(data)).toString('base64');
 
-	jsonp(this.host+"/api/"+this.token+"/model/set?callback=?&data="+data, function(err, data) {
+	this.jsonp(this.host+"/api/"+this.token+"/model/set?callback=?&data="+data, function(err, data) {
 		if (!err) return deferred.resolve(data);
         deferred.reject(err);
 	});
@@ -75,7 +76,7 @@ module.exports = Reportr
 },{"./jsonp":2,"Q":3,"Underscore":4,"__browserify_Buffer":8}],2:[function(require,module,exports){
 var request = require('browser-request');
 
-var jsonp = function (url, callback) {
+var jsonpNode = function (url, callback) {
 	url.replace('callback=?', 'jsonp_callback');
 	request(url, function (error, response, body) {
 	  if (!error && response.statusCode == 200) {
@@ -100,24 +101,34 @@ var jsonp = function (url, callback) {
 	})
 };
 
+
 if (window != null) {
 	window._jsonp_callbacks = {};
-	jsonp = function(url, cb) {
-		var id = 'j' + (Math.random() * (1<<30)).toString(16).replace('.', '')
-		, script = document.createElement('script')
-
-		window._jsonp_callbacks[id] = function(res) {
-		cb && cb(res)
-		delete window._jsonp_callbacks[id]
-		script.parentNode.removeChild(script)
-		}
-
-		script.src = url.replace('callback=?', 'callback=_jsonp_callbacks.' + id)
-		document.getElementsByTagName('head')[0].appendChild(script)
-	};
 }
 
-module.exports = jsonp;
+var jsonpBrowser = function(url, cb) {
+	if (window == null) { 
+		throw "Works only in browser";
+	}
+	var id = 'j' + (Math.random() * (1<<30)).toString(16).replace('.', '')
+	, script = document.createElement('script')
+
+	window._jsonp_callbacks[id] = function(res) {
+	cb && cb(res)
+	delete window._jsonp_callbacks[id]
+	script.parentNode.removeChild(script)
+	}
+
+	script.src = url.replace('callback=?', 'callback=_jsonp_callbacks.' + id)
+	document.getElementsByTagName('head')[0].appendChild(script)
+};
+
+
+
+module.exports = {
+	'browser': jsonpBrowser,
+	'node': jsonpNode
+};
 },{"browser-request":5}],3:[function(require,module,exports){
 var process=require("__browserify_process");// vim:ts=4:sts=4:sw=4:
 /*!

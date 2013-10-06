@@ -18,13 +18,13 @@ var start = function(host, token) {
 	}
 
 	console.log("Create reportr client with token ", token);
-	reportr = new Reportr(host, token);
+	reportr = new Reportr(host, token, "node");
 
 	console.log("Add event model");
 	reportr.model("chrome", "visit", {
 		"icon": "$browser",
 		"name": "Web Navigation",
-		"description": "Webpage viewed on Google Chrome"
+		"description": "Webpages viewed on Google Chrome"
 	});
 }
 
