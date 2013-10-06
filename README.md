@@ -125,5 +125,7 @@ Here is a list of trackers, I already build or I want to build.
 On Google Chrome, open the extensions settings and add an unpacked extension from the directory *examples/javascript/chrome*.
 Define your host and token in the popup and that's it!
 
+_* You can get the token by clicking the "key" icon at the bottom left corner of your reportr page._
+
 Note: For your own reportr instance, you need to modify the *manifest.json* to change the permissions.
 
