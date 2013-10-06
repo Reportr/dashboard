@@ -16,6 +16,6 @@ module.exports =  {
 
 	/* Database configuration */
 	"database": {
-		"url": process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
+		"url": process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
 	},
 };

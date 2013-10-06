@@ -28,8 +28,10 @@ $ nano ./config.js
 # Create your heroku application
 $ heroku create
 
-# Add MongoHQ addon for heroku
+# Add MongoHQ or MongoLab addon for heroku
 $ heroku addons:add mongohq:small
+or
+$ heroku addons:add mongolab:sandbox
 
 # Deploy the application
 $ git push heroku master
