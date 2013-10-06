@@ -43,8 +43,6 @@ $ git push heroku master
 $ heroku open
 ```
 
-Open the file **config.js** and adapt the web configuration to your server configuration.
-
 ## APIs
 
 Reportr use a HTTP REST API to track event and manage models.
