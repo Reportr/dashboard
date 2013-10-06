@@ -4,15 +4,19 @@
 <div id="dashboard">
 	<!-- Lateral bar -->
 	<div id="lateralbar">
-		<!-- Action -->
-		<a href="#" class="menu-action action-logout"><i class="icon-signout"></i></a>
-
 		<!-- Models -->
 		<input type="text" class="search" placeholder="Search" />
 		<div class="models">
 			<%= view.component("models.list", {
 				'collection': user.models
 			}, "models") %>
+		</div>
+
+		<!-- Footer -->
+		<div class="footer">
+			<a href="#" class="menu-action action-logout"><i class="icon-signout"></i></a>
+			<a href="#" class="menu-action action-token"><i class="icon-key"></i></a>
+			<a href="https://github.com/SamyPesse/reportr" class="menu-action"><i class="icon-github"></i></a>
 		</div>
 	</div>
 

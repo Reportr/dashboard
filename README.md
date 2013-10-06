@@ -4,6 +4,18 @@ Reportr is a complete application whick works like a dashboard for tracking even
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
 
+[![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
+
+## Why Reportr is great ?
+
+* Host your own Reportr instance and keep your data private
+* Track events from anywhere (web server, client application, connected hardware, ...)
+* It's very simple to track an event : HTTP API
+* Simple but powerful web dashboard
+* Realtime display
+* One place for all your personal analytics data
+* Very simple to export data for analytics (machien learning, ...)
+
 ## How to host your own Reportr instance ?
 
 ```
@@ -105,4 +117,10 @@ Here is a list of trackers, I already build or I want to build.
 * Hardware:
 	* Track the temperature in my room (using tessel.io)
 
+#### Track your web navigation
+
+On Google Chrome, opne the extensions settings and add an unpacked extension from the directory **examples/javascript/chrome**.
+Define your host and token in the popup and that's it!
+
+Note: For your own reportr instance, you need to modify the **manifest.json** to change the permissions.
 

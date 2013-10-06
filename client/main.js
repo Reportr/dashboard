@@ -37,7 +37,8 @@ require([
             "click .action-logout": "actionLogout",
 
             // Dashboard
-            "keyup #lateralbar .search": "searchModels"
+            "keyup #lateralbar .search": "searchModels",
+            "click .action-token": "actionGetToken"
         },
 
         /*
@@ -159,6 +160,16 @@ require([
         searchModels: function(e) {
             var q = $(e.currentTarget).val();
             this.components.models.search(q); 
+        },
+
+        /*
+         *  (action) Get token
+         */
+        actionGetToken: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            alert(this.user.get("token"));
         }
     });
 
