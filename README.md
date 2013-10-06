@@ -1,10 +1,11 @@
-# Reportr : Your life's personal dashboard.
+# Reportr
+> "Your life's personal dashboard."
 
 Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it can track and show your online activity (with trackers like Fcaebook, Twitter, GitHub, ...) or your real-life activity (with hardware trackers or applications like Runkeeper).
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
 
-A simple instance of Reportr runs at [www.reportr.io][http://www.reportr.io]. This is a very small instance and you can't use it yet for tracking a lot of events, but I'll probably scale this in the future.
+A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). This is a very small instance and you can't use it yet for tracking a lot of events, but I'll probably scale this in the future.
 
 [![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
 
@@ -123,8 +124,8 @@ Here is a list of trackers, I already build or I want to build.
 
 #### Track your web navigation
 
-On Google Chrome, opne the extensions settings and add an unpacked extension from the directory **examples/javascript/chrome**.
+On Google Chrome, opne the extensions settings and add an unpacked extension from the directory *examples/javascript/chrome*.
 Define your host and token in the popup and that's it!
 
-Note: For your own reportr instance, you need to modify the **manifest.json** to change the permissions.
+Note: For your own reportr instance, you need to modify the *manifest.json* to change the permissions.
 
