@@ -3,13 +3,13 @@ from reportr import Reportr
 
 # Create a Reportr Client
 client = Reportr(
-	host="http://localhost:5000",
-	token="59c9088e-397c-44b2-a5d0-4fccea29760a")
+	host="http://www.reportr.io",
+	token="fb5dfd49-760a-4bce-bf67-fa6131283c71")
 
 # Define model for our event
 client.model("reportr", "ping",
 	name="Ping",
-	description="Ping test for the Reportr API with random value.",
+	description="Ping tests for the Reportr API with random value.",
 	icon="$message")
 
 # Track an event
