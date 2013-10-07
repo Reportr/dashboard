@@ -102,6 +102,20 @@ define([
         },
 
         /*
+         *  Resize
+         */
+        resizeChart: function() {
+            ReportLineView.__super__.resizeChart.apply(this, arguments);
+
+            if (this.chart != null) {
+                this.chart.resize();
+                this.chart.setupGrid();
+                this.chart.draw();
+            }
+            return this;
+        },
+
+        /*
          *  Events list change : refresh the chart
          */
         updateChart: function() {

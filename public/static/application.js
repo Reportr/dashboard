@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381150586838,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381156764703,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29915,11 +29915,12 @@ define('models/eventinfo',[
 });
 define('views/report',[
     "hr/hr",
+    "jQuery",
     "Underscore",
     "api",
     "models/user",
     "models/eventinfo"
-], function(hr, _, api, User, EventInfo) { 
+], function(hr, $, _, api, User, EventInfo) { 
 
     Array.prototype.remove = function() {
         var what, a = arguments, L = a.length, ax;
@@ -29955,6 +29956,8 @@ define('views/report',[
 
             // Bind update
             this.report.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
+            this.report.on("layout", this.resizeChart, this);
+            $(window).resize(_.bind(this.resizeChart, this));
             return this;
         },
 
@@ -29972,6 +29975,13 @@ define('views/report',[
          */
         updateChart: function() {
             return this.render();
+        },
+
+        /*
+         *  need to resize the chart
+         */
+        resizeChart: function() {
+            return this;
         },
 
         /*
@@ -30001,10 +30011,16 @@ define('views/report',[
             // Actions
             'click .report-header .action-toggle-options': 'actionToggleOptions',
             'click .report-header .action-report-remove': 'actionReportRemove',
-            'click *[data-visualization]': 'actionSelectVisualisation'
+            'click *[data-visualization]': 'actionSelectVisualisation',
+            'click *[data-layout]': 'actionSelectLayout'
         },
         defaultSettings: {
+            'layout': 'large',
             'visualization': 'line'
+        },
+        layouts: {
+            '<i class="icon-align-justify"></i> Large': 'large',
+            '<i class="icon-th-large"></i> Medium': 'medium'
         },
 
         /*
@@ -30020,13 +30036,17 @@ define('views/report',[
 
             // Create settings
             this.settings = {};
-            _.defaults(this.settings, this.defaultSettings);
             _.extend(this.settings, this.loadSettings());
+            _.defaults(this.settings, this.defaultSettings);
 
             // Create event info
             this.eventInfo = new EventInfo();
             this.eventInfo.on("change", this.render, this);
             this.eventInfo.load(this.eventNamespace, this.eventName);
+
+            // Layout
+            this.setLayout(this.settings.layout);
+
             return this;
         },
 
@@ -30034,13 +30054,14 @@ define('views/report',[
          *  Template context
          */
         templateContext: function() {
-            console.log(this.settings);
             this.settings.visualization = this.settings.visualization || 'line';
             return {
                 'model': this.getModel(),
                 'report': this,
                 'visualization': ReportView.visualizations[this.settings.visualization],
-                'visualizations': ReportView.visualizations
+
+                'visualizations': ReportView.visualizations,
+                'layouts': this.layouts
             };
         },
 
@@ -30049,6 +30070,22 @@ define('views/report',[
          */
         getModel: function() {
             return this.eventInfo.model();
+        },
+
+        /*
+         *  Change page layout
+         */
+        setLayout: function(layout) {
+            if (!_.contains(_.values(this.layouts), layout)) {
+                layout = this.defaultSettings.layout;
+            }
+
+
+            this.settings.layout = layout;
+            this.$el.attr("class", this.className+" layout-"+this.settings.layout);
+            this.saveSettings();
+            this.trigger("layout:change");
+            return this;
         },
 
         /*
@@ -30096,6 +30133,14 @@ define('views/report',[
             };
             this.saveSettings();
             this.render();
+        },
+
+        /*
+         *  (action) Change layout
+         */
+        actionSelectLayout: function(e) {
+            if (e != null) e.preventDefault();
+            this.setLayout($(e.currentTarget).data("layout"));
         }
     }, {
         visualizations: {},
@@ -33714,6 +33759,20 @@ define('views/report.line',[
             });
 
             return this.updateChart();
+        },
+
+        /*
+         *  Resize
+         */
+        resizeChart: function() {
+            ReportLineView.__super__.resizeChart.apply(this, arguments);
+
+            if (this.chart != null) {
+                this.chart.resize();
+                this.chart.setupGrid();
+                this.chart.draw();
+            }
+            return this;
         },
 
         /*
