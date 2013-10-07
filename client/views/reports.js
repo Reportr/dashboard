@@ -44,6 +44,7 @@ define([
          */
         submitSettings: function(e) {
             e.preventDefault();
+            this.toggleSettings(false);
         },
 
         /*

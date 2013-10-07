@@ -24,8 +24,7 @@ require([
         template: "main.html",
         metas: {
             "description": "Track your life activity on a single platform.",
-            "viewport": "width=device-width, initial-scale=1.0",
-            "google-site-verification": "yspAMnHx6_MBalUkZDjyWernbqmv8IOXrxarY1CgT8M"
+            "viewport": "width=device-width, initial-scale=1.0"
         },
         links: {
             "icon": hr.Urls.static("images/favicon.png"),
