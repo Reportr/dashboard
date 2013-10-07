@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381171046775,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381174520609,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34004,7 +34004,7 @@ define('views/reports/lastvalue',[
             this.value = 0;
 
             this.report.eventInfo.on("events:new", function(e) {
-                this.value = e.get("properties."+this.report.settings.property);
+                this.value = e.get("properties."+this.report.settings.property, 0);
                 this.render();
             }, this);
 
