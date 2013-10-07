@@ -21,9 +21,11 @@
 		</div>
 
 		<h3 class="model-name"><%- model.get('name') %></h3>
-		<p class="model-description"><%- model.get('description') %></p>
 	</div>
 	<%= view.component("report."+visualization.id, {
 		"report": report
 	}) %>
+	<div class="report-footer">
+		<p class="model-description"><%- model.get('description') %></p>
+	</div>
 </div>

@@ -1,9 +1,10 @@
 define([
     'views/models.list',
     
-    'views/report.line',
-    'views/report.count',
-    'views/report.list',
+    'views/reports/line',
+    'views/reports/count',
+    'views/reports/lastvalue',
+    'views/reports/list',
 
     'views/reports',
     'views/report'

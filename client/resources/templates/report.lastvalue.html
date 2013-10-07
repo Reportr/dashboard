@@ -1,0 +1,11 @@
+<div class="report-options">
+	<!-- Property -->
+	<select class="select-property">
+		<% _.each(properties, function(propertyType, name) { %>
+			<option value="<%- name %>" <% if (name == settings.property) { %>selected<% } %>><%- name %></option>
+		<% }); %>
+	</select>
+</div>
+<div class="report-body">
+	<div class="value"><%- value %></div>
+</div>

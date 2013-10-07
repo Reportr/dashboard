@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381161740207,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381171046775,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -33683,7 +33683,7 @@ API.txt for details.
 
 define("vendors/jquery.flot.time", function(){});
 
-define('views/report.line',[
+define('views/reports/line',[
     "hr/hr",
     "api",
     "models/user",
@@ -33907,7 +33907,7 @@ define('views/report.line',[
 
     return ReportLineView;
 });
-define('views/report.count',[
+define('views/reports/count',[
     "hr/hr",
     "api",
     "views/report"
@@ -33973,6 +33973,63 @@ define('views/report.count',[
     });
 
     return ReportCountView;
+});
+define('views/reports/lastvalue',[
+    "hr/hr",
+    "api",
+    "views/report"
+], function(hr, api, Report) { 
+
+    /*
+     *  This report visualization display the last value of a property
+     */
+
+
+    var ReportLastValueView = Report.visualization({
+        'id': 'lastvalue',
+        'name': 'Last value'
+    }, {
+        className: "report-lastvalue",
+        template: "report.lastvalue.html",
+        events: {
+            'change .select-property': 'actionSelectProperty',
+        },
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            ReportLastValueView.__super__.initialize.apply(this, arguments);
+
+            this.value = 0;
+
+            this.report.eventInfo.on("events:new", function(e) {
+                this.value = e.get("properties."+this.report.settings.property);
+                this.render();
+            }, this);
+
+            return this;
+        },
+
+        templateContext: function() {
+            return {
+                'value': this.value,
+                'properties': this.report.eventInfo.get("properties"),
+                'settings': this.report.settings
+            };
+        },
+
+        /*
+         *  (action) Select property
+         */
+        actionSelectProperty: function(e) {
+            this.report.settings.property = this.$(".select-property").val();
+            this.report.saveSettings();
+            this.updateChart();
+        },
+    });
+
+    return ReportLastValueView;
 });
 define('models/event',[
     "hr/hr",
@@ -34096,7 +34153,7 @@ define('collections/events',[
 
     return Events;
 });
-define('views/report.list',[
+define('views/reports/list',[
     "hr/hr",
     "api",
     "views/report",
@@ -34248,9 +34305,10 @@ define('views/reports',[
 define('views/views',[
     'views/models.list',
     
-    'views/report.line',
-    'views/report.count',
-    'views/report.list',
+    'views/reports/line',
+    'views/reports/count',
+    'views/reports/lastvalue',
+    'views/reports/list',
 
     'views/reports',
     'views/report'
