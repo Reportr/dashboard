@@ -1,13 +1,4 @@
-<div class="chart-header">
-	<img src="<%- model.icon() %>" class="model-icon"/>
-	<div class="btn-group pull-right">
-		<a href="#" class="btn btn-default action-toggle-options"><i class="icon-cog"></i></a>
-		<a href="#" class="btn btn-default action-report-remove"><i class="icon-remove"></i></a>
-	</div>
-	<h3 class="model-name"><%- model.get('name') %></h3>
-	<p class="model-description"><%- model.get('description') %></p>
-</div>
-<div class="chart-options">
+<div class="report-options">
 	<!-- Transformations -->
 	<select class="pull-right select-transform">
 		<% _.each(transforms, function(f, name) { %>

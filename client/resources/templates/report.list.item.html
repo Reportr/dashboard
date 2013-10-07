@@ -1,0 +1,6 @@
+<td><%- moment(event.get("timestamp")).fromNow() %></td>
+<% _.each(properties, function(propertyType, name) { %>
+	<% if (_.contains(settings.properties, name)) { %>
+		<td><%- event.get("properties."+name, "") %></td>
+	<% } %>
+<% }); %>

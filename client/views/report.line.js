@@ -2,26 +2,22 @@ define([
     "hr/hr",
     "api",
     "models/user",
-    "views/events.chart",
+    "views/report",
 
     "vendors/jquery.flot",
     "vendors/jquery.flot.time"
-], function(hr, api, User, EventsChartView) { 
+], function(hr, api, User, Report) { 
 
-    Array.prototype.remove = function() {
-        var what, a = arguments, L = a.length, ax;
-        while (L && this.length) {
-            what = a[--L];
-            while ((ax = this.indexOf(what)) !== -1) {
-                this.splice(ax, 1);
-            }
-        }
-        return this;
-    };
+    /*
+     *  This report visualization display a line chart
+     */
 
-    var EventsChartLineView = EventsChartView.extend({
-        className: "events-chart-line",
-        template: "events.chart.line.html",
+    var ReportLineView = Report.visualization({
+        'id': 'line',
+        'name': 'Lines'
+    }, {
+        className: "report-line",
+        template: "report.line.html",
         defaultSettings: {
             'limit': 100,
             'transform': 'sum',
@@ -30,11 +26,6 @@ define([
             'interval': 60*60*1000
         },
         events: {
-            // Actions
-            'click .action-toggle-options': 'actionToggleOptions',
-            'click .action-report-remove': 'actionReportRemove',
-
-            // Options
             'change .select-transform': 'actionSelectTransform',
             'change .select-limit': 'actionSelectLimit',
             'change .select-properties input': 'actionSelectProperty',
@@ -42,10 +33,10 @@ define([
             'change .select-period': 'actionSelectPeriod'
         },
         dataTransforms: {
-            'sum': _.sum,
-            'count': _.size,
-            'min': _.min,
-            'max': _.max
+            'sum': 'sum',
+            'count': 'count',
+            'min': 'min',
+            'max': 'max'
         },
         dataPeriods: {
             'Last 10 minutes': 10*60*1000,
@@ -73,7 +64,7 @@ define([
          *  Constructor
          */
         initialize: function() {
-            EventsChartLineView.__super__.initialize.apply(this, arguments);
+            ReportLineView.__super__.initialize.apply(this, arguments);
 
             this.chart = null;
 
@@ -85,16 +76,13 @@ define([
          */
         templateContext: function() {
             return {
-                'model': this.getModel(),
-                'event': this.eventInfo,
-
                 'transforms': this.dataTransforms,
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
                 'limits': this.dataLimits,
-                'properties': this.eventInfo.get("properties"),
+                'properties': this.report.eventInfo.get("properties"),
 
-                'settings': this.settings
+                'settings': this.report.settings
             };
         },
 
@@ -102,7 +90,7 @@ define([
          *  Display graph
          */
         finish: function() {
-            EventsChartLineView.__super__.finish.apply(this, arguments);
+            ReportLineView.__super__.finish.apply(this, arguments);
 
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
@@ -120,16 +108,16 @@ define([
             var that = this;
             var series = [];
             var seriesD = [];
-            var properties = this.settings.properties;
+            var properties = this.report.settings.properties;
 
             if (this.chart == null) return this;
 
             _.each(properties, function(property) {
                 var d = this.updateData({
-                    'transform': this.dataTransforms[this.settings.transform],
+                    'transform': this.dataTransforms[this.report.settings.transform],
                     'property': property,
-                    'period': this.settings.period,
-                    'interval': this.settings.interval
+                    'period': this.report.settings.period,
+                    'interval': this.report.settings.interval
                 });
                 d.done(function(data) {
                     series.push({
@@ -163,19 +151,11 @@ define([
         },
 
         /*
-         *  Action toggle options
-         */
-        actionToggleOptions: function(e) {
-            if (e != null) e.preventDefault();
-            this.$el.toggleClass("mode-options");
-        },
-
-        /*
          *  (action) Select transform
          */
         actionSelectTransform: function(e) {
-            this.settings.transform = this.$(".select-transform").val();
-            this.saveSettings();
+            this.report.settings.transform = this.$(".select-transform").val();
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -189,12 +169,12 @@ define([
             if (property == "") property = null;
 
             if (checked) {
-                this.settings.properties.push(property);
+                this.report.settings.properties.push(property);
             } else {
-                this.settings.properties.remove(property);
+                this.report.settings.properties.remove(property);
             }
-            this.settings.properties = _.uniq(this.settings.properties);
-            this.saveSettings();
+            this.report.settings.properties = _.uniq(this.report.settings.properties);
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -202,8 +182,8 @@ define([
          *  (action) Select interval
          */
         actionSelectInterval: function(e) {
-            this.settings.interval = parseInt(this.$(".select-interval").val());
-            this.saveSettings();
+            this.report.settings.interval = parseInt(this.$(".select-interval").val());
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -211,22 +191,20 @@ define([
          *  (action) Select interval
          */
         actionSelectLimit: function(e) {
-            this.settings.limit = parseInt(this.$(".select-limit").val());
-            this.saveSettings();
-            //this.updateData();
+            this.report.settings.limit = parseInt(this.$(".select-limit").val());
+            this.report.saveSettings();
+            this.updateChart();
         },
 
         /*
          *  (action) Select period
          */
         actionSelectPeriod: function(e) {
-            this.settings.period = parseInt(this.$(".select-period").val());
-            this.saveSettings();
+            this.report.settings.period = parseInt(this.$(".select-period").val());
+            this.report.saveSettings();
             this.updateChart();
         }
     });
 
-    hr.View.Template.registerComponent("events.chart.line", EventsChartLineView);
-
-    return EventsChartLineView;
+    return ReportLineView;
 });

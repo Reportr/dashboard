@@ -79,6 +79,7 @@ define([
          *	Log out the user
          */
         logout: function() {
+            hr.Storage.clear();
         	this.set({
         		'email': null,
         		'token': null

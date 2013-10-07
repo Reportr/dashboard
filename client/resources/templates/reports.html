@@ -1,21 +1,21 @@
-<div class="row">
-	<% if (_.size(reports) > 0) { %>
-		<% _.each(reports, function(report) { %>
-		<div class="col-lg-12">
-			<div class="event-summary">
-				<%= view.component("events.chart.line", {
+<div class="reports">
+	<div class="row">
+		<% if (_.size(reports) > 0) { %>
+			<% _.each(reports, function(report) { %>
+			<div class="col-lg-12">
+				<%= view.component("report", {
 					"report": report
 				}) %>
 			</div>
-		</div>
-		<% }); %>
-	<% } else { %>
-		<div class="reports-empty">
-			<p class="icon"><i class="icon-bar-chart"></i></p>
-			<h3>No reports yet</h3>
-			<p>Start tracking events to add reports to this dashboard.</p>
-			<p>Install the Google Chrome extension to track your web navigation or use the API to track personnalized events.</p>
-			<p><a href="https://github.com/SamyPesse/reportr" target="_blank">Learn more</a></p>
-		</div>
-	<% } %>
+			<% }); %>
+		<% } else { %>
+			<div class="reports-empty">
+				<p class="icon"><i class="icon-bar-chart"></i></p>
+				<h3>No reports yet</h3>
+				<p>Start tracking events to add reports to this dashboard.</p>
+				<p>Install the Google Chrome extension to track your web navigation or use the API to track personnalized events.</p>
+				<p><a href="https://github.com/SamyPesse/reportr" target="_blank">Learn more</a></p>
+			</div>
+		<% } %>
+	</div>
 </div>

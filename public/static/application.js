@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381142759273,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381150167151,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29476,6 +29476,7 @@ define('models/user',[
          *	Log out the user
          */
         logout: function() {
+            hr.Storage.clear();
         	this.set({
         		'email': null,
         		'token': null
@@ -29649,6 +29650,163 @@ define('collections/eventmodels',[
 
     return EventModels;
 });
+/* ========================================================================
+ * Bootstrap: dropdown.js v3.0.0
+ * http://twbs.github.com/bootstrap/javascript.html#dropdowns
+ * ========================================================================
+ * Copyright 2012 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ======================================================================== */
+
+
++function ($) { 
+
+  // DROPDOWN CLASS DEFINITION
+  // =========================
+
+  var backdrop = '.dropdown-backdrop'
+  var toggle   = '[data-toggle=dropdown]'
+  var Dropdown = function (element) {
+    var $el = $(element).on('click.bs.dropdown', this.toggle)
+  }
+
+  Dropdown.prototype.toggle = function (e) {
+    var $this = $(this)
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    clearMenus()
+
+    if (!isActive) {
+      if ('ontouchstart' in document.documentElement && !$parent.closest('.navbar-nav').length) {
+        // if mobile we we use a backdrop because click events don't delegate
+        $('<div class="dropdown-backdrop"/>').insertAfter($(this)).on('click', clearMenus)
+      }
+
+      $parent.trigger(e = $.Event('show.bs.dropdown'))
+
+      if (e.isDefaultPrevented()) return
+
+      $parent
+        .toggleClass('open')
+        .trigger('shown.bs.dropdown')
+
+      $this.focus()
+    }
+
+    return false
+  }
+
+  Dropdown.prototype.keydown = function (e) {
+    if (!/(38|40|27)/.test(e.keyCode)) return
+
+    var $this = $(this)
+
+    e.preventDefault()
+    e.stopPropagation()
+
+    if ($this.is('.disabled, :disabled')) return
+
+    var $parent  = getParent($this)
+    var isActive = $parent.hasClass('open')
+
+    if (!isActive || (isActive && e.keyCode == 27)) {
+      if (e.which == 27) $parent.find(toggle).focus()
+      return $this.click()
+    }
+
+    var $items = $('[role=menu] li:not(.divider):visible a', $parent)
+
+    if (!$items.length) return
+
+    var index = $items.index($items.filter(':focus'))
+
+    if (e.keyCode == 38 && index > 0)                 index--                        // up
+    if (e.keyCode == 40 && index < $items.length - 1) index++                        // down
+    if (!~index)                                      index=0
+
+    $items.eq(index).focus()
+  }
+
+  function clearMenus() {
+    $(backdrop).remove()
+    $(toggle).each(function (e) {
+      var $parent = getParent($(this))
+      if (!$parent.hasClass('open')) return
+      $parent.trigger(e = $.Event('hide.bs.dropdown'))
+      if (e.isDefaultPrevented()) return
+      $parent.removeClass('open').trigger('hidden.bs.dropdown')
+    })
+  }
+
+  function getParent($this) {
+    var selector = $this.attr('data-target')
+
+    if (!selector) {
+      selector = $this.attr('href')
+      selector = selector && /#/.test(selector) && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
+    }
+
+    var $parent = selector && $(selector)
+
+    return $parent && $parent.length ? $parent : $this.parent()
+  }
+
+
+  // DROPDOWN PLUGIN DEFINITION
+  // ==========================
+
+  var old = $.fn.dropdown
+
+  $.fn.dropdown = function (option) {
+    return this.each(function () {
+      var $this = $(this)
+      var data  = $this.data('dropdown')
+
+      if (!data) $this.data('dropdown', (data = new Dropdown(this)))
+      if (typeof option == 'string') data[option].call($this)
+    })
+  }
+
+  $.fn.dropdown.Constructor = Dropdown
+
+
+  // DROPDOWN NO CONFLICT
+  // ====================
+
+  $.fn.dropdown.noConflict = function () {
+    $.fn.dropdown = old
+    return this
+  }
+
+
+  // APPLY TO STANDARD DROPDOWN ELEMENTS
+  // ===================================
+
+  $(document)
+    .on('click.bs.dropdown.data-api', clearMenus)
+    .on('click.bs.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() })
+    .on('click.bs.dropdown.data-api'  , toggle, Dropdown.prototype.toggle)
+    .on('keydown.bs.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
+
+}(window.jQuery);
+
+define("vendors/bootstrap/dropdown", function(){});
+
 define('views/models.list',[
     "hr/hr",
     "api",
@@ -29710,6 +29868,7 @@ define('models/eventinfo',[
             'namespace': null,
             'properties': {},
             'timestamp': 0,
+            'count': 0
         },
 
         /*
@@ -29754,42 +29913,48 @@ define('models/eventinfo',[
 
     return EventInfo;
 });
-define('views/events.chart',[
+define('views/report',[
     "hr/hr",
     "Underscore",
     "api",
     "models/user",
-    "models/eventmodel",
     "models/eventinfo"
-], function(hr, _, api, User, EventModel, EventInfo) { 
+], function(hr, _, api, User, EventInfo) { 
 
-    var EventsChartView = hr.View.extend({
-        className: "events-chart",
-        template: null,
-        events: {},
+    Array.prototype.remove = function() {
+        var what, a = arguments, L = a.length, ax;
+        while (L && this.length) {
+            what = a[--L];
+            while ((ax = this.indexOf(what)) !== -1) {
+                this.splice(ax, 1);
+            }
+        }
+        return this;
+    };
+
+    /*
+     *  Represent the data view inside a report
+     */
+    var ReportDataView = hr.View.extend({
+        /*
+         *  Defaults settigns to store for this report in the user settings
+         */
         defaultSettings: {},
 
         /*
          *  Constructor
          */
         initialize: function() {
-            EventsChartView.__super__.initialize.apply(this, arguments);
+            ReportDataView.__super__.initialize.apply(this, arguments);
 
-            // Base values
+            // parent report
             this.report = this.options.report;
-            this.eventName = this.options.report.split("/")[1];
-            this.eventNamespace = this.options.report.split("/")[0];
 
             // Create settings
-            this.settings = {};
-            _.defaults(this.settings, this.defaultSettings);
-            _.extend(this.settings, this.loadSettings());
+            this.report.loadSettings(this.defaultSettings);
 
-            // Create event info
-            this.eventInfo = new EventInfo();
-            this.eventInfo.on("change", this.render, this);
-            this.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
-            this.eventInfo.load(this.eventNamespace, this.eventName);
+            // Bind update
+            this.report.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
             return this;
         },
 
@@ -29798,7 +29963,7 @@ define('views/events.chart',[
          */
         templateContext: function() {
             return {
-                
+                'report': this.report
             };
         },
 
@@ -29815,14 +29980,67 @@ define('views/events.chart',[
         updateData: function(options) {
             options = _.defaults(options || {}, {
                 'start': 0,
-                'limit': this.settings.limit || 10000,
+                'limit': this.report.settings.limit || 10000,
                 'interval': 1000,
                 'period': -1,
                 'property': null,
                 'transform': _.size
             });
 
-            return api.request("get", User.current.get('token')+"/data/"+this.eventNamespace+"/"+this.eventName, options);
+            return api.request("get", User.current.get('token')+"/data/"+this.report.eventNamespace+"/"+this.report.eventName, options);
+        },
+    });
+
+    /*
+     *  Represent a complete report : header with control, data view
+     */
+    var ReportView = hr.View.extend({
+        className: "report",
+        template: "report.html",
+        events: {
+            // Actions
+            'click .report-header .action-toggle-options': 'actionToggleOptions',
+            'click .report-header .action-report-remove': 'actionReportRemove',
+            'click *[data-visualization]': 'actionSelectVisualisation'
+        },
+        defaultSettings: {
+            'visualization': 'line'
+        },
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            ReportView.__super__.initialize.apply(this, arguments);
+
+            // Base values
+            this.report = this.options.report;
+            this.eventName = this.options.report.split("/")[1];
+            this.eventNamespace = this.options.report.split("/")[0];
+
+            // Create settings
+            this.settings = {};
+            _.defaults(this.settings, this.defaultSettings);
+            _.extend(this.settings, this.loadSettings());
+
+            // Create event info
+            this.eventInfo = new EventInfo();
+            this.eventInfo.on("change", this.render, this);
+            this.eventInfo.load(this.eventNamespace, this.eventName);
+            return this;
+        },
+
+        /*
+         *  Template context
+         */
+        templateContext: function() {
+            console.log(this.settings);
+            return {
+                'model': this.getModel(),
+                'report': this,
+                'visualization': ReportView.visualizations[this.settings.visualization],
+                'visualizations': ReportView.visualizations
+            };
         },
 
         /*
@@ -29833,7 +30051,7 @@ define('views/events.chart',[
         },
 
         /*
-         *  Save chart settings
+         *  Save report settings
          */
         saveSettings: function() {
             User.current.setSettings("report/"+this.report, this.settings);
@@ -29841,10 +30059,20 @@ define('views/events.chart',[
         },
 
         /*
-         *  Save chart settings
+         *  Load report settings
          */
-        loadSettings: function() {
-            return User.current.getSettings("report/"+this.report);
+        loadSettings: function(def) {
+            this.settings = User.current.getSettings("report/"+this.report);
+            _.defaults(this.settings, def || {});
+            return this.settings;
+        },
+
+        /*
+         *  (action) Toggle options
+         */
+        actionToggleOptions: function(e) {
+            if (e != null) e.preventDefault();
+            this.$el.toggleClass("mode-options");
         },
 
         /*
@@ -29852,11 +30080,39 @@ define('views/events.chart',[
          */
         actionReportRemove: function(e) {
             if (e != null) e.preventDefault();
+            this.settings = {};
+            this.saveSettings();
             User.current.removeReport(this.report);
+        },
+
+        /*
+         *  (action) Change visualisation
+         */
+        actionSelectVisualisation: function(e) {
+            if (e != null) e.preventDefault();
+            this.settings = {
+                'visualization':  $(e.currentTarget).data("visualization")
+            };
+            this.saveSettings();
+            this.render();
+        }
+    }, {
+        visualizations: {},
+
+        /*
+         *  Add a data visualization view
+         */
+        visualization: function(options, classMethods, staticMethods) {
+            options.V = ReportDataView.extend(classMethods, staticMethods);
+            ReportView.visualizations[options.id] = options;
+            hr.View.Template.registerComponent("report."+options.id, options.V);
+            return options.V
         }
     });
 
-    return EventsChartView;
+    hr.View.Template.registerComponent("report", ReportView);
+
+    return ReportView;
 });
 /* Javascript plotting library for jQuery, version 0.8.1.
 
@@ -33356,30 +33612,26 @@ API.txt for details.
 
 define("vendors/jquery.flot.time", function(){});
 
-define('views/events.chart.line',[
+define('views/report.line',[
     "hr/hr",
     "api",
     "models/user",
-    "views/events.chart",
+    "views/report",
 
     "vendors/jquery.flot",
     "vendors/jquery.flot.time"
-], function(hr, api, User, EventsChartView) { 
+], function(hr, api, User, Report) { 
 
-    Array.prototype.remove = function() {
-        var what, a = arguments, L = a.length, ax;
-        while (L && this.length) {
-            what = a[--L];
-            while ((ax = this.indexOf(what)) !== -1) {
-                this.splice(ax, 1);
-            }
-        }
-        return this;
-    };
+    /*
+     *  This report visualization display a line chart
+     */
 
-    var EventsChartLineView = EventsChartView.extend({
-        className: "events-chart-line",
-        template: "events.chart.line.html",
+    var ReportLineView = Report.visualization({
+        'id': 'line',
+        'name': 'Lines'
+    }, {
+        className: "report-line",
+        template: "report.line.html",
         defaultSettings: {
             'limit': 100,
             'transform': 'sum',
@@ -33388,11 +33640,6 @@ define('views/events.chart.line',[
             'interval': 60*60*1000
         },
         events: {
-            // Actions
-            'click .action-toggle-options': 'actionToggleOptions',
-            'click .action-report-remove': 'actionReportRemove',
-
-            // Options
             'change .select-transform': 'actionSelectTransform',
             'change .select-limit': 'actionSelectLimit',
             'change .select-properties input': 'actionSelectProperty',
@@ -33400,10 +33647,10 @@ define('views/events.chart.line',[
             'change .select-period': 'actionSelectPeriod'
         },
         dataTransforms: {
-            'sum': _.sum,
-            'count': _.size,
-            'min': _.min,
-            'max': _.max
+            'sum': 'sum',
+            'count': 'count',
+            'min': 'min',
+            'max': 'max'
         },
         dataPeriods: {
             'Last 10 minutes': 10*60*1000,
@@ -33431,7 +33678,7 @@ define('views/events.chart.line',[
          *  Constructor
          */
         initialize: function() {
-            EventsChartLineView.__super__.initialize.apply(this, arguments);
+            ReportLineView.__super__.initialize.apply(this, arguments);
 
             this.chart = null;
 
@@ -33443,16 +33690,13 @@ define('views/events.chart.line',[
          */
         templateContext: function() {
             return {
-                'model': this.getModel(),
-                'event': this.eventInfo,
-
                 'transforms': this.dataTransforms,
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
                 'limits': this.dataLimits,
-                'properties': this.eventInfo.get("properties"),
+                'properties': this.report.eventInfo.get("properties"),
 
-                'settings': this.settings
+                'settings': this.report.settings
             };
         },
 
@@ -33460,7 +33704,7 @@ define('views/events.chart.line',[
          *  Display graph
          */
         finish: function() {
-            EventsChartLineView.__super__.finish.apply(this, arguments);
+            ReportLineView.__super__.finish.apply(this, arguments);
 
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
@@ -33478,16 +33722,16 @@ define('views/events.chart.line',[
             var that = this;
             var series = [];
             var seriesD = [];
-            var properties = this.settings.properties;
+            var properties = this.report.settings.properties;
 
             if (this.chart == null) return this;
 
             _.each(properties, function(property) {
                 var d = this.updateData({
-                    'transform': this.dataTransforms[this.settings.transform],
+                    'transform': this.dataTransforms[this.report.settings.transform],
                     'property': property,
-                    'period': this.settings.period,
-                    'interval': this.settings.interval
+                    'period': this.report.settings.period,
+                    'interval': this.report.settings.interval
                 });
                 d.done(function(data) {
                     series.push({
@@ -33521,19 +33765,11 @@ define('views/events.chart.line',[
         },
 
         /*
-         *  Action toggle options
-         */
-        actionToggleOptions: function(e) {
-            if (e != null) e.preventDefault();
-            this.$el.toggleClass("mode-options");
-        },
-
-        /*
          *  (action) Select transform
          */
         actionSelectTransform: function(e) {
-            this.settings.transform = this.$(".select-transform").val();
-            this.saveSettings();
+            this.report.settings.transform = this.$(".select-transform").val();
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -33547,12 +33783,12 @@ define('views/events.chart.line',[
             if (property == "") property = null;
 
             if (checked) {
-                this.settings.properties.push(property);
+                this.report.settings.properties.push(property);
             } else {
-                this.settings.properties.remove(property);
+                this.report.settings.properties.remove(property);
             }
-            this.settings.properties = _.uniq(this.settings.properties);
-            this.saveSettings();
+            this.report.settings.properties = _.uniq(this.report.settings.properties);
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -33560,8 +33796,8 @@ define('views/events.chart.line',[
          *  (action) Select interval
          */
         actionSelectInterval: function(e) {
-            this.settings.interval = parseInt(this.$(".select-interval").val());
-            this.saveSettings();
+            this.report.settings.interval = parseInt(this.$(".select-interval").val());
+            this.report.saveSettings();
             this.updateChart();
         },
 
@@ -33569,24 +33805,74 @@ define('views/events.chart.line',[
          *  (action) Select interval
          */
         actionSelectLimit: function(e) {
-            this.settings.limit = parseInt(this.$(".select-limit").val());
-            this.saveSettings();
-            //this.updateData();
+            this.report.settings.limit = parseInt(this.$(".select-limit").val());
+            this.report.saveSettings();
+            this.updateChart();
         },
 
         /*
          *  (action) Select period
          */
         actionSelectPeriod: function(e) {
-            this.settings.period = parseInt(this.$(".select-period").val());
-            this.saveSettings();
+            this.report.settings.period = parseInt(this.$(".select-period").val());
+            this.report.saveSettings();
             this.updateChart();
         }
     });
 
-    hr.View.Template.registerComponent("events.chart.line", EventsChartLineView);
+    return ReportLineView;
+});
+define('views/report.count',[
+    "hr/hr",
+    "api",
+    "views/report"
+], function(hr, api, Report) { 
 
-    return EventsChartLineView;
+    /*
+     *  This report visualization display a simple counter for the number of events
+     */
+
+
+    var ReportCountView = Report.visualization({
+        'id': 'count',
+        'name': 'Count'
+    }, {
+        className: "report-count",
+        template: "report.count.html",
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            ReportCountView.__super__.initialize.apply(this, arguments);
+
+            this.counter = this.report.eventInfo.get("count", 0);
+
+            // From eventinfos
+            this.report.eventInfo.on("change", function() {
+                this.counter = this.report.eventInfo.get("count");
+            }, this);
+
+            // New events
+            this.report.eventInfo.on("events:new", function() {
+                this.counter = this.counter + 1;
+                this.render();
+            }, this);
+
+            return this;
+        },
+
+        /*
+         *  Template context
+         */
+        templateContext: function() {
+            return {
+                'counter': this.counter
+            };
+        },
+    });
+
+    return ReportCountView;
 });
 define('models/event',[
     "hr/hr",
@@ -33653,7 +33939,7 @@ define('collections/events',[
             notifications.on("events:new", function(e) {
                 if (this.options.allEvents
                 || (e.get("event") == this.options.eventName
-                && e.get("namespace") == this.options.namespace)) {
+                && e.get("namespace") == this.options.eventNamespace)) {
                     this.add(e, {
                         at: 0
                     });
@@ -33677,7 +33963,7 @@ define('collections/events',[
             
             options = _.defaults(options || {}, {});
 
-            return api.request("get", User.current.get('token')+"/events/"+this.options.namespace+"/"+this.options.eventName, {
+            return api.request("get", User.current.get('token')+"/events/"+this.options.eventNamespace+"/"+this.options.eventName, {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
             }).done(function(data) {
@@ -33710,42 +33996,127 @@ define('collections/events',[
 
     return Events;
 });
-define('views/events.list',[
+define('views/report.list',[
     "hr/hr",
     "api",
-    "models/user",
+    "views/report",
     "collections/events"
-], function(hr, api, User, Events) { 
+], function(hr, api, Report, Events) { 
+
+    /*
+     *  This report visualization display an infinite table of all events
+     */
 
     // List Item View
     var EventItem = hr.List.Item.extend({
+        tagName: "tr",
         className: "event-item",
-        template: "events.list.item.html",
+        template: "report.list.item.html",
         events: {},
 
         templateContext: function() {
             return {
                 'event': this.model,
-                'model': this.model.model()
+                'model': this.model.model(),
+                'properties': this.list.options.report.eventInfo.get("properties"),
+                'settings': this.list.options.report.settings
             };
         },
     });
 
     // List View
     var EventsList = hr.List.extend({
+        tagName: "tbody",
         className: "events-list",
         Collection: Events,
         Item: EventItem,
         defaults: _.defaults({
             collection: {
-                allEvents: true
+                
             }
         }, hr.List.prototype.defaults)
     });
 
-    hr.View.Template.registerComponent("events.list", EventsList);
+    var ReportListView = Report.visualization({
+        'id': 'list',
+        'name': 'List'
+    }, {
+        className: "report-list",
+        template: "report.list.html",
+        events: {
+            'change .select-properties input': 'actionSelectProperty'
+        },
+        defaultSettings: {
+            'limit': 10,
+            'properties': []
+        },
 
-    return EventsList;
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            ReportListView.__super__.initialize.apply(this, arguments);
+            return this;
+        },
+
+        /*
+         *  Template context
+         */
+        templateContext: function() {
+            return {
+                'report': this.report,
+                'properties': this.report.eventInfo.get("properties"),
+                'settings': this.report.settings
+            };
+        },
+
+        /*
+         *  After template rendering
+         */
+        finish: function() {
+            ReportListView.__super__.initialize.apply(this, arguments);
+
+            // Build and add list
+            this.list = new EventsList({
+                'report': this.report,
+                'collection': {
+                    'loader': "getSpecific",
+                    'limit': this.report.settings.limit,
+                    'eventName': this.report.eventName,
+                    'eventNamespace': this.report.eventNamespace
+                }
+            });
+            this.list.$el.appendTo(this.$(".events-table"));
+
+            return this;
+        },
+
+        /*
+         *  Events list change : do nothing (list manage realtime update)
+         */
+        updateChart: function() {
+            return this;
+        },
+
+        /*
+         *  (action) Select property
+         */
+        actionSelectProperty: function(e) {
+            var property = $(e.currentTarget).val();
+            var checked = $(e.currentTarget).is(":checked");
+
+            if (checked) {
+                this.report.settings.properties.push(property);
+            } else {
+                this.report.settings.properties.remove(property);
+            }
+            this.report.settings.properties = _.uniq(this.report.settings.properties);
+            this.report.saveSettings();
+            this.render();
+        },
+    });
+
+    return ReportListView;
 });
 define('views/reports',[
     "hr/hr",
@@ -33776,9 +34147,13 @@ define('views/reports',[
 });
 define('views/views',[
     'views/models.list',
-    'views/events.chart.line',
-    'views/events.list',
-    'views/reports'
+    
+    'views/report.line',
+    'views/report.count',
+    'views/report.list',
+
+    'views/reports',
+    'views/report'
 ], function() {
 	return arguments;
 });

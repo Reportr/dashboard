@@ -26,7 +26,7 @@ define([
             notifications.on("events:new", function(e) {
                 if (this.options.allEvents
                 || (e.get("event") == this.options.eventName
-                && e.get("namespace") == this.options.namespace)) {
+                && e.get("namespace") == this.options.eventNamespace)) {
                     this.add(e, {
                         at: 0
                     });
@@ -50,7 +50,7 @@ define([
             
             options = _.defaults(options || {}, {});
 
-            return api.request("get", User.current.get('token')+"/events/"+this.options.namespace+"/"+this.options.eventName, {
+            return api.request("get", User.current.get('token')+"/events/"+this.options.eventNamespace+"/"+this.options.eventName, {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
             }).done(function(data) {

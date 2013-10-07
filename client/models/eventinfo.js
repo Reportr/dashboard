@@ -15,6 +15,7 @@ define([
             'namespace': null,
             'properties': {},
             'timestamp': 0,
+            'count': 0
         },
 
         /*

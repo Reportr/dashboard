@@ -34,6 +34,9 @@ exports.config = {
         },
         'vendors/moment': {
             exports: 'moment'
+        },
+        'views/views': {
+            deps: ['vendors/bootstrap/dropdown']
         }
     },
     "paths": {

@@ -1,8 +1,12 @@
 define([
     'views/models.list',
-    'views/events.chart.line',
-    'views/events.list',
-    'views/reports'
+    
+    'views/report.line',
+    'views/report.count',
+    'views/report.list',
+
+    'views/reports',
+    'views/report'
 ], function() {
 	return arguments;
 });
