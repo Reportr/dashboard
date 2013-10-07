@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381158270133,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381161740207,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29871,8 +29871,9 @@ define('models/eventinfo',[
     "hr/hr",
     "api",
     "notifications",
-    "models/user"
-], function(hr, api, notifications, User) {
+    "models/user",
+    "models/eventmodel"
+], function(hr, api, notifications, User, EventModel) {
     /*
      *  EventInfo model represent informations given by the api using /api/<token>/event/<namespace>/<event>
      *  about some events.
@@ -29883,8 +29884,15 @@ define('models/eventinfo',[
         	'event': null,
             'namespace': null,
             'properties': {},
+            'model': {},
             'timestamp': 0,
             'count': 0
+        },
+
+        joints: {
+            "model": function(info, model) {
+                return new EventModel({}, model);
+            }
         },
 
         /*
@@ -29923,7 +29931,7 @@ define('models/eventinfo',[
          *  Return model for the event
          */
         model: function() {
-            return User.current.models.getModel(this);
+            return this.get("model");
         }
     });
 
@@ -33730,7 +33738,7 @@ define('views/report.line',[
             'Minute': 60*1000,
             '10 Minutes': 10*60*1000,
             'Hour': 60*60*1000,
-            '6 Hours': 60*60*1000,
+            '6 Hours': 6*60*60*1000,
             'Day': 24*60*60*1000,
             'Week': 7*24*60*60*1000,
             'Month': 30*24*60*60*1000,
@@ -33924,10 +33932,14 @@ define('views/report.count',[
             ReportCountView.__super__.initialize.apply(this, arguments);
 
             this.counter = this.report.eventInfo.get("count", 0);
+            this.pCounter = this.counter;
+            this.speed = 0;
 
             // From eventinfos
             this.report.eventInfo.on("change", function() {
                 this.counter = this.report.eventInfo.get("count");
+                this.pCounter = this.counter;
+                this.render();
             }, this);
 
             // New events
@@ -33936,17 +33948,28 @@ define('views/report.count',[
                 this.render();
             }, this);
 
+            // Interval
+            setInterval(_.bind(function() {
+                this.speed = (this.counter - this.pCounter)/5;
+                this.pCounter = this.counter;
+                this.render();
+            }, this), 5000)
+
             return this;
         },
 
-        /*
-         *  Template context
-         */
         templateContext: function() {
             return {
-                'counter': this.counter
+                'counter': this.counter,
+                'speed': this.speed
             };
         },
+
+        finish: function() {
+            ReportCountView.__super__.finish.apply(this, arguments);
+            
+            return this;
+        }
     });
 
     return ReportCountView;

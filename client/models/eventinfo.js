@@ -2,8 +2,9 @@ define([
     "hr/hr",
     "api",
     "notifications",
-    "models/user"
-], function(hr, api, notifications, User) {
+    "models/user",
+    "models/eventmodel"
+], function(hr, api, notifications, User, EventModel) {
     /*
      *  EventInfo model represent informations given by the api using /api/<token>/event/<namespace>/<event>
      *  about some events.
@@ -14,8 +15,15 @@ define([
         	'event': null,
             'namespace': null,
             'properties': {},
+            'model': {},
             'timestamp': 0,
             'count': 0
+        },
+
+        joints: {
+            "model": function(info, model) {
+                return new EventModel({}, model);
+            }
         },
 
         /*
@@ -54,7 +62,7 @@ define([
          *  Return model for the event
          */
         model: function() {
-            return User.current.models.getModel(this);
+            return this.get("model");
         }
     });
 
