@@ -10,6 +10,9 @@ module.exports =  {
 		/* (boolean) Secure https mode */
 		"secure": false,
 
+		/* Crawling */
+		"crawling": process.env.PORT != null,
+
 		/* (int) TCP server port */
 		"port": process.env.PORT || 5000
 	},

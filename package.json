@@ -14,7 +14,8 @@
         "express": "3.3.5",
         "socket.io": "0.9.16",
         "hr.js": "0.1.1",
-        "uuid": "1.4.1"
+        "uuid": "1.4.1",
+        "prerender-node": "0.0.6"
     },
     "bin": {
         "run": "./bin/run.js"
