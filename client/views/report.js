@@ -33,7 +33,7 @@ define([
         initialize: function() {
             ReportDataView.__super__.initialize.apply(this, arguments);
 
-            // parent report
+            // Parent report
             this.report = this.options.report;
 
             // Create settings
@@ -116,8 +116,8 @@ define([
 
             // Base values
             this.report = this.options.report;
-            this.eventName = this.options.report.split("/")[1];
-            this.eventNamespace = this.options.report.split("/")[0];
+            this.eventName = this.options.report.report.split("/")[1];
+            this.eventNamespace = this.options.report.report.split("/")[0];
 
             // Create settings
             this.settings = {};
@@ -177,7 +177,7 @@ define([
          *  Save report settings
          */
         saveSettings: function() {
-            User.current.setSettings("report/"+this.report, this.settings);
+            User.current.setSettings("report/"+this.report.id, this.settings);
             return this;
         },
 
@@ -185,7 +185,7 @@ define([
          *  Load report settings
          */
         loadSettings: function(def) {
-            this.settings = User.current.getSettings("report/"+this.report) || {};
+            this.settings = User.current.getSettings("report/"+this.report.id) || {};
             _.defaults(this.settings, def || {});
             return this.settings;
         },
@@ -205,7 +205,8 @@ define([
             if (e != null) e.preventDefault();
             this.settings = {};
             this.saveSettings();
-            User.current.removeReport(this.report);
+            console.log(this.report, this);
+            User.current.removeReport(this.report.id);
         },
 
         /*

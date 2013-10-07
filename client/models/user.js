@@ -107,16 +107,29 @@ define([
          *  Get list reports
          */
         reports: function() {
-            return this.getSettings("reports") || [];
+            var reports = this.getSettings("reports") || [];
+            return _.reduce(reports, function(memo, report) {
+                if (_.isString(report)) {
+                    memo.push({
+                        'id': _.uniqueId('report_'),
+                        'report': report
+                    });
+                } else if (_.isObject(report)) {
+                    memo.push(report);
+                }
+                return memo;
+            }, []);
         },
 
         /*
          *  Add a new report
          */
-        addReport: function(report) {
+        addReport: function(report, reportId) {
             var reports = this.reports();
-            reports.push(report);
-            reports = _.uniq(reports);
+            reports.push({
+                'id': reportId || _.uniqueId('report_'),
+                'report': report
+            });
             this.setSettings("reports", reports);
             return this;
         },
@@ -124,10 +137,13 @@ define([
         /*
          *  Remove a report
          */
-        removeReport: function(report) {
+        removeReport: function(reportId) {
             var reports = this.reports();
-            reports.remove(report);
-            reports = _.uniq(reports);
+            _.each(reports, function(report, i) {
+                if (report.id == reportId) {
+                    delete reports[i];
+                }
+            });
             this.setSettings("reports", reports);
             return this;
         }

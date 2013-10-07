@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381156764703,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381158270133,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29504,16 +29504,29 @@ define('models/user',[
          *  Get list reports
          */
         reports: function() {
-            return this.getSettings("reports") || [];
+            var reports = this.getSettings("reports") || [];
+            return _.reduce(reports, function(memo, report) {
+                if (_.isString(report)) {
+                    memo.push({
+                        'id': _.uniqueId('report_'),
+                        'report': report
+                    });
+                } else if (_.isObject(report)) {
+                    memo.push(report);
+                }
+                return memo;
+            }, []);
         },
 
         /*
          *  Add a new report
          */
-        addReport: function(report) {
+        addReport: function(report, reportId) {
             var reports = this.reports();
-            reports.push(report);
-            reports = _.uniq(reports);
+            reports.push({
+                'id': reportId || _.uniqueId('report_'),
+                'report': report
+            });
             this.setSettings("reports", reports);
             return this;
         },
@@ -29521,10 +29534,13 @@ define('models/user',[
         /*
          *  Remove a report
          */
-        removeReport: function(report) {
+        removeReport: function(reportId) {
             var reports = this.reports();
-            reports.remove(report);
-            reports = _.uniq(reports);
+            _.each(reports, function(report, i) {
+                if (report.id == reportId) {
+                    delete reports[i];
+                }
+            });
             this.setSettings("reports", reports);
             return this;
         }
@@ -29948,7 +29964,7 @@ define('views/report',[
         initialize: function() {
             ReportDataView.__super__.initialize.apply(this, arguments);
 
-            // parent report
+            // Parent report
             this.report = this.options.report;
 
             // Create settings
@@ -30031,8 +30047,8 @@ define('views/report',[
 
             // Base values
             this.report = this.options.report;
-            this.eventName = this.options.report.split("/")[1];
-            this.eventNamespace = this.options.report.split("/")[0];
+            this.eventName = this.options.report.report.split("/")[1];
+            this.eventNamespace = this.options.report.report.split("/")[0];
 
             // Create settings
             this.settings = {};
@@ -30092,7 +30108,7 @@ define('views/report',[
          *  Save report settings
          */
         saveSettings: function() {
-            User.current.setSettings("report/"+this.report, this.settings);
+            User.current.setSettings("report/"+this.report.id, this.settings);
             return this;
         },
 
@@ -30100,7 +30116,7 @@ define('views/report',[
          *  Load report settings
          */
         loadSettings: function(def) {
-            this.settings = User.current.getSettings("report/"+this.report) || {};
+            this.settings = User.current.getSettings("report/"+this.report.id) || {};
             _.defaults(this.settings, def || {});
             return this.settings;
         },
@@ -30120,7 +30136,8 @@ define('views/report',[
             if (e != null) e.preventDefault();
             this.settings = {};
             this.saveSettings();
-            User.current.removeReport(this.report);
+            console.log(this.report, this);
+            User.current.removeReport(this.report.id);
         },
 
         /*

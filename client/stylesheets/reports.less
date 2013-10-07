@@ -18,7 +18,7 @@
 		.icon {
 			font-size: 100px;
 			line-height: 120px;
-			opacity: 0.6;
+			opacity: 0.2;
 		}
 	}
 
@@ -27,11 +27,12 @@
 		display: block;
 		float: left;
 
-		&.layout-large {
-			width: 100%;
-		}
-		&.layout-medium {
-			width: 50%;
+		width: 100%;
+
+		@media (min-width: 1280px) {
+			&.layout-medium {
+				width: 50%;
+			}
 		}
 
 		.report-inner {
