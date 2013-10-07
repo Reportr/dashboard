@@ -28,6 +28,10 @@ else
 	$(NPM) install .
 endif
 
+deploy:
+	@echo ==== Deploy to Heroku ====
+	git push heroku master
+
 run:
 	@echo ==== Run server ====
 	$(NODE) bin/web.js

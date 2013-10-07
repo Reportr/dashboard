@@ -120,6 +120,7 @@ define([
          */
         templateContext: function() {
             console.log(this.settings);
+            this.settings.visualization = this.settings.visualization || 'line';
             return {
                 'model': this.getModel(),
                 'report': this,
@@ -147,7 +148,7 @@ define([
          *  Load report settings
          */
         loadSettings: function(def) {
-            this.settings = User.current.getSettings("report/"+this.report);
+            this.settings = User.current.getSettings("report/"+this.report) || {};
             _.defaults(this.settings, def || {});
             return this.settings;
         },
