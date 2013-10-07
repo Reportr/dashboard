@@ -1,15 +1,49 @@
-<% if (_.size(reports) > 0) { %>
+<div class="reports-list">
 	<% _.each(reports, function(report) { %>
 	<%= view.component("report", {
 		"report": report
 	}) %>
 	<% }); %>
-<% } else { %>
-	<div class="reports-empty">
-		<p class="icon"><i class="icon-bar-chart"></i></p>
-		<h3>No reports yet</h3>
-		<p>Start tracking events to add reports to this dashboard.</p>
-		<p>Install the Google Chrome extension to track your web navigation or use the API to track personnalized events.</p>
-		<p><a href="https://github.com/SamyPesse/reportr" target="_blank">Learn more</a></p>
-	</div>
-<% } %>
+</div>
+<div class="settings">
+	<form class="form-horizontal" role="form">
+		<fieldset>
+			<h1>Account Settings</h1>
+			<div class="fieldset-inner">
+				<div class="form-group">
+					<label for="host" class="col-lg-2 control-label">Host</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="host" placeholder="Host" disabled value="<%- [window.location.protocol, '//', window.location.host].join('') %>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="col-lg-2 control-label">Email</label>
+					<div class="col-lg-10">
+						<input type="email" class="form-control" id="email" placeholder="Email" disabled value="<%- user.get('email') %>">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="token" class="col-lg-2 control-label">API token</label>
+					<div class="col-lg-10">
+						<input type="text" class="form-control" id="token" placeholder="API token" disabled value="<%- user.get('token') %>">
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<h1>Connect Trackers</h1>
+			<div class="fieldset-inner">
+				<div class="trackers-list">
+					<a class="tracker action-install-chrome <% if (window.chrome != null && window.chrome.app.isInstalled) { %>active<% } %>" href="#">
+						<img src="<%- hr.urls.static("images/services/googlechrome.png") %>" />
+						<h3>Web Navigation</h3>
+						<p>Track your web navigation to Reportr using the Google Chrome extension.</p>
+					</a>
+				</div>
+			</div>
+		</fieldset>
+
+		<a href="#" class="btn btn-lg btn-danger action-logout btn-block">Logout</a>
+	</form>
+</div>

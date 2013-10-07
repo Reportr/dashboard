@@ -5,19 +5,11 @@ HR = node_modules/hr.js/bin/hr.js
 
 .PHONY: all
 
-all: build run
+all: build chromeextension run
 
 build:
 	@echo ==== Build dashboard client ====
 	$(HR) -d client build
-
-	@echo
-	@echo ==== Build client library ====
-	browserify -r ./reportr.js -o ./public/api.js
-
-	@echo
-	@echo ==== Build chrome extension ====
-	cd examples/javascript/chrome && sh ./build.sh
 	@echo
 
 install:
@@ -27,6 +19,17 @@ ifeq ($(NPM),)
 else
 	$(NPM) install .
 endif
+
+clientlibrary:
+	@echo ==== Build client library ====
+	browserify -r ./reportr.js -o ./public/api.js
+	@echo
+
+chromeextension: clientlibrary
+	@echo ==== Build chrome extension ====
+	cd examples/javascript/chrome && sh ./build.sh
+	zip chrome-extension.zip ./examples/javascript/chrome/*
+	@echo
 
 deploy:
 	@echo ==== Deploy to Heroku ====

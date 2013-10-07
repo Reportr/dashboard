@@ -18,4 +18,14 @@ module.exports =  {
 	"database": {
 		"url": process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
 	},
+
+	/* Trackers */
+	"trackers": [
+		{
+			'module': 'tracker/ping',
+			'config': {
+				'interval': 60*60
+			}
+		}
+	]
 };

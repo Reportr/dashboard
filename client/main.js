@@ -14,7 +14,8 @@ require([
     // Configure hr
     hr.configure(args);
     hr.Template.extendContext({
-        'moment': moment
+        'moment': moment,
+        'user': User.current
     });
 
     // Define base application
@@ -23,10 +24,12 @@ require([
         template: "main.html",
         metas: {
             "description": "Track your life activity on a single platform.",
-            "viewport": "width=device-width, initial-scale=1.0"
+            "viewport": "width=device-width, initial-scale=1.0",
+            "google-site-verification": "yspAMnHx6_MBalUkZDjyWernbqmv8IOXrxarY1CgT8M"
         },
         links: {
-            "icon": hr.Urls.static("images/favicon.png")
+            "icon": hr.Urls.static("images/favicon.png"),
+            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko"
         },
         events: {
             // Homepage
@@ -38,7 +41,8 @@ require([
 
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
-            "click .action-token": "actionGetToken"
+            "click .action-token": "actionGetToken",
+            "click .action-settings": "actionSettings"
         },
 
         /*
@@ -170,6 +174,16 @@ require([
                 e.preventDefault();
             }
             alert(this.user.get("token"));
+        },
+
+        /*
+         *  (action) Open settings
+         */
+        actionSettings: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.components.reports.toggleSettings(true);
         }
     });
 

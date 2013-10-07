@@ -78,9 +78,11 @@ class Reportr(Session):
         """
         kwargs["event"] = event
         kwargs["namespace"] = namespace
-        return self.request("get", "api/"+self.token+"/events/track", params={
+        r = self.request("get", "api/"+self.token+"/events/track", params={
             "data": base64.b64encode(json.dumps(kwargs))
         })
+        r.raise_for_status()
+        return r
 
     def model(self, namespace, event, **kwargs):
         """
@@ -91,7 +93,9 @@ class Reportr(Session):
         """
         kwargs["event"] = event
         kwargs["namespace"] = namespace
-        return self.request("get", "api/"+self.token+"/model/set", params={
+        r = self.request("get", "api/"+self.token+"/model/set", params={
             "data": base64.b64encode(json.dumps(kwargs))
         })
+        r.raise_for_status()
+        return r
 

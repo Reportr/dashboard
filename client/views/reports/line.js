@@ -94,7 +94,8 @@ define([
 
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
-                    'mode': 'time'
+                    'mode': 'time',
+                    'timezone': "browser"
                 }
             });
 

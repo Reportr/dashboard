@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381178842818,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381188158295,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -33779,7 +33779,8 @@ define('views/reports/line',[
 
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
-                    'mode': 'time'
+                    'mode': 'time',
+                    'timezone': "browser"
                 }
             });
 
@@ -34283,7 +34284,10 @@ define('views/reports',[
     var ReportsView = hr.View.extend({
         className: "reports",
         template: "reports.html",
-        events: {},
+        events: {
+            "submit .settings form": "submitSettings",
+            "click .action-install-chrome": "actionInstallChrome"
+        },
 
         initialize: function() {
             ReportsView.__super__.initialize.apply(this, arguments);
@@ -34295,6 +34299,38 @@ define('views/reports',[
             return {
                 'reports': User.current.reports(),
             };
+        },
+
+        finish: function() {
+            ReportsView.__super__.finish.apply(this, arguments);
+            this.toggleSettings(false);
+            return this;
+        },
+
+        /*
+         *  Toggle settings
+         */
+        toggleSettings: function(state) {
+            if (_.size(User.current.reports()) == 0) {
+                state = true;
+            }
+            this.$el.toggleClass("mode-settings", state);
+        },
+
+        /*
+         *  (submit) Settings
+         */
+        submitSettings: function(e) {
+            e.preventDefault();
+        },
+
+        /*
+         * (action) Install chrome extension
+         */
+        actionInstallChrome: function(e) {
+            e.preventDefault();
+            if (window.chrome == null) return;
+            chrome.webstore.install(undefined, _.bind(this.render, this));
         }
     });
 
@@ -34342,7 +34378,8 @@ require([
     // Configure hr
     hr.configure(args);
     hr.Template.extendContext({
-        'moment': moment
+        'moment': moment,
+        'user': User.current
     });
 
     // Define base application
@@ -34351,10 +34388,12 @@ require([
         template: "main.html",
         metas: {
             "description": "Track your life activity on a single platform.",
-            "viewport": "width=device-width, initial-scale=1.0"
+            "viewport": "width=device-width, initial-scale=1.0",
+            "google-site-verification": "yspAMnHx6_MBalUkZDjyWernbqmv8IOXrxarY1CgT8M"
         },
         links: {
-            "icon": hr.Urls.static("images/favicon.png")
+            "icon": hr.Urls.static("images/favicon.png"),
+            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko"
         },
         events: {
             // Homepage
@@ -34366,7 +34405,8 @@ require([
 
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
-            "click .action-token": "actionGetToken"
+            "click .action-token": "actionGetToken",
+            "click .action-settings": "actionSettings"
         },
 
         /*
@@ -34498,6 +34538,16 @@ require([
                 e.preventDefault();
             }
             alert(this.user.get("token"));
+        },
+
+        /*
+         *  (action) Open settings
+         */
+        actionSettings: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.components.reports.toggleSettings(true);
         }
     });
 
