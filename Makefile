@@ -28,8 +28,7 @@ clientlibrary:
 chromeextension: clientlibrary
 	@echo ==== Build chrome extension ====
 	cd examples/javascript/chrome && sh ./build.sh
-	rm chrome-extension.zip
-	cd examples/javascript/chrome && zip ../../../chrome-extension.zip ./*
+	cd examples/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
 	@echo
 
 deploy:
