@@ -53,7 +53,9 @@ define([
         actionInstallChrome: function(e) {
             e.preventDefault();
             if (window.chrome == null) return;
-            chrome.webstore.install(undefined, _.bind(this.render, this));
+            chrome.webstore.install(undefined, _.bind(this.render, this), function() {
+                window.location.href = "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko";
+            });
         }
     });
 
