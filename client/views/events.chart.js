@@ -4,8 +4,8 @@ define([
     "api",
     "models/user",
     "models/eventmodel",
-    "collections/events"
-], function(hr, _, api, User, EventModel, Events) { 
+    "models/eventinfo"
+], function(hr, _, api, User, EventModel, EventInfo) { 
 
     var EventsChartView = hr.View.extend({
         className: "events-chart",
@@ -29,15 +29,11 @@ define([
             _.defaults(this.settings, this.defaultSettings);
             _.extend(this.settings, this.loadSettings());
 
-
-            // Create events collection
-            this.collection = new Events({
-                'eventName': this.eventName,
-                'namespace': this.eventNamespace,
-                'limit': this.settings.limit || 100
-            });
-            this.collection.on("add remove",  _.throttle(this.updateChart, 500), this);
-            this.updateData();
+            // Create event info
+            this.eventInfo = new EventInfo();
+            this.eventInfo.on("change", this.render, this);
+            this.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
+            this.eventInfo.load(this.eventNamespace, this.eventName);
             return this;
         },
 
@@ -60,23 +56,24 @@ define([
         /*
          *  Load events data
          */
-        updateData: function() {
-            this.collection.options.limit = this.settings.limit || 100;
-            this.collection.reset([]);
-            this.collection.getSpecific();
-            return this;
+        updateData: function(options) {
+            options = _.defaults(options || {}, {
+                'start': 0,
+                'limit': this.settings.limit || 10000,
+                'interval': 1000,
+                'period': -1,
+                'property': null,
+                'transform': _.size
+            });
+
+            return api.request("get", User.current.get('token')+"/data/"+this.eventNamespace+"/"+this.eventName, options);
         },
 
         /*
          *  Return model for these events
          */
         getModel: function() {
-            var def = new EventModel({}, {
-                'event': this.eventName,
-                'namespace': this.eventNamespace,
-                'name': this.eventName
-            });
-            return User.current.models.getModel(this.report, def);
+            return this.eventInfo.model();
         },
 
         /*

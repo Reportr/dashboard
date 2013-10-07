@@ -46,7 +46,7 @@
 				Default
 			</label>
 		</div>
-		<% _.each(properties, function(name) { %>
+		<% _.each(properties, function(propertyType, name) { %>
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" value="<%- name %>" <% if (_.contains(settings.properties, name)) { %>checked<% } %>>

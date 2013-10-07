@@ -75,7 +75,7 @@ define([
         initialize: function() {
             EventsChartLineView.__super__.initialize.apply(this, arguments);
 
-
+            this.chart = null;
 
             return this;
         },
@@ -86,13 +86,13 @@ define([
         templateContext: function() {
             return {
                 'model': this.getModel(),
-                'event': this.eventName,
+                'event': this.eventInfo,
 
                 'transforms': this.dataTransforms,
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
-                'properties': this.collection.properties(),
                 'limits': this.dataLimits,
+                'properties': this.eventInfo.get("properties"),
 
                 'settings': this.settings
             };
@@ -104,39 +104,59 @@ define([
         finish: function() {
             EventsChartLineView.__super__.finish.apply(this, arguments);
 
+            this.chart = $.plot(this.$(".chart"), [], {
+                'xaxis': {
+                    'mode': 'time'
+                }
+            });
+
+            return this.updateChart();
+        },
+
+        /*
+         *  Events list change : refresh the chart
+         */
+        updateChart: function() {
+            var that = this;
             var series = [];
+            var seriesD = [];
             var properties = this.settings.properties;
 
+            if (this.chart == null) return this;
+
             _.each(properties, function(property) {
-                var data = this.collection.dataSeries({
+                var d = this.updateData({
                     'transform': this.dataTransforms[this.settings.transform],
                     'property': property,
                     'period': this.settings.period,
                     'interval': this.settings.interval
                 });
-
-                series.push({
-                    'data': data,
-                    'hoverable': true,
-                    'lines': {
-                        'show': true
-                    },
-                    'points': {
-                        'show': true
-                    },
-                    'lines': {
-                        'show': true,
-                        'fill': true,
-                        'fillColor': "rgba(255, 255, 255, 0.8)"
-                    }
+                d.done(function(data) {
+                    series.push({
+                        'data': data.data,
+                        'label': property || 'Default',
+                        'hoverable': true,
+                        'clickable': true,
+                        'lines': {
+                            'show': true
+                        },
+                        'points': {
+                            'show': true
+                        },
+                        'lines': {
+                            'show': true,
+                            'fill': true,
+                            'fillColor': "rgba(255, 255, 255, 0.8)"
+                        }
+                    });
                 });
+                seriesD.push(d);
             }, this);
             
-            
-            $.plot(this.$(".chart"), series, {
-                'xaxis': {
-                    'mode': 'time'
-                }
+            hr.Deferred.when.apply(null, seriesD).done(function() {
+                that.chart.setData(series);
+                that.chart.setupGrid();
+                that.chart.draw();  
             });
 
             return this;
@@ -193,7 +213,7 @@ define([
         actionSelectLimit: function(e) {
             this.settings.limit = parseInt(this.$(".select-limit").val());
             this.saveSettings();
-            this.updateData();
+            //this.updateData();
         },
 
         /*

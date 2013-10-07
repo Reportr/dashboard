@@ -68,7 +68,7 @@ class Reportr(Session):
 
         return super(Reportr, self).request(method, url, **req_kwargs)
 
-    def track(self, event, namespace="main", **kwargs):
+    def track(self, namespace, event, **kwargs):
         """
         Track an event
 
@@ -82,7 +82,7 @@ class Reportr(Session):
             "data": base64.b64encode(json.dumps(kwargs))
         })
 
-    def model(self, event, namespace="main", **kwargs):
+    def model(self, namespace, event, **kwargs):
         """
         Define a model for an event type
 

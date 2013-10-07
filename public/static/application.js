@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381093933403,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381142759273,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29560,7 +29560,7 @@ define('models/eventmodel',[
          */
         icon: function() {
             var icon = this.get('icon', "");
-            if (icon.length > 0 && icon[0] == '$') {
+            if (icon && icon[0] == '$') {
                 icon = '/static/images/models/'+icon.slice(1)+'.png';
             }
             return icon || '/static/images/models/default.png';
@@ -29693,19 +29693,48 @@ define('views/models.list',[
 
     return EventModelsList;
 });
-define('models/event',[
+define('models/eventinfo',[
     "hr/hr",
     "api",
     "notifications",
     "models/user"
 ], function(hr, api, notifications, User) {
-    var Event = hr.Model.extend({
+    /*
+     *  EventInfo model represent informations given by the api using /api/<token>/event/<namespace>/<event>
+     *  about some events.
+     *  It used to get a list of all properties names and types of an events collection.
+     */
+    var EventInfo = hr.Model.extend({
         defaults: {
-            'id': null,
         	'event': null,
             'namespace': null,
             'properties': {},
             'timestamp': 0,
+        },
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            EventInfo.__super__.initialize.apply(this, arguments);
+
+            // Signal eventsi n relatime
+            notifications.on("events:new", function(e) {
+                if (e.report() == this.report()) {
+                    this.trigger("events:new", e);
+                }
+            }, this);
+            return this;
+        },
+
+        /*
+         * Load info about events
+         */
+        load: function(eventNamespace, eventName) {
+            var that = this;
+            return api.request("get", User.current.get('token')+"/event/"+eventNamespace+"/"+eventName, {}).done(function(data) {
+                that.set(data);
+            });
         },
 
         /*
@@ -29723,150 +29752,7 @@ define('models/event',[
         }
     });
 
-    // Notification events
-    notifications.on("event", function(data) {
-        notifications.trigger("events:new", new Event({}, data.data));
-    });
-
-    return Event;
-});
-define('collections/events',[
-    "Underscore",
-    "hr/hr",
-    "api",
-    "notifications",
-    "models/event",
-    "models/user"
-], function(_, hr, api, notifications, Event, User) {
-    var Events = hr.Collection.extend({
-        model: Event,
-
-        defaults: _.defaults({
-            loader: "getSpecific",
-            loaderArgs: [],
-            limit: 100,
-            allEvents: false
-        }, hr.Collection.prototype.defaults),
-
-        /*
-         *  Constructor
-         */
-        initialize: function() {
-            Events.__super__.initialize.apply(this, arguments);
-
-            // Add new event in realtime
-            notifications.on("events:new", function(e) {
-                if (this.options.allEvents
-                || (e.get("event") == this.options.eventName
-                && e.get("namespace") == this.options.namespace)) {
-                    this.add(e, {
-                        at: 0
-                    });
-                }
-            }, this);
-            return this;
-        },
-
-        /*
-         *  Comparator
-         */
-        comparator: function(e) {
-            return e.get("timestamp");
-        },
-
-        /*
-         *  Get specific events
-         */
-        getSpecific: function(options) {
-            var self = this;
-            
-            options = _.defaults(options || {}, {});
-
-            return api.request("get", User.current.get('token')+"/events/"+this.options.namespace+"/"+this.options.eventName, {
-            	'start': this.options.startIndex,
-            	'limit': this.options.limit
-            }).done(function(data) {
-            	self.add({
-                    list: data.events,
-                    n: data.count
-                });
-            });
-        },
-
-        /*
-         *  Get last events
-         */
-        getLast: function(options) {
-            var self = this;
-            
-            options = _.defaults(options || {}, {});
-
-            return api.request("get", User.current.get('token')+"/events/last", {
-                'start': this.options.startIndex,
-                'limit': this.options.limit
-            }).done(function(data) {
-                self.add({
-                    list: data.events,
-                    n: data.count
-                });
-            });
-        },
-
-        /*
-         *  Return list of properties
-         */
-        properties: function() {
-            return _.uniq(this.reduce(function(memo, e) {
-                memo.push.apply(memo, _.keys(e.get("properties", {})));
-                return memo;
-            }, []));
-        },
-
-
-        /*
-         *	Get data series for these events collection
-         */
-        dataSeries: function(options) {
-        	options = _.defaults(options || {}, {
-        		'interval': 1000,
-                'period': -1,
-                'property': null,
-                'transform': _.size
-        	});
-
-            // Sort the collection
-            this.sort();
-
-            // Build a map (x->[list of values])
-        	var seriesMap = {};
-        	this.each(function(e) {
-                // Check period
-                var t = e.get("timestamp");
-                if (options.period > 0 && t < (Date.now() - options.period)) {
-                    return;
-                }
-
-                // index
-        		t = Math.floor(t / options.interval)*options.interval;
-
-                // value
-                var v = !options.property ? 1 : e.get("properties."+options.property, 0);
-        		seriesMap[t] = seriesMap[t] || [];
-                seriesMap[t].push(v);
-        	});
-            //console.log("seriesMap (x->[list of values]) ", seriesMap);
-
-            // Transform to (x->y)
-            _.each(seriesMap, function(values, x) {
-                seriesMap[x] = options.transform(values);
-            });
-            //console.log("seriesMap (x->y) ", seriesMap);
-
-        	return _.pairs(seriesMap);
-        }
-    });
-
-    return Events;
+    return EventInfo;
 });
 define('views/events.chart',[
     "hr/hr",
@@ -29874,8 +29760,8 @@ define('views/events.chart',[
     "api",
     "models/user",
     "models/eventmodel",
-    "collections/events"
-], function(hr, _, api, User, EventModel, Events) { 
+    "models/eventinfo"
+], function(hr, _, api, User, EventModel, EventInfo) { 
 
     var EventsChartView = hr.View.extend({
         className: "events-chart",
@@ -29899,15 +29785,11 @@ define('views/events.chart',[
             _.defaults(this.settings, this.defaultSettings);
             _.extend(this.settings, this.loadSettings());
 
-
-            // Create events collection
-            this.collection = new Events({
-                'eventName': this.eventName,
-                'namespace': this.eventNamespace,
-                'limit': this.settings.limit || 100
-            });
-            this.collection.on("add remove",  _.throttle(this.updateChart, 500), this);
-            this.updateData();
+            // Create event info
+            this.eventInfo = new EventInfo();
+            this.eventInfo.on("change", this.render, this);
+            this.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
+            this.eventInfo.load(this.eventNamespace, this.eventName);
             return this;
         },
 
@@ -29930,23 +29812,24 @@ define('views/events.chart',[
         /*
          *  Load events data
          */
-        updateData: function() {
-            this.collection.options.limit = this.settings.limit || 100;
-            this.collection.reset([]);
-            this.collection.getSpecific();
-            return this;
+        updateData: function(options) {
+            options = _.defaults(options || {}, {
+                'start': 0,
+                'limit': this.settings.limit || 10000,
+                'interval': 1000,
+                'period': -1,
+                'property': null,
+                'transform': _.size
+            });
+
+            return api.request("get", User.current.get('token')+"/data/"+this.eventNamespace+"/"+this.eventName, options);
         },
 
         /*
          *  Return model for these events
          */
         getModel: function() {
-            var def = new EventModel({}, {
-                'event': this.eventName,
-                'namespace': this.eventNamespace,
-                'name': this.eventName
-            });
-            return User.current.models.getModel(this.report, def);
+            return this.eventInfo.model();
         },
 
         /*
@@ -33550,7 +33433,7 @@ define('views/events.chart.line',[
         initialize: function() {
             EventsChartLineView.__super__.initialize.apply(this, arguments);
 
-
+            this.chart = null;
 
             return this;
         },
@@ -33561,13 +33444,13 @@ define('views/events.chart.line',[
         templateContext: function() {
             return {
                 'model': this.getModel(),
-                'event': this.eventName,
+                'event': this.eventInfo,
 
                 'transforms': this.dataTransforms,
                 'intervals': this.dataIntervals,
                 'periods': this.dataPeriods,
-                'properties': this.collection.properties(),
                 'limits': this.dataLimits,
+                'properties': this.eventInfo.get("properties"),
 
                 'settings': this.settings
             };
@@ -33579,39 +33462,59 @@ define('views/events.chart.line',[
         finish: function() {
             EventsChartLineView.__super__.finish.apply(this, arguments);
 
+            this.chart = $.plot(this.$(".chart"), [], {
+                'xaxis': {
+                    'mode': 'time'
+                }
+            });
+
+            return this.updateChart();
+        },
+
+        /*
+         *  Events list change : refresh the chart
+         */
+        updateChart: function() {
+            var that = this;
             var series = [];
+            var seriesD = [];
             var properties = this.settings.properties;
 
+            if (this.chart == null) return this;
+
             _.each(properties, function(property) {
-                var data = this.collection.dataSeries({
+                var d = this.updateData({
                     'transform': this.dataTransforms[this.settings.transform],
                     'property': property,
                     'period': this.settings.period,
                     'interval': this.settings.interval
                 });
-
-                series.push({
-                    'data': data,
-                    'hoverable': true,
-                    'lines': {
-                        'show': true
-                    },
-                    'points': {
-                        'show': true
-                    },
-                    'lines': {
-                        'show': true,
-                        'fill': true,
-                        'fillColor': "rgba(255, 255, 255, 0.8)"
-                    }
+                d.done(function(data) {
+                    series.push({
+                        'data': data.data,
+                        'label': property || 'Default',
+                        'hoverable': true,
+                        'clickable': true,
+                        'lines': {
+                            'show': true
+                        },
+                        'points': {
+                            'show': true
+                        },
+                        'lines': {
+                            'show': true,
+                            'fill': true,
+                            'fillColor': "rgba(255, 255, 255, 0.8)"
+                        }
+                    });
                 });
+                seriesD.push(d);
             }, this);
             
-            
-            $.plot(this.$(".chart"), series, {
-                'xaxis': {
-                    'mode': 'time'
-                }
+            hr.Deferred.when.apply(null, seriesD).done(function() {
+                that.chart.setData(series);
+                that.chart.setupGrid();
+                that.chart.draw();  
             });
 
             return this;
@@ -33668,7 +33571,7 @@ define('views/events.chart.line',[
         actionSelectLimit: function(e) {
             this.settings.limit = parseInt(this.$(".select-limit").val());
             this.saveSettings();
-            this.updateData();
+            //this.updateData();
         },
 
         /*
@@ -33684,6 +33587,128 @@ define('views/events.chart.line',[
     hr.View.Template.registerComponent("events.chart.line", EventsChartLineView);
 
     return EventsChartLineView;
+});
+define('models/event',[
+    "hr/hr",
+    "api",
+    "notifications",
+    "models/user"
+], function(hr, api, notifications, User) {
+    var Event = hr.Model.extend({
+        defaults: {
+            'id': null,
+        	'event': null,
+            'namespace': null,
+            'properties': {},
+            'timestamp': 0,
+        },
+
+        /*
+         *  Return report id
+         */
+        report: function() {
+            return this.get("namespace")+"/"+this.get("event");
+        },
+
+        /*
+         *  Return model for the event
+         */
+        model: function() {
+            return User.current.models.getModel(this);
+        }
+    });
+
+    // Notification events
+    notifications.on("event", function(data) {
+        notifications.trigger("events:new", new Event({}, data.data));
+    });
+
+    return Event;
+});
+define('collections/events',[
+    "Underscore",
+    "hr/hr",
+    "api",
+    "notifications",
+    "models/event",
+    "models/user"
+], function(_, hr, api, notifications, Event, User) {
+    var Events = hr.Collection.extend({
+        model: Event,
+
+        defaults: _.defaults({
+            loader: "getSpecific",
+            loaderArgs: [],
+            limit: 100,
+            allEvents: false
+        }, hr.Collection.prototype.defaults),
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            Events.__super__.initialize.apply(this, arguments);
+
+            // Add new event in realtime
+            notifications.on("events:new", function(e) {
+                if (this.options.allEvents
+                || (e.get("event") == this.options.eventName
+                && e.get("namespace") == this.options.namespace)) {
+                    this.add(e, {
+                        at: 0
+                    });
+                }
+            }, this);
+            return this;
+        },
+
+        /*
+         *  Comparator
+         */
+        comparator: function(e) {
+            return e.get("timestamp");
+        },
+
+        /*
+         *  Get specific events
+         */
+        getSpecific: function(options) {
+            var self = this;
+            
+            options = _.defaults(options || {}, {});
+
+            return api.request("get", User.current.get('token')+"/events/"+this.options.namespace+"/"+this.options.eventName, {
+            	'start': this.options.startIndex,
+            	'limit': this.options.limit
+            }).done(function(data) {
+            	self.add({
+                    list: data.events,
+                    n: data.count
+                });
+            });
+        },
+
+        /*
+         *  Get last events
+         */
+        getLast: function(options) {
+            var self = this;
+            
+            options = _.defaults(options || {}, {});
+
+            return api.request("get", User.current.get('token')+"/events/last", {
+                'start': this.options.startIndex,
+                'limit': this.options.limit
+            }).done(function(data) {
+                self.add({
+                    list: data.events,
+                    n: data.count
+                });
+            });
+        }
+    });
+
+    return Events;
 });
 define('views/events.list',[
     "hr/hr",

@@ -24,7 +24,7 @@ define([
          */
         icon: function() {
             var icon = this.get('icon', "");
-            if (icon.length > 0 && icon[0] == '$') {
+            if (icon && icon[0] == '$') {
                 icon = '/static/images/models/'+icon.slice(1)+'.png';
             }
             return icon || '/static/images/models/default.png';
