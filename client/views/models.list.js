@@ -24,7 +24,11 @@ define([
          */
         actionReportAdd: function(e) {
             if (e != null) e.preventDefault();
-            User.current.addReport(this.model.report());
+            
+            User.current.reports.add({
+                'event': this.model.get('event'),
+                'namespace': this.model.get('namespace')
+            });
         }
     });
 

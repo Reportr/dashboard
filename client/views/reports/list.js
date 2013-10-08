@@ -78,7 +78,7 @@ define([
         finish: function() {
             ReportListView.__super__.initialize.apply(this, arguments);
 
-            // Build and add list
+            // Build list
             this.list = new EventsList({
                 'report': this.report,
                 'collection': {
@@ -88,6 +88,8 @@ define([
                     'eventNamespace': this.report.eventNamespace
                 }
             });
+
+            // Add list to dom
             this.list.$el.appendTo(this.$(".events-table"));
 
             return this;

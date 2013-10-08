@@ -5,6 +5,10 @@
 	right: 0px;
 	top: 0px;
 	background: #eee;
+
+	svg {
+		display: none;
+	}
 	
 	#intro {
 		position: relative;
@@ -28,6 +32,7 @@
 			bottom: 0px;
 			left: 0px;
 			right: 0px;
+			filter: url('#svg-blur');
 			-webkit-filter: blur(@blur);
 			-moz-filter: blur(@blur);
 			-o-filter: blur(@blur);

@@ -103,6 +103,7 @@ define([
      *  Represent a complete report : header with control, data view
      */
     var ReportView = hr.View.extend({
+        tagName: "div",
         className: "report",
         template: "report.html",
         events: {
@@ -128,9 +129,10 @@ define([
             ReportView.__super__.initialize.apply(this, arguments);
 
             // Base values
-            this.report = this.options.report;
-            this.eventName = this.options.report.report.split("/")[1];
-            this.eventNamespace = this.options.report.report.split("/")[0];
+            this.report = this.model;
+            this.reports = this.list;
+            this.eventName = this.model.get("event");
+            this.eventNamespace = this.model.get("namespace");
 
             // Create settings
             this.settings = {};
@@ -139,13 +141,23 @@ define([
 
             // Create event info
             this.eventInfo = new EventInfo();
-            this.eventInfo.on("change", this.render, this);
-            this.eventInfo.load(this.eventNamespace, this.eventName);
+            this.eventInfo.on("set", function() {
+                this.render(true);
+            }, this);
+            this.eventInfo.load(this.report.get("namespace"), this.report.get("event"));
 
             // Layout
             this.setLayout(this.settings.layout);
 
             return this;
+        },
+
+        /*
+         *  Render
+         */
+        render: function(force) {
+            if (!force) return this;
+            return ReportView.__super__.render.apply(this, arguments);
         },
 
         /*
@@ -178,12 +190,12 @@ define([
                 layout = this.defaultSettings.layout;
             }
 
-
             this.settings.layout = layout;
             this.$el.attr("class", this.className+" layout-"+this.settings.layout);
 
             this.saveSettings();
             this.trigger("layout:change");
+
             return this;
         },
 
@@ -191,7 +203,7 @@ define([
          *  Save report settings
          */
         saveSettings: function() {
-            User.current.setSettings("report/"+this.report.id, this.settings);
+            this.report.set("settings", this.settings);
             return this;
         },
 
@@ -199,7 +211,7 @@ define([
          *  Load report settings
          */
         loadSettings: function(def) {
-            this.settings = User.current.getSettings("report/"+this.report.id) || {};
+            this.settings = this.report.get("settings") || {};
             _.defaults(this.settings, def || {});
             return this.settings;
         },
@@ -217,10 +229,7 @@ define([
          */
         actionReportRemove: function(e) {
             if (e != null) e.preventDefault();
-            this.settings = {};
-            this.saveSettings();
-            console.log(this.report, this);
-            User.current.removeReport(this.report.id);
+            this.report.destroy();
         },
 
         /*
@@ -232,7 +241,7 @@ define([
                 'visualization':  $(e.currentTarget).data("visualization")
             };
             this.saveSettings();
-            this.render();
+            this.render(true);
         },
 
         /*

@@ -52,7 +52,7 @@ require([
 
             this.user = User.current;
             this.user.models = new EventModels();
-            this.user.on("change", this.render, this);
+            this.user.on("change:token", this.render, this);
 
             return this;
         },
@@ -62,7 +62,7 @@ require([
          */
         templateContext: function() {
             return {
-                user: this.user
+                'user': this.user
             }
         },
 

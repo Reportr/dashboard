@@ -1,8 +1,8 @@
 <div class="report-inner">
 	<div class="report-header">
-		<img src="<%- model.icon() %>" class="model-icon"/>
+		<img src="<%- model.icon() %>" class="report-icon"/>
 
-		<div class="btn-group pull-right">
+		<div class="report-controls btn-group pull-right">
 			<!-- Actions -->
 			<a href="#" class="btn btn-default action-toggle-options"><i class="icon-cog"></i></a>
 			<a href="#" class="btn btn-default action-report-remove"><i class="icon-remove"></i></a>
@@ -20,12 +20,12 @@
 		  	</ul>
 		</div>
 
-		<h3 class="model-name"><%- model.get('name') %></h3>
+		<h3 class="report-name"><%- model.get('name') %></h3>
 	</div>
 	<%= view.component("report."+visualization.id, {
 		"report": report
 	}, "visualization") %>
 	<div class="report-footer">
-		<p class="model-description"><%- model.get('description') %></p>
+		<p class="report-description"><%- model.get('description') %></p>
 	</div>
 </div>

@@ -26,7 +26,7 @@
 
 		.report-inner {
 			background: #fff;
-			border: 1px solid #ddd;
+			border: 1px solid #d8d8d8;
 			border-radius: 8px;
 			padding: 0px;
 			overflow: hidden;
@@ -37,16 +37,22 @@
 				border-bottom: 1px solid #ddd;
 				.clearfix();
 
-				.model-icon {
+				.report-controls {
+					display: none;
+				}
+
+				.report-icon {
 					float: left;
 					margin-right: 10px;
 					width: 32px;
 					height: 32px;
+					margin-top: 2px;
 				}
 
-				.model-name {
+				.report-name {
 					margin: 0px;
 					font-weight: 200;
+					line-height: 34px;
 				}
 			}
 
@@ -56,7 +62,7 @@
 				border-top: 1px solid #ddd;
 				.clearfix();
 
-				.model-description {
+				.report-description {
 					margin: 0px;
 				}
 			}
@@ -82,6 +88,14 @@
 
 			.report-body {
 				padding: 15px;
+			}
+
+			&:hover {
+				.report-header {
+					.report-controls {
+						display: block;
+					}
+				}
 			}
 		}
 

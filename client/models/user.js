@@ -1,12 +1,14 @@
 define([
     "hr/hr",
     "api",
-    "notifications"
-], function(hr, api, notifications) {
+    "notifications",
+    "collections/reports"
+], function(hr, api, notifications, Reports) {
     var User = hr.Model.extend({
         defaults: {
         	'email': hr.Storage.get("email", ""),
-        	'token': hr.Storage.get("token", "")
+        	'token': hr.Storage.get("token", ""),
+            'settings': hr.Storage.get("settings") || {}
         },
 
         /*
@@ -15,14 +17,30 @@ define([
         initialize: function() {
             User.__super__.initialize.apply(this, arguments);
 
-            // User change
-            this.on("change", function() {
-            	hr.Storage.set("email", this.get("email", ""));
-            	hr.Storage.set("token", this.get("token", ""));
+            // Reports list
+            this.reports = new Reports();
+            this.reports.on("add remove set", function() {
+                var settings = _.extend({}, this.get("settings", {}), {
+                    'reports': this.reports.toJSON()
+                });
 
+                this.set("settings", settings);
+            }, this);
+
+            // User change
+            this.on("change:token", function() {
                 this.connectNotifications();
             }, this);
+
+            this.on("set", _.throttle(this.syncSettings, 1000), this);
             
+            if (this.isAuth()) {
+                console.log("user is logged");
+                this.syncSettings({
+                    'updateReports': true
+                });
+            }
+
             this.connectNotifications();
             return this;
         },
@@ -57,6 +75,8 @@ define([
                 'password': password
             }).done(function(data) {
             	that.set(data);
+                this.syncLocal();
+                this.reports.reset(this.get("settings.reports", []));
             });
         },
 
@@ -79,6 +99,7 @@ define([
          *	Log out the user
          */
         logout: function() {
+            if (!this.isAuth()) return this;
             hr.Storage.clear();
         	this.set({
         		'email': null,
@@ -87,73 +108,42 @@ define([
         	return this;
         },
 
-        /*
-         *  Key/Value storage for user settings
-         *
-         *  TODO: add sync with server
-         */
-
-        getSettings: function(key) {
-            return hr.Storage.get(this.get("email")+"/"+key);
-        },
-        setSettings: function(key, value) {
-            hr.Storage.set(this.get("email")+"/"+key, value);
-            this.trigger("settings.change."+key, key);
-            this.syncSettings();
-            return this;
-        },
 
         /*
          *  Sync settings
          */
-        syncSettings: function() {
-            
-        },
+        syncSettings: function(options) {
+            var that = this;
+            if (!this.isAuth()) return this;
 
+            // options
+            options = _.defaults(options || {}, {
+                'updateReports': false
+            })
 
-        /*
-         *  Get list reports
-         */
-        reports: function() {
-            var reports = this.getSettings("reports") || [];
-            return _.reduce(reports, function(memo, report) {
-                if (_.isString(report)) {
-                    memo.push({
-                        'id': _.uniqueId('report_'),
-                        'report': report
-                    });
-                } else if (_.isObject(report)) {
-                    memo.push(report);
+            // Sync with server
+            return api.request("post", this.get("token")+"/account/sync", {
+                'settings': this.get("settings", {})
+            }).done(function(data) {
+                // Update user
+                that.set(data, {
+                    silent: true
+                });
+
+                // Update reports
+                if (options.updateReports) {
+                    that.reports.reset(that.get("settings.reports", []));
                 }
-                return memo;
-            }, []);
+
+                that.syncLocal();
+            });
         },
 
-        /*
-         *  Add a new report
-         */
-        addReport: function(report, reportId) {
-            var reports = this.reports();
-            reports.push({
-                'id': reportId || _.uniqueId('report_'),
-                'report': report
-            });
-            this.setSettings("reports", reports);
-            return this;
-        },
-
-        /*
-         *  Remove a report
-         */
-        removeReport: function(reportId) {
-            var reports = this.reports();
-            _.each(reports, function(report, i) {
-                if (report.id == reportId) {
-                    delete reports[i];
-                }
-            });
-            this.setSettings("reports", reports);
-            return this;
+        syncLocal: function() {
+            // Sync in localStorage
+            hr.Storage.set("email", this.get("email", ""));
+            hr.Storage.set("token", this.get("token", ""));
+            hr.Storage.set("settings", this.get("settings", {}));
         }
     }, {
         current: null

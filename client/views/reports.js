@@ -1,8 +1,23 @@
 define([
     "hr/hr",
     "api",
-    "models/user"
-], function(hr, api, User) { 
+    "models/user",
+    "collections/reports",
+    "views/report"
+], function(hr, api, User, Reports, ReportView) {
+
+    // Reports list
+    var ReportsList = hr.List.extend({
+        tagName: "div",
+        className: "reports-list",
+        Collection: Reports,
+        Item: ReportView,
+        defaults: _.defaults({
+            
+        }, hr.List.prototype.defaults)
+    });
+
+    // Reports dashboard
     var ReportsView = hr.View.extend({
         className: "reports",
         template: "reports.html",
@@ -13,19 +28,30 @@ define([
 
         initialize: function() {
             ReportsView.__super__.initialize.apply(this, arguments);
-            User.current.on("settings.change.reports", this.render, this);
-            return this;
-        },
+            
+            User.current.reports.on("add remove reset", function() {
+                if (User.current.reports.size() > 0) {
+                    this.toggleSettings(false);
+                } else {
+                    this.toggleSettings(true);
+                }
+            }, this);
 
-        templateContext: function() {
-            return {
-                'reports': User.current.reports(),
-            };
+            this.reportsList = new ReportsList({
+                'collection': User.current.reports
+            });
+            return this;
         },
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
+
+            // Disable Settings
             this.toggleSettings(false);
+
+            // Add list
+            this.reportsList.$el.appendTo(this.$(".reports-list-outer"));
+
             return this;
         },
 
@@ -33,7 +59,7 @@ define([
          *  Toggle settings
          */
         toggleSettings: function(state) {
-            if (_.size(User.current.reports()) == 0) {
+            if (User.current.reports.size() == 0) {
                 state = true;
             }
             this.$el.toggleClass("mode-settings", state);

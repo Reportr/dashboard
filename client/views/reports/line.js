@@ -160,11 +160,13 @@ define([
                 seriesD.push(d);
             }, this);
             
-            hr.Deferred.when.apply(null, seriesD).done(function() {
-                that.chart.setData(series);
-                that.chart.setupGrid();
-                that.chart.draw();  
-            });
+            if (_.size(seriesD) > 0) {
+                hr.Deferred.when.apply(null, seriesD).done(function() {
+                    that.chart.setData(series);
+                    that.chart.setupGrid();
+                    that.chart.draw();  
+                });
+            }
 
             return this;
         },

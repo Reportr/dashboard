@@ -22748,11 +22748,10 @@ define('hr/utils/cache',[
             if (s == null) {
                 return false;
             }
-            var r = new RegExp("/^(cache_"+configs.revision+")/");
             Object.keys(s).forEach(function(key){
-                   if (/^(cache_)/.test(key) && r.test(key) == false) {
-                       s.removeItem(key);
-                   }
+                if (key.indexOf("cache_") == 0 && key.indexOf("cache_"+configs.revision) ) {
+                    s.removeItem(key);
+                }
             });
         },
 
@@ -22850,8 +22849,6 @@ define('hr/utils/cache',[
             return ncache;
         }
     };
-
-    Cache.init();
 
     return Cache;
 });
@@ -24219,6 +24216,7 @@ define('hr/core/application',[
             logging.log("Run application", this.name);
 
             var hr = require("hr/hr");
+            hr.Cache.init();
             hr.app = this;
             this.render();
             return this;
@@ -24760,7 +24758,7 @@ define('hr/core/collection',[
 
             if (_.isArray(model)) {
                 _.each(model, function(m) {
-                    this.add(m, options);
+                    this.add(m, _.clone(options));
                 }, this);
                 return this;
             }
@@ -24773,7 +24771,7 @@ define('hr/core/collection',[
             }
 
             options = _.defaults(options || {}, {
-                at: _.size(this.models),
+                at: this.models.length,
                 merge: false,
                 silent: false
             });
@@ -25404,7 +25402,9 @@ define('hr/vendors/underscore-more',[
         }
         sharedArrayKeys = _.intersection(arrays(destination), arrays(source));
         combine = function(key) {
-            return source[key] = _.union(destination[key], source[key]);
+            return source[key];
+            // Replace array and not replaced
+            //return source[key] = _.union(destination[key], source[key]);
         };
         for (_j = 0, _len1 = sharedArrayKeys.length; _j < _len1; _j++) {
             sharedArrayKey = sharedArrayKeys[_j];
@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381241028060,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381267379965,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29395,15 +29395,52 @@ define('notifications',[
 
     return new NotificationsManager();
 });
+define('models/report',[
+    "hr/hr",
+    "Underscore"
+], function(hr, _) {
+    var Report = hr.Model.extend({
+        defaults: {
+            'id': null,
+        	'event': null,
+            'namespace': null,
+            'settings': {}
+        },
+
+        /*
+         *  Constructor
+         */
+        initialize: function() {
+            Report.__super__.initialize.apply(this, arguments);
+
+            this.set("id", this.get("id") || _.uniqueId("report_"));
+            return this;
+        }
+    });
+
+    return Report;
+});
+define('collections/reports',[
+    "hr/hr",
+    "models/report"
+], function(hr, Report) {
+    var Reports = hr.Collection.extend({
+        model: Report,
+    });
+
+    return Reports;
+});
 define('models/user',[
     "hr/hr",
     "api",
-    "notifications"
-], function(hr, api, notifications) {
+    "notifications",
+    "collections/reports"
+], function(hr, api, notifications, Reports) {
     var User = hr.Model.extend({
         defaults: {
         	'email': hr.Storage.get("email", ""),
-        	'token': hr.Storage.get("token", "")
+        	'token': hr.Storage.get("token", ""),
+            'settings': hr.Storage.get("settings") || {}
         },
 
         /*
@@ -29412,14 +29449,30 @@ define('models/user',[
         initialize: function() {
             User.__super__.initialize.apply(this, arguments);
 
-            // User change
-            this.on("change", function() {
-            	hr.Storage.set("email", this.get("email", ""));
-            	hr.Storage.set("token", this.get("token", ""));
+            // Reports list
+            this.reports = new Reports();
+            this.reports.on("add remove set", function() {
+                var settings = _.extend({}, this.get("settings", {}), {
+                    'reports': this.reports.toJSON()
+                });
 
+                this.set("settings", settings);
+            }, this);
+
+            // User change
+            this.on("change:token", function() {
                 this.connectNotifications();
             }, this);
+
+            this.on("set", _.throttle(this.syncSettings, 1000), this);
             
+            if (this.isAuth()) {
+                console.log("user is logged");
+                this.syncSettings({
+                    'updateReports': true
+                });
+            }
+
             this.connectNotifications();
             return this;
         },
@@ -29454,6 +29507,8 @@ define('models/user',[
                 'password': password
             }).done(function(data) {
             	that.set(data);
+                this.syncLocal();
+                this.reports.reset(this.get("settings.reports", []));
             });
         },
 
@@ -29476,6 +29531,7 @@ define('models/user',[
          *	Log out the user
          */
         logout: function() {
+            if (!this.isAuth()) return this;
             hr.Storage.clear();
         	this.set({
         		'email': null,
@@ -29484,73 +29540,42 @@ define('models/user',[
         	return this;
         },
 
-        /*
-         *  Key/Value storage for user settings
-         *
-         *  TODO: add sync with server
-         */
-
-        getSettings: function(key) {
-            return hr.Storage.get(this.get("email")+"/"+key);
-        },
-        setSettings: function(key, value) {
-            hr.Storage.set(this.get("email")+"/"+key, value);
-            this.trigger("settings.change."+key, key);
-            this.syncSettings();
-            return this;
-        },
 
         /*
          *  Sync settings
          */
-        syncSettings: function() {
-            
-        },
+        syncSettings: function(options) {
+            var that = this;
+            if (!this.isAuth()) return this;
 
+            // options
+            options = _.defaults(options || {}, {
+                'updateReports': false
+            })
 
-        /*
-         *  Get list reports
-         */
-        reports: function() {
-            var reports = this.getSettings("reports") || [];
-            return _.reduce(reports, function(memo, report) {
-                if (_.isString(report)) {
-                    memo.push({
-                        'id': _.uniqueId('report_'),
-                        'report': report
-                    });
-                } else if (_.isObject(report)) {
-                    memo.push(report);
+            // Sync with server
+            return api.request("post", this.get("token")+"/account/sync", {
+                'settings': this.get("settings", {})
+            }).done(function(data) {
+                // Update user
+                that.set(data, {
+                    silent: true
+                });
+
+                // Update reports
+                if (options.updateReports) {
+                    that.reports.reset(that.get("settings.reports", []));
                 }
-                return memo;
-            }, []);
+
+                that.syncLocal();
+            });
         },
 
-        /*
-         *  Add a new report
-         */
-        addReport: function(report, reportId) {
-            var reports = this.reports();
-            reports.push({
-                'id': reportId || _.uniqueId('report_'),
-                'report': report
-            });
-            this.setSettings("reports", reports);
-            return this;
-        },
-
-        /*
-         *  Remove a report
-         */
-        removeReport: function(reportId) {
-            var reports = this.reports();
-            _.each(reports, function(report, i) {
-                if (report.id == reportId) {
-                    delete reports[i];
-                }
-            });
-            this.setSettings("reports", reports);
-            return this;
+        syncLocal: function() {
+            // Sync in localStorage
+            hr.Storage.set("email", this.get("email", ""));
+            hr.Storage.set("token", this.get("token", ""));
+            hr.Storage.set("settings", this.get("settings", {}));
         }
     }, {
         current: null
@@ -29857,7 +29882,11 @@ define('views/models.list',[
          */
         actionReportAdd: function(e) {
             if (e != null) e.preventDefault();
-            User.current.addReport(this.model.report());
+            
+            User.current.reports.add({
+                'event': this.model.get('event'),
+                'namespace': this.model.get('namespace')
+            });
         }
     });
 
@@ -30050,6 +30079,7 @@ define('views/report',[
      *  Represent a complete report : header with control, data view
      */
     var ReportView = hr.View.extend({
+        tagName: "div",
         className: "report",
         template: "report.html",
         events: {
@@ -30075,9 +30105,10 @@ define('views/report',[
             ReportView.__super__.initialize.apply(this, arguments);
 
             // Base values
-            this.report = this.options.report;
-            this.eventName = this.options.report.report.split("/")[1];
-            this.eventNamespace = this.options.report.report.split("/")[0];
+            this.report = this.model;
+            this.reports = this.list;
+            this.eventName = this.model.get("event");
+            this.eventNamespace = this.model.get("namespace");
 
             // Create settings
             this.settings = {};
@@ -30086,13 +30117,23 @@ define('views/report',[
 
             // Create event info
             this.eventInfo = new EventInfo();
-            this.eventInfo.on("change", this.render, this);
-            this.eventInfo.load(this.eventNamespace, this.eventName);
+            this.eventInfo.on("set", function() {
+                this.render(true);
+            }, this);
+            this.eventInfo.load(this.report.get("namespace"), this.report.get("event"));
 
             // Layout
             this.setLayout(this.settings.layout);
 
             return this;
+        },
+
+        /*
+         *  Render
+         */
+        render: function(force) {
+            if (!force) return this;
+            return ReportView.__super__.render.apply(this, arguments);
         },
 
         /*
@@ -30125,12 +30166,12 @@ define('views/report',[
                 layout = this.defaultSettings.layout;
             }
 
-
             this.settings.layout = layout;
             this.$el.attr("class", this.className+" layout-"+this.settings.layout);
 
             this.saveSettings();
             this.trigger("layout:change");
+
             return this;
         },
 
@@ -30138,7 +30179,7 @@ define('views/report',[
          *  Save report settings
          */
         saveSettings: function() {
-            User.current.setSettings("report/"+this.report.id, this.settings);
+            this.report.set("settings", this.settings);
             return this;
         },
 
@@ -30146,7 +30187,7 @@ define('views/report',[
          *  Load report settings
          */
         loadSettings: function(def) {
-            this.settings = User.current.getSettings("report/"+this.report.id) || {};
+            this.settings = this.report.get("settings") || {};
             _.defaults(this.settings, def || {});
             return this.settings;
         },
@@ -30164,10 +30205,7 @@ define('views/report',[
          */
         actionReportRemove: function(e) {
             if (e != null) e.preventDefault();
-            this.settings = {};
-            this.saveSettings();
-            console.log(this.report, this);
-            User.current.removeReport(this.report.id);
+            this.report.destroy();
         },
 
         /*
@@ -30179,7 +30217,7 @@ define('views/report',[
                 'visualization':  $(e.currentTarget).data("visualization")
             };
             this.saveSettings();
-            this.render();
+            this.render(true);
         },
 
         /*
@@ -33867,11 +33905,13 @@ define('views/reports/line',[
                 seriesD.push(d);
             }, this);
             
-            hr.Deferred.when.apply(null, seriesD).done(function() {
-                that.chart.setData(series);
-                that.chart.setupGrid();
-                that.chart.draw();  
-            });
+            if (_.size(seriesD) > 0) {
+                hr.Deferred.when.apply(null, seriesD).done(function() {
+                    that.chart.setData(series);
+                    that.chart.setupGrid();
+                    that.chart.draw();  
+                });
+            }
 
             return this;
         },
@@ -34260,7 +34300,7 @@ define('views/reports/list',[
         finish: function() {
             ReportListView.__super__.initialize.apply(this, arguments);
 
-            // Build and add list
+            // Build list
             this.list = new EventsList({
                 'report': this.report,
                 'collection': {
@@ -34270,6 +34310,8 @@ define('views/reports/list',[
                     'eventNamespace': this.report.eventNamespace
                 }
             });
+
+            // Add list to dom
             this.list.$el.appendTo(this.$(".events-table"));
 
             return this;
@@ -34473,8 +34515,23 @@ define('views/reports/map',[
 define('views/reports',[
     "hr/hr",
     "api",
-    "models/user"
-], function(hr, api, User) { 
+    "models/user",
+    "collections/reports",
+    "views/report"
+], function(hr, api, User, Reports, ReportView) {
+
+    // Reports list
+    var ReportsList = hr.List.extend({
+        tagName: "div",
+        className: "reports-list",
+        Collection: Reports,
+        Item: ReportView,
+        defaults: _.defaults({
+            
+        }, hr.List.prototype.defaults)
+    });
+
+    // Reports dashboard
     var ReportsView = hr.View.extend({
         className: "reports",
         template: "reports.html",
@@ -34485,19 +34542,30 @@ define('views/reports',[
 
         initialize: function() {
             ReportsView.__super__.initialize.apply(this, arguments);
-            User.current.on("settings.change.reports", this.render, this);
-            return this;
-        },
+            
+            User.current.reports.on("add remove reset", function() {
+                if (User.current.reports.size() > 0) {
+                    this.toggleSettings(false);
+                } else {
+                    this.toggleSettings(true);
+                }
+            }, this);
 
-        templateContext: function() {
-            return {
-                'reports': User.current.reports(),
-            };
+            this.reportsList = new ReportsList({
+                'collection': User.current.reports
+            });
+            return this;
         },
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
+
+            // Disable Settings
             this.toggleSettings(false);
+
+            // Add list
+            this.reportsList.$el.appendTo(this.$(".reports-list-outer"));
+
             return this;
         },
 
@@ -34505,7 +34573,7 @@ define('views/reports',[
          *  Toggle settings
          */
         toggleSettings: function(state) {
-            if (_.size(User.current.reports()) == 0) {
+            if (User.current.reports.size() == 0) {
                 state = true;
             }
             this.$el.toggleClass("mode-settings", state);
@@ -34614,7 +34682,7 @@ require([
 
             this.user = User.current;
             this.user.models = new EventModels();
-            this.user.on("change", this.render, this);
+            this.user.on("change:token", this.render, this);
 
             return this;
         },
@@ -34624,7 +34692,7 @@ require([
          */
         templateContext: function() {
             return {
-                user: this.user
+                'user': this.user
             }
         },
 
