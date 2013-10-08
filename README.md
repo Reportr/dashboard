@@ -115,11 +115,11 @@ Events models define information about how to display an event in the dashboard.
 
 #### Special properties for events
 
-When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '$'.
+When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '@'.
 
 ```
-$lat : latitude for location
-$lng : longitude for location
+@lat : latitude for location
+@lng : longitude for location
 ```
 
 ## Trackers

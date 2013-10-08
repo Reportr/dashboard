@@ -19,6 +19,13 @@ module.exports =  {
 		"url": process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
 	},
 
+	/* Client configuration */
+	"client": {
+		"map": {
+			"apiKey": "AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"
+		}
+	},
+
 	/* Trackers */
 	"trackers": [
 		{

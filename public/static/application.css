@@ -1289,3 +1289,4 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .report-lastvalue{text-align:center;}.report-lastvalue .value{text-align:center;font-size:60px;line-height:100px;}
 .report-count{text-align:center;padding:35px;}.report-count .counter{text-align:center;font-size:80px;line-height:100px;}
 .report-count .speed{text-align:center;font-size:30px;line-height:50px;font-weight:200;}.report-count .speed.speed-positive{color:#27ae60;}
+.report-map .map{height:330px;}

@@ -41,5 +41,8 @@ exports.config = {
     },
     "paths": {
         
-    }
+    },
+
+    // Config and args
+    "args": config.client
 };

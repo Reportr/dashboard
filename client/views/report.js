@@ -51,7 +51,8 @@ define([
          */
         templateContext: function() {
             return {
-                'report': this.report
+                'report': this.report,
+                'settings': this.report.settings
             };
         },
 
@@ -59,7 +60,7 @@ define([
          *  Events list change : refresh the chart
          */
         updateChart: function() {
-            return this.render();
+            return this;
         },
 
         /*

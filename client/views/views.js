@@ -5,6 +5,7 @@ define([
     'views/reports/count',
     'views/reports/lastvalue',
     'views/reports/list',
+    'views/reports/map',
 
     'views/reports',
     'views/report'
