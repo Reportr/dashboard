@@ -18,11 +18,12 @@ define([
         className: "report-map",
         template: "reports/map.html",
         events: {
-            'change input': 'actionChangeSettings'
+            'change input[type="checkbox"]': 'actionChangeBooleanSettings'
         },
         defaultSettings: {
             'limit': 100,
-            'lines': true
+            'lines': true,
+            'markers': true
         },
 
         /*
@@ -91,6 +92,11 @@ define([
                 infowindow.open(that.map, marker);
             });
 
+            // Hide marker
+            if (!this.report.settings.markers) {
+                marker.setMap(null);
+            }
+
             // Draw line
             if (this.report.settings.lines && this.previousMarker) {
                 var line = new google.maps.Polyline({
@@ -116,11 +122,11 @@ define([
         /*
          * (action) Change settings
          */
-        actionChangeSettings: function(e) {
+        actionChangeBooleanSettings: function(e) {
             var p = $(e.currentTarget).attr("value");
             this.report.settings[p] = $(e.currentTarget).is(":checked");
             this.report.saveSettings();
-            this.updateChart();
+            this.render();
         }
     }, {
         apiLoaded: false,

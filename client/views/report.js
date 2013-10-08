@@ -41,8 +41,12 @@ define([
 
             // Bind update
             this.report.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
+
+            this.report.on("layout", this.updateLayout, this);
             this.report.on("layout", this.resizeChart, this);
+            
             $(window).resize(_.bind(this.resizeChart, this));
+            this.updateLayout();
             return this;
         },
 
@@ -61,6 +65,14 @@ define([
          */
         updateChart: function() {
             return this;
+        },
+
+        /*
+         *  Update layout
+         */
+        updateLayout: function() {
+            var cls = this.$el.attr("class").replace(/\blayout-*?\b/g, '');
+            this.$el.attr("class", cls+" layout-"+this.report.settings.layout);
         },
 
         /*
@@ -169,6 +181,7 @@ define([
 
             this.settings.layout = layout;
             this.$el.attr("class", this.className+" layout-"+this.settings.layout);
+
             this.saveSettings();
             this.trigger("layout:change");
             return this;

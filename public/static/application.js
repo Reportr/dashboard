@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381236157473,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381238851722,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29988,8 +29988,12 @@ define('views/report',[
 
             // Bind update
             this.report.eventInfo.on("events:new",  _.throttle(this.updateChart, 1500), this);
+
+            this.report.on("layout", this.updateLayout, this);
             this.report.on("layout", this.resizeChart, this);
+            
             $(window).resize(_.bind(this.resizeChart, this));
+            this.updateLayout();
             return this;
         },
 
@@ -30008,6 +30012,14 @@ define('views/report',[
          */
         updateChart: function() {
             return this;
+        },
+
+        /*
+         *  Update layout
+         */
+        updateLayout: function() {
+            var cls = this.$el.attr("class").replace(/\blayout-*?\b/g, '');
+            this.$el.attr("class", cls+" layout-"+this.report.settings.layout);
         },
 
         /*
@@ -30116,6 +30128,7 @@ define('views/report',[
 
             this.settings.layout = layout;
             this.$el.attr("class", this.className+" layout-"+this.settings.layout);
+
             this.saveSettings();
             this.trigger("layout:change");
             return this;
@@ -33786,6 +33799,10 @@ define('views/reports/line',[
         finish: function() {
             ReportLineView.__super__.finish.apply(this, arguments);
 
+            if (!$.contains(document.documentElement, this.el)) {
+                return this;
+            }
+
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
                     'mode': 'time',
@@ -34305,11 +34322,12 @@ define('views/reports/map',[
         className: "report-map",
         template: "reports/map.html",
         events: {
-            'change input': 'actionChangeSettings'
+            'change input[type="checkbox"]': 'actionChangeBooleanSettings'
         },
         defaultSettings: {
             'limit': 100,
-            'lines': true
+            'lines': true,
+            'markers': true
         },
 
         /*
@@ -34378,6 +34396,11 @@ define('views/reports/map',[
                 infowindow.open(that.map, marker);
             });
 
+            // Hide marker
+            if (!this.report.settings.markers) {
+                marker.setMap(null);
+            }
+
             // Draw line
             if (this.report.settings.lines && this.previousMarker) {
                 var line = new google.maps.Polyline({
@@ -34403,11 +34426,11 @@ define('views/reports/map',[
         /*
          * (action) Change settings
          */
-        actionChangeSettings: function(e) {
+        actionChangeBooleanSettings: function(e) {
             var p = $(e.currentTarget).attr("value");
             this.report.settings[p] = $(e.currentTarget).is(":checked");
             this.report.saveSettings();
-            this.updateChart();
+            this.render();
         }
     }, {
         apiLoaded: false,

@@ -24,7 +24,7 @@
 	</div>
 	<%= view.component("report."+visualization.id, {
 		"report": report
-	}) %>
+	}, "visualization") %>
 	<div class="report-footer">
 		<p class="model-description"><%- model.get('description') %></p>
 	</div>

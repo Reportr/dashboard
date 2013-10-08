@@ -92,6 +92,10 @@ define([
         finish: function() {
             ReportLineView.__super__.finish.apply(this, arguments);
 
+            if (!$.contains(document.documentElement, this.el)) {
+                return this;
+            }
+
             this.chart = $.plot(this.$(".chart"), [], {
                 'xaxis': {
                     'mode': 'time',
