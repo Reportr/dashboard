@@ -7,14 +7,37 @@
 	background: #eee;
 	
 	#intro {
-		margin-top: 40px;
+		position: relative;
+		z-index: 10;
+		margin-top: 10%;
 		width: 100%;
+		height: 390px;
 		max-width: 600px;
 		margin-right: auto;
 		margin-left: auto;
 		text-align: center;
 		color: #111;
 		padding: 0px 15px;
+
+		.background {
+			@blur: 30px;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			-webkit-filter: blur(@blur);
+			-moz-filter: blur(@blur);
+			-o-filter: blur(@blur);
+			-ms-filter: blur(@blur);
+			filter: blur(@blur);
+			opacity: 0.94;
+			background: #fff;
+			z-index: -1;
+		}
+
 
 		h1 {
 			font-size: 90px;
@@ -25,7 +48,7 @@
 		p {
 			font-size: 40px;
 			font-weight: 100;
-			line-height: 30px;
+			line-height: 50px;
 		}
 
 		form {
@@ -37,11 +60,14 @@
 	}
 
 	#preview {
+		position: relative;
 		width: 100%;
 		max-width: 1200px;
 		margin-right: auto;
 		margin-left: auto;
-		margin-top: 40px;
+		top: -280px;
+		z-index: 1;
+		text-align: center;
 
 		img {
 			max-width: 100%;
@@ -50,6 +76,7 @@
 
 	#footer {
 		position: fixed;
+		z-index: 20;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
