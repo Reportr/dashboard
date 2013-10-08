@@ -77,6 +77,20 @@ Events are definied by 'event', 'namespace' and 'properties'. You can alse speci
 <host>/api/<token>/events/<namespace>/<event>
 ```
 
+
+#### Get data serie
+
+```
+<host>/api/<token>/data/<namespace>/<event>?arguments
+
+arguments could contains :
+interval: Interval between data (in ms) (default: 1000)
+period: Period for events (in ms) (default: -1)
+property: Property te calcul (default: null)
+transform: Transofrmation to do (default: 'sum')
+fill: Fill empty time with 0 (default: true)
+```
+
 #### Define models
 
 Events models define information about how to display an event in the dashboard.
