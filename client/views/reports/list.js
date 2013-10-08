@@ -13,7 +13,7 @@ define([
     var EventItem = hr.List.Item.extend({
         tagName: "tr",
         className: "event-item",
-        template: "report.list.item.html",
+        template: "reports/list.item.html",
         events: {},
 
         templateContext: function() {
@@ -44,7 +44,7 @@ define([
         'name': 'List'
     }, {
         className: "report-list",
-        template: "report.list.html",
+        template: "reports/list.html",
         events: {
             'change .select-properties input': 'actionSelectProperty'
         },

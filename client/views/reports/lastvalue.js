@@ -14,7 +14,7 @@ define([
         'name': 'Last value'
     }, {
         className: "report-lastvalue",
-        template: "report.lastvalue.html",
+        template: "reports/lastvalue.html",
         events: {
             'change .select-property': 'actionSelectProperty',
         },

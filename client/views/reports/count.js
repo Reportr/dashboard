@@ -14,7 +14,7 @@ define([
         'name': 'Count'
     }, {
         className: "report-count",
-        template: "report.count.html",
+        template: "reports/count.html",
 
         /*
          *  Constructor

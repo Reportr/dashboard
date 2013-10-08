@@ -17,7 +17,7 @@ define([
         'name': 'Lines'
     }, {
         className: "report-line",
-        template: "report.line.html",
+        template: "reports/line.html",
         defaultSettings: {
             'limit': 100,
             'transform': 'sum',

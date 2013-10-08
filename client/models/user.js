@@ -99,7 +99,15 @@ define([
         setSettings: function(key, value) {
             hr.Storage.set(this.get("email")+"/"+key, value);
             this.trigger("settings.change."+key, key);
+            this.syncSettings();
             return this;
+        },
+
+        /*
+         *  Sync settings
+         */
+        syncSettings: function() {
+            
         },
 
 

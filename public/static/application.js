@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"revision":1381189770041,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1381224459661,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29496,7 +29496,15 @@ define('models/user',[
         setSettings: function(key, value) {
             hr.Storage.set(this.get("email")+"/"+key, value);
             this.trigger("settings.change."+key, key);
+            this.syncSettings();
             return this;
+        },
+
+        /*
+         *  Sync settings
+         */
+        syncSettings: function() {
+            
         },
 
 
@@ -33702,7 +33710,7 @@ define('views/reports/line',[
         'name': 'Lines'
     }, {
         className: "report-line",
-        template: "report.line.html",
+        template: "reports/line.html",
         defaultSettings: {
             'limit': 100,
             'transform': 'sum',
@@ -33924,7 +33932,7 @@ define('views/reports/count',[
         'name': 'Count'
     }, {
         className: "report-count",
-        template: "report.count.html",
+        template: "reports/count.html",
 
         /*
          *  Constructor
@@ -33991,7 +33999,7 @@ define('views/reports/lastvalue',[
         'name': 'Last value'
     }, {
         className: "report-lastvalue",
-        template: "report.lastvalue.html",
+        template: "reports/lastvalue.html",
         events: {
             'change .select-property': 'actionSelectProperty',
         },
@@ -34169,7 +34177,7 @@ define('views/reports/list',[
     var EventItem = hr.List.Item.extend({
         tagName: "tr",
         className: "event-item",
-        template: "report.list.item.html",
+        template: "reports/list.item.html",
         events: {},
 
         templateContext: function() {
@@ -34200,7 +34208,7 @@ define('views/reports/list',[
         'name': 'List'
     }, {
         className: "report-list",
-        template: "report.list.html",
+        template: "reports/list.html",
         events: {
             'change .select-properties input': 'actionSelectProperty'
         },
