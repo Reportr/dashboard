@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381267379965,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381358622468,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29440,7 +29440,8 @@ define('models/user',[
         defaults: {
         	'email': hr.Storage.get("email", ""),
         	'token': hr.Storage.get("token", ""),
-            'settings': hr.Storage.get("settings") || {}
+            'settings': {},
+            'trackers': []
         },
 
         /*
@@ -29464,13 +29465,11 @@ define('models/user',[
                 this.connectNotifications();
             }, this);
 
-            this.on("set", _.throttle(this.syncSettings, 1000), this);
+            this.on("set", _.throttle(this.saveSettings, 1000), this);
             
             if (this.isAuth()) {
                 console.log("user is logged");
-                this.syncSettings({
-                    'updateReports': true
-                });
+                this.loadSettings();
             }
 
             this.connectNotifications();
@@ -29507,7 +29506,12 @@ define('models/user',[
                 'password': password
             }).done(function(data) {
             	that.set(data);
-                this.syncLocal();
+
+                // Save email and token
+                hr.Storage.set("email", this.get("email", ""));
+                hr.Storage.set("token", this.get("token", ""));
+
+                // Update reports
                 this.reports.reset(this.get("settings.reports", []));
             });
         },
@@ -29542,41 +29546,69 @@ define('models/user',[
 
 
         /*
-         *  Sync settings
+         *  Save user settings
          */
-        syncSettings: function(options) {
+        saveSettings: function(options) {
             var that = this;
             if (!this.isAuth()) return this;
 
             // options
             options = _.defaults(options || {}, {
-                'updateReports': false
+                
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/account/sync", {
+            return api.request("post", this.get("token")+"/account/save", {
                 'settings': this.get("settings", {})
             }).done(function(data) {
                 // Update user
                 that.set(data, {
                     silent: true
                 });
+            });
+        },
+
+        /*
+         *  Load user settings
+         */
+        loadSettings: function(options) {
+            var that = this;
+            if (!this.isAuth()) return this;
+
+            // options
+            options = _.defaults(options || {}, {
+                'updateReports': true
+            })
+
+            // Sync with server
+            return api.request("post", this.get("token")+"/account/get").done(function(data) {
+                // Update user
+                that.set(data);
 
                 // Update reports
                 if (options.updateReports) {
                     that.reports.reset(that.get("settings.reports", []));
                 }
-
-                that.syncLocal();
             });
         },
 
-        syncLocal: function() {
-            // Sync in localStorage
-            hr.Storage.set("email", this.get("email", ""));
-            hr.Storage.set("token", this.get("token", ""));
-            hr.Storage.set("settings", this.get("settings", {}));
-        }
+        /*
+         *  Toggle tracker
+         */
+        toggleTracker: function(tId, options) {
+            var that = this;
+            if (!this.isAuth()) return this;
+
+            // options
+            options = _.defaults(options || {}, {
+                
+            })
+
+            // Sync with server
+            return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").done(function(data) {
+                that.loadSettings();
+            });
+        },
     }, {
         current: null
     });
@@ -34537,7 +34569,8 @@ define('views/reports',[
         template: "reports.html",
         events: {
             "submit .settings form": "submitSettings",
-            "click .action-install-chrome": "actionInstallChrome"
+            "click .action-install-chrome": "actionInstallChrome",
+            "click a[data-tracker]": "actionToggleTracker"
         },
 
         initialize: function() {
@@ -34551,6 +34584,8 @@ define('views/reports',[
                 }
             }, this);
 
+            User.current.on("change:trackers", this.render, this);
+
             this.reportsList = new ReportsList({
                 'collection': User.current.reports
             });
@@ -34559,7 +34594,7 @@ define('views/reports',[
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
-
+            
             // Disable Settings
             this.toggleSettings(false);
 
@@ -34596,6 +34631,15 @@ define('views/reports',[
             chrome.webstore.install(undefined, _.bind(this.render, this), function() {
                 window.location.href = "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko";
             });
+        },
+
+        /*
+         *  (action) Toggle tracker
+         */
+        actionToggleTracker: function(e) {
+            e.preventDefault();
+            var tId = $(e.currentTarget).data("tracker");
+            User.current.toggleTracker(tId);
         }
     });
 

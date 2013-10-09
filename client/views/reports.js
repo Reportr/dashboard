@@ -23,7 +23,8 @@ define([
         template: "reports.html",
         events: {
             "submit .settings form": "submitSettings",
-            "click .action-install-chrome": "actionInstallChrome"
+            "click .action-install-chrome": "actionInstallChrome",
+            "click a[data-tracker]": "actionToggleTracker"
         },
 
         initialize: function() {
@@ -37,6 +38,8 @@ define([
                 }
             }, this);
 
+            User.current.on("change:trackers", this.render, this);
+
             this.reportsList = new ReportsList({
                 'collection': User.current.reports
             });
@@ -45,7 +48,7 @@ define([
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
-
+            
             // Disable Settings
             this.toggleSettings(false);
 
@@ -82,6 +85,15 @@ define([
             chrome.webstore.install(undefined, _.bind(this.render, this), function() {
                 window.location.href = "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko";
             });
+        },
+
+        /*
+         *  (action) Toggle tracker
+         */
+        actionToggleTracker: function(e) {
+            e.preventDefault();
+            var tId = $(e.currentTarget).data("tracker");
+            User.current.toggleTracker(tId);
         }
     });
 

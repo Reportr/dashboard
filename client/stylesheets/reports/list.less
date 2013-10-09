@@ -4,6 +4,8 @@
 
 	.list-container {
 		overflow-x: auto;
+		overflow-y: auto;
+		max-height: 400px;
 
 		.events-table {
 			margin: 0px;
@@ -33,4 +35,9 @@
 		}
 	}
 	
+	&.layout-medium {
+		.list-container {
+			max-height: 230px;
+		}
+	}
 }
