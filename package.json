@@ -7,7 +7,9 @@
         "q": "0.9.6",
         "underscore": "1.4.4",
         "request": "2.27.0",
+
         "mongoose": "3.6.20",
+        "mongoose-findorcreate": "0.1.2",
         "express": "3.3.5",
         "socket.io": "0.9.16",
         "hr.js": "0.1.5",
