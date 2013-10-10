@@ -3,7 +3,7 @@ import time
 from test import client
 
 """
-Simple test whick track random events
+Simple test which track random events
 """
 
 for i in range(5000):

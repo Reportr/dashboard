@@ -11,7 +11,7 @@ define([
         defaults: _.defaults({
             loader: "get",
             loaderArgs: [],
-            limit: 10
+            limit: 100
         }, hr.Collection.prototype.defaults),
 
         /*
