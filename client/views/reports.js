@@ -23,7 +23,7 @@ define([
         template: "reports.html",
         events: {
             "submit .settings form": "submitSettings",
-            "click .action-install-chrome": "actionInstallChrome",
+            "click a[data-tracker='chrome']": "actionInstallChrome",
             "click a[data-tracker]": "actionToggleTracker"
         },
 
@@ -83,7 +83,7 @@ define([
             e.preventDefault();
             if (window.chrome == null) return;
             chrome.webstore.install(undefined, _.bind(this.render, this), function() {
-                window.location.href = "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko";
+                window.open('https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko','_blank');
             });
         },
 

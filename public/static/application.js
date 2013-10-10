@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381428499997,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381433017007,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34590,7 +34590,7 @@ define('views/reports',[
         template: "reports.html",
         events: {
             "submit .settings form": "submitSettings",
-            "click .action-install-chrome": "actionInstallChrome",
+            "click a[data-tracker='chrome']": "actionInstallChrome",
             "click a[data-tracker]": "actionToggleTracker"
         },
 
@@ -34650,7 +34650,7 @@ define('views/reports',[
             e.preventDefault();
             if (window.chrome == null) return;
             chrome.webstore.install(undefined, _.bind(this.render, this), function() {
-                window.location.href = "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko";
+                window.open('https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko','_blank');
             });
         },
 

@@ -29,6 +29,9 @@ module.exports =  {
 	/* Trackers */
 	"trackers": [
 		{
+			'module': './trackers/chrome'
+		},
+		{
 			'module': './trackers/ping',
 			'config': {
 				'interval': 10*60

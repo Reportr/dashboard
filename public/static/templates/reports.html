@@ -29,11 +29,6 @@
 			<h1>Connect Trackers</h1>
 			<div class="fieldset-inner">
 				<div class="trackers-list">
-					<a class="tracker action-install-chrome <% if (window.chrome != null && window.chrome.app.isInstalled) { %>active<% } %>" href="#">
-						<img src="<%- hr.urls.static("images/trackers/googlechrome.png") %>" />
-						<h3>Web Navigation</h3>
-						<p>Track your web navigation to Reportr using the Google Chrome extension.</p>
-					</a>
 					<% _.each(user.get("trackers", []), function(tracker) { %>
 					<a class="tracker <% if (tracker.active) { %>active<% } %>" href="#" data-tracker="<%- tracker.id %>">
 						<img src="<%- hr.urls.static("images/trackers/"+tracker.id+".png") %>" />
