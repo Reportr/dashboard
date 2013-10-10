@@ -73,14 +73,9 @@ define([
                 'email': email,
                 'password': password
             }).done(function(data) {
-            	that.set(data);
-
-                // Save email and token
-                hr.Storage.set("email", this.get("email", ""));
-                hr.Storage.set("token", this.get("token", ""));
-
-                // Update reports
-                this.reports.reset(this.get("settings.reports", []));
+                that.loadSettings({
+                    'token': data.token
+                });
             });
         },
 
@@ -107,7 +102,9 @@ define([
             hr.Storage.clear();
         	this.set({
         		'email': null,
-        		'token': null
+        		'token': null,
+                'settings': {},
+                'trackers': []
         	})
         	return this;
         },
@@ -145,18 +142,26 @@ define([
 
             // options
             options = _.defaults(options || {}, {
-                'updateReports': true
+                'updateReports': true,
+                'token': this.get("token")
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/account/get").done(function(data) {
+            return api.request("post", options.token+"/account/get").then(function(data) {
                 // Update user
                 that.set(data);
+
+                // Save email and token
+                hr.Storage.set("email", that.get("email", ""));
+                hr.Storage.set("token", that.get("token", ""));
 
                 // Update reports
                 if (options.updateReports) {
                     that.reports.reset(that.get("settings.reports", []));
                 }
+            }, function() {
+                console.log("fail gettings settings");
+                that.logout();
             });
         },
 

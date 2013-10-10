@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381358622468,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381401246572,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29505,14 +29505,9 @@ define('models/user',[
                 'email': email,
                 'password': password
             }).done(function(data) {
-            	that.set(data);
-
-                // Save email and token
-                hr.Storage.set("email", this.get("email", ""));
-                hr.Storage.set("token", this.get("token", ""));
-
-                // Update reports
-                this.reports.reset(this.get("settings.reports", []));
+                that.loadSettings({
+                    'token': data.token
+                });
             });
         },
 
@@ -29539,7 +29534,9 @@ define('models/user',[
             hr.Storage.clear();
         	this.set({
         		'email': null,
-        		'token': null
+        		'token': null,
+                'settings': {},
+                'trackers': []
         	})
         	return this;
         },
@@ -29577,18 +29574,26 @@ define('models/user',[
 
             // options
             options = _.defaults(options || {}, {
-                'updateReports': true
+                'updateReports': true,
+                'token': this.get("token")
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/account/get").done(function(data) {
+            return api.request("post", options.token+"/account/get").then(function(data) {
                 // Update user
                 that.set(data);
+
+                // Save email and token
+                hr.Storage.set("email", that.get("email", ""));
+                hr.Storage.set("token", that.get("token", ""));
 
                 // Update reports
                 if (options.updateReports) {
                     that.reports.reset(that.get("settings.reports", []));
                 }
+            }, function() {
+                console.log("fail gettings settings");
+                that.logout();
             });
         },
 
