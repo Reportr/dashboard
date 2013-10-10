@@ -34,3 +34,6 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 		start(data.host, data.token);
 	});
 });
+chrome.storage.sync.get(['host', 'token'], function(data) {
+	start(data.host, data.token)
+});
