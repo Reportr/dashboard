@@ -5,7 +5,7 @@ module.exports =  {
 	/* Server configuration */
 	"web": {
 		/* (string) Hostname for the application */
-		"host": process.env.HOST || "reportr.io",
+		"host": process.env.HOST || "www.reportr.io",
 
 		/* (boolean) Secure https mode */
 		"secure": false,
