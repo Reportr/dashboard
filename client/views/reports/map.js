@@ -22,6 +22,9 @@ define([
         },
         defaultSettings: {
             'limit': 100,
+            'lat': 51.508742,
+            'lng': -0.120850,
+            'zoom': 2,
             'lines': true,
             'markers': true
         },
@@ -44,22 +47,35 @@ define([
             });
             this.collection.on("add", this.addEventMarker, this);
             this.collection.getSpecific();
-
-            ReportMapView.loadMapApi(_.bind(this.render), this);
+            
+            ReportMapView.loadMapApi(_.bind(this.render, this));
 
             return this;
         },
 
         finish: function() {
+            var that = this;
             ReportMapView.__super__.finish.apply(this, arguments);
             
             if (!ReportMapView.apiReady) return this;
 
             this.map = new google.maps.Map(this.$(".map").get(0), {
-                'center': new google.maps.LatLng(51.508742,-0.120850),
-                'zoom':2,
+                'center': new google.maps.LatLng(parseFloat(this.report.settings.lat || 51.508742), parseFloat(this.report.settings.lng || -0.120850)),
+                'zoom': parseInt(this.report.settings.zoom || 2),
                 'disableDefaultUI': true,
                 'mapTypeId': google.maps.MapTypeId.ROADMAP
+            });
+
+            google.maps.event.addListener(this.map, 'center_changed', function() {
+                var center = that.map.getCenter();
+                that.report.settings.lat = center.lat();
+                that.report.settings.lng = center.lng();
+                that.report.saveSettings();
+            });
+            google.maps.event.addListener(this.map, 'zoom_changed', function() {
+                var zoomLevel = that.map.getZoom();
+                that.report.settings.zoom = zoomLevel;
+                that.report.saveSettings();
             });
 
             this.collection.each(_.bind(this.addEventMarker, this));
@@ -141,7 +157,7 @@ define([
                 return;
             }
 
-            $(window).on("googleMapAPI", callback);
+            $(window).bind("googleMapAPI", callback);
 
             if (!ReportMapView.apiLoaded) {
                 window.gmapInitialize = function() {
@@ -162,7 +178,7 @@ define([
         }
     });
 
-    ReportMapView.loadMapApi();
+    ReportMapView.loadMapApi(function() {});
 
     return ReportMapView;
 });
