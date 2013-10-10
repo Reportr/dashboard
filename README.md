@@ -122,11 +122,21 @@ When you track events using the API, you can define some specials properties tha
 @lng : longitude for location
 ```
 
+#### Special properties for events
+
+When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '@'.
+
+```
+@lat : latitude for location
+@lng : longitude for location
+```
+
 ## Trackers
 
 Here is a list of trackers, I already build or I want to build.
 
 * [done] Web Navigation: track my web navigation using a chrome extension
+* [done] Instance ping: ping state of the reportr instance
 * Facebook: track my relations on Facebook (using Realtime API)
 * GitHub: track my coding activity on GitHub (using GitHub Webhooks)
 * Twitter: track my twitter activity (tweets, mentions, ...)
