@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381433017007,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381447416809,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29438,8 +29438,8 @@ define('models/user',[
 ], function(hr, api, notifications, Reports) {
     var User = hr.Model.extend({
         defaults: {
-        	'email': hr.Storage.get("email", ""),
-        	'token': hr.Storage.get("token", ""),
+        	'email': null,
+        	'token': null,
             'settings': {},
             'trackers': []
         },
@@ -29448,16 +29448,16 @@ define('models/user',[
          *  Constructor
          */
         initialize: function() {
+            var that = this;
             User.__super__.initialize.apply(this, arguments);
 
             // Reports list
             this.reports = new Reports();
             this.reports.on("add remove set", function() {
-                var settings = _.extend({}, this.get("settings", {}), {
-                    'reports': this.reports.toJSON()
-                });
+                var settings = that.toJSON().settings;
+                settings.reports = that.reports.toJSON();
 
-                this.set("settings", settings);
+                that.set("settings", settings);
             }, this);
 
             // User change
@@ -29467,10 +29467,7 @@ define('models/user',[
 
             this.on("set", _.throttle(this.saveSettings, 1000), this);
             
-            if (this.isAuth()) {
-                console.log("user is logged");
-                this.loadSettings();
-            }
+            this.loadSettings();
 
             this.connectNotifications();
             return this;
@@ -29530,15 +29527,15 @@ define('models/user',[
          *	Log out the user
          */
         logout: function() {
-            if (!this.isAuth()) return this;
-            hr.Storage.clear();
-        	this.set({
-        		'email': null,
-        		'token': null,
-                'settings': {},
-                'trackers': []
-        	})
-        	return this;
+            var that = this;
+            return api.request("post", "auth/logout").done(function(data) {
+                that.set({
+                    'email': null,
+                    'token': null,
+                    'settings': {},
+                    'trackers': []
+                })
+            });
         },
 
 
@@ -29555,7 +29552,7 @@ define('models/user',[
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/account/save", {
+            return api.request("post", "account/save", {
                 'settings': this.get("settings", {})
             }).done(function(data) {
                 // Update user
@@ -29570,7 +29567,6 @@ define('models/user',[
          */
         loadSettings: function(options) {
             var that = this;
-            if (!this.isAuth()) return this;
 
             // options
             options = _.defaults(options || {}, {
@@ -29579,13 +29575,9 @@ define('models/user',[
             })
 
             // Sync with server
-            return api.request("post", options.token+"/account/get").then(function(data) {
+            return api.request("post", "account/get").then(function(data) {
                 // Update user
                 that.set(data);
-
-                // Save email and token
-                hr.Storage.set("email", that.get("email", ""));
-                hr.Storage.set("token", that.get("token", ""));
 
                 // Update reports
                 if (options.updateReports) {
@@ -29611,7 +29603,13 @@ define('models/user',[
 
             // Sync with server
             return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").done(function(data) {
-                that.loadSettings();
+                if (data.url == null) {
+                    that.loadSettings().done(function() {
+                        that.trigger("trackers:toggle", tId);
+                    });                    
+                } else {
+                    window.location.href = data.url;
+                }
             });
         },
     }, {
@@ -30217,7 +30215,6 @@ define('views/report',[
          */
         saveSettings: function() {
             this.report.set("settings", this.settings);
-            return this;
         },
 
         /*
@@ -30249,19 +30246,23 @@ define('views/report',[
          *  (action) Change visualisation
          */
         actionSelectVisualisation: function(e) {
-            if (e != null) e.preventDefault();
+            e.preventDefault();
+
             this.settings = {
                 'visualization':  $(e.currentTarget).data("visualization")
             };
             this.saveSettings();
             this.render(true);
+
+            return false;
         },
 
         /*
          *  (action) Change layout
          */
         actionSelectLayout: function(e) {
-            if (e != null) e.preventDefault();
+            e.preventDefault();
+
             this.setLayout($(e.currentTarget).data("layout"));
         }
     }, {
@@ -34605,7 +34606,10 @@ define('views/reports',[
                 }
             }, this);
 
-            User.current.on("change:trackers", this.render, this);
+            User.current.on("trackers:toggle", function() {
+                this.toggleSettings(true);
+                this.render();
+            }, this);
 
             this.reportsList = new ReportsList({
                 'collection': User.current.reports
@@ -34615,9 +34619,9 @@ define('views/reports',[
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
-            
+
             // Disable Settings
-            this.toggleSettings(false);
+            //this.toggleSettings(false);
 
             // Add list
             this.reportsList.$el.appendTo(this.$(".reports-list-outer"));
@@ -34858,16 +34862,6 @@ require([
         searchModels: function(e) {
             var q = $(e.currentTarget).val();
             this.components.models.search(q); 
-        },
-
-        /*
-         *  (action) Get token
-         */
-        actionGetToken: function(e) {
-            if (e != null) {
-                e.preventDefault();
-            }
-            alert(this.user.get("token"));
         },
 
         /*

@@ -38,7 +38,10 @@ define([
                 }
             }, this);
 
-            User.current.on("change:trackers", this.render, this);
+            User.current.on("trackers:toggle", function() {
+                this.toggleSettings(true);
+                this.render();
+            }, this);
 
             this.reportsList = new ReportsList({
                 'collection': User.current.reports
@@ -48,9 +51,9 @@ define([
 
         finish: function() {
             ReportsView.__super__.finish.apply(this, arguments);
-            
+
             // Disable Settings
-            this.toggleSettings(false);
+            //this.toggleSettings(false);
 
             // Add list
             this.reportsList.$el.appendTo(this.$(".reports-list-outer"));

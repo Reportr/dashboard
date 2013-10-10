@@ -204,7 +204,6 @@ define([
          */
         saveSettings: function() {
             this.report.set("settings", this.settings);
-            return this;
         },
 
         /*
@@ -236,19 +235,23 @@ define([
          *  (action) Change visualisation
          */
         actionSelectVisualisation: function(e) {
-            if (e != null) e.preventDefault();
+            e.preventDefault();
+
             this.settings = {
                 'visualization':  $(e.currentTarget).data("visualization")
             };
             this.saveSettings();
             this.render(true);
+
+            return false;
         },
 
         /*
          *  (action) Change layout
          */
         actionSelectLayout: function(e) {
-            if (e != null) e.preventDefault();
+            e.preventDefault();
+
             this.setLayout($(e.currentTarget).data("layout"));
         }
     }, {

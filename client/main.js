@@ -166,16 +166,6 @@ require([
         },
 
         /*
-         *  (action) Get token
-         */
-        actionGetToken: function(e) {
-            if (e != null) {
-                e.preventDefault();
-            }
-            alert(this.user.get("token"));
-        },
-
-        /*
          *  (action) Open settings
          */
         actionSettings: function(e) {

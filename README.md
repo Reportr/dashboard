@@ -43,6 +43,20 @@ $ git push heroku master
 $ heroku open
 ```
 
+#### Heroku config vars (ENV variables):
+
+```
+# Host name
+HOST
+
+# Express Secret session
+SESSION_SECRET
+
+# Foursquare oauth
+FOURSQUARE_CLIENTID
+FOURSQUARE_CLIENTSECRET
+```
+
 ## APIs
 
 Reportr use a HTTP REST API to track event and manage models.
@@ -137,6 +151,7 @@ Here is a list of trackers, I already build or I want to build.
 
 * [done] Web Navigation: track my web navigation using a chrome extension
 * [done] Instance ping: ping state of the reportr instance
+* [done] Foursquare: track checkins
 * Facebook: track my relations on Facebook (using Realtime API)
 * GitHub: track my coding activity on GitHub (using GitHub Webhooks)
 * Twitter: track my twitter activity (tweets, mentions, ...)

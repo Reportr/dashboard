@@ -6,8 +6,8 @@ define([
 ], function(hr, api, notifications, Reports) {
     var User = hr.Model.extend({
         defaults: {
-        	'email': hr.Storage.get("email", ""),
-        	'token': hr.Storage.get("token", ""),
+        	'email': null,
+        	'token': null,
             'settings': {},
             'trackers': []
         },
@@ -16,16 +16,16 @@ define([
          *  Constructor
          */
         initialize: function() {
+            var that = this;
             User.__super__.initialize.apply(this, arguments);
 
             // Reports list
             this.reports = new Reports();
             this.reports.on("add remove set", function() {
-                var settings = _.extend({}, this.get("settings", {}), {
-                    'reports': this.reports.toJSON()
-                });
+                var settings = that.toJSON().settings;
+                settings.reports = that.reports.toJSON();
 
-                this.set("settings", settings);
+                that.set("settings", settings);
             }, this);
 
             // User change
@@ -35,10 +35,7 @@ define([
 
             this.on("set", _.throttle(this.saveSettings, 1000), this);
             
-            if (this.isAuth()) {
-                console.log("user is logged");
-                this.loadSettings();
-            }
+            this.loadSettings();
 
             this.connectNotifications();
             return this;
@@ -98,15 +95,15 @@ define([
          *	Log out the user
          */
         logout: function() {
-            if (!this.isAuth()) return this;
-            hr.Storage.clear();
-        	this.set({
-        		'email': null,
-        		'token': null,
-                'settings': {},
-                'trackers': []
-        	})
-        	return this;
+            var that = this;
+            return api.request("post", "auth/logout").done(function(data) {
+                that.set({
+                    'email': null,
+                    'token': null,
+                    'settings': {},
+                    'trackers': []
+                })
+            });
         },
 
 
@@ -123,7 +120,7 @@ define([
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/account/save", {
+            return api.request("post", "account/save", {
                 'settings': this.get("settings", {})
             }).done(function(data) {
                 // Update user
@@ -138,7 +135,6 @@ define([
          */
         loadSettings: function(options) {
             var that = this;
-            if (!this.isAuth()) return this;
 
             // options
             options = _.defaults(options || {}, {
@@ -147,13 +143,9 @@ define([
             })
 
             // Sync with server
-            return api.request("post", options.token+"/account/get").then(function(data) {
+            return api.request("post", "account/get").then(function(data) {
                 // Update user
                 that.set(data);
-
-                // Save email and token
-                hr.Storage.set("email", that.get("email", ""));
-                hr.Storage.set("token", that.get("token", ""));
 
                 // Update reports
                 if (options.updateReports) {
@@ -179,7 +171,13 @@ define([
 
             // Sync with server
             return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").done(function(data) {
-                that.loadSettings();
+                if (data.url == null) {
+                    that.loadSettings().done(function() {
+                        that.trigger("trackers:toggle", tId);
+                    });                    
+                } else {
+                    window.location.href = data.url;
+                }
             });
         },
     }, {
