@@ -36,7 +36,9 @@ define([
          */
         removeEvents: function() {
             var that = this;
-            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event'));
+            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event')).done(function() {
+                that.destroy();
+            });
         }
     });
 
