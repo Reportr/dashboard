@@ -19,20 +19,29 @@ module.exports =  {
 
 	/* Database configuration */
 	"database": {
+		/* (string) Url for mongodb */
 		"url": process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/reportr'
 	},
 
 	/* Client configuration */
 	"client": {
 		"map": {
+			/* Key for Google Maps API v3 */
 			"apiKey": "AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"
 		}
+	},
+
+	/* Tasks */
+	"tasks": {
+		/* (int) Interval between tasks started (in ms) */
+		'interval': 4*60*1000
 	},
 
 	/* Trackers */
 	"trackers": [
 		{
-			'module': './trackers/chrome'
+			'module': './trackers/chrome',
+			'config': {}
 		},
 		{
 			'module': './trackers/foursquare',
