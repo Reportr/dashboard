@@ -29,7 +29,7 @@ define([
     });
 
     // Notification events
-    notifications.on("event", function(data) {
+    notifications.on("io:event:new", function(data) {
         notifications.trigger("events:new", new Event({}, data.data));
     });
 

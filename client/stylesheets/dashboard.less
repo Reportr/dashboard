@@ -44,12 +44,16 @@
 				color: #fff;
 				line-height: 30px;
 				font-size: 30px;
-				opacity: 0.6;
+				opacity: 0.4;
 				text-align: center;
 				margin: 0px 8px;
 
 				&:hover {
 					text-decoration: none;
+					opacity: 0.8;
+				}
+
+				&.active, &.active:hover {
 					opacity: 1;
 				}
 			}
@@ -75,5 +79,16 @@
 		left: 280px;
 		padding: 15px;
 		overflow-y: auto;
+	}
+}
+
+.mode-edit {
+	.hidden-appeditmode {
+		display: none !important;
+	}
+}
+.mode-normal {
+	.hidden-appnormalmode {
+		display: none !important;
 	}
 }

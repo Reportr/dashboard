@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381492042305,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381500119578,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29371,7 +29371,7 @@ define('notifications',[
                 'resource': 'socket.io'
             });
             this.socket.on('notification', function (data) {
-                that.trigger(data.event, data);
+                that.trigger("io:"+data.event, data);
             });
             return this;
         },
@@ -29622,8 +29622,9 @@ define('models/user',[
 define('models/eventmodel',[
     "hr/hr",
     "api",
-    "notifications"
-], function(hr, api, notifications) {
+    "notifications",
+    "models/user"
+], function(hr, api, notifications, User) {
     var EventModel = hr.Model.extend({
         defaults: {
         	'event': null,
@@ -29649,12 +29650,23 @@ define('models/eventmodel',[
                 icon = '/static/images/models/'+icon.slice(1)+'.png';
             }
             return icon || '/static/images/models/default.png';
+        },
+
+        /*
+         *  Remove events associated and the model
+         */
+        removeEvents: function() {
+            var that = this;
+            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event'));
         }
     });
 
     // Notification models
-    notifications.on("model", function(data) {
+    notifications.on("io:model:new", function(data) {
         notifications.trigger("models:new", new EventModel({}, data.data));
+    });
+    notifications.on("io:model:remove", function(data) {
+        notifications.trigger("models:remove", new EventModel({}, data.data));
     });
 
     return EventModel;
@@ -29688,6 +29700,14 @@ define('collections/eventmodels',[
                     this.remove(model);
                 }
                 this.add(e);
+            }, this);
+
+            // Remove model in realtime
+            notifications.on("models:remove", function(e) {
+                var model = this.getModel(e, null);
+                if (model != null) {
+                    this.remove(model);
+                }
             }, this);
             return this;
         },
@@ -29903,7 +29923,8 @@ define('views/models.list',[
         className: "model-item",
         template: "models.list.item.html",
         events: {
-            "click .action-report-add": "actionReportAdd"
+            "click .action-report-add": "actionReportAdd",
+            "click .action-model-remove": "actionModelRemove"
         },
 
         templateContext: function() {
@@ -29922,6 +29943,15 @@ define('views/models.list',[
                 'event': this.model.get('event'),
                 'namespace': this.model.get('namespace')
             });
+        },
+
+        /*
+         *  (action) Report remove
+         */
+        actionModelRemove: function(e) {
+            if (e != null) e.preventDefault();
+            
+            this.model.removeEvents();
         }
     });
 
@@ -29979,6 +30009,11 @@ define('models/eventinfo',[
                     this.trigger("events:new", e);
                 }
             }, this);
+            notifications.on("models:remove", function(e) {
+                if (e.report() == this.report()) {
+                    this.destroy();
+                }
+            }, this);
             return this;
         },
 
@@ -29987,8 +30022,10 @@ define('models/eventinfo',[
          */
         load: function(eventNamespace, eventName) {
             var that = this;
-            return api.request("get", User.current.get('token')+"/event/"+eventNamespace+"/"+eventName, {}).done(function(data) {
+            return api.request("get", User.current.get('token')+"/event/"+eventNamespace+"/"+eventName, {}).then(function(data) {
                 that.set(data);
+            }, function() {
+                that.destroy();
             });
         },
 
@@ -30154,6 +30191,10 @@ define('views/report',[
             this.eventInfo = new EventInfo();
             this.eventInfo.on("set", function() {
                 this.render(true);
+            }, this);
+            this.eventInfo.on("destroy", function() {
+                // Remove invalid report
+                this.actionReportRemove();
             }, this);
             this.eventInfo.load(this.report.get("namespace"), this.report.get("event"));
 
@@ -34167,7 +34208,7 @@ define('models/event',[
     });
 
     // Notification events
-    notifications.on("event", function(data) {
+    notifications.on("io:event:new", function(data) {
         notifications.trigger("events:new", new Event({}, data.data));
     });
 
@@ -34739,8 +34780,8 @@ require([
 
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
-            "click .action-token": "actionGetToken",
-            "click .action-settings": "actionSettings"
+            "click .action-settings": "actionSettings",
+            "click .action-toggle-editmode": "actionToggleEditMode"
         },
 
         /*
@@ -34766,10 +34807,12 @@ require([
         },
 
         /*
-         *  Render
+         *  Finish rendering
          */
-        render: function() {
-            return Application.__super__.render.apply(this, arguments);
+        finish: function() {
+            Application.__super__.finish.apply(this, arguments);
+            this.setMode("normal");
+            return this;
         },
 
         /*
@@ -34872,6 +34915,27 @@ require([
                 e.preventDefault();
             }
             this.components.reports.toggleSettings(true);
+        },
+
+        /*
+         *  Set mode
+         */
+        setMode: function(mode) {
+            this.mode = mode;
+            this.$el.attr("class", "mode-"+this.mode);
+            this.$("*[data-appmode='edit']").toggleClass("active", this.$el.hasClass("mode-edit"));
+            this.$("*[data-appmode='normal']").toggleClass("active", !this.$el.hasClass("mode-edit"));
+            return this;
+        },
+
+        /*
+         *  (action) Toggle edit mode
+         */
+        actionToggleEditMode: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.setMode(this.mode == 'edit' ? 'normal' : 'edit');
         }
     });
 

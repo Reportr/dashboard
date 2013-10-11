@@ -38,6 +38,11 @@ define([
                     this.trigger("events:new", e);
                 }
             }, this);
+            notifications.on("models:remove", function(e) {
+                if (e.report() == this.report()) {
+                    this.destroy();
+                }
+            }, this);
             return this;
         },
 
@@ -46,8 +51,10 @@ define([
          */
         load: function(eventNamespace, eventName) {
             var that = this;
-            return api.request("get", User.current.get('token')+"/event/"+eventNamespace+"/"+eventName, {}).done(function(data) {
+            return api.request("get", User.current.get('token')+"/event/"+eventNamespace+"/"+eventName, {}).then(function(data) {
                 that.set(data);
+            }, function() {
+                that.destroy();
             });
         },
 

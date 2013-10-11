@@ -40,8 +40,8 @@ require([
 
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
-            "click .action-token": "actionGetToken",
-            "click .action-settings": "actionSettings"
+            "click .action-settings": "actionSettings",
+            "click .action-toggle-editmode": "actionToggleEditMode"
         },
 
         /*
@@ -67,10 +67,12 @@ require([
         },
 
         /*
-         *  Render
+         *  Finish rendering
          */
-        render: function() {
-            return Application.__super__.render.apply(this, arguments);
+        finish: function() {
+            Application.__super__.finish.apply(this, arguments);
+            this.setMode("normal");
+            return this;
         },
 
         /*
@@ -173,6 +175,27 @@ require([
                 e.preventDefault();
             }
             this.components.reports.toggleSettings(true);
+        },
+
+        /*
+         *  Set mode
+         */
+        setMode: function(mode) {
+            this.mode = mode;
+            this.$el.attr("class", "mode-"+this.mode);
+            this.$("*[data-appmode='edit']").toggleClass("active", this.$el.hasClass("mode-edit"));
+            this.$("*[data-appmode='normal']").toggleClass("active", !this.$el.hasClass("mode-edit"));
+            return this;
+        },
+
+        /*
+         *  (action) Toggle edit mode
+         */
+        actionToggleEditMode: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.setMode(this.mode == 'edit' ? 'normal' : 'edit');
         }
     });
 

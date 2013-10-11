@@ -1,8 +1,9 @@
 define([
     "hr/hr",
     "api",
-    "notifications"
-], function(hr, api, notifications) {
+    "notifications",
+    "models/user"
+], function(hr, api, notifications, User) {
     var EventModel = hr.Model.extend({
         defaults: {
         	'event': null,
@@ -28,12 +29,23 @@ define([
                 icon = '/static/images/models/'+icon.slice(1)+'.png';
             }
             return icon || '/static/images/models/default.png';
+        },
+
+        /*
+         *  Remove events associated and the model
+         */
+        removeEvents: function() {
+            var that = this;
+            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event'));
         }
     });
 
     // Notification models
-    notifications.on("model", function(data) {
+    notifications.on("io:model:new", function(data) {
         notifications.trigger("models:new", new EventModel({}, data.data));
+    });
+    notifications.on("io:model:remove", function(data) {
+        notifications.trigger("models:remove", new EventModel({}, data.data));
     });
 
     return EventModel;

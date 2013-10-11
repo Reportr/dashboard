@@ -15,7 +15,7 @@ define([
                 'resource': 'socket.io'
             });
             this.socket.on('notification', function (data) {
-                that.trigger(data.event, data);
+                that.trigger("io:"+data.event, data);
             });
             return this;
         },

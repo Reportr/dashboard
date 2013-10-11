@@ -10,7 +10,8 @@ define([
         className: "model-item",
         template: "models.list.item.html",
         events: {
-            "click .action-report-add": "actionReportAdd"
+            "click .action-report-add": "actionReportAdd",
+            "click .action-model-remove": "actionModelRemove"
         },
 
         templateContext: function() {
@@ -29,6 +30,15 @@ define([
                 'event': this.model.get('event'),
                 'namespace': this.model.get('namespace')
             });
+        },
+
+        /*
+         *  (action) Report remove
+         */
+        actionModelRemove: function(e) {
+            if (e != null) e.preventDefault();
+            
+            this.model.removeEvents();
         }
     });
 

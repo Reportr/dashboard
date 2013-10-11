@@ -144,6 +144,10 @@ define([
             this.eventInfo.on("set", function() {
                 this.render(true);
             }, this);
+            this.eventInfo.on("destroy", function() {
+                // Remove invalid report
+                this.actionReportRemove();
+            }, this);
             this.eventInfo.load(this.report.get("namespace"), this.report.get("event"));
 
             // Layout

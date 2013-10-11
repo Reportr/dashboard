@@ -28,6 +28,14 @@ define([
                 }
                 this.add(e);
             }, this);
+
+            // Remove model in realtime
+            notifications.on("models:remove", function(e) {
+                var model = this.getModel(e, null);
+                if (model != null) {
+                    this.remove(model);
+                }
+            }, this);
             return this;
         },
 
