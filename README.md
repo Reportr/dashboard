@@ -43,7 +43,7 @@ $ git push heroku master
 $ heroku open
 ```
 
-#### Heroku config vars (ENV variables):
+Configure using Heroku config vars or ENV variables:
 
 ```
 # Host name
@@ -52,10 +52,33 @@ HOST
 # Express Secret session
 SESSION_SECRET
 
-# Foursquare oauth
+# Foursquare oAuth
+# Callback url is {HOST}/auth/foursquare/callback
 FOURSQUARE_CLIENTID
 FOURSQUARE_CLIENTSECRET
+
+# GitHub oAuth
+# Callback url is {HOST}/auth/github/callback
+GITHUB_CLIENTID
+GITHUB_CLIENTSECRET
 ```
+
+## Trackers
+
+Here is a list of trackers, I already build :
+
+* Web Navigation: track web navigation using a chrome extension
+* Instance ping: ping state of the reportr instance
+* Foursquare: track checkins
+* GitHub: track coding activity on GitHub
+
+And more to come:
+
+* Facebook: track relations on Facebook (using Realtime API)
+* Twitter: track twitter activity (tweets, mentions, ...)
+* Runkeeper: track running activity
+* Hardware:
+	* Track the temperature in a room (using tessel.io)
 
 ## APIs
 
@@ -145,16 +168,3 @@ When you track events using the API, you can define some specials properties tha
 @lng : longitude for location
 ```
 
-## Trackers
-
-Here is a list of trackers, I already build or I want to build.
-
-* [done] Web Navigation: track my web navigation using a chrome extension
-* [done] Instance ping: ping state of the reportr instance
-* [done] Foursquare: track checkins
-* Facebook: track my relations on Facebook (using Realtime API)
-* GitHub: track my coding activity on GitHub (using GitHub Webhooks)
-* Twitter: track my twitter activity (tweets, mentions, ...)
-* Runkeeper: track my running activity
-* Hardware:
-	* Track the temperature in my room (using tessel.io)
