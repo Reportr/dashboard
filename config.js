@@ -37,7 +37,7 @@ module.exports =  {
 		{
 			'module': './trackers/foursquare',
 			'config': {
-				'interval': 60*60,
+				'interval': 24*60*60,
 				'clientId': process.env.FOURSQUARE_CLIENTID,
 				'clientSecret': process.env.FOURSQUARE_CLIENTSECRET
 			}
