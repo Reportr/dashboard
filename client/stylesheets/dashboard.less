@@ -4,16 +4,46 @@
 	left: 0px;
 	right: 0px;
 	top: 0px;
-	background: #eee;
+	background: #eaeaea;
+
+	#header {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		left: @reportrLateralbarWidth;
+		height: 50px;
+		background: @reportrMainColor;
+		text-align: center;
+		.transition(all .4s);
+
+		h2 {
+			margin: 0px;
+			line-height: 50px;
+			font-weight: 200;
+			color: #fff;
+		}
+
+		a.action {
+			color: #fff;
+			line-height: 50px;
+			padding: 0px 14px;
+			font-size: 22px;
+
+			&:hover {
+				background: #27ae60;
+				text-decoration: none;
+			}
+		}
+	}
 
 	#lateralbar {
 		position: absolute;
 		bottom: 0px;
 		left: 0px;
 		top: 0px;
-		width: 280px;
+		width: @reportrLateralbarWidth;
 		z-index: 10;
-		background: #27ae60;
+		background: #2c3e50;
 		.transition(all .4s);
 		overflow: hidden;
 		padding: 10px;
@@ -24,7 +54,7 @@
 			background: #fff;
 			outline: none !important;
 			border: none;
-			color: #2980b9;
+			color: #2c3e50;
 			padding: 8px;
 		}
 
@@ -34,19 +64,18 @@
 			left: 0px;
 			right: 0px;
 			padding: 10px;
-			background: #2ecc71;
+			background: #34495e;
 
 			/* Actions */
 			.menu-action {
 				display: inline-block;
-				width: 30px;
+				width: 100%;
 				height: 30px;
 				color: #fff;
 				line-height: 30px;
-				font-size: 30px;
-				opacity: 0.4;
+				font-size: 20px;
+				opacity: 0.3;
 				text-align: center;
-				margin: 0px 8px;
 
 				&:hover {
 					text-decoration: none;
@@ -75,10 +104,23 @@
 		position: absolute;
 		bottom: 0px;
 		right: 0px;
-		top: 0px;
-		left: 280px;
+		top: 50px;
+		left: @reportrLateralbarWidth;
 		padding: 15px;
 		overflow-y: auto;
+		.transition(all .4s);
+	}
+
+	&.mode-lateralbar-close {
+		#lateralbar {
+			left: -@reportrLateralbarWidth;
+		}
+		#body {
+			left: 0px;
+		}
+		#header {
+			left: 0px;
+		}
 	}
 }
 

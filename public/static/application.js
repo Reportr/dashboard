@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381530607948,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381585386389,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34640,6 +34640,7 @@ define('views/reports',[
 
         initialize: function() {
             ReportsView.__super__.initialize.apply(this, arguments);
+            this.settingsState = false;
             
             User.current.reports.on("add remove reset", function() {
                 if (User.current.reports.size() > 0) {
@@ -34664,7 +34665,7 @@ define('views/reports',[
             ReportsView.__super__.finish.apply(this, arguments);
 
             // Disable Settings
-            //this.toggleSettings(false);
+            this.toggleSettings(this.settingsState);
 
             // Add list
             this.reportsList.$el.appendTo(this.$(".reports-list-outer"));
@@ -34680,6 +34681,7 @@ define('views/reports',[
                 state = true;
             }
             this.$el.toggleClass("mode-settings", state);
+            this.settingsState = this.$el.hasClass("mode-settings")
         },
 
         /*
@@ -34783,6 +34785,7 @@ require([
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
             "click .action-settings": "actionSettings",
+            "click .action-toggle-lateralmenu": "actionToggleLateralmenu",
             "click .action-toggle-editmode": "actionToggleEditMode"
         },
 
@@ -34938,7 +34941,17 @@ require([
                 e.preventDefault();
             }
             this.setMode(this.mode == 'edit' ? 'normal' : 'edit');
-        }
+        },
+
+        /*
+         * (action) Toggle lateral menu
+         */
+        actionToggleLateralmenu: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.$("#dashboard").toggleClass("mode-lateralbar-close");
+        } 
     });
 
     var app = new Application();

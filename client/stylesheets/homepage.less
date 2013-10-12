@@ -1,16 +1,10 @@
 #homepage {
-	position: fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	top: 0px;
 	background: #fff;
-	overflow-y: auto;
 
 	#intro {
 		width: 100%;
 		padding: 100px 80px;
-		background: #27ae60;
+		background: @reportrMainColorDarker;
 		color: #fff;
 		.clearfix();
 
@@ -33,15 +27,24 @@
 				margin-top: 65px;
 				font-weight: 200;
 
-				input, input:focus {
-					border-color: #fff;
-					.box-shadow(none);
-				}
+				.form-group {
+					input, input:focus {
+						border-color: #fff;
+						.box-shadow(none);
+					}
 
-				button {
-					border: 2px solid #fff;
-					background: transparent;
-					color: #fff;
+					button {
+						border: 2px solid #fff;
+						background: transparent;
+						color: #fff;
+					}
+
+					&.has-error  {
+						input {
+							border-color: #e74c3c;
+							color: #e74c3c;
+						}
+					}
 				}
 			}
 
@@ -64,6 +67,7 @@
 					margin-top: 20px;
 					margin-bottom: 20px;
 					font-size: 24px;
+					font-weight: 200;
 
 					a.action-signup {
 						padding: 18px 24px;

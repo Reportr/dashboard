@@ -1,46 +1,46 @@
 <div class="reports-list-outer"></div>
 <div class="settings">
 	<form class="form-horizontal" role="form">
-		<fieldset>
-			<h1>Account Settings</h1>
-			<div class="fieldset-inner">
-				<div class="form-group">
-					<label for="host" class="col-lg-2 control-label">Host</label>
-					<div class="col-lg-10">
-						<input type="text" class="form-control" id="host" placeholder="Host" disabled value="<%- [window.location.protocol, '//', window.location.host].join('') %>">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="email" class="col-lg-2 control-label">Email</label>
-					<div class="col-lg-10">
-						<input type="email" class="form-control" id="email" placeholder="Email" disabled value="<%- user.get('email') %>">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="token" class="col-lg-2 control-label">API token</label>
-					<div class="col-lg-10">
-						<input type="text" class="form-control" id="token" placeholder="API token" disabled value="<%- user.get('token') %>">
-					</div>
-				</div>
-			</div>
-		</fieldset>
-
-		<fieldset>
-			<h1>Connect Trackers</h1>
-			<div class="fieldset-inner">
+		<div class="row">
+			<!-- Trackers -->
+			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 				<div class="trackers-list">
 					<% _.each(user.get("trackers", []), function(tracker) { %>
-					<a class="tracker <% if (tracker.active) { %>active<% } %>" href="#" data-tracker="<%- tracker.id %>">
+					<div class="tracker">
 						<img src="<%- hr.urls.static("images/trackers/"+tracker.id+".png") %>" />
 						<h3><%- tracker.name %></h3>
 						<p><%- tracker.description %></p>
-					</a>
+						<div class="tracker-actions">
+							<% if (tracker.active) { %>
+							<a href="#" class="btn btn-danger btn-block" data-tracker="<%- tracker.id %>">Disable</a>
+							<% } else { %>
+							<a href="#" class="btn btn-success btn-block" data-tracker="<%- tracker.id %>">Active</a>
+							<% } %>
+						</div>
+					</div>
 					<% }); %>
 				</div>
 			</div>
-		</fieldset>
 
-		<button type="submit" class="btn btn-lg btn-default btn-block">Done</button>
-		<a href="#" class="btn btn-lg btn-danger action-logout btn-block">Logout</a>
+			<!-- Infos -->
+			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+				<fieldset>
+					<div class="form-group">
+						<label for="host" class="control-label">Host</label>
+						<input type="text" class="form-control" id="host" placeholder="Host" disabled value="<%- [window.location.protocol, '//', window.location.host].join('') %>">
+					</div>
+					<div class="form-group">
+						<label for="email" class="control-label">Email</label>
+						<input type="email" class="form-control" id="email" placeholder="Email" disabled value="<%- user.get('email') %>">
+					</div>
+					<div class="form-group">
+						<label for="token" class="control-label">API token</label>
+						<input type="text" class="form-control" id="token" placeholder="API token" disabled value="<%- user.get('token') %>">
+					</div>
+				</fieldset>
+				<button type="submit" class="btn btn-lg btn-default btn-block">Return</button>
+				<a href="#" class="btn btn-lg btn-danger action-logout btn-block">Logout</a>
+			</div>
+		</div>
 	</form>
 </div>

@@ -41,6 +41,7 @@ require([
             // Dashboard
             "keyup #lateralbar .search": "searchModels",
             "click .action-settings": "actionSettings",
+            "click .action-toggle-lateralmenu": "actionToggleLateralmenu",
             "click .action-toggle-editmode": "actionToggleEditMode"
         },
 
@@ -196,7 +197,17 @@ require([
                 e.preventDefault();
             }
             this.setMode(this.mode == 'edit' ? 'normal' : 'edit');
-        }
+        },
+
+        /*
+         * (action) Toggle lateral menu
+         */
+        actionToggleLateralmenu: function(e) {
+            if (e != null) {
+                e.preventDefault();
+            }
+            this.$("#dashboard").toggleClass("mode-lateralbar-close");
+        } 
     });
 
     var app = new Application();

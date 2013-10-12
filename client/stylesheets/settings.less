@@ -1,22 +1,23 @@
 .reports {
 	.settings {
-		max-width: 940px;
+		max-width: 1140px;
 		margin: 0px auto;
 
-		fieldset {
-			h1 {
+		.form-group {
+			background: #fff;
+			padding: 15px;
+			border-radius: 4px;
+
+			label {
 				margin: 0px;
-				color: #27ae60;
-				font-weight: 100;
-				font-size: 50px;
+				font-weight: normal;
+				margin-bottom: 10px;
+				text-align: center;
 			}
 
-			.fieldset-inner {
-				padding: 30px;
-				margin-top: 25px;
-				margin-bottom: 50px;
-				background: #fff;
-				border: 1px solid #ddd;
+			.form-control {
+				border-color: #ddd;
+				.box-shadow(none);
 			}
 		}
 
@@ -27,42 +28,35 @@
 				padding: 10px;
 				display: inline-block;
 				color: inherit;
-				background: #f3f3f3;
-				border: 1px solid #f1f1f1;
+				background: #fff;
 				.clearfix();
-				height: 92px;
 				overflow: hidden;
 				width: 100%;
 				margin: 5px;
-				text-align: left;
+				text-align: center;
+				border-radius: 4px;
 
 				@media (min-width: 1300px) {
 					width: 45%;
 				}
 
-				&.active, &.active:hover {
-					border-color: #27ae60;
-					background: #dff0d8;
-				}
-
-
-				&:hover {
-					text-decoration: none;
-					background: #eee;
-					border-color: #ddd;
-				}
-
 				img {
-					float: left;
 					width: 72px;
 					height: 72px;
 					margin-right: 12px;
+					margin-bottom: 15px;
+					text-align: center;
 				}
 
 				h3 {
 					margin: 0px;
 					font-weight: 200;
 					margin-bottom: 4px;
+				}
+
+				p {
+					height: 40px;
+					margin: 8px 0px;
 				}
 			}
 		}

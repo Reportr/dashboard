@@ -29,6 +29,7 @@ define([
 
         initialize: function() {
             ReportsView.__super__.initialize.apply(this, arguments);
+            this.settingsState = false;
             
             User.current.reports.on("add remove reset", function() {
                 if (User.current.reports.size() > 0) {
@@ -53,7 +54,7 @@ define([
             ReportsView.__super__.finish.apply(this, arguments);
 
             // Disable Settings
-            //this.toggleSettings(false);
+            this.toggleSettings(this.settingsState);
 
             // Add list
             this.reportsList.$el.appendTo(this.$(".reports-list-outer"));
@@ -69,6 +70,7 @@ define([
                 state = true;
             }
             this.$el.toggleClass("mode-settings", state);
+            this.settingsState = this.$el.hasClass("mode-settings")
         },
 
         /*
