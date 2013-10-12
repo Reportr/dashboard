@@ -17,7 +17,7 @@ module.exports =  {
 		"sessionSecret": process.env.SESSION_SECRET || "sessionSecret",
 
 		/* Use websocket */
-		"websocket": true
+		"websockets": true
 	},
 
 	/* Database configuration */
