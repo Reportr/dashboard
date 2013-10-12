@@ -34,7 +34,7 @@ module.exports =  {
 	/* Tasks */
 	"tasks": {
 		/* (int) Interval between tasks started (in ms) */
-		'interval': 2*1000
+		'interval': 1*60*1000
 	},
 
 	/* Trackers */
