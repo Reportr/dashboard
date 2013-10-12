@@ -4,6 +4,9 @@ module.exports =  {
 
 	/* Server configuration */
 	"web": {
+		/* Use websocket */
+		"websocket": false,
+
 		/* (string) Hostname for the application */
 		"host": process.env.HOST || "www.reportr.io",
 
