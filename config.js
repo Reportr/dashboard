@@ -34,7 +34,7 @@ module.exports =  {
 	/* Tasks */
 	"tasks": {
 		/* (int) Interval between tasks started (in ms) */
-		'interval': 5*60*1000
+		'interval': 2*1000
 	},
 
 	/* Trackers */
@@ -59,14 +59,14 @@ module.exports =  {
 				'clientSecret': process.env.GITHUB_CLIENTSECRET
 			}
 		},
-		/*{
+		{
 			'module': './trackers/facebook',
 			'config': {
 				'interval': 6*60*60,
 				'clientId': process.env.FACEBOOK_CLIENTID,
 				'clientSecret': process.env.FACEBOOK_CLIENTSECRET
 			}
-		},*/
+		},
 		{
 			'module': './trackers/ping',
 			'config': {
