@@ -4,9 +4,6 @@ module.exports =  {
 
 	/* Server configuration */
 	"web": {
-		/* Use websocket */
-		"websocket": false,
-
 		/* (string) Hostname for the application */
 		"host": process.env.HOST || "www.reportr.io",
 
@@ -17,7 +14,10 @@ module.exports =  {
 		"port": process.env.PORT || 5000,
 
 		/* (string) Session secret */
-		"sessionSecret": process.env.SESSION_SECRET || "sessionSecret"
+		"sessionSecret": process.env.SESSION_SECRET || "sessionSecret",
+
+		/* Use websocket */
+		"websocket": true
 	},
 
 	/* Database configuration */
