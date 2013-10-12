@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381586556146,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1381587641947,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34772,7 +34772,8 @@ require([
         },
         links: {
             "icon": hr.Urls.static("images/favicon.png"),
-            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko"
+            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko",
+            "apple-touch-icon-precomposed": hr.Urls.static("images/apple-touch-icon.png")
         },
         events: {
             // Homepage

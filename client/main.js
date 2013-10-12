@@ -28,7 +28,8 @@ require([
         },
         links: {
             "icon": hr.Urls.static("images/favicon.png"),
-            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko"
+            "chrome-webstore-item": "https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko",
+            "apple-touch-icon-precomposed": hr.Urls.static("images/apple-touch-icon.png")
         },
         events: {
             // Homepage
