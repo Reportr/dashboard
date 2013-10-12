@@ -61,6 +61,11 @@ FOURSQUARE_CLIENTSECRET
 # Callback url is {HOST}/auth/github/callback
 GITHUB_CLIENTID
 GITHUB_CLIENTSECRET
+
+# Facebook oAuth
+# Callback url is {HOST}/auth/facebook/callback
+FACEBOOK_CLIENTID
+FACEBOOK_CLIENTSECRET
 ```
 
 ## Trackers

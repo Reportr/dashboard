@@ -22,7 +22,9 @@
         "github": "0.1.12",
 
         "passport-foursquare": "0.1.3",
-        "node-foursquare": "0.2.0"
+        "node-foursquare": "0.2.0",
+
+        "passport-facebook": "1.0.1"
     },
     "bin": {
         "run": "./bin/run.js"
