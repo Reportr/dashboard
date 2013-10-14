@@ -81,11 +81,11 @@ Here is a list of trackers, I already build :
 * Instance ping: ping state of the reportr instance
 * Foursquare: track checkins
 * GitHub: track coding activity on GitHub
+* Facebook: track relations on Facebook (using Realtime API)
+* Twitter: track twitter activity (tweets, mentions, ...)
 
 And more to come:
 
-* Facebook: track relations on Facebook (using Realtime API)
-* Twitter: track twitter activity (tweets, mentions, ...)
 * Runkeeper: track running activity
 * Hardware:
 	* Track the temperature in a room (using tessel.io)
