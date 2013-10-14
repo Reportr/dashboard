@@ -37,7 +37,7 @@ module.exports =  {
 	/* Tasks */
 	"tasks": {
 		/* (int) Interval between tasks started (in ms) */
-		'interval': 1*60*1000
+		'interval': 5*60*1000
 	},
 
 	/* Trackers */
@@ -54,14 +54,14 @@ module.exports =  {
 				'clientSecret': process.env.FACEBOOK_CLIENTSECRET
 			}
 		},
-		/*{
+		{
 			'module': './trackers/twitter',
 			'config': {
 				'interval': 6*60*60,
 				'clientId': process.env.TWITTER_CLIENTID,
 				'clientSecret': process.env.TWITTER_CLIENTSECRET
 			}
-		},*/
+		},
 		{
 			'module': './trackers/foursquare',
 			'config': {
