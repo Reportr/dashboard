@@ -66,6 +66,11 @@ GITHUB_CLIENTSECRET
 # Callback url is {HOST}/auth/facebook/callback
 FACEBOOK_CLIENTID
 FACEBOOK_CLIENTSECRET
+
+# Twitter oAuth
+# Callback url is {HOST}/auth/twitter/callback
+TWITTER_CLIENTID
+TWITTER_CLIENTSECRET
 ```
 
 ## Trackers

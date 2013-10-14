@@ -21,7 +21,7 @@ exports.config = {
     "static": {
         "templates": path.resolve(__dirname, "resources", "templates"),
         "images": path.resolve(__dirname, "resources", "images"),
-        "font": path.resolve(__dirname, "resources", "font")
+        "fonts": path.resolve(__dirname, "resources", "fonts")
     },
 
     // Stylesheet entry point

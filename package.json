@@ -1,13 +1,14 @@
 {
     "name": "reportr",
     "description": "Your life personal dashboard.",
-    "version": "0.0.1",
+    "version": "1.1.1",
     "author": "samypesse@gmail.com",
     "dependencies": {
         "q": "0.9.6",
         "underscore": "1.4.4",
         "request": "2.27.0",
         "hr.js": "0.1.5",
+        "browserify": "2.34.0",
         "uuid": "1.4.1",
         "moment": "2.3.1",
         "mongoose": "3.6.20",
@@ -16,7 +17,6 @@
         "express": "3.3.5",
         "socket.io": "0.9.16",
         "passport": "0.1.17",
-        
 
         "passport-github": "0.1.5",
         "github": "0.1.12",
@@ -25,7 +25,9 @@
         "node-foursquare": "0.2.0",
 
         "passport-facebook": "1.0.1",
-        "facebook-client": "1.6.1"
+        "facebook-client": "1.6.1",
+
+        "passport-twitter": "1.0.2"
     },
     "bin": {
         "run": "./bin/run.js"

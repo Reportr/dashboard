@@ -1,7 +1,8 @@
 SHELL = bash
 NODE = $(shell which node)
 NPM = $(shell which npm)
-HR = node_modules/hr.js/bin/hr.js
+HR = node_modules/.bin/hr.js
+BROWSERIFY = node_modules/.bin/browserify
 
 .PHONY: all
 
@@ -22,12 +23,12 @@ endif
 
 clientlibrary:
 	@echo ==== Build client library ====
-	browserify -r ./reportr.js -o ./public/api.js
+	$(BROWSERIFY) -r ./reportr.js -o ./public/api.js
 	@echo
 
 chromeextension: clientlibrary
 	@echo ==== Build chrome extension ====
-	cd examples/javascript/chrome && sh ./build.sh
+	cp ./public/api.js ./examples/javascript/chrome/src/reportr.js
 	cd examples/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
 	@echo
 
