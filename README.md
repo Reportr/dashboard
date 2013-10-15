@@ -19,7 +19,7 @@ A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). Th
 * One place for all your personal analytics data
 * Very simple to export data for analytics (machine learning, ...)
 
-## How to host your own Reportr instance ?
+## How to host your own Reportr instance ? (or run it in local)
 
 ```
 # Clone the source code
@@ -43,7 +43,7 @@ $ git push heroku master
 $ heroku open
 ```
 
-Configure using Heroku config vars or ENV variables:
+Configure using Heroku config vars or define these variables in a **.env** file:
 
 ```
 # Host name
@@ -72,6 +72,23 @@ FACEBOOK_CLIENTSECRET
 TWITTER_CLIENTID
 TWITTER_CLIENTSECRET
 ```
+
+For running it in local, use [foreman from heroku](https://toolbelt.heroku.com/):
+
+```
+foreman start
+```
+
+For building client and run:
+
+```
+# Build and run
+make
+
+# or only build
+make build
+```
+
 
 ## Trackers
 

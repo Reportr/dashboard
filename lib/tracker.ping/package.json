@@ -1,0 +1,14 @@
+{
+    "name": "tracker.ping",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [
+            "logger", "trackers"
+        ],
+        "provides": []
+    }
+}

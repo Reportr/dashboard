@@ -1,0 +1,13 @@
+{
+    "name": "web.api.auth",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [
+            "logger", "api", "User"
+        ]
+    }
+}

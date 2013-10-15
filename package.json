@@ -1,12 +1,14 @@
 {
     "name": "reportr",
     "description": "Your life personal dashboard.",
-    "version": "1.1.1",
+    "version": "2.0.0",
     "author": "samypesse@gmail.com",
     "dependencies": {
+        "architect": "0.1.10",
         "q": "0.9.6",
         "underscore": "1.4.4",
         "request": "2.27.0",
+        "browser-request": "0.2.1",
         "hr.js": "0.1.5",
         "browserify": "2.34.0",
         "uuid": "1.4.1",
@@ -17,6 +19,7 @@
         "express": "3.3.5",
         "socket.io": "0.9.16",
         "passport": "0.1.17",
+        "commander": "1.1.1",
 
         "passport-github": "0.1.5",
         "github": "0.1.12",
@@ -31,11 +34,7 @@
         "twit": "1.1.11"
     },
     "bin": {
-        "run": "./bin/run.js"
-    },
-    "devDependencies": {
-        "browser-request": "0.2.1",
-        "socket.io-client": "0.9.16"
+        "reportr": "./bin/reportr.js"
     },
     "engines": {
         "node": "0.8.x",

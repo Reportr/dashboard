@@ -1,0 +1,13 @@
+{
+    "name": "worker.main",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [
+            "config", "logger", "database", "trackers"
+        ]
+    }
+}

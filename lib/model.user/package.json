@@ -1,0 +1,16 @@
+{
+    "name": "model.user",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [
+            "logger", "Event", "EventModel"
+        ],
+        "provides": [
+        	"User"
+        ]
+    }
+}

@@ -1,5 +1,4 @@
 var path = require("path");
-var config = require("../config");
 
 exports.config = {
     // Base directory for the application
@@ -9,7 +8,7 @@ exports.config = {
     "name": "Report",
 
     // Mode debug
-    "debug": config.debug,
+    "debug": true,
 
     // Main entry point for application
     "main": "main",
@@ -44,5 +43,10 @@ exports.config = {
     },
 
     // Config and args
-    "args": config.client
+    "args": {
+        "map": {
+            /* Key for Google Maps API v3 */
+            "apiKey": process.env.GMAP_APIKEY
+        }
+    }
 };
