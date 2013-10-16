@@ -1,0 +1,15 @@
+{
+    "name": "web.main",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [
+            "config", "logger", "database", "User", "notifications", "api", "trackers",
+            "tracker.chrome", "tracker.facebook", "tracker.foursquare",
+            "tracker.twitter", "tracker.github", "tracker.ping"
+        ]
+    }
+}

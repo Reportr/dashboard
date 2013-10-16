@@ -2,11 +2,12 @@ SHELL = bash
 NODE = $(shell which node)
 NPM = $(shell which npm)
 HR = node_modules/.bin/hr.js
+FOREMAN = foreman
 BROWSERIFY = node_modules/.bin/browserify
 
 .PHONY: all
 
-all: build chromeextension run
+all: build clientlib run
 
 build:
 	@echo ==== Build dashboard client ====
@@ -21,21 +22,24 @@ else
 	$(NPM) install .
 endif
 
-clientlibrary:
-	@echo ==== Build client library ====
+clientlib:
+	@echo ==== Build API library ====
 	$(BROWSERIFY) -r ./reportr.js -o ./public/api.js
 	@echo
 
-chromeextension: clientlibrary
+chrome: clientlib
 	@echo ==== Build chrome extension ====
-	cp ./public/api.js ./examples/javascript/chrome/src/reportr.js
-	cd examples/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
+	cp ./public/api.js ./thirdparty/javascript/chrome/src/reportr.js
+	cd thirdparty/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
 	@echo
 
 deploy:
+	@echo ==== Check Procfile ====
+	$(FOREMAN) check
+
 	@echo ==== Deploy to Heroku ====
 	git push heroku master
 
 run:
-	@echo ==== Run server ====
-	$(NODE) bin/web.js
+	@echo ==== Run application with foreman ====
+	$(FOREMAN) start
