@@ -8,7 +8,7 @@
     "plugin": {
         "consumes": [
             "config", "logger", "database", "trackers", "tasks",
-            "tracker.ping"
+            "tracker.ping", "tracker.foursquare"
         ]
     }
 }

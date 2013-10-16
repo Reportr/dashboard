@@ -18,6 +18,7 @@ var modulesSection = {
         
         "./trackers",
         "./tracker.ping",
+        "./tracker.foursquare",
 
         "./model.user",
         "./model.event",
