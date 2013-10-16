@@ -1,0 +1,12 @@
+{
+    "name": "config",
+    "version": "0.0.1",
+
+    "main": "./main.js",
+    "private": true,
+
+    "plugin": {
+        "consumes": [],
+        "provides": ["config"]
+    }
+}
