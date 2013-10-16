@@ -158,6 +158,18 @@ define([
         },
 
         /*
+         *  Get tracker state
+         */
+        trackerState: function(tId) {
+            return _.reduce(this.get("trackers", []), function(memo, tracker) {
+                if (tracker.id == tId) {
+                    memo = tracker.active;
+                }
+                return memo
+            }, null);
+        },
+
+        /*
          *  Toggle tracker
          */
         toggleTracker: function(tId, options) {

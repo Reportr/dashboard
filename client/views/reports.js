@@ -86,7 +86,7 @@ define([
          */
         actionInstallChrome: function(e) {
             e.preventDefault();
-            if (window.chrome == null) return;
+            if (window.chrome == null || User.current.trackerState("chrome")) return;
             chrome.webstore.install(undefined, _.bind(this.render, this), function() {
                 window.open('https://chrome.google.com/webstore/detail/pignkdodidfdfpmocgffojoihgnnldko','_blank');
             });
