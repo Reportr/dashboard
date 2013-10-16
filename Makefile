@@ -7,14 +7,11 @@ BROWSERIFY = node_modules/.bin/browserify
 
 .PHONY: all
 
-all: build run
+all: build clientlib run
 
 build:
 	@echo ==== Build dashboard client ====
 	$(HR) -d client build
-	@echo
-	@echo ==== Build API library ====
-	$(BROWSERIFY) -r ./reportr.js -o ./public/api.js
 	@echo
 
 install:
@@ -25,10 +22,15 @@ else
 	$(NPM) install .
 endif
 
-chrome: clientlibrary
+clientlib:
+	@echo ==== Build API library ====
+	$(BROWSERIFY) -r ./reportr.js -o ./public/api.js
+	@echo
+
+chrome: clientlib
 	@echo ==== Build chrome extension ====
-	cp ./public/api.js ./examples/javascript/chrome/src/reportr.js
-	cd examples/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
+	cp ./public/api.js ./thirdparty/javascript/chrome/src/reportr.js
+	cd thirdparty/javascript/chrome && zip -ru ../../../chrome-extension.zip ./*
 	@echo
 
 deploy:
@@ -40,4 +42,4 @@ deploy:
 
 run:
 	@echo ==== Run application with foreman ====
-	$(FOREMAN) run
+	$(FOREMAN) start
