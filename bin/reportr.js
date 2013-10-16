@@ -17,8 +17,12 @@ var modulesSection = {
         "./tasks",
         
         "./trackers",
-        "./tracker.ping",
+        "./tracker.chrome",
+        "./tracker.facebook",
         "./tracker.foursquare",
+        "./tracker.twitter",
+        "./tracker.github",
+        "./tracker.ping",
 
         "./model.user",
         "./model.event",
