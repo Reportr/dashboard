@@ -9,11 +9,11 @@ A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). Th
 
 [![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
 
-## Why Reportr is great ?
+## Why is Reportr great ?
 
 * Host your own Reportr instance and keep your data private
 * Track events from anywhere (web server, client application, connected hardware, ...)
-* It's very simple to track an event: HTTP API
+* Its very simple to track an event: HTTP API
 * Simple, but powerful web dashboard
 * Realtime display
 * One place for all your personal analytics data
@@ -75,7 +75,7 @@ TWITTER_CLIENTSECRET
 
 ## Trackers
 
-Here is a list of trackers, I already build :
+Here is a list of trackers, I already built :
 
 * Web Navigation: track web navigation using a chrome extension
 * Instance ping: ping state of the reportr instance
@@ -92,15 +92,15 @@ And more to come:
 
 ## APIs
 
-Reportr use a HTTP REST API to track event and manage models.
+Reportr uses a HTTP REST API to track event and manage models.
 
-Data are always JSON encoded and Base64 encoded and passed as a "*data*" argument. You can pass a "*callback*" arguments for using HTTP API in a client side application.
+Data is always JSON encoded and Base64 encoded and passed as a "*data*" argument. You can pass a "*callback*" arguments for using the HTTP API in a client side application.
 
-You can get some libraries to use Reportr in Python and Javascript in the *examples* directory. To build the Javascript client library, you will need 'browserify' (npm install -g browserify).
+Python and Javascript libraries for Reportr are in the *examples* directory. To build the Javascript client library, you will need 'browserify' (npm install -g browserify).
 
 #### Track events
 
-Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaters such as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
+Events are defined by 'event', 'namespace' and 'properties'. You can alse specify optional parameters such as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
 
 ```
 <host>/api/<token>/events/track
@@ -125,7 +125,7 @@ Events are definied by 'event', 'namespace' and 'properties'. You can alse speci
 ```
 
 
-#### Get data serie
+#### Get data series
 
 ```
 <host>/api/<token>/data/<namespace>/<event>?arguments
@@ -133,7 +133,7 @@ Events are definied by 'event', 'namespace' and 'properties'. You can alse speci
 arguments could contains :
 interval: Interval between data (in ms) (default: 1000)
 period: Period for events (in ms) (default: -1)
-property: Property te calcul (default: null)
+property: Property to calculate (default: null)
 transform: Transofrmation to do (default: 'sum')
 fill: Fill empty time with 0 (default: true)
 ```
