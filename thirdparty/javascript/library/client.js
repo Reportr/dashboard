@@ -4,13 +4,12 @@
  */
 var _ = require('underscore');
 var Q = require('Q');
-//var jsonp = require('./jsonp');
-var jsonpClient = require('jsonp-client');
+var jsonp = require('./jsonp');
 
 var Reportr = function(host, token, mode) {
 	this.host = host;
 	this.token = token;
-	this.jsonp = jsonpClient; //jsonp[mode || 'browser'];
+	this.jsonp = jsonp[mode || 'browser'];
 };
 
 

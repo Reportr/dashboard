@@ -7,8 +7,10 @@
 
     "plugin": {
         "consumes": [
-            "logger", "trackers"
+            "logger", "trackers", "tasks"
         ],
-        "provides": []
+        "provides": [
+            "tracker.ping"
+        ]
     }
 }

@@ -7,7 +7,7 @@
 
     "plugin": {
         "consumes": [
-            "logger", "Event", "EventModel"
+            "logger", "Event", "EventModel", "notifications", "trackers"
         ],
         "provides": [
         	"User"

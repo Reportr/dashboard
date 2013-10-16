@@ -46,7 +46,7 @@ exports.config = {
     "args": {
         "map": {
             /* Key for Google Maps API v3 */
-            "apiKey": process.env.GMAP_APIKEY
+            "apiKey": process.env.GMAP_APIKEY || "AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"
         }
     }
 };

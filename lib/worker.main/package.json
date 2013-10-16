@@ -7,7 +7,8 @@
 
     "plugin": {
         "consumes": [
-            "config", "logger", "database", "trackers"
+            "config", "logger", "database", "trackers", "tasks",
+            "tracker.ping"
         ]
     }
 }
