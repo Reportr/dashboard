@@ -9,7 +9,7 @@ A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). Th
 
 [![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
 
-## Why Reportr is great ?
+## Why Reportr is great?
 
 * Host your own Reportr instance and keep your data private
 * Track events from anywhere (web server, client application, connected hardware, ...)
@@ -19,7 +19,7 @@ A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). Th
 * One place for all your personal analytics data
 * Very simple to export data for analytics (machine learning, ...)
 
-## How to host your own Reportr instance ?
+## How to host your own Reportr instance?
 
 ```
 # Clone the source code
@@ -75,10 +75,10 @@ TWITTER_CLIENTSECRET
 
 ## Trackers
 
-Here is a list of trackers, I already build :
+Here is a list of trackers, I already built:
 
-* Web Navigation: track web navigation using a chrome extension
-* Instance ping: ping state of the reportr instance
+* Web Navigation: track web navigation using a Chrome extension
+* Instance ping: ping state of the Reportr instance
 * Foursquare: track checkins
 * GitHub: track coding activity on GitHub
 * Facebook: track relations on Facebook (using Realtime API)
@@ -92,7 +92,7 @@ And more to come:
 
 ## APIs
 
-Reportr use a HTTP REST API to track event and manage models.
+Reportr uses a HTTP REST API to track event and manage models.
 
 Data are always JSON encoded and Base64 encoded and passed as a "*data*" argument. You can pass a "*callback*" arguments for using HTTP API in a client side application.
 
@@ -100,7 +100,7 @@ You can get some libraries to use Reportr in Python and Javascript in the *examp
 
 #### Track events
 
-Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaters such as 'id' for updating unique event if existant or 'timestamp' to define time position for the event.
+Events are definied by 'event', 'namespace' and 'properties'. You can alse specify optional paramaters such as 'id' for updating a unique event if existant or define 'timestamp' to track date & time for the event.
 
 ```
 <host>/api/<token>/events/track
@@ -125,7 +125,7 @@ Events are definied by 'event', 'namespace' and 'properties'. You can alse speci
 ```
 
 
-#### Get data serie
+#### Get data series
 
 ```
 <host>/api/<token>/data/<namespace>/<event>?arguments
@@ -140,7 +140,7 @@ fill: Fill empty time with 0 (default: true)
 
 #### Define models
 
-Events models define information about how to display an event in the dashboard.
+Event models define information about how to display an event in the dashboard.
 
 ```
 <host>/api/<token>/model/set
@@ -162,19 +162,9 @@ Events models define information about how to display an event in the dashboard.
 
 #### Special properties for events
 
-When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '@'.
+When you track events using the API, you can define some special properties that can be use by Reportr for advanced use. Special properties always begin with '@'.
 
 ```
 @lat : latitude for location
 @lng : longitude for location
 ```
-
-#### Special properties for events
-
-When you track events using the API, you can define some specials properties that can be use by Reportr for advanced used. Special properties always begin with '@'.
-
-```
-@lat : latitude for location
-@lng : longitude for location
-```
-
