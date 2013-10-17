@@ -116,7 +116,9 @@ make deploy
 |   X   | **Runkeeper** | Track fitness activity from Runkeeper | Callback url is /auth/runkeeper/callback |
 |||| RUNKEEPER_CLIENTID |
 |||| RUNKEEPER_CLIENTSECRET |
-|   -   | **Fitbit** | Track fitness activity from Fitbit | |
+|   X   | **Fitbit** | Track fitness activity from Fitbit | Callback url is /auth/fitbit/callback |
+|||| FITBIT_CLIENTID |
+|||| FITBIT_CLIENTSECRET |
 |   -   | **Temperature** | Track the temperature in a room (using tessel.io) | |
 
 
