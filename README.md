@@ -58,6 +58,11 @@ FACEBOOK_CLIENTSECRET
 # Callback url is {HOST}/auth/twitter/callback
 TWITTER_CLIENTID
 TWITTER_CLIENTSECRET
+
+# Runkeeper oAuth
+# Callback url is {HOST}/auth/runkeeper/callback
+RUNKEEPER_CLIENTID
+RUNKEEPER_CLIENTSECRET
 ```
 
 #### Create your application and deploy it
@@ -121,10 +126,11 @@ Here is a list of trackers, I already built:
 * GitHub: track coding activity on GitHub
 * Facebook: track relations on Facebook (using Realtime API)
 * Twitter: track twitter activity (tweets, mentions, ...)
+* Runkeeper: track running activity
 
 And more to come:
 
-* Runkeeper: track running activity
+* Fitbit
 * Hardware:
 	* Track the temperature in a room (using tessel.io)
 

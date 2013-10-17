@@ -22,6 +22,7 @@ var modulesSection = {
         "./tracker.foursquare",
         "./tracker.twitter",
         "./tracker.github",
+        "./tracker.runkeeper",
         "./tracker.ping",
 
         "./model.user",

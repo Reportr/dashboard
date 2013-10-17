@@ -38,7 +38,10 @@
         "facebook-client": "1.6.1",
 
         "passport-twitter": "1.0.2",
-        "twit": "1.1.11"
+        "twit": "1.1.11",
+
+        "passport-runkeeper": "0.1.2",
+        "node-runkeeper": "0.1.4"
     },
     "bin": {
         "reportr": "./bin/reportr.js"
