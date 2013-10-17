@@ -34,6 +34,23 @@ chrome: clientlib
 	@echo
 
 deploy:
+	@echo ==== Change Procfile to Procfile-normal ====
+	cp -f ./Procfile-normal ./Procfile
+	git add ./Procfile
+	git commit -m "Change deployment procfile"
+
+	@echo ==== Check Procfile ====
+	$(FOREMAN) check
+
+	@echo ==== Deploy to Heroku ====
+	git push heroku master
+
+deploy-free:
+	@echo ==== Change Procfile to Procfile-free ====
+	cp -f ./Procfile-free ./Procfile
+	git add ./Procfile
+	git commit -m "Change deployment procfile"
+
 	@echo ==== Check Procfile ====
 	$(FOREMAN) check
 
@@ -44,6 +61,6 @@ run:
 	@echo ==== Run application with foreman ====
 	$(FOREMAN) start
 
-runfree:
+run-free:
 	@echo ==== Run application for free with foreman ====
 	$(FOREMAN) start -f ./Procfile-free
