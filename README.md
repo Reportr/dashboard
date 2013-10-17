@@ -108,11 +108,14 @@ make build
 You can run Reportr for free on Heroku by using the Procfile named Procfile-free, it'll only run one web dyno (with the worker and background task in it).
 
 ```
+# Change mode
+make mode-free
+
 # Run it
-make run-free
+make run
 
 # Deploy it
-make deploy-free
+make deploy
 ```
 
 
