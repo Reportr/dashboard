@@ -30,7 +30,8 @@ $ git clone https://github.com/SamyPesse/reportr.git && cd ./reportr
 
 #### Configuration
 
-Configure the Reportr instance using Heroku config vars or define these variables in a **.env** file for local use:
+Configure the Reportr instance using Heroku config vars or define these variables in a **.env** file for local use.
+Configure the differents trackers using Trackers list below.
 
 ```
 # Host name
@@ -38,31 +39,6 @@ HOST
 
 # Express Secret session
 SESSION_SECRET
-
-# Foursquare oAuth
-# Callback url is {HOST}/auth/foursquare/callback
-FOURSQUARE_CLIENTID
-FOURSQUARE_CLIENTSECRET
-
-# GitHub oAuth
-# Callback url is {HOST}/auth/github/callback
-GITHUB_CLIENTID
-GITHUB_CLIENTSECRET
-
-# Facebook oAuth
-# Callback url is {HOST}/auth/facebook/callback
-FACEBOOK_CLIENTID
-FACEBOOK_CLIENTSECRET
-
-# Twitter oAuth
-# Callback url is {HOST}/auth/twitter/callback
-TWITTER_CLIENTID
-TWITTER_CLIENTSECRET
-
-# Runkeeper oAuth
-# Callback url is {HOST}/auth/runkeeper/callback
-RUNKEEPER_CLIENTID
-RUNKEEPER_CLIENTSECRET
 ```
 
 #### Create your application and deploy it
@@ -121,21 +97,28 @@ make deploy
 
 ## Trackers
 
-Here is a list of trackers, I already built:
+| State | Name                | Description       | Configuration     |
+|:-----:| ------------------- | ----------------- | ----------------- |
+|   X   | *Web Navigation* | Track web navigation using a Chrome extension | |
+|   X   | *Ping* | Ping state of the Reportr instance | |
+|   X   | *Foursquare* | Track your checkins | Callback url is /auth/foursquare/callback |
+|||| FOURSQUARE_CLIENTID |
+|||| FOURSQUARE_CLIENTSECRET |
+|   X   | *GitHub* | Track coding activity on GitHub | Callback url is /auth/github/callback |
+|||| GITHUB_CLIENTID |
+|||| GITHUB_CLIENTSECRET |
+|   X   | *Facebook* | Track relations on Facebook | Callback url is /auth/facebook/callback |
+|||| FACEBOOK_CLIENTID |
+|||| FACEBOOK_CLIENTSECRET |
+|   X   | *Twitter* | Track twitter activity (tweets, mentions, ...) | Callback url is /auth/twitter/callback |
+|||| TWITTER_CLIENTID |
+|||| TWITTER_CLIENTSECRET |
+|   X   | *Runkeeper* | Track fitness activity from Runkeeper | Callback url is /auth/runkeeper/callback |
+|||| RUNKEEPER_CLIENTID |
+|||| RUNKEEPER_CLIENTSECRET |
+|   -   | *Fitbit* | Track fitness activity from Fitbit | |
+|   -   | *Temperature* | Track the temperature in a room (using tessel.io) | |
 
-* Web Navigation: track web navigation using a Chrome extension
-* Instance ping: ping state of the Reportr instance
-* Foursquare: track checkins
-* GitHub: track coding activity on GitHub
-* Facebook: track relations on Facebook (using Realtime API)
-* Twitter: track twitter activity (tweets, mentions, ...)
-* Runkeeper: track running activity
-
-And more to come:
-
-* Fitbit
-* Hardware:
-	* Track the temperature in a room (using tessel.io)
 
 ## APIs
 
