@@ -79,7 +79,7 @@ For running it in local, use [foreman from heroku](https://toolbelt.heroku.com/)
 foreman start
 ```
 
-For building client and run:
+And for building client:
 
 ```
 # Build and run
@@ -88,6 +88,8 @@ make
 # or only build
 make build
 ```
+
+You can run Reportr for free on Heroku by using the Procfile named Procfile-free, it'll only run one web dyno (with the worker and background task in it).
 
 
 ## Trackers

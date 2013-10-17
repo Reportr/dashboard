@@ -39,6 +39,16 @@ var modulesSection = {
         "./web.api.events",
         "./web.api.trackers",
         "./web.main"
+    ],
+    'all': [
+        "./web.api",
+        "./web.api.auth",
+        "./web.api.data",
+        "./web.api.models",
+        "./web.api.events",
+        "./web.api.trackers",
+        "./web.main",
+        "./worker.main"
     ]
 };
 

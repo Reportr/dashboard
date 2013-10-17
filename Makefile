@@ -43,3 +43,7 @@ deploy:
 run:
 	@echo ==== Run application with foreman ====
 	$(FOREMAN) start
+
+runfree:
+	@echo ==== Run application for free with foreman ====
+	$(FOREMAN) start -f ./Procfile-free

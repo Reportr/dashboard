@@ -1,0 +1,1 @@
+web: node bin/reportr.js run --mode=all
