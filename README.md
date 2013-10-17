@@ -99,25 +99,25 @@ make deploy
 
 | State | Name                | Description       | Configuration     |
 |:-----:| ------------------- | ----------------- | ----------------- |
-|   X   | *Web Navigation* | Track web navigation using a Chrome extension | |
-|   X   | *Ping* | Ping state of the Reportr instance | |
-|   X   | *Foursquare* | Track your checkins | Callback url is /auth/foursquare/callback |
+|   X   | **Web Navigation** | Track web navigation using a Chrome extension | |
+|   X   | **Ping** | Ping state of the Reportr instance | |
+|   X   | **Foursquare** | Track your checkins | Callback url is /auth/foursquare/callback |
 |||| FOURSQUARE_CLIENTID |
 |||| FOURSQUARE_CLIENTSECRET |
-|   X   | *GitHub* | Track coding activity on GitHub | Callback url is /auth/github/callback |
+|   X   | **GitHub** | Track coding activity on GitHub | Callback url is /auth/github/callback |
 |||| GITHUB_CLIENTID |
 |||| GITHUB_CLIENTSECRET |
-|   X   | *Facebook* | Track relations on Facebook | Callback url is /auth/facebook/callback |
+|   X   | **Facebook** | Track relations on Facebook | Callback url is /auth/facebook/callback |
 |||| FACEBOOK_CLIENTID |
 |||| FACEBOOK_CLIENTSECRET |
-|   X   | *Twitter* | Track twitter activity (tweets, mentions, ...) | Callback url is /auth/twitter/callback |
+|   X   | **Twitter** | Track twitter activity (tweets, mentions, ...) | Callback url is /auth/twitter/callback |
 |||| TWITTER_CLIENTID |
 |||| TWITTER_CLIENTSECRET |
-|   X   | *Runkeeper* | Track fitness activity from Runkeeper | Callback url is /auth/runkeeper/callback |
+|   X   | **Runkeeper** | Track fitness activity from Runkeeper | Callback url is /auth/runkeeper/callback |
 |||| RUNKEEPER_CLIENTID |
 |||| RUNKEEPER_CLIENTSECRET |
-|   -   | *Fitbit* | Track fitness activity from Fitbit | |
-|   -   | *Temperature* | Track the temperature in a room (using tessel.io) | |
+|   -   | **Fitbit** | Track fitness activity from Fitbit | |
+|   -   | **Temperature** | Track the temperature in a room (using tessel.io) | |
 
 
 ## APIs
