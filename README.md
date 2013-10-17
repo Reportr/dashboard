@@ -19,31 +19,18 @@ A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). Th
 * One place for all your personal analytics data
 * Very simple to export data for analytics (machine learning, ...)
 
-## How to host your own Reportr instance (or run it locally)?
+## How to host your own Reportr instance?
+
+#### Get the application source code
 
 ```
 # Clone the source code
 $ git clone https://github.com/SamyPesse/reportr.git && cd ./reportr
-
-# Edit the config.js file
-$ nano ./config.js
-
-# Create your heroku application
-$ heroku create
-
-# Add MongoHQ or MongoLab addon for heroku
-$ heroku addons:add mongohq:small
-or
-$ heroku addons:add mongolab:sandbox
-
-# Deploy the application
-$ git push heroku master
-
-# Open the application in your browser
-$ heroku open
 ```
 
-Configure using Heroku config vars or define these variables in a **.env** file:
+#### Configuration
+
+Configure the Reportr instance using Heroku config vars or define these variables in a **.env** file for local use:
 
 ```
 # Host name
@@ -73,13 +60,35 @@ TWITTER_CLIENTID
 TWITTER_CLIENTSECRET
 ```
 
+#### Create your application and deploy it
+
+```
+# Create your heroku application
+$ heroku create
+
+# Add MongoHQ or MongoLab addon for heroku
+$ heroku addons:add mongohq:small
+or
+$ heroku addons:add mongolab:sandbox
+
+# Deploy the application
+$ git push heroku master
+
+# Open the application in your browser
+$ heroku open
+```
+
+#### Run it locally
+
 For running it in local, use [foreman from heroku](https://toolbelt.heroku.com/):
 
 ```
 foreman start
 ```
 
-And for building client:
+#### Build and test the client
+
+Reportr client uses [HappyRhino.js](https://github.com/FriendCode/hr.js) which needs a build process.
 
 ```
 # Build and run
@@ -89,7 +98,13 @@ make
 make build
 ```
 
+#### Run for free on heroku (only one web dynoo)
+
 You can run Reportr for free on Heroku by using the Procfile named Procfile-free, it'll only run one web dyno (with the worker and background task in it).
+
+```
+make deploy-free
+```
 
 
 ## Trackers
