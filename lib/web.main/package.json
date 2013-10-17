@@ -8,8 +8,10 @@
     "plugin": {
         "consumes": [
             "config", "logger", "database", "User", "notifications", "api", "trackers",
+
             "tracker.chrome", "tracker.facebook", "tracker.foursquare",
-            "tracker.twitter", "tracker.github", "tracker.runkeeper", "tracker.ping"
+            "tracker.twitter", "tracker.github", "tracker.runkeeper", 
+            "tracker.fitbit", "tracker.ping"
         ]
     }
 }

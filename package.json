@@ -41,7 +41,10 @@
         "twit": "1.1.11",
 
         "passport-runkeeper": "0.1.2",
-        "node-runkeeper": "0.1.4"
+        "node-runkeeper": "0.1.4",
+
+        "passport-fitbit": "0.1.2",
+        "fitbit-js": "0.2.0"
     },
     "bin": {
         "reportr": "./bin/reportr.js"

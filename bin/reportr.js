@@ -23,6 +23,7 @@ var modulesSection = {
         "./tracker.twitter",
         "./tracker.github",
         "./tracker.runkeeper",
+        "./tracker.fitbit",
         "./tracker.ping",
 
         "./model.user",
