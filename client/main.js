@@ -24,7 +24,9 @@ require([
         template: "main.html",
         metas: {
             "description": "Track your life activity on a single platform.",
-            "viewport": "width=device-width, initial-scale=1.0"
+            "viewport": "width=device-width, initial-scale=1, user-scalable=no",
+            "apple-mobile-web-app-capable": "yes",
+            "apple-mobile-web-app-status-bar-style": "black"
         },
         links: {
             "icon": hr.Urls.static("images/favicon.png"),
@@ -176,7 +178,7 @@ require([
             if (e != null) {
                 e.preventDefault();
             }
-            this.components.reports.toggleSettings(true);
+            this.components.reports.toggleSettings();
         },
 
         /*

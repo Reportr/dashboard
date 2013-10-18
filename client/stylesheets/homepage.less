@@ -8,6 +8,11 @@
 		color: #fff;
 		.clearfix();
 
+		/* Mobile */
+		@media (max-width: 768px) {
+			padding: 40px 5px;
+		}
+
 		a {
 			color: inherit;
 			text-decoration: underline;
@@ -88,6 +93,29 @@
 						}
 					}
 				}
+
+				/* Mobile */
+				@media (max-width: 768px) {
+					h1 {
+						font-size: 60px;
+						font-weight: 200;
+						font-family: 'reportrNormal';
+						line-height: 80px;
+						margin: 0px;
+					}
+
+					p {
+						font-size: 20px;
+						font-family: 'reportrNormal';
+						font-weight: 200;
+						line-height: 25px;
+						margin: 0px;
+					}
+
+					p.links {
+						display: none;
+					}
+				}
 			}
 		}
 	}
@@ -127,6 +155,26 @@
 			p {
 				font-size: 18px;
 				font-weight: 200;
+			}
+
+			/* Mobile */
+			@media (max-width: 768px) {
+				min-height: 50px;
+				
+				.icon {
+					width: 25px;
+					height: 30px;
+					font-size: 20px;
+					line-height: 25px;
+				}
+
+				h3 {
+					font-size: 20px;
+				}
+
+				p {
+					font-size: 14px;
+				}
 			}
 
 			&.tracker-twitter {

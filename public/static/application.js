@@ -25527,7 +25527,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         }
     }
 });
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1382035267682,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1382088730273,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34780,7 +34780,9 @@ require([
         template: "main.html",
         metas: {
             "description": "Track your life activity on a single platform.",
-            "viewport": "width=device-width, initial-scale=1.0"
+            "viewport": "width=device-width, initial-scale=1, user-scalable=no",
+            "apple-mobile-web-app-capable": "yes",
+            "apple-mobile-web-app-status-bar-style": "black"
         },
         links: {
             "icon": hr.Urls.static("images/favicon.png"),
@@ -34932,7 +34934,7 @@ require([
             if (e != null) {
                 e.preventDefault();
             }
-            this.components.reports.toggleSettings(true);
+            this.components.reports.toggleSettings();
         },
 
         /*

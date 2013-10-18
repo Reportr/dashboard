@@ -123,6 +123,37 @@
 			left: 0px;
 		}
 	}
+
+
+	@media (max-width: 768px) {
+		/* On mobile : lateral bar is full size and open/close states are inversed */
+		#lateralbar {
+			left: -100%;
+			width: 100%;
+			top: 50px;
+		}
+		#body {
+			left: 0px;
+			width: 100%;
+			padding: 0px;
+		}
+		#header {
+			left: 0px;
+			width: 100%;
+		}
+
+		&.mode-lateralbar-close {
+			#lateralbar {
+				left: 0px;
+			}
+			#body {
+				left: 100%;
+			}
+			#header {
+				left: 0px;
+			}
+		}
+	}
 }
 
 .mode-edit {
