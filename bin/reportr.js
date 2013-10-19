@@ -86,6 +86,6 @@ cli
 });
 
 
-cli.option('-m, --mode <web or worker>', 'Run mdoe for this process.');
+cli.option('-m, --mode <web or worker>', 'Run mode for this process.');
 
 cli.version(pkg.version).parse(process.argv);
