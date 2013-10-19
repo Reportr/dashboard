@@ -89,3 +89,4 @@ cli
 cli.option('-m, --mode <web or worker>', 'Run mode for this process.');
 
 cli.version(pkg.version).parse(process.argv);
+if (!cli.args.length) cli.help();
