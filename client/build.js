@@ -24,7 +24,7 @@ exports.config = {
     },
 
     // Stylesheet entry point
-    "style": path.resolve(__dirname, "stylesheets/main.less"),
+    "style": path.resolve(__dirname, "resources/stylesheets/main.less"),
 
     // paths and shim
     "shim": {
