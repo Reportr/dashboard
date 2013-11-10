@@ -3,7 +3,7 @@
  *	Use browserify to use it in the browser.
  */
 var _ = require('underscore');
-var Q = require('Q');
+var Q = require('q');
 var jsonp = require('./jsonp');
 
 var Reportr = function(host, token, mode) {
