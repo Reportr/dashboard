@@ -7,7 +7,7 @@
 
     "plugin": {
         "consumes": [
-            "logger", "User", "queue"
+            "logger", "User", "queue", "config"
         ],
         "provides": [
             "tasks"
