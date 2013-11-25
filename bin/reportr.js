@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 var path = require('path');
-var architect = require('architect');
+var engineer = require('engineer');
 var cli = require('commander');
 var pkg = require('../package.json');
 
@@ -72,16 +72,19 @@ cli
     }
 
     var modules = _.union(modulesSection["*"], modulesSection[this.mode]);
-    var config = architect.resolveConfig(modules, path.resolve(__dirname, '..', 'lib'));
-    architect.createApp(config, function(err) {
-        if (err) {
-            console.error('Error initializing Reportr '+that.mode+' process');
-            console.error(err);
-            console.error(err.stack);
-
-            // Kill process
-            process.exit(1);
-        }
+    var app = new engineer.Application({
+        'paths': [
+            path.resolve(__dirname, '..', 'lib')
+        ]
+    });
+    app.on("error", function(err) {
+        console.log("Error in the application:");
+        console.log(err.stack);
+        // Kill process
+        process.exit(1);
+    });
+    return app.load(modules).then(function() {
+        return Q(app);
     });
 });
 

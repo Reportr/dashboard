@@ -1,7 +1,8 @@
 define([
-    "Underscore",
-    "hr/hr"
-], function(_, hr) {
+    "underscore",
+    "hr/hr",
+    "q"
+], function(_, hr, Q) {
     return {
         /*
          *  Execute a request
@@ -11,14 +12,9 @@ define([
          *  @args : args for the request
          */
         request: function(mode, method, args, options) {
-            var d = new hr.Deferred();
-            hr.Requests[mode]("/api/"+method, args, options).then(function(o) {
-                d.resolve(JSON.parse(o));
-            }, function(err) {
-                d.reject(err);
+            return hr.Requests[mode]("/api/"+method, args, options).then(function(o) {
+                return JSON.parse(o);
             });
-
-            return d;
         },
     };
 });

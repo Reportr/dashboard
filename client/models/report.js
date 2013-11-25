@@ -1,6 +1,6 @@
 define([
     "hr/hr",
-    "Underscore"
+    "underscore"
 ], function(hr, _) {
     var Report = hr.Model.extend({
         defaults: {

@@ -161,7 +161,7 @@ define([
             }, this);
             
             if (_.size(seriesD) > 0) {
-                hr.Deferred.when.apply(null, seriesD).done(function() {
+                Q.all(seriesD).then(function() {
                     that.chart.setData(series);
                     that.chart.setupGrid();
                     that.chart.draw();  

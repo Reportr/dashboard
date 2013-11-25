@@ -3274,10 +3274,18 @@ define("requireLib", function(){});
 
 }).call(this);
 
-define("Underscore", (function (global) {
+define("underscore", (function (global) {
     return function () {
         var ret, fn;
         return ret || global._;
+    };
+}(this)));
+
+!function a(b,c,d){function e(g,h){if(!c[g]){if(!b[g]){var i="function"==typeof require&&require;if(!h&&i)return i(g,!0);if(f)return f(g,!0);throw new Error("Cannot find module '"+g+"'")}var j=c[g]={exports:{}};b[g][0].call(j.exports,function(a){var c=b[g][1][a];return e(c?c:a)},j,j.exports,a,b,c,d)}return c[g].exports}for(var f="function"==typeof require&&require,g=0;g<d.length;g++)e(d[g]);return e}({1:[function(a){window.Q=a("./q")},{"./q":2}],2:[function(a,b){function c(a){return function(){return Z.apply(a,arguments)}}function d(a){return a===Object(a)}function e(a){return"[object StopIteration]"===fb(a)||a instanceof V}function f(a,b){if(S&&b.stack&&"object"==typeof a&&null!==a&&a.stack&&-1===a.stack.indexOf(hb)){for(var c=[],d=b;d;d=d.source)d.stack&&c.unshift(d.stack);c.unshift(a.stack);var e=c.join("\n"+hb+"\n");a.stack=g(e)}}function g(a){for(var b=a.split("\n"),c=[],d=0;d<b.length;++d){var e=b[d];j(e)||h(e)||!e||c.push(e)}return c.join("\n")}function h(a){return-1!==a.indexOf("(module.js:")||-1!==a.indexOf("(node.js:")}function i(a){var b=/at .+ \((.+):(\d+):(?:\d+)\)$/.exec(a);if(b)return[b[1],Number(b[2])];var c=/at ([^ ]+):(\d+):(?:\d+)$/.exec(a);if(c)return[c[1],Number(c[2])];var d=/.*@(.+):(\d+)$/.exec(a);return d?[d[1],Number(d[2])]:void 0}function j(a){var b=i(a);if(!b)return!1;var c=b[0],d=b[1];return c===U&&d>=W&&mb>=d}function k(){if(S)try{throw new Error}catch(a){var b=a.stack.split("\n"),c=b[0].indexOf("@")>0?b[1]:b[2],d=i(c);if(!d)return;return U=d[0],d[1]}}function l(a,b,c){return function(){return"undefined"!=typeof console&&"function"==typeof console.warn&&console.warn(b+" is deprecated, use "+c+" instead.",new Error("").stack),a.apply(a,arguments)}}function m(a){return t(a)?a:u(a)?F(a):E(a)}function n(){function a(a){b=a,f.source=a,_(c,function(b,c){Y(function(){a.promiseDispatch.apply(a,c)})},void 0),c=void 0,d=void 0}var b,c=[],d=[],e=cb(n.prototype),f=cb(q.prototype);if(f.promiseDispatch=function(a,e,f){var g=$(arguments);c?(c.push(g),"when"===e&&f[1]&&d.push(f[1])):Y(function(){b.promiseDispatch.apply(b,g)})},f.valueOf=l(function(){if(c)return f;var a=s(b);return t(a)&&(b=a),a},"valueOf","inspect"),f.inspect=function(){return b?b.inspect():{state:"pending"}},m.longStackSupport&&S)try{throw new Error}catch(g){f.stack=g.stack.substring(g.stack.indexOf("\n")+1)}return e.promise=f,e.resolve=function(c){b||a(m(c))},e.fulfill=function(c){b||a(E(c))},e.reject=function(c){b||a(D(c))},e.notify=function(a){b||_(d,function(b,c){Y(function(){c(a)})},void 0)},e}function o(a){if("function"!=typeof a)throw new TypeError("resolver must be a function.");var b=n();try{a(b.resolve,b.reject,b.notify)}catch(c){b.reject(c)}return b.promise}function p(a){return o(function(b,c){for(var d=0,e=a.length;e>d;d++)m(a[d]).then(b,c)})}function q(a,b,c){void 0===b&&(b=function(a){return D(new Error("Promise does not support operation: "+a))}),void 0===c&&(c=function(){return{state:"unknown"}});var d=cb(q.prototype);if(d.promiseDispatch=function(c,e,f){var g;try{g=a[e]?a[e].apply(d,f):b.call(d,e,f)}catch(h){g=D(h)}c&&c(g)},d.inspect=c,c){var e=c();"rejected"===e.state&&(d.exception=e.reason),d.valueOf=l(function(){var a=c();return"pending"===a.state||"rejected"===a.state?d:a.value})}return d}function r(a,b,c,d){return m(a).then(b,c,d)}function s(a){if(t(a)){var b=a.inspect();if("fulfilled"===b.state)return b.value}return a}function t(a){return d(a)&&"function"==typeof a.promiseDispatch&&"function"==typeof a.inspect}function u(a){return d(a)&&"function"==typeof a.then}function v(a){return t(a)&&"pending"===a.inspect().state}function w(a){return!t(a)||"fulfilled"===a.inspect().state}function x(a){return t(a)&&"rejected"===a.inspect().state}function y(){kb||"undefined"==typeof window||window.Touch||!window.console||console.warn("[Q] Unhandled rejection reasons (should be empty):",ib),kb=!0}function z(){for(var a=0;a<ib.length;a++){var b=ib[a];b&&"undefined"!=typeof b.stack?console.warn("Unhandled rejection reason:",b.stack):console.warn("Unhandled rejection reason (no stack):",b)}}function A(){ib.length=0,jb.length=0,kb=!1,lb||(lb=!0,"undefined"!=typeof process&&process.on&&process.on("exit",z))}function B(a,b){lb&&(jb.push(a),ib.push(b),y())}function C(a){if(lb){var b=ab(jb,a);-1!==b&&(jb.splice(b,1),ib.splice(b,1))}}function D(a){var b=q({when:function(b){return b&&C(this),b?b(a):this}},function(){return this},function(){return{state:"rejected",reason:a}});return B(b,a),b}function E(a){return q({when:function(){return a},get:function(b){return a[b]},set:function(b,c){a[b]=c},"delete":function(b){delete a[b]},post:function(b,c){return null===b||void 0===b?a.apply(void 0,c):a[b].apply(a,c)},apply:function(b,c){return a.apply(b,c)},keys:function(){return eb(a)}},void 0,function(){return{state:"fulfilled",value:a}})}function F(a){var b=n();return Y(function(){try{a.then(b.resolve,b.reject,b.notify)}catch(c){b.reject(c)}}),b.promise}function G(a){return q({isDef:function(){}},function(b,c){return M(a,b,c)},function(){return m(a).inspect()})}function H(a,b,c){return m(a).spread(b,c)}function I(a){return function(){function b(a,b){var g;if(gb){try{g=c[a](b)}catch(h){return D(h)}return g.done?g.value:r(g.value,d,f)}try{g=c[a](b)}catch(h){return e(h)?h.value:D(h)}return r(g,d,f)}var c=a.apply(this,arguments),d=b.bind(b,"next"),f=b.bind(b,"throw");return d()}}function J(a){m.done(m.async(a)())}function K(a){throw new V(a)}function L(a){return function(){return H([this,N(arguments)],function(b,c){return a.apply(b,c)})}}function M(a,b,c){return m(a).dispatch(b,c)}function N(a){return r(a,function(a){var b=0,c=n();return _(a,function(d,e,f){var g;t(e)&&"fulfilled"===(g=e.inspect()).state?a[f]=g.value:(++b,r(e,function(d){a[f]=d,0===--b&&c.resolve(a)},c.reject,function(a){c.notify({index:f,value:a})}))},void 0),0===b&&c.resolve(a),c.promise})}function O(a){return r(a,function(a){return a=bb(a,m),r(N(bb(a,function(a){return r(a,X,X)})),function(){return a})})}function P(a){return r(a,function(a){return N(bb(a,function(b,c){return r(b,function(b){return a[c]={state:"fulfilled",value:b},a[c]},function(b){return a[c]={state:"rejected",reason:b},a[c]})})).thenResolve(a)})}function Q(a,b){return m(a).then(void 0,void 0,b)}function R(a,b){return m(a).nodeify(b)}var S=!1;try{throw new Error}catch(T){S=!!T.stack}var U,V,W=k(),X=function(){},Y=function(){function a(){for(;b.next;){b=b.next;var c=b.task;b.task=void 0;var e=b.domain;e&&(b.domain=void 0,e.enter());try{c()}catch(g){if(f)throw e&&e.exit(),setTimeout(a,0),e&&e.enter(),g;setTimeout(function(){throw g},0)}e&&e.exit()}d=!1}var b={task:void 0,next:null},c=b,d=!1,e=void 0,f=!1;if(Y=function(a){c=c.next={task:a,domain:f&&process.domain,next:null},d||(d=!0,e())},"undefined"!=typeof process&&process.nextTick)f=!0,e=function(){process.nextTick(a)};else if("function"==typeof setImmediate)e="undefined"!=typeof window?setImmediate.bind(window,a):function(){setImmediate(a)};else if("undefined"!=typeof MessageChannel){var g=new MessageChannel;g.port1.onmessage=a,e=function(){g.port2.postMessage(0)}}else e=function(){setTimeout(a,0)};return Y}(),Z=Function.call,$=c(Array.prototype.slice),_=c(Array.prototype.reduce||function(a,b){var c=0,d=this.length;if(1===arguments.length)for(;;){if(c in this){b=this[c++];break}if(++c>=d)throw new TypeError}for(;d>c;c++)c in this&&(b=a(b,this[c],c));return b}),ab=c(Array.prototype.indexOf||function(a){for(var b=0;b<this.length;b++)if(this[b]===a)return b;return-1}),bb=c(Array.prototype.map||function(a,b){var c=this,d=[];return _(c,function(e,f,g){d.push(a.call(b,f,g,c))},void 0),d}),cb=Object.create||function(a){function b(){}return b.prototype=a,new b},db=c(Object.prototype.hasOwnProperty),eb=Object.keys||function(a){var b=[];for(var c in a)db(a,c)&&b.push(c);return b},fb=c(Object.prototype.toString);V="undefined"!=typeof ReturnValue?ReturnValue:function(a){this.value=a};var gb;try{new Function("(function* (){ yield 1; })"),gb=!0}catch(T){gb=!1}var hb="From previous event:";m.resolve=m,m.nextTick=Y,m.longStackSupport=!1,m.defer=n,n.prototype.makeNodeResolver=function(){var a=this;return function(b,c){b?a.reject(b):arguments.length>2?a.resolve($(arguments,1)):a.resolve(c)}},m.promise=o,m.passByCopy=function(a){return a},q.prototype.passByCopy=function(){return this},m.join=function(a,b){return m(a).join(b)},q.prototype.join=function(a){return m([this,a]).spread(function(a,b){if(a===b)return a;throw new Error("Can't join: not the same: "+a+" "+b)})},m.race=p,q.prototype.race=function(){return this.then(m.race)},m.makePromise=q,q.prototype.toString=function(){return"[object Promise]"},q.prototype.then=function(a,b,c){function d(b){try{return"function"==typeof a?a(b):b}catch(c){return D(c)}}function e(a){if("function"==typeof b){f(a,h);try{return b(a)}catch(c){return D(c)}}return D(a)}function g(a){return"function"==typeof c?c(a):a}var h=this,i=n(),j=!1;return Y(function(){h.promiseDispatch(function(a){j||(j=!0,i.resolve(d(a)))},"when",[function(a){j||(j=!0,i.resolve(e(a)))}])}),h.promiseDispatch(void 0,"when",[void 0,function(a){var b,c=!1;try{b=g(a)}catch(d){if(c=!0,!m.onerror)throw d;m.onerror(d)}c||i.notify(b)}]),i.promise},m.when=r,q.prototype.thenResolve=function(a){return this.then(function(){return a})},m.thenResolve=function(a,b){return m(a).thenResolve(b)},q.prototype.thenReject=function(a){return this.then(function(){throw a})},m.thenReject=function(a,b){return m(a).thenReject(b)},m.nearer=s,m.isPromise=t,m.isPromiseAlike=u,m.isPending=v,q.prototype.isPending=function(){return"pending"===this.inspect().state},m.isFulfilled=w,q.prototype.isFulfilled=function(){return"fulfilled"===this.inspect().state},m.isRejected=x,q.prototype.isRejected=function(){return"rejected"===this.inspect().state};var ib=[],jb=[],kb=!1,lb=!0;m.resetUnhandledRejections=A,m.getUnhandledReasons=function(){return ib.slice()},m.stopUnhandledRejectionTracking=function(){A(),"undefined"!=typeof process&&process.on&&process.removeListener("exit",z),lb=!1},A(),m.reject=D,m.fulfill=E,m.master=G,m.spread=H,q.prototype.spread=function(a,b){return this.all().then(function(b){return a.apply(void 0,b)},b)},m.async=I,m.spawn=J,m["return"]=K,m.promised=L,m.dispatch=M,q.prototype.dispatch=function(a,b){var c=this,d=n();return Y(function(){c.promiseDispatch(d.resolve,a,b)}),d.promise},m.get=function(a,b){return m(a).dispatch("get",[b])},q.prototype.get=function(a){return this.dispatch("get",[a])},m.set=function(a,b,c){return m(a).dispatch("set",[b,c])},q.prototype.set=function(a,b){return this.dispatch("set",[a,b])},m.del=m["delete"]=function(a,b){return m(a).dispatch("delete",[b])},q.prototype.del=q.prototype["delete"]=function(a){return this.dispatch("delete",[a])},m.mapply=m.post=function(a,b,c){return m(a).dispatch("post",[b,c])},q.prototype.mapply=q.prototype.post=function(a,b){return this.dispatch("post",[a,b])},m.send=m.mcall=m.invoke=function(a,b){return m(a).dispatch("post",[b,$(arguments,2)])},q.prototype.send=q.prototype.mcall=q.prototype.invoke=function(a){return this.dispatch("post",[a,$(arguments,1)])},m.fapply=function(a,b){return m(a).dispatch("apply",[void 0,b])},q.prototype.fapply=function(a){return this.dispatch("apply",[void 0,a])},m["try"]=m.fcall=function(a){return m(a).dispatch("apply",[void 0,$(arguments,1)])},q.prototype.fcall=function(){return this.dispatch("apply",[void 0,$(arguments)])},m.fbind=function(a){var b=m(a),c=$(arguments,1);return function(){return b.dispatch("apply",[this,c.concat($(arguments))])}},q.prototype.fbind=function(){var a=this,b=$(arguments);return function(){return a.dispatch("apply",[this,b.concat($(arguments))])}},m.keys=function(a){return m(a).dispatch("keys",[])},q.prototype.keys=function(){return this.dispatch("keys",[])},m.all=N,q.prototype.all=function(){return N(this)},m.allResolved=l(O,"allResolved","allSettled"),q.prototype.allResolved=function(){return O(this)},m.allSettled=P,q.prototype.allSettled=function(){return P(this)},m.fail=m["catch"]=function(a,b){return m(a).then(void 0,b)},q.prototype.fail=q.prototype["catch"]=function(a){return this.then(void 0,a)},m.progress=Q,q.prototype.progress=function(a){return this.then(void 0,void 0,a)},m.fin=m["finally"]=function(a,b){return m(a)["finally"](b)},q.prototype.fin=q.prototype["finally"]=function(a){return a=m(a),this.then(function(b){return a.fcall().then(function(){return b})},function(b){return a.fcall().then(function(){throw b})})},m.done=function(a,b,c,d){return m(a).done(b,c,d)},q.prototype.done=function(a,b,c){var d=function(a){Y(function(){if(f(a,e),!m.onerror)throw a;m.onerror(a)})},e=a||b||c?this.then(a,b,c):this;"object"==typeof process&&process&&process.domain&&(d=process.domain.bind(d)),e.then(void 0,d)},m.timeout=function(a,b,c){return m(a).timeout(b,c)},q.prototype.timeout=function(a,b){var c=n(),d=setTimeout(function(){c.reject(new Error(b||"Timed out after "+a+" ms"))},a);return this.then(function(a){clearTimeout(d),c.resolve(a)},function(a){clearTimeout(d),c.reject(a)},c.notify),c.promise},m.delay=function(a,b){return void 0===b&&(b=a,a=void 0),m(a).delay(b)},q.prototype.delay=function(a){return this.then(function(b){var c=n();return setTimeout(function(){c.resolve(b)},a),c.promise})},m.nfapply=function(a,b){return m(a).nfapply(b)},q.prototype.nfapply=function(a){var b=n(),c=$(a);return c.push(b.makeNodeResolver()),this.fapply(c).fail(b.reject),b.promise},m.nfcall=function(a){var b=$(arguments,1);return m(a).nfapply(b)},q.prototype.nfcall=function(){var a=$(arguments),b=n();return a.push(b.makeNodeResolver()),this.fapply(a).fail(b.reject),b.promise},m.nfbind=m.denodeify=function(a){var b=$(arguments,1);return function(){var c=b.concat($(arguments)),d=n();return c.push(d.makeNodeResolver()),m(a).fapply(c).fail(d.reject),d.promise}},q.prototype.nfbind=q.prototype.denodeify=function(){var a=$(arguments);return a.unshift(this),m.denodeify.apply(void 0,a)},m.nbind=function(a,b){var c=$(arguments,2);return function(){function d(){return a.apply(b,arguments)}var e=c.concat($(arguments)),f=n();return e.push(f.makeNodeResolver()),m(d).fapply(e).fail(f.reject),f.promise}},q.prototype.nbind=function(){var a=$(arguments,0);return a.unshift(this),m.nbind.apply(void 0,a)},m.nmapply=m.npost=function(a,b,c){return m(a).npost(b,c)},q.prototype.nmapply=q.prototype.npost=function(a,b){var c=$(b||[]),d=n();return c.push(d.makeNodeResolver()),this.dispatch("post",[a,c]).fail(d.reject),d.promise},m.nsend=m.nmcall=m.ninvoke=function(a,b){var c=$(arguments,2),d=n();return c.push(d.makeNodeResolver()),m(a).dispatch("post",[b,c]).fail(d.reject),d.promise},q.prototype.nsend=q.prototype.nmcall=q.prototype.ninvoke=function(a){var b=$(arguments,1),c=n();return b.push(c.makeNodeResolver()),this.dispatch("post",[a,b]).fail(c.reject),c.promise},m.nodeify=R,q.prototype.nodeify=function(a){return a?(this.then(function(b){Y(function(){a(null,b)})},function(b){Y(function(){a(b)})}),void 0):this},b.exports=m;var mb=k()},{}]},{},[1]);
+define("q", (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.Q;
     };
 }(this)));
 
@@ -12126,59 +12134,15 @@ define("jQuery", (function (global) {
     };
 }(this)));
 
-
-define('hr/shims',[],function() {
-    if(!Function.prototype.bind) {
-      Function.prototype.bind = function(newThis) {
-        var that = this;
-        return function(){ 
-          return that.apply(newThis, arguments); 
-        };
-      }
-    }
-
-    return {};
-});
-define('hr/configs',['require'],function(args) {
-    var Config = {
-        // Revision
-        "revision": 0,
-
-        // Arguments
-        "args": {},
-
-        // Hr version
-        "version": "0.1.1",
-
-        // Log level
-        // "log", "debug", "warn", "error", "none"
-        "logLevel": "log",
-        "logLevels": {},
-
-        // Base url
-        "baseUrl": "/",
-
-        // Static files directory (relative to baseUrl)
-        "staticDirectory": "static",
-
-        // Configurations for resources loading
-        "resources": {
-            /* Default loader */
-            "loader": "http"
-        },
-
-        // i18n
-        "defaultLocale": "en",
-
-        extend: function() {
-            var args = Array.prototype.slice.call(arguments, 0);
-            args.splice(0,0, Config);
-            _.deepExtend.apply(_, args);
-        }
+(function() {
+!function a(b,c,d){function e(g,h){if(!c[g]){if(!b[g]){var i="function"==typeof require&&require;if(!h&&i)return i(g,!0);if(f)return f(g,!0);throw new Error("Cannot find module '"+g+"'")}var j=c[g]={exports:{}};b[g][0].call(j.exports,function(a){var c=b[g][1][a];return e(c?c:a)},j,j.exports,a,b,c,d)}return c[g].exports}for(var f="function"==typeof require&&require,g=0;g<d.length;g++)e(d[g]);return e}({1:[function(a){window.Q=a("./q")},{"./q":2}],2:[function(a,b){function c(a){return function(){return Z.apply(a,arguments)}}function d(a){return a===Object(a)}function e(a){return"[object StopIteration]"===fb(a)||a instanceof V}function f(a,b){if(S&&b.stack&&"object"==typeof a&&null!==a&&a.stack&&-1===a.stack.indexOf(hb)){for(var c=[],d=b;d;d=d.source)d.stack&&c.unshift(d.stack);c.unshift(a.stack);var e=c.join("\n"+hb+"\n");a.stack=g(e)}}function g(a){for(var b=a.split("\n"),c=[],d=0;d<b.length;++d){var e=b[d];j(e)||h(e)||!e||c.push(e)}return c.join("\n")}function h(a){return-1!==a.indexOf("(module.js:")||-1!==a.indexOf("(node.js:")}function i(a){var b=/at .+ \((.+):(\d+):(?:\d+)\)$/.exec(a);if(b)return[b[1],Number(b[2])];var c=/at ([^ ]+):(\d+):(?:\d+)$/.exec(a);if(c)return[c[1],Number(c[2])];var d=/.*@(.+):(\d+)$/.exec(a);return d?[d[1],Number(d[2])]:void 0}function j(a){var b=i(a);if(!b)return!1;var c=b[0],d=b[1];return c===U&&d>=W&&mb>=d}function k(){if(S)try{throw new Error}catch(a){var b=a.stack.split("\n"),c=b[0].indexOf("@")>0?b[1]:b[2],d=i(c);if(!d)return;return U=d[0],d[1]}}function l(a,b,c){return function(){return"undefined"!=typeof console&&"function"==typeof console.warn&&console.warn(b+" is deprecated, use "+c+" instead.",new Error("").stack),a.apply(a,arguments)}}function m(a){return t(a)?a:u(a)?F(a):E(a)}function n(){function a(a){b=a,f.source=a,_(c,function(b,c){Y(function(){a.promiseDispatch.apply(a,c)})},void 0),c=void 0,d=void 0}var b,c=[],d=[],e=cb(n.prototype),f=cb(q.prototype);if(f.promiseDispatch=function(a,e,f){var g=$(arguments);c?(c.push(g),"when"===e&&f[1]&&d.push(f[1])):Y(function(){b.promiseDispatch.apply(b,g)})},f.valueOf=l(function(){if(c)return f;var a=s(b);return t(a)&&(b=a),a},"valueOf","inspect"),f.inspect=function(){return b?b.inspect():{state:"pending"}},m.longStackSupport&&S)try{throw new Error}catch(g){f.stack=g.stack.substring(g.stack.indexOf("\n")+1)}return e.promise=f,e.resolve=function(c){b||a(m(c))},e.fulfill=function(c){b||a(E(c))},e.reject=function(c){b||a(D(c))},e.notify=function(a){b||_(d,function(b,c){Y(function(){c(a)})},void 0)},e}function o(a){if("function"!=typeof a)throw new TypeError("resolver must be a function.");var b=n();try{a(b.resolve,b.reject,b.notify)}catch(c){b.reject(c)}return b.promise}function p(a){return o(function(b,c){for(var d=0,e=a.length;e>d;d++)m(a[d]).then(b,c)})}function q(a,b,c){void 0===b&&(b=function(a){return D(new Error("Promise does not support operation: "+a))}),void 0===c&&(c=function(){return{state:"unknown"}});var d=cb(q.prototype);if(d.promiseDispatch=function(c,e,f){var g;try{g=a[e]?a[e].apply(d,f):b.call(d,e,f)}catch(h){g=D(h)}c&&c(g)},d.inspect=c,c){var e=c();"rejected"===e.state&&(d.exception=e.reason),d.valueOf=l(function(){var a=c();return"pending"===a.state||"rejected"===a.state?d:a.value})}return d}function r(a,b,c,d){return m(a).then(b,c,d)}function s(a){if(t(a)){var b=a.inspect();if("fulfilled"===b.state)return b.value}return a}function t(a){return d(a)&&"function"==typeof a.promiseDispatch&&"function"==typeof a.inspect}function u(a){return d(a)&&"function"==typeof a.then}function v(a){return t(a)&&"pending"===a.inspect().state}function w(a){return!t(a)||"fulfilled"===a.inspect().state}function x(a){return t(a)&&"rejected"===a.inspect().state}function y(){kb||"undefined"==typeof window||window.Touch||!window.console||console.warn("[Q] Unhandled rejection reasons (should be empty):",ib),kb=!0}function z(){for(var a=0;a<ib.length;a++){var b=ib[a];b&&"undefined"!=typeof b.stack?console.warn("Unhandled rejection reason:",b.stack):console.warn("Unhandled rejection reason (no stack):",b)}}function A(){ib.length=0,jb.length=0,kb=!1,lb||(lb=!0,"undefined"!=typeof process&&process.on&&process.on("exit",z))}function B(a,b){lb&&(jb.push(a),ib.push(b),y())}function C(a){if(lb){var b=ab(jb,a);-1!==b&&(jb.splice(b,1),ib.splice(b,1))}}function D(a){var b=q({when:function(b){return b&&C(this),b?b(a):this}},function(){return this},function(){return{state:"rejected",reason:a}});return B(b,a),b}function E(a){return q({when:function(){return a},get:function(b){return a[b]},set:function(b,c){a[b]=c},"delete":function(b){delete a[b]},post:function(b,c){return null===b||void 0===b?a.apply(void 0,c):a[b].apply(a,c)},apply:function(b,c){return a.apply(b,c)},keys:function(){return eb(a)}},void 0,function(){return{state:"fulfilled",value:a}})}function F(a){var b=n();return Y(function(){try{a.then(b.resolve,b.reject,b.notify)}catch(c){b.reject(c)}}),b.promise}function G(a){return q({isDef:function(){}},function(b,c){return M(a,b,c)},function(){return m(a).inspect()})}function H(a,b,c){return m(a).spread(b,c)}function I(a){return function(){function b(a,b){var g;if(gb){try{g=c[a](b)}catch(h){return D(h)}return g.done?g.value:r(g.value,d,f)}try{g=c[a](b)}catch(h){return e(h)?h.value:D(h)}return r(g,d,f)}var c=a.apply(this,arguments),d=b.bind(b,"next"),f=b.bind(b,"throw");return d()}}function J(a){m.done(m.async(a)())}function K(a){throw new V(a)}function L(a){return function(){return H([this,N(arguments)],function(b,c){return a.apply(b,c)})}}function M(a,b,c){return m(a).dispatch(b,c)}function N(a){return r(a,function(a){var b=0,c=n();return _(a,function(d,e,f){var g;t(e)&&"fulfilled"===(g=e.inspect()).state?a[f]=g.value:(++b,r(e,function(d){a[f]=d,0===--b&&c.resolve(a)},c.reject,function(a){c.notify({index:f,value:a})}))},void 0),0===b&&c.resolve(a),c.promise})}function O(a){return r(a,function(a){return a=bb(a,m),r(N(bb(a,function(a){return r(a,X,X)})),function(){return a})})}function P(a){return r(a,function(a){return N(bb(a,function(b,c){return r(b,function(b){return a[c]={state:"fulfilled",value:b},a[c]},function(b){return a[c]={state:"rejected",reason:b},a[c]})})).thenResolve(a)})}function Q(a,b){return m(a).then(void 0,void 0,b)}function R(a,b){return m(a).nodeify(b)}var S=!1;try{throw new Error}catch(T){S=!!T.stack}var U,V,W=k(),X=function(){},Y=function(){function a(){for(;b.next;){b=b.next;var c=b.task;b.task=void 0;var e=b.domain;e&&(b.domain=void 0,e.enter());try{c()}catch(g){if(f)throw e&&e.exit(),setTimeout(a,0),e&&e.enter(),g;setTimeout(function(){throw g},0)}e&&e.exit()}d=!1}var b={task:void 0,next:null},c=b,d=!1,e=void 0,f=!1;if(Y=function(a){c=c.next={task:a,domain:f&&process.domain,next:null},d||(d=!0,e())},"undefined"!=typeof process&&process.nextTick)f=!0,e=function(){process.nextTick(a)};else if("function"==typeof setImmediate)e="undefined"!=typeof window?setImmediate.bind(window,a):function(){setImmediate(a)};else if("undefined"!=typeof MessageChannel){var g=new MessageChannel;g.port1.onmessage=a,e=function(){g.port2.postMessage(0)}}else e=function(){setTimeout(a,0)};return Y}(),Z=Function.call,$=c(Array.prototype.slice),_=c(Array.prototype.reduce||function(a,b){var c=0,d=this.length;if(1===arguments.length)for(;;){if(c in this){b=this[c++];break}if(++c>=d)throw new TypeError}for(;d>c;c++)c in this&&(b=a(b,this[c],c));return b}),ab=c(Array.prototype.indexOf||function(a){for(var b=0;b<this.length;b++)if(this[b]===a)return b;return-1}),bb=c(Array.prototype.map||function(a,b){var c=this,d=[];return _(c,function(e,f,g){d.push(a.call(b,f,g,c))},void 0),d}),cb=Object.create||function(a){function b(){}return b.prototype=a,new b},db=c(Object.prototype.hasOwnProperty),eb=Object.keys||function(a){var b=[];for(var c in a)db(a,c)&&b.push(c);return b},fb=c(Object.prototype.toString);V="undefined"!=typeof ReturnValue?ReturnValue:function(a){this.value=a};var gb;try{new Function("(function* (){ yield 1; })"),gb=!0}catch(T){gb=!1}var hb="From previous event:";m.resolve=m,m.nextTick=Y,m.longStackSupport=!1,m.defer=n,n.prototype.makeNodeResolver=function(){var a=this;return function(b,c){b?a.reject(b):arguments.length>2?a.resolve($(arguments,1)):a.resolve(c)}},m.promise=o,m.passByCopy=function(a){return a},q.prototype.passByCopy=function(){return this},m.join=function(a,b){return m(a).join(b)},q.prototype.join=function(a){return m([this,a]).spread(function(a,b){if(a===b)return a;throw new Error("Can't join: not the same: "+a+" "+b)})},m.race=p,q.prototype.race=function(){return this.then(m.race)},m.makePromise=q,q.prototype.toString=function(){return"[object Promise]"},q.prototype.then=function(a,b,c){function d(b){try{return"function"==typeof a?a(b):b}catch(c){return D(c)}}function e(a){if("function"==typeof b){f(a,h);try{return b(a)}catch(c){return D(c)}}return D(a)}function g(a){return"function"==typeof c?c(a):a}var h=this,i=n(),j=!1;return Y(function(){h.promiseDispatch(function(a){j||(j=!0,i.resolve(d(a)))},"when",[function(a){j||(j=!0,i.resolve(e(a)))}])}),h.promiseDispatch(void 0,"when",[void 0,function(a){var b,c=!1;try{b=g(a)}catch(d){if(c=!0,!m.onerror)throw d;m.onerror(d)}c||i.notify(b)}]),i.promise},m.when=r,q.prototype.thenResolve=function(a){return this.then(function(){return a})},m.thenResolve=function(a,b){return m(a).thenResolve(b)},q.prototype.thenReject=function(a){return this.then(function(){throw a})},m.thenReject=function(a,b){return m(a).thenReject(b)},m.nearer=s,m.isPromise=t,m.isPromiseAlike=u,m.isPending=v,q.prototype.isPending=function(){return"pending"===this.inspect().state},m.isFulfilled=w,q.prototype.isFulfilled=function(){return"fulfilled"===this.inspect().state},m.isRejected=x,q.prototype.isRejected=function(){return"rejected"===this.inspect().state};var ib=[],jb=[],kb=!1,lb=!0;m.resetUnhandledRejections=A,m.getUnhandledReasons=function(){return ib.slice()},m.stopUnhandledRejectionTracking=function(){A(),"undefined"!=typeof process&&process.on&&process.removeListener("exit",z),lb=!1},A(),m.reject=D,m.fulfill=E,m.master=G,m.spread=H,q.prototype.spread=function(a,b){return this.all().then(function(b){return a.apply(void 0,b)},b)},m.async=I,m.spawn=J,m["return"]=K,m.promised=L,m.dispatch=M,q.prototype.dispatch=function(a,b){var c=this,d=n();return Y(function(){c.promiseDispatch(d.resolve,a,b)}),d.promise},m.get=function(a,b){return m(a).dispatch("get",[b])},q.prototype.get=function(a){return this.dispatch("get",[a])},m.set=function(a,b,c){return m(a).dispatch("set",[b,c])},q.prototype.set=function(a,b){return this.dispatch("set",[a,b])},m.del=m["delete"]=function(a,b){return m(a).dispatch("delete",[b])},q.prototype.del=q.prototype["delete"]=function(a){return this.dispatch("delete",[a])},m.mapply=m.post=function(a,b,c){return m(a).dispatch("post",[b,c])},q.prototype.mapply=q.prototype.post=function(a,b){return this.dispatch("post",[a,b])},m.send=m.mcall=m.invoke=function(a,b){return m(a).dispatch("post",[b,$(arguments,2)])},q.prototype.send=q.prototype.mcall=q.prototype.invoke=function(a){return this.dispatch("post",[a,$(arguments,1)])},m.fapply=function(a,b){return m(a).dispatch("apply",[void 0,b])},q.prototype.fapply=function(a){return this.dispatch("apply",[void 0,a])},m["try"]=m.fcall=function(a){return m(a).dispatch("apply",[void 0,$(arguments,1)])},q.prototype.fcall=function(){return this.dispatch("apply",[void 0,$(arguments)])},m.fbind=function(a){var b=m(a),c=$(arguments,1);return function(){return b.dispatch("apply",[this,c.concat($(arguments))])}},q.prototype.fbind=function(){var a=this,b=$(arguments);return function(){return a.dispatch("apply",[this,b.concat($(arguments))])}},m.keys=function(a){return m(a).dispatch("keys",[])},q.prototype.keys=function(){return this.dispatch("keys",[])},m.all=N,q.prototype.all=function(){return N(this)},m.allResolved=l(O,"allResolved","allSettled"),q.prototype.allResolved=function(){return O(this)},m.allSettled=P,q.prototype.allSettled=function(){return P(this)},m.fail=m["catch"]=function(a,b){return m(a).then(void 0,b)},q.prototype.fail=q.prototype["catch"]=function(a){return this.then(void 0,a)},m.progress=Q,q.prototype.progress=function(a){return this.then(void 0,void 0,a)},m.fin=m["finally"]=function(a,b){return m(a)["finally"](b)},q.prototype.fin=q.prototype["finally"]=function(a){return a=m(a),this.then(function(b){return a.fcall().then(function(){return b})},function(b){return a.fcall().then(function(){throw b})})},m.done=function(a,b,c,d){return m(a).done(b,c,d)},q.prototype.done=function(a,b,c){var d=function(a){Y(function(){if(f(a,e),!m.onerror)throw a;m.onerror(a)})},e=a||b||c?this.then(a,b,c):this;"object"==typeof process&&process&&process.domain&&(d=process.domain.bind(d)),e.then(void 0,d)},m.timeout=function(a,b,c){return m(a).timeout(b,c)},q.prototype.timeout=function(a,b){var c=n(),d=setTimeout(function(){c.reject(new Error(b||"Timed out after "+a+" ms"))},a);return this.then(function(a){clearTimeout(d),c.resolve(a)},function(a){clearTimeout(d),c.reject(a)},c.notify),c.promise},m.delay=function(a,b){return void 0===b&&(b=a,a=void 0),m(a).delay(b)},q.prototype.delay=function(a){return this.then(function(b){var c=n();return setTimeout(function(){c.resolve(b)},a),c.promise})},m.nfapply=function(a,b){return m(a).nfapply(b)},q.prototype.nfapply=function(a){var b=n(),c=$(a);return c.push(b.makeNodeResolver()),this.fapply(c).fail(b.reject),b.promise},m.nfcall=function(a){var b=$(arguments,1);return m(a).nfapply(b)},q.prototype.nfcall=function(){var a=$(arguments),b=n();return a.push(b.makeNodeResolver()),this.fapply(a).fail(b.reject),b.promise},m.nfbind=m.denodeify=function(a){var b=$(arguments,1);return function(){var c=b.concat($(arguments)),d=n();return c.push(d.makeNodeResolver()),m(a).fapply(c).fail(d.reject),d.promise}},q.prototype.nfbind=q.prototype.denodeify=function(){var a=$(arguments);return a.unshift(this),m.denodeify.apply(void 0,a)},m.nbind=function(a,b){var c=$(arguments,2);return function(){function d(){return a.apply(b,arguments)}var e=c.concat($(arguments)),f=n();return e.push(f.makeNodeResolver()),m(d).fapply(e).fail(f.reject),f.promise}},q.prototype.nbind=function(){var a=$(arguments,0);return a.unshift(this),m.nbind.apply(void 0,a)},m.nmapply=m.npost=function(a,b,c){return m(a).npost(b,c)},q.prototype.nmapply=q.prototype.npost=function(a,b){var c=$(b||[]),d=n();return c.push(d.makeNodeResolver()),this.dispatch("post",[a,c]).fail(d.reject),d.promise},m.nsend=m.nmcall=m.ninvoke=function(a,b){var c=$(arguments,2),d=n();return c.push(d.makeNodeResolver()),m(a).dispatch("post",[b,c]).fail(d.reject),d.promise},q.prototype.nsend=q.prototype.nmcall=q.prototype.ninvoke=function(a){var b=$(arguments,1),c=n();return b.push(c.makeNodeResolver()),this.dispatch("post",[a,b]).fail(c.reject),c.promise},m.nodeify=R,q.prototype.nodeify=function(a){return a?(this.then(function(b){Y(function(){a(null,b)})},function(b){Y(function(){a(b)})}),void 0):this},b.exports=m;var mb=k()},{}]},{},[1]);
+define("q", (function (global) {
+    return function () {
+        var ret, fn;
+        return ret || global.Q;
     };
+}(this)));
 
-    return Config;
-});
 //     Underscore.js 1.4.4
 //     http://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
@@ -13406,213 +13370,13 @@ define('hr/configs',['require'],function(args) {
 
 }).call(this);
 
-define("Underscore", (function (global) {
+define("underscore", (function (global) {
     return function () {
         var ret, fn;
         return ret || global._;
     };
 }(this)));
 
-define('hr/core/class',[
-    "Underscore",
-], function(_) {
-    // Regular expression used to split event strings.
-    var eventSplitter = /\s+/;
-
-    /*
-     *  hr.Class is the base for objects in hr
-     */
-    var Class = function(options) {
-        this.options = _.extend({}, options || {});
-        _.defaults(this.options, this.defaults);
-        this.cid = _.uniqueId('class');
-        this.initialize.apply(this, arguments);
-    };
-
-    /*
-     * Class.extend is used for herited from this class
-     *  exemples:
-     *      Class.extend(Class1, staticProps)
-     *      Class.extend([Class1, Class2], staticProps)
-     */
-    Class.extend = function(protoProps, staticProps) {
-        var parent = this;
-        var child;
-
-        // The constructor function for the new subclass is either defined by you
-        // (the "constructor" property in your `extend` definition), or defaulted
-        // by us to simply call the parent's constructor.
-        if (protoProps && _.has(protoProps, 'constructor')) {
-            child = protoProps.constructor;
-        } else {
-            child = function(){ return parent.apply(this, arguments); };
-        }
-
-        // Add static properties to the constructor function, if supplied.
-        _.extend(child, parent, staticProps);
-
-        // Set the prototype chain to inherit from `parent`, without calling
-        // `parent`'s constructor function.
-        var Surrogate = function(){ this.constructor = child; };
-        Surrogate.prototype = parent.prototype;
-        child.prototype = new Surrogate;
-
-        // Add prototype properties (instance properties) to the subclass,
-        // if supplied.
-        if (protoProps) _.extend(child.prototype, protoProps);
-
-        // Set a convenience property in case the parent's prototype is needed
-        // later.
-        child.__super__ = parent.prototype;
-
-        return child;
-    };
-
-    Class = Class.extend({
-        /*
-         *  Default options for this.options in the class object
-         */
-        defaults: {},
-
-        /*
-         *  This method is a kind of constructor in class definition.
-         */
-        initialize: function() {
-            return this;
-        },
-
-        /*
-         *  Bind an event to a `callback` function. Passing `"all"` will bind
-         *  the callback to all events fired.
-         */
-        on: function(name, callback, context) {
-            if (!this.multipleEvents('on', name, [callback, context]) || !callback) return this;
-            this._events || (this._events = {});
-            var events = this._events[name] || (this._events[name] = []);
-            events.push({
-                callback: callback,
-                context: context,
-                ctx: context || this
-            });
-            return this;
-        },
-
-        /*
-         *  Bind an event to only be triggered a single time. After the first time
-         *  the callback is invoked, it will be removed.
-         */
-        once: function(name, callback, context) {
-            if (!this.multipleEvents('once', name, [callback, context]) || !callback) return this;
-            var self = this;
-            var once = _.once(function() {
-                self.off(name, once);
-                callback.apply(this, arguments);
-            });
-            once._callback = callback;
-            return this.on(name, once, context);
-        },
-
-        /*
-         *  Remove one or many callbacks. If `context` is null, removes all
-         *  callbacks with that function. If `callback` is null, removes all
-         *  callbacks for the event. If `name` is null, removes all bound
-         *  callbacks for all events.
-         */
-        off: function(name, callback, context) {
-            var retain, ev, events, names, i, l, j, k;
-            if (!this._events || !this.multipleEvents('off', name, [callback, context])) return this;
-            if (!name && !callback && !context) {
-                this._events = {};
-                return this;
-            }
-
-            names = name ? [name] : _.keys(this._events);
-            for (i = 0, l = names.length; i < l; i++) {
-                name = names[i];
-                if (events = this._events[name]) {
-                    this._events[name] = retain = [];
-                    if (callback || context) {
-                        for (j = 0, k = events.length; j < k; j++) {
-                            ev = events[j];
-                            if ((callback && callback !== ev.callback && callback !== ev.callback._callback) ||
-                            (context && context !== ev.context)) {
-                                retain.push(ev);
-                            }
-                        }
-                    }
-                    if (!retain.length) delete this._events[name];
-                }
-            }
-
-            return this;
-        },
-
-        /*
-         *  Trigger one or many events, firing all bound callbacks. Callbacks are
-         *  passed the same arguments as `trigger` is, apart from the event name
-         *  (unless you're listening on `"all"`, which will cause your callback to
-         *  receive the true name of the event as the first argument).
-         */
-        triggerOnly: function(name) {
-            if (!this._events) return this;
-            var args = Array.prototype.slice.call(arguments, 1);
-            var events = this._events[name];
-            var allEvents = this._events.all;
-            if (events) this.triggerEvents(events, args);
-            if (allEvents) this.triggerEvents(allEvents, arguments);
-            return this;
-        },
-        trigger: function(name) {
-            var args = Array.prototype.slice.call(arguments, 0);
-            if (!this.multipleEvents('trigger', name, args)) return this;
-            _.each(name.split(":"), function(part, n, parts) {
-                var newname = parts.slice(0, n+1).join(":");
-                args[0] = newname;
-                this.triggerOnly.apply(this, args);
-            }, this);
-            return this;
-        },
-        triggerEvents: function(events, args) {
-            var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2];
-            switch (args.length) {
-                case 0: while (++i < l) (ev = events[i]).callback.call(ev.ctx); return;
-                case 1: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1); return;
-                case 2: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2); return;
-                case 3: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2, a3); return;
-                default: while (++i < l) (ev = events[i]).callback.apply(ev.ctx, args);
-            }
-        },
-
-        /*
-         *  Implement fancy features of the Events API such as multiple event
-         *  names `"change blur"` and jQuery-style event maps `{change: action}`
-         *  in terms of the existing API.
-        */
-        multipleEvents: function(action, name, rest) {
-            if (!name) return true;
-
-            // Handle event maps.
-            if (typeof name === 'object') {
-                for (var key in name) {
-                    this[action].apply(this, [key, name[key]].concat(rest));
-                }
-                return false;
-            }
-
-            // Handle space separated event names.
-            if (eventSplitter.test(name)) {
-                var names = name.split(eventSplitter);
-                for (var i = 0, l = names.length; i < l; i++) {
-                    this[action].apply(this, [names[i]].concat(rest));
-                }
-                return false;
-            }
-
-            return true;
-        }
-    });
-    return Class;
-});
 /*!
  * jQuery JavaScript Library v2.0.1
  * http://jquery.com/
@@ -22458,9 +22222,379 @@ define("jQuery", (function (global) {
     };
 }(this)));
 
-define('hr/utils/logger',[
+define('hr/shims',[
+    "underscore",
+    "jQuery",
+], function(_, $) {
+	if(!Function.prototype.bind) {
+		Function.prototype.bind = function(newThis) {
+			var that = this;
+			return function(){ 
+				return that.apply(newThis, arguments); 
+			};
+		}
+	}
+
+    var arrays, basicObjects, deepClone, deepExtend, deepExtendCouple, isBasicObject, sum, removeHtml,
+    __slice = [].slice;
+
+    deepClone = function(obj) {
+        var func, isArr;
+        if (!_.isObject(obj) || _.isFunction(obj)) {
+            return obj;
+        }
+        if (_.isDate(obj)) {
+            return new Date(obj.getTime());
+        }
+        if (_.isRegExp(obj)) {
+            return new RegExp(obj.source, obj.toString().replace(/.*\//, ""));
+        }
+        isArr = _.isArray(obj || _.isArguments(obj));
+        func = function(memo, value, key) {
+            if (isArr) {
+                memo.push(deepClone(value));
+            } else {
+                memo[key] = deepClone(value);
+            }
+            return memo;
+        };
+        return _.reduce(obj, func, isArr ? [] : {});
+    };
+
+    isBasicObject = function(object) {
+        return (object != null && (object.prototype === {}.prototype || object.prototype === Object.prototype) && _.isObject(object) && !_.isArray(object) && !_.isFunction(object) && !_.isDate(object) && !_.isRegExp(object) && !_.isArguments(object));
+    };
+
+    basicObjects = function(object) {
+        return _.filter(_.keys(object), function(key) {
+            return isBasicObject(object[key]);
+        });
+    };
+
+    arrays = function(object) {
+        return _.filter(_.keys(object), function(key) {
+            return _.isArray(object[key]);
+        });
+    };
+
+    deepExtendCouple = function(destination, source, maxDepth) {
+        var combine, recurse, sharedArrayKey, sharedArrayKeys, sharedObjectKey, sharedObjectKeys, _i, _j, _len, _len1;
+        if (maxDepth == null) {
+            maxDepth = 20;
+        }
+        if (maxDepth <= 0) {
+            console.warn('_.deepExtend(): Maximum depth of recursion hit.');
+            return _.extend(destination, source);
+        }
+        sharedObjectKeys = _.intersection(basicObjects(destination), basicObjects(source));
+        recurse = function(key) {
+            return source[key] = deepExtendCouple(destination[key], source[key], maxDepth - 1);
+        };
+        for (_i = 0, _len = sharedObjectKeys.length; _i < _len; _i++) {
+            sharedObjectKey = sharedObjectKeys[_i];
+            recurse(sharedObjectKey);
+        }
+        sharedArrayKeys = _.intersection(arrays(destination), arrays(source));
+        combine = function(key) {
+            return source[key];
+            // Replace array and not replaced
+            //return source[key] = _.union(destination[key], source[key]);
+        };
+        for (_j = 0, _len1 = sharedArrayKeys.length; _j < _len1; _j++) {
+            sharedArrayKey = sharedArrayKeys[_j];
+            combine(sharedArrayKey);
+        }
+        return _.extend(destination, source);
+    };
+
+    deepExtend = function() {
+        var finalObj, maxDepth, objects, _i;
+        objects = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), maxDepth = arguments[_i++];
+        if (!_.isNumber(maxDepth)) {
+            objects.push(maxDepth);
+            maxDepth = 20;
+        }
+        if (objects.length <= 1) {
+            return objects[0];
+        }
+        if (maxDepth <= 0) {
+            return _.extend.apply(this, objects);
+        }
+        finalObj = objects.shift();
+        while (objects.length > 0) {
+            finalObj = deepExtendCouple(finalObj, deepClone(objects.shift()), maxDepth);
+        }
+        return finalObj;
+    };
+
+    sum = function(obj) {
+      if (!$.isArray(obj) || obj.length == 0) return 0;
+      return _.reduce(obj, function(sum, n) {
+        return sum += n;
+      });
+    };
+
+    removeHtml = function(t) {
+        return $("<div>").html(t).text();
+    },
+
+    _.mixin({
+        deepClone: deepClone,
+        isBasicObject: isBasicObject,
+        basicObjects: basicObjects,
+        arrays: arrays,
+        deepExtend: deepExtend,
+        sum: sum,
+        removeHtml: removeHtml
+    });
+
+    return _;
+
+    return {};
+});
+define('hr/configs',[],function() {
+    var Config = {
+        // Revision
+        "revision": 0,
+
+        // Arguments
+        "args": {},
+
+        // Hr version
+        "version": "0.2.5",
+
+        // Log level
+        // "log", "debug", "warn", "error", "none"
+        "logLevel": "log",
+        "logLevels": {},
+
+        // Base url
+        "baseUrl": "/",
+
+        // Static files directory (relative to baseUrl)
+        "staticDirectory": "static",
+
+        // Configurations for resources loading
+        "resources": {
+            /* Default loader */
+            "loader": "http"
+        },
+
+        // i18n
+        "defaultLocale": "en",
+
+        extend: function() {
+            var args = Array.prototype.slice.call(arguments, 0);
+            args.splice(0,0, Config);
+            _.deepExtend.apply(_, args);
+        }
+    };
+
+    return Config;
+});
+define('hr/class',[
+    "underscore",
+], function(_) {
+    // Regular expression used to split event strings.
+    var eventSplitter = /\s+/;
+
+    /*
+     *  hr.Class is the base for objects in hr
+     */
+    var Class = function(options) {
+        this.options = _.extend({}, options || {});
+        _.defaults(this.options, this.defaults);
+        this.cid = _.uniqueId('class');
+        this.initialize.apply(this, arguments);
+    };
+
+    /*
+     * Class.extend is used for herited from this class
+     *  exemples:
+     *      Class.extend(Class1, staticProps)
+     *      Class.extend([Class1, Class2], staticProps)
+     */
+    Class.extend = function(protoProps, staticProps) {
+        var parent = this;
+        var child;
+
+        // The constructor function for the new subclass is either defined by you
+        // (the "constructor" property in your `extend` definition), or defaulted
+        // by us to simply call the parent's constructor.
+        if (protoProps && _.has(protoProps, 'constructor')) {
+            child = protoProps.constructor;
+        } else {
+            child = function(){ return parent.apply(this, arguments); };
+        }
+
+        // Add static properties to the constructor function, if supplied.
+        _.extend(child, parent, staticProps);
+
+        // Set the prototype chain to inherit from `parent`, without calling
+        // `parent`'s constructor function.
+        var Surrogate = function(){ this.constructor = child; };
+        Surrogate.prototype = parent.prototype;
+        child.prototype = new Surrogate;
+
+        // Add prototype properties (instance properties) to the subclass,
+        // if supplied.
+        if (protoProps) _.extend(child.prototype, protoProps);
+
+        // Set a convenience property in case the parent's prototype is needed
+        // later.
+        child.__super__ = parent.prototype;
+
+        return child;
+    };
+
+    Class = Class.extend({
+        /*
+         *  Default options for this.options in the class object
+         */
+        defaults: {},
+
+        /*
+         *  This method is a kind of constructor in class definition.
+         */
+        initialize: function() {
+            return this;
+        },
+
+        /*
+         *  Bind an event to a `callback` function. Passing `"all"` will bind
+         *  the callback to all events fired.
+         */
+        on: function(name, callback, context) {
+            if (!this.multipleEvents('on', name, [callback, context]) || !callback) return this;
+            this._events || (this._events = {});
+            var events = this._events[name] || (this._events[name] = []);
+            events.push({
+                callback: callback,
+                context: context,
+                ctx: context || this
+            });
+            return this;
+        },
+
+        /*
+         *  Bind an event to only be triggered a single time. After the first time
+         *  the callback is invoked, it will be removed.
+         */
+        once: function(name, callback, context) {
+            if (!this.multipleEvents('once', name, [callback, context]) || !callback) return this;
+            var self = this;
+            var once = _.once(function() {
+                self.off(name, once);
+                callback.apply(this, arguments);
+            });
+            once._callback = callback;
+            return this.on(name, once, context);
+        },
+
+        /*
+         *  Remove one or many callbacks. If `context` is null, removes all
+         *  callbacks with that function. If `callback` is null, removes all
+         *  callbacks for the event. If `name` is null, removes all bound
+         *  callbacks for all events.
+         */
+        off: function(name, callback, context) {
+            var retain, ev, events, names, i, l, j, k;
+            if (!this._events || !this.multipleEvents('off', name, [callback, context])) return this;
+            if (!name && !callback && !context) {
+                this._events = void 0;
+                return this;
+            }
+
+            names = name ? [name] : _.keys(this._events);
+            for (i = 0, l = names.length; i < l; i++) {
+                name = names[i];
+                if (events = this._events[name]) {
+                    this._events[name] = retain = [];
+                    if (callback || context) {
+                        for (j = 0, k = events.length; j < k; j++) {
+                            ev = events[j];
+                            if ((callback && callback !== ev.callback && callback !== ev.callback._callback) ||
+                            (context && context !== ev.context)) {
+                                retain.push(ev);
+                            }
+                        }
+                    }
+                    if (!retain.length) delete this._events[name];
+                }
+            }
+
+            return this;
+        },
+
+        /*
+         *  Trigger one or many events, firing all bound callbacks. Callbacks are
+         *  passed the same arguments as `trigger` is, apart from the event name
+         *  (unless you're listening on `"all"`, which will cause your callback to
+         *  receive the true name of the event as the first argument).
+         */
+        triggerOnly: function(name) {
+            if (!this._events) return this;
+            var args = Array.prototype.slice.call(arguments, 1);
+            var events = this._events[name];
+            var allEvents = this._events.all;
+            if (events) this.triggerEvents(events, args);
+            if (allEvents) this.triggerEvents(allEvents, arguments);
+            return this;
+        },
+        trigger: function(name) {
+            var args = Array.prototype.slice.call(arguments, 0);
+            if (!this.multipleEvents('trigger', name, args)) return this;
+            _.each(name.split(":"), function(part, n, parts) {
+                var newname = parts.slice(0, n+1).join(":");
+                args[0] = newname;
+                this.triggerOnly.apply(this, args);
+            }, this);
+            return this;
+        },
+        triggerEvents: function(events, args) {
+            var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2];
+            switch (args.length) {
+                case 0: while (++i < l) (ev = events[i]).callback.call(ev.ctx); return;
+                case 1: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1); return;
+                case 2: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2); return;
+                case 3: while (++i < l) (ev = events[i]).callback.call(ev.ctx, a1, a2, a3); return;
+                default: while (++i < l) (ev = events[i]).callback.apply(ev.ctx, args);
+            }
+        },
+
+        /*
+         *  Implement fancy features of the Events API such as multiple event
+         *  names `"change blur"` and jQuery-style event maps `{change: action}`
+         *  in terms of the existing API.
+        */
+        multipleEvents: function(action, name, rest) {
+            if (!name) return true;
+
+            // Handle event maps.
+            if (typeof name === 'object') {
+                for (var key in name) {
+                    this[action].apply(this, [key, name[key]].concat(rest));
+                }
+                return false;
+            }
+
+            // Handle space separated event names.
+            if (eventSplitter.test(name)) {
+                var names = name.split(eventSplitter);
+                for (var i = 0, l = names.length; i < l; i++) {
+                    this[action].apply(this, [names[i]].concat(rest));
+                }
+                return false;
+            }
+
+            return true;
+        }
+    });
+    return Class;
+});
+define('hr/logger',[
     "hr/configs",
-    "hr/core/class"
+    "hr/class"
 ], function(configs, Class) {
     var Logger = Class.extend({
         /*
@@ -22521,6 +22655,14 @@ define('hr/utils/logger',[
          */
         logLevel: function(type) {
             return Logger.levels[type] || 0;
+        },
+
+        /*
+         *  Load and exception
+         */
+        exception: function(err, message) {
+            this.error(message, err.stack);
+            this.error(err);
         }
     }, {
         namespaces: {},
@@ -22553,8 +22695,87 @@ define('hr/utils/logger',[
 
     return Logger;
 });
-define('hr/utils/urls',[
-    "Underscore",
+define('hr/queue',[
+    "underscore",
+    "q",
+    "hr/class"
+], function(_, q, Class) {
+    var Queue = Class.extend({
+        /*
+         *  Initialize
+         */
+        initialize: function() {
+            this.tasks = [];
+            this.empty = true;
+            return this;
+        },
+
+        /*
+         *  Add tasks
+         *  @task : function task
+         *  @args : args to the task
+         *  @context : context to the task
+         */
+        defer: function(task, context, args) {
+            var d = Q.defer();
+            this.tasks.push({
+                "task": task,
+                "args": args || [],
+                "context": context,
+                "result": d
+            });
+            if (this.empty == true) {
+                this.startNext();
+            }
+            return d.promise;
+        },
+
+        /*
+         *  Start a task
+         *  @task task object to start
+         */
+        startTask: function(task) {
+            Q(task.task.apply(task.context, task.args)).then(function() {
+                task.result.resolve.apply(task.result, arguments);
+            }, function() {
+                task.result.reject.apply(task.result, arguments);
+            }).fin(_.bind(this.startNext, this));
+        },
+
+        /*
+         *  Start next task
+         */
+        startNext: function() {
+            if (_.size(this.tasks) > 0) {
+                this.empty = false;
+                var task = this.tasks.shift();
+                this.startTask(task);
+                this.trigger("tasks:next");
+            } else {
+                this.empty = true;
+                this.trigger("tasks:finish");
+            }      
+        },
+
+        /*
+         *  Return queue size
+         */
+        size: function() {
+            return _.size(this.tasks);
+        },
+
+        /*
+         *  Return true if tasks queue is finish
+         */
+        isComplete: function() {
+            return this.empty == true;
+        }
+    });
+
+    return Queue;
+});
+define('hr/urls',[
+    "underscore",
     "hr/configs"
 ], function(_, configs) {
     var Urls = {
@@ -22636,10 +22857,10 @@ define('hr/utils/urls',[
 
     return Urls;
 });
-define('hr/utils/storage',[
-    "Underscore",
+define('hr/storage',[
+    "underscore",
     "hr/configs",
-    "hr/utils/logger"
+    "hr/logger"
 ], function(_, configs, Logger) {
 
     var logging = Logger.addNamespace("storage");
@@ -22729,11 +22950,11 @@ define('hr/utils/storage',[
 
     return Storage;
 });
-define('hr/utils/cache',[
-    "Underscore",
+define('hr/cache',[
+    "underscore",
     "hr/configs",
-    "hr/utils/logger",
-    "hr/utils/storage"
+    "hr/logger",
+    "hr/storage"
 ], function(_, configs, Logger, Storage) {
 
     var logging = Logger.addNamespace("cache");
@@ -22852,131 +23073,12 @@ define('hr/utils/cache',[
 
     return Cache;
 });
-define('hr/utils/deferred',[
-    "Underscore",
-    "hr/core/class",
-], function(_, Class) {    
-    /* 
-    * Deferred is an implementation of the Promise pattern, which allows
-    * for asynchronous events to be handled in a unified way across an
-    * application. Deferred's are like callbacks on steroids.
-    *
-    * Rather than passing around callback functions, Deferred objects 
-    * are passed around. Deferreds contain a queue of callback functions
-    * and manage the state of the asychronous event.
-    *
-    * When calling an asynchronous function, all functions should return a 
-    * Deferred object. The caller function, having received the Deferred
-    * and having done whatever it wants to do, should also return that 
-    * same Deferred when it exits, so that other parties have a chance to
-    * interact with it.
-    *
-    * The Deferred object represents the completed state of a future event.
-    * Interested parties can add a callback function to the Deferred that
-    * will be called when the Deferred event is deemed complete.
-    * 
-    * When an asynchronous event is deemed completed, all the callbacks that
-    * were added to the Deferred will be called in serial order. The return 
-    * value of each callback is passed as a parameter to the next callback.
-    * i.e., callback3(callback2(callback1( trigger(o) )))
-    *
-    * After the event is deemed completed and all the callbacks are called,
-    * further callbacks which are added to the Deferred at a later stage 
-    * will be executed immediately.
-    */
-    var Deferred = Class.extend({
-        err: 0,
-        x: 0,
-
-        /* Constructor */
-        initialize: function() {
-            this.callbacks = [];
-            return this;
-        },
-
-        /* Bind methods */
-        _bind: function(arr) {
-            this.callbacks.push(arr);
-            this.x == 2 && this._call(this.o);
-            return this
-        },
-
-        done: function(cb) {
-            return this._bind([cb, 0])
-        },
-
-        fail: function(cb) {
-            return this._bind([0, cb])
-        },
-
-        always: function(cb) {
-            return this._bind([0, 0, cb])
-        },
-
-        then: function(cb, err) {
-            return this._bind([cb, err])
-        },
-
-
-        /* Calls methods */
-        reject: function(obj) {
-            this.x || (this.err = 1, this._call(obj));
-            return this
-        },
-
-        resolve: function(obj) {
-            this.x || this._call(obj);
-            return this
-        },
-
-        _call: function(obj) {
-            this.x = 1;
-            for(var state = this.err, cb = this.callbacks, method = cb.shift(), value = obj; method; ) {
-                try {
-                    while(method) {
-                        (method = method[2] || (state ? method[1] : method[0])) && (value = method(value || obj));
-                        if(value instanceof Deferred) {
-                            var that = this;
-                            value.always(function(v) {that._call(v || obj); return v});
-                            return
-                        }
-                        method = cb.shift()
-                    }
-                } catch(e) {
-                    console.trace();
-                    console.error("Error in Deferred callbacks (file: "+e.fileName+" line: "+e.lineNumber+") : " + e.name + " : ", e.message, e.stack, e);
-                    state && (method = cb.shift()), this.err = state = 1
-                }
-            }
-            this.o = value || obj;
-            this.x = 2
-        },
-    }, {
-        when: function(m, args) {
-            if(!args) return m;
-
-            args = [].slice.call(arguments);
-            m = new Deferred;
-
-            var i = args.length,
-            n = i,
-            res = [],
-            done = function(j) {return function(v) {res[j] = v; --n || m.resolve(res)}},
-            fail = function(v) {m.reject(v)};
-
-            while(i--) args[i].then(done(i), fail);
-            return m
-        }
-    });
-
-    return Deferred;
-});
-define('hr/utils/requests',[
+define('hr/requests',[
+    "q",
     "hr/configs",
-    "hr/core/class",
-    "hr/utils/logger",
-    "hr/utils/deferred"
-], function(configs, Class, Logger, Deferred) {
+    "hr/class",
+    "hr/logger"
+], function(Q, configs, Class, Logger) {
     
     var logging = Logger.addNamespace("requests");
 
@@ -22985,14 +23087,15 @@ define('hr/utils/requests',[
             url: null,
             method: "GET",
             params: {},
-            dataType: "text"
+            dataType: "text",
+            options: {}
         },
 
         /*
          *  Execute the request
          */
         execute: function() {
-            this.xhr = $.ajax({
+            this.xhr = $.ajax(_.extend({}, {
                 "type":     this.options.method,
                 "url":      this.options.url,
                 "data":     this.options.params,
@@ -23002,11 +23105,16 @@ define('hr/utils/requests',[
                     logging.debug("Result for request ", this.options);
                     this.trigger("done", data);
                 },
-                "error": function() {
+                "error": function(xhr, textStatus, errorThrown) {
                     logging.error("Error for request ", this.options);
-                    this.trigger("error");
+                    this.trigger("error", {
+                        'status': textStatus,
+                        'error': errorThrown,
+                        'content': xhr.responseText,
+                        'xhr': xhr
+                    });
                 }
-            });
+            }, this.options.options));
             return this;
         }
     }, {
@@ -23014,7 +23122,7 @@ define('hr/utils/requests',[
          *  Execute a request
          */
         _execute: function(url, options, defaults) {
-            var d = new Deferred();
+            var d = Q.defer();
             options = options || {};
             options = _.extend(options, defaults, {
                 "url": url
@@ -23023,12 +23131,12 @@ define('hr/utils/requests',[
             r.on("done", function(content) {
                 d.resolve(content);
             });
-            r.on("error", function() {
-                d.reject();
+            r.on("error", function(err) {
+                d.reject(new Error(err.textStatus+": "+err.error+" - "+err.content));
             });
 
             r.execute();
-            return d;
+            return d.promise;
         },
 
         /*
@@ -23112,15 +23220,15 @@ define('hr/utils/requests',[
     });
     return Requests;
 });
-define('hr/utils/resources',[
-    "Underscore",
+define('hr/resources',[
+    "underscore",
+    "q",
     "hr/configs",
-    "hr/utils/logger",
-    "hr/utils/cache",
-    "hr/utils/requests",
-    "hr/utils/urls",
-    "hr/utils/deferred",
-], function(_, configs, Logger, Cache, Requests, Urls, Deferred) {
+    "hr/logger",
+    "hr/cache",
+    "hr/requests",
+    "hr/urls"
+], function(_, q, configs, Logger, Cache, Requests, Urls) {
 
     var logging = Logger.addNamespace("resources");
     var cache = Cache.namespace("resources");
@@ -23133,17 +23241,17 @@ define('hr/utils/resources',[
          *  Load a ressource
          */
         load: function(namespace, ressource, args, options) {
-            var d = new Deferred();
+            var d = Q.defer();
             var namespace_configs = _.extend({}, Resources.namespaces[namespace] || {}, options || {});
             var loader = namespace_configs.loader || configs.resources.loader;
             
             if (Resources.loaders[loader] == null) {
                 logging.error("Loader doesn't exists ", loader, "namespace=",namespace);
                 d.reject();
-                return d;
+                return d.promise;
             }
             Resources.loaders[loader](ressource, d, args, namespace_configs);
-            return d;
+            return d.promise;
         },
 
         /*
@@ -23186,7 +23294,7 @@ define('hr/utils/resources',[
             var content = require(ressourcename);
             callback.resolve(content);
         } catch(err) {
-            logging.error("Error loading using require : ", ressourcename, err.message);
+            logging.exception(err, "Error loading using require:");
             callback.reject(null);
         }
     });
@@ -23197,16 +23305,16 @@ define('hr/utils/resources',[
             base: "./",
             extension: ""
         });
-        ressourceurl = Urls.static(config.base, ressourcename) + config.extension;
+        var ressourceurl = Urls.static(config.base, ressourcename) + config.extension;
         
         // Check application cache
-        var content = cache.get(ressourcename);
+        var content = cache.get(ressourceurl);
         if (content != null) { callback.resolve(content); return; }
 
         // Get ressource using requests
         logging.debug("Load ressource using http ", ressourcename);
         Requests.get(ressourceurl).then(function(content) {
-            cache.set(ressourcename, content);
+            cache.set(ressourceurl, content);
             callback.resolve(content);
         }, function() {
             logging.error("Error loading using http : ", ressourcename);
@@ -23216,31 +23324,31 @@ define('hr/utils/resources',[
 
     return Resources;
 });
-define('hr/utils/i18n',[
+define('hr/i18n',[
     "jQuery",
-    "Underscore",
+    "underscore",
+    "q",
     "hr/configs",
-    "hr/utils/urls",
-    "hr/utils/logger",
-    "hr/utils/resources",
-    "hr/utils/deferred"
-], function($, _, configs, Urls, Logger, Resources, Deferred) {
+    "hr/urls",
+    "hr/logger",
+    "hr/resources"
+], function($, _, Q, configs, Urls, Logger, Resources) {
     var logging = Logger.addNamespace("i18n");
-    var I18n = {};
+    var i18n = {};
 
     // Set default locale to english
-    I18n.defaultLocale = "en";
+    i18n.defaultLocale = "en";
 
     // Set default separator
-    I18n.defaultSeparator = ".";
+    i18n.defaultSeparator = ".";
 
     // Set current locale to null
-    I18n.locale = null;
+    i18n.locale = null;
 
     // Languages loaded
-    I18n.locales = [];
+    i18n.locales = [];
 
-    I18n.interpolate = function(message, options) {
+    i18n.interpolate = function(message, options) {
         options = options || {};
         
         var compiled = _.template(message);
@@ -23255,37 +23363,37 @@ define('hr/utils/i18n',[
         return compiled(options);
     };
 
-    I18n.currentLocale = function() {
-        return (I18n.locale || I18n.defaultLocale);
+    i18n.currentLocale = function() {
+        return (i18n.locale || i18n.defaultLocale);
     };
 
-    I18n.setCurrentLocale = function(lang) {
-        I18n.locale = lang;
+    i18n.setCurrentLocale = function(lang) {
+        i18n.locale = lang;
     };
 
-    I18n.loadLocale = function(lng) {
-        if (_.isArray(lng)) {
-            var d = [];
-            _.each(lng, function(lang) {
-                var nd = I18n.loadLocale(lang);
-                nd.done(function() {
-                    I18n.locales.push(lang);
-                    I18n.locales = _.uniq(I18n.locales);
-                });
-                d.push(nd);
-            });
-            return Deferred.when.apply(Deferred, d);
-        }
-        return Resources.load("i18n", lng).then(function(content) {
-            // use "eval" here because content is from a trusted source
-            if (_.isString(content)) content = eval('(' + content + ')');//JSON.parse(content);
-            I18n.translations[lng] = content;
-        }, function() {
-            logging.error("Error loading locale "+lng);
+    i18n.loadLocale = function(lng, options) {
+        options = _.defaults({}, options || {}, {
+            'loader': 'i18n'
         });
+
+        if (!_.isArray(lng)) {
+            lng = [lng];
+        }
+
+        return Q.all(_.map(lng, function(lang) {
+            return Resources.load(options.loader, lang).then(function(content) {
+                // use "eval" here because content is from a trusted source
+                if (_.isString(content)) content = eval('(' + content + ')');
+                i18n.translations[lang] = content;
+                i18n.locales.push(lang);
+                i18n.locales = _.uniq(i18n.locales);
+            }, function() {
+                logging.error("Error loading locale "+lng);
+            });
+        }));
     };
 
-    I18n.missingTranslation = function() {
+    i18n.missingTranslation = function() {
         var message = '[missing "' + this.currentLocale()
             , count = arguments.length
         ;
@@ -23299,11 +23407,11 @@ define('hr/utils/i18n',[
         return message;
     };
 
-    I18n.lookup = function(scope, options) {
+    i18n.lookup = function(scope, options) {
         var options = options || {}
             , lookupInitialScope = scope
-            , translations = I18n.translations
-            , locale = options.locale || I18n.currentLocale()
+            , translations = i18n.translations
+            , locale = options.locale || i18n.currentLocale()
             , messages = translations[locale] || {}
             , currentScope
         ;
@@ -23326,7 +23434,7 @@ define('hr/utils/i18n',[
         return messages;
     };
 
-    I18n.translate = function(scope, options) {
+    i18n.translate = function(scope, options) {
         var translation = this.lookup(scope, options);
 
         try {
@@ -23337,28 +23445,34 @@ define('hr/utils/i18n',[
         }
     };
 
-    I18n.translations = {};
-    I18n.t = I18n.translate;
+    i18n.translations = {};
+    i18n.t = i18n.translate;
 
-    I18n.defaultLocale = configs.defaultLocale;
-    I18n.locale = configs.defaultLocale;
+    i18n.defaultLocale = configs.defaultLocale;
+    i18n.locale = configs.defaultLocale;
 
 
-    return I18n;
+    return i18n;
 });
-define('hr/utils/template',[
-    "Underscore",
+define('hr/template',[
+    "underscore",
+    "q",
     "hr/configs",
-    "hr/core/class",
-    "hr/utils/logger",
-    "hr/utils/urls",
-    "hr/utils/resources",
-    "hr/utils/i18n"
-], function(_, configs, Class, Logger, Urls, Resources, I18n) {
+    "hr/class",
+    "hr/logger",
+    "hr/urls",
+    "hr/resources",
+    "hr/i18n"
+], function(_, Q, configs, Class, Logger, Urls, Resources, I18n) {
+    var logging = Logger.addNamespace("templates");
+
     var Template = Class.extend({
         defaults: {
             /* Template id */
             template: null,
+
+            /* Loader for the template */
+            loader: "templates",
 
             /* Context givent to template generation */
             args: {}
@@ -23383,21 +23497,18 @@ define('hr/utils/template',[
                 "hr": {
                     "configs": configs,
                     "urls": Urls,
-                    "i18n": I18n,
-                    "utils": Template.utils
+                    "i18n": I18n
                 },
                 "view": {
                     "component": function(cid, args, name, subid) {
                         name = name || cid;
 
                         if (!self.view) {
-                            Logger.logging.error("Error in template " + self.template + " : try to import component in a non view-related template ");
-                            return "";
+                            throw new Error("Error in template " + self.template + " : try to import component in a non view-related template ");
                         }
 
                         if (Template.components[cid] == null) {
-                            Logger.logging.error("Error in template " + self.template + " : try to import component "+cid);
-                            return "";
+                            throw new Error("Error in template " + self.template + " : try to import component "+cid);
                         }
 
                         var view = new Template.components[cid].Class(args || {}, self.view);
@@ -23432,7 +23543,7 @@ define('hr/utils/template',[
          */
         setContent: function(content) {
             this.content = content;
-            if (this.content != null) this.generate = _.template(this.content);
+            if (this.content != null) this.generate = Q.fbind(_.template(this.content));
             return this;
         },
 
@@ -23442,7 +23553,7 @@ define('hr/utils/template',[
         load: function(template) {
             var self = this;
             this.template = template || this.template;
-            Resources.load("templates", this.template).then(function(content) {
+            Resources.load(this.options.loader, this.template).then(function(content) {
                 self.setContent(content);
                 self.trigger("loaded");
             }, function() {
@@ -23456,51 +23567,31 @@ define('hr/utils/template',[
          * Render template
          */
         render: function(el) {
+            var that = this;
+            var d = Q.defer();
+
             if (this.view != null) el = el || this.view.$el;
             this.on("loaded", function() {
                 if (this.content == null) return;
                 if (this.view != null) this.view.clearComponents();
-                el.html(this.generate(this.args));
-                if (this.view != null) this.view.renderComponents();
-                this.trigger("updated");
+                this.generate(this.args).then(function(content) {
+                    el.html(content);
+                    if (that.view != null) that.view.renderComponents();
+                    that.trigger("updated");
+                    d.resolve(el);
+                }, function(err) {
+                    logging.exception(err, "Error with template:");
+                    d.reject(err);
+                });
+                
             }, this);
-            return this.load();
+            this.load();
+
+            return d.promise;
         },
     }, {
         /* Defaults options for template */
         options: {},
-
-        /* Defaults utils for templates */
-        utils: {
-            timeago: function(timestamp) {
-                var current_timestamp = (new Date()).getTime() / 1000;
-                var distance_in_minutes = Math.round((current_timestamp - timestamp)/60);
-
-                var msgid = "error";
-                
-                if (distance_in_minutes < 0) {
-                    distance_in_minutes = 0;
-                }
-                
-                if (distance_in_minutes < 1051199) { msgid = 'yearago'; }
-                if (distance_in_minutes < 525960) { msgid =  'months'; }
-                if (distance_in_minutes < 86400) { msgid = 'month'; }
-                if (distance_in_minutes < 43200) { msgid =  'days'; }
-                if (distance_in_minutes < 2880) { msgid = 'day'; }
-                if (distance_in_minutes < 1440) { msgid = 'hours'; }
-                if (distance_in_minutes < 90) { msgid = 'hour'; }
-                if (distance_in_minutes < 45) { msgid =  'minutes'; }
-                if (distance_in_minutes == 1) { msgid = 'minute'; }
-                if (distance_in_minutes == 0) { msgid = 'seconds'; }
-
-                return I18n.t("hr.utils.timeago."+msgid, {
-                    "months": Math.floor(distance_in_minutes / 43200),
-                    "days": Math.floor(distance_in_minutes / 1440),
-                    "hours": Math.round(distance_in_minutes / 60),
-                    "minutes": distance_in_minutes
-                });
-            }
-        },
 
         /* Map of components constructor */
         components: {},
@@ -23527,19 +23618,22 @@ define('hr/utils/template',[
 
     return Template;
 });
-define('hr/core/view',[
+define('hr/view',[
     "jQuery",
-    "Underscore",
-    "hr/core/class",
-    "hr/utils/template",
-    "hr/utils/deferred"
-], function($, _, Class, Template, Deferred) {
-
+    "underscore",
+    "q",
+    "hr/class",
+    "hr/logger",
+    "hr/queue",
+    "hr/template"
+], function($, _, q, Class, Logger, Queue, Template) {
+    var logging = Logger.addNamespace("templates");
     var delegateEventSplitter = /^(\S+)\s*(.*)$/;
     
     var View = Class.extend({
         tagName: "div",
         template: null,
+        templateLoader: "templates",
 
         /*
          *  Initialize a view
@@ -23548,6 +23642,9 @@ define('hr/core/view',[
             View.__super__.initialize.call(this, options);
             this._ensureElement();
             this.delegateEvents();
+
+            // Rendering queue
+            this.renderQueue = new Queue();
 
             // Components map
             this.components = {};
@@ -23680,15 +23777,15 @@ define('hr/core/view',[
          *  The callback will be call only when the view is ready
          */
         defer: function(callback) {
-            var d = new Deferred();
-            if (_.isFunction(callback)) d.done(callback);
+            var d = Q.defer();
+            if (_.isFunction(callback)) d.promise.done(callback);
 
             this.on("ready", function() {
                 d.resolve(this);
             }, this);
             if (this.is_ready) d.resolve(this);
 
-            return d;
+            return d.promise;
         },
 
         /*
@@ -23697,7 +23794,13 @@ define('hr/core/view',[
         render: function() {
             var tpl = _.result(this, 'template')
             if (tpl) return this.renderTemplate(tpl);
-            return this;
+        },
+
+        /*
+         *  Update rendering
+         */
+        update: function() {
+            return this.renderQueue.defer(this.render, this);
         },
 
         /*
@@ -23716,7 +23819,7 @@ define('hr/core/view',[
             view.parent = this;
 
             if (this.components[name] != null) {
-                if (!_.isArray(this.components[name])) this.components[name] = [this.components[name]]
+                if (!_.isArray(this.components[name])) this.components[name] = [this.components[name]];
                 this.components[name].push(view);
             } else {
                 this.components[name] = view;
@@ -23749,11 +23852,16 @@ define('hr/core/view',[
 
             if (_.size(this.components) == 0) { this.ready(); return this; }
 
-            var addComponent = _.bind(function(component) {
-                this.$("component[data-component='"+component.cid+"']").empty().append(component.$el);
+            var addComponent = _.bind(Q.fbind(function(component) {
+                this.$("component[data-component='"+component.cid+"']").replaceWith(component.$el);
                 component.defer(_.once(componentRendered));
-                component.render();
-            }, this);
+
+                return Q.try(function() {
+                    component.update();
+                }).fail(function(err) {
+                    logging.exception(err, "Error rendering component:");
+                })
+            }), this);
             
             _.each(this.components, function(value, cid) {
                 if (_.isArray(value)) {
@@ -23787,18 +23895,18 @@ define('hr/core/view',[
          *  @tplname : template id
          *  @tplargs : contexts for template (if null, use templateContext)
          */
-        renderTemplate: function(tplname, tplargs) {
+        renderTemplate: function(tplname, tplargs, tplloader) {
             tplname = tplname || this.template;
             tplargs = tplargs || _.result(this, "templateContext");
+            tplloader = tplloader || _.result(this, "templateLoader");
 
             var tpl = new Template({
                 template: tplname,
                 args: tplargs,
+                loader: tplloader,
                 view: this
             });
-            tpl.render();
-
-            return this;
+            return tpl.render();
         }
     }, {
         Template: Template
@@ -23821,10 +23929,10 @@ define('hr/core/view',[
 
     return View;
 });
-define('hr/core/head',[
+define('hr/head',[
     "jQuery",
-    "Underscore",
-    "hr/core/view"
+    "underscore",
+    "hr/view"
 ], function($, _, View) {
     var Head = View.extend({
         el: $("head"),
@@ -23961,14 +24069,14 @@ define('hr/core/head',[
 
     return Head;
 });
-define('hr/core/history',[
+define('hr/history',[
     "jQuery",
-    "Underscore",
+    "underscore",
     "hr/configs",
-    "hr/core/class",
-    "hr/utils/logger",
-    "hr/utils/urls",
-], function($, _, configs, Class, Logger, Urls) {
+    "hr/class",
+    "hr/logger",
+    "hr/urls",
+], function($, _, configs, Class, Logger, urls) {
 
     var logging = Logger.addNamespace("history");
 
@@ -24023,7 +24131,7 @@ define('hr/core/history',[
          *  Navigate
          */
         navigate: function(route, args) {
-            url = Urls.route(route, args);
+            url = urls.route(route, args);
             logging.log("navigate to ", url);
             window.location.hash = url;
         },
@@ -24059,12 +24167,12 @@ define('hr/core/history',[
 
     return History;
 });
-define('hr/core/router',[
+define('hr/router',[
     "jQuery",
-    "Underscore",
-    "hr/core/class",
-    "hr/core/history",
-    "hr/utils/logger",
+    "underscore",
+    "hr/class",
+    "hr/history",
+    "hr/logger",
 ], function($, _, Class, History, Logger) {
 
     // Add specifif logs handler
@@ -24155,13 +24263,13 @@ define('hr/core/router',[
 
     return Router;
 });
-define('hr/core/application',[
+define('hr/application',[
     "jQuery",
-    "Underscore",
-    "hr/core/view",
-    "hr/core/head",
-    "hr/core/router",
-    "hr/utils/logger"
+    "underscore",
+    "hr/view",
+    "hr/head",
+    "hr/router",
+    "hr/logger"
 ], function($, _, View, Head, Router, Logger) {
 
     var logging = Logger.addNamespace("application");
@@ -24218,7 +24326,8 @@ define('hr/core/application',[
             var hr = require("hr/hr");
             hr.Cache.init();
             hr.app = this;
-            this.render();
+            
+            this.update();
             return this;
         },
 
@@ -24260,10 +24369,10 @@ define('hr/core/application',[
 
     return Application;
 });
-define('hr/core/model',[
-    "Underscore",
-    "hr/core/class",
-    "hr/utils/logger"
+define('hr/model',[
+    "underscore",
+    "hr/class",
+    "hr/logger"
 ], function(_, Class, Logger) {
     var logging = Logger.addNamespace("models");
 
@@ -24555,100 +24664,14 @@ define('hr/core/model',[
 
     return Model;
 });
-define('hr/utils/queue',[
-    "Underscore",
-    "hr/core/class",
-    "hr/utils/deferred"
-], function(_, Class, Deferred) {
-    var Queue = Class.extend({
-        /*
-         *  Initialize
-         */
-        initialize: function() {
-            this.tasks = [];
-            this.empty = true;
-            return this;
-        },
-
-        /*
-         *  Add tasks
-         *  @task : function task
-         *  @args : args to the task
-         *  @context : context to the task
-         */
-        defer: function(task, context, args) {
-            var d = new Deferred();
-            this.tasks.push({
-                "task": task,
-                "args": args || [],
-                "context": context,
-                "result": d
-            });
-            if (this.empty == true) {
-                this.startNext();
-            }
-            return d;
-        },
-
-        /*
-         *  Start a task
-         *  @task task object to start
-         */
-        startTask: function(task) {
-            var d = task.task.apply(task.context, task.args);
-            if (!(d instanceof Deferred)) {
-                task.result.resolve(d)
-                this.startNext();
-            } else {
-                d.then(function() {
-                    task.result.resolve.apply(task.result, arguments);
-                }, function() {
-                    task.result.reject.apply(task.result, arguments);
-                });
-                d.always(_.bind(this.startNext, this));
-            }
-        },
-
-        /*
-         *  Start next task
-         */
-        startNext: function() {
-            if (_.size(this.tasks) > 0) {
-                this.empty = false;
-                var task = this.tasks.shift();
-                this.startTask(task);
-                this.trigger("tasks:next");
-            } else {
-                this.empty = true;
-                this.trigger("tasks:finish");
-            }      
-        },
-
-        /*
-         *  Return queue size
-         */
-        size: function() {
-            return _.size(this.tasks);
-        },
-
-        /*
-         *  Return true if tasks queue is finish
-         */
-        isComplete: function() {
-            return this.empty == true;
-        }
-    });
-
-    return Queue;
-});
-define('hr/core/collection',[
-    "Underscore",
-    "hr/core/class",
-    "hr/core/model",
-    "hr/utils/logger",
-    "hr/utils/deferred",
-    "hr/utils/queue"
-], function(_, Class, Model, Logger, Deferred, Queue) {
+define('hr/collection',[
+    "underscore",
+    "q",
+    "hr/class",
+    "hr/model",
+    "hr/logger",
+    "hr/queue"
+], function(_, Q, Class, Model, Logger, Queue) {
     var logging = Logger.addNamespace("collections");
 
     var Collection = Class.extend({
@@ -24739,7 +24762,7 @@ define('hr/core/collection',[
                 this._totalCount = models.n;
                 return this.reset(models.list, options);
             }
-            this.startIndex = 0;
+            this.options.startIndex = 0;
             this.models = [];
             this.add(models, _.extend({silent: true}, options || {}));
             options = _.defaults(options || {}, {
@@ -24929,17 +24952,12 @@ define('hr/core/collection',[
 
                 if (this._totalCount == null || this.hasMore() > 0 || options.refresh) {
                     this.options.startIndex = this.options.startIndex || 0;
-                    d = this[this.options.loader].apply(this, this.options.loaderArgs || []);
-                    if (!(d instanceof Deferred)) {
-                        d = new Deferred();
-                        d.resolve();      
-                    }
+                    d = Q(this[this.options.loader].apply(this, this.options.loaderArgs || []));
                     d.done(function() {
                         self.options.startIndex = self.options.startIndex + self.options.limit
                     });
                 } else {
-                    d = new Deferred();
-                    d.reject();
+                    d = Q.reject();
                 }
 
                 return d;
@@ -24957,14 +24975,14 @@ define('hr/core/collection',[
         },
     });
 
-    // Underscore methods that we want to implement on the Collection.
+    // underscore methods that we want to implement on the Collection.
     var methods = ['forEach', 'each', 'map', 'reduce', 'reduceRight', 'find',
     'detect', 'filter', 'select', 'reject', 'every', 'all', 'some', 'any',
     'include', 'contains', 'invoke', 'max', 'min', 'sortBy', 'sortedIndex',
     'toArray', 'size', 'first', 'initial', 'rest', 'last', 'without', 'indexOf',
     'shuffle', 'lastIndexOf', 'isEmpty', 'groupBy'];
 
-    // Mix in each Underscore method as a proxy to `Collection#models`.
+    // Mix in each underscore method as a proxy to `Collection#models`.
     _.each(methods, function(method) {
         Collection.prototype[method] = function() {
             return _[method].apply(_, [this.models].concat(_.toArray(arguments)));
@@ -24973,11 +24991,11 @@ define('hr/core/collection',[
 
     return Collection;
 });
-define('hr/core/list',[
-    "Underscore",
-    "hr/core/view",
-    "hr/utils/logger",
-    "hr/core/collection"
+define('hr/list',[
+    "underscore",
+    "hr/view",
+    "hr/logger",
+    "hr/collection"
 ], function(_, View, Logger, Collection) {
 
     var logging = Logger.addNamespace("lists");
@@ -25036,7 +25054,7 @@ define('hr/core/list',[
                 this.removeModel(elementmodel)
             }, this);
             this.collection.queue.on("tasks", function() {
-                this.render();
+                this.update();
             }, this);
 
             this.resetModels({
@@ -25045,7 +25063,7 @@ define('hr/core/list',[
 
             if (this.options.loadAtInit) this.getItems();
 
-            return this.render();
+            return this.update();
         },
 
         /*
@@ -25068,9 +25086,9 @@ define('hr/core/list',[
                 "collection": this.collection
             });
             model.on("change", function() {
-                item.render();
+                item.update();
             });
-            item.render();
+            item.update();
             tag = this.Item.prototype.tagName+"."+this.Item.prototype.className.split(" ")[0];
 
             if (options.at > 0) {
@@ -25081,7 +25099,7 @@ define('hr/core/list',[
             this.items[model.cid] = item;
 
             if (!options.silent) this.trigger("change:add", model);
-            if (options.render) this.render();
+            if (options.render) this.update();
 
             return this;
         },
@@ -25104,7 +25122,7 @@ define('hr/core/list',[
             delete this.items[model.cid];
 
             if (!options.silent) this.trigger("change:remove", model);
-            if (options.render) this.render();
+            if (options.render) this.update();
 
             return this;
         },
@@ -25136,7 +25154,7 @@ define('hr/core/list',[
             }, this);
 
             if (!options.silent) this.trigger("change:reset");
-            if (options.render) this.render();
+            if (options.render) this.update();
             return this;
         },
 
@@ -25301,10 +25319,10 @@ define('hr/core/list',[
 
     return ListView;
 });
-define('hr/utils/views',[
-    "Underscore",
-    "hr/core/view",
-    "hr/utils/template"
+define('hr/views',[
+    "underscore",
+    "hr/view",
+    "hr/template"
 ], function(_, View, Template) {
     
     var RelativeDateView = View.extend({
@@ -25337,155 +25355,40 @@ define('hr/utils/views',[
         "RelativeDate": RelativeDateView
     };
 });
-define('hr/vendors/underscore-more',[
-    "Underscore",
-    "jQuery",
-], function(_, $) {
-    var arrays, basicObjects, deepClone, deepExtend, deepExtendCouple, isBasicObject, sum, removeHtml,
-    __slice = [].slice;
-
-    deepClone = function(obj) {
-        var func, isArr;
-        if (!_.isObject(obj) || _.isFunction(obj)) {
-            return obj;
-        }
-        if (_.isDate(obj)) {
-            return new Date(obj.getTime());
-        }
-        if (_.isRegExp(obj)) {
-            return new RegExp(obj.source, obj.toString().replace(/.*\//, ""));
-        }
-        isArr = _.isArray(obj || _.isArguments(obj));
-        func = function(memo, value, key) {
-            if (isArr) {
-                memo.push(deepClone(value));
-            } else {
-                memo[key] = deepClone(value);
-            }
-            return memo;
-        };
-        return _.reduce(obj, func, isArr ? [] : {});
-    };
-
-    isBasicObject = function(object) {
-        return (object != null && (object.prototype === {}.prototype || object.prototype === Object.prototype) && _.isObject(object) && !_.isArray(object) && !_.isFunction(object) && !_.isDate(object) && !_.isRegExp(object) && !_.isArguments(object));
-    };
-
-    basicObjects = function(object) {
-        return _.filter(_.keys(object), function(key) {
-            return isBasicObject(object[key]);
-        });
-    };
-
-    arrays = function(object) {
-        return _.filter(_.keys(object), function(key) {
-            return _.isArray(object[key]);
-        });
-    };
-
-    deepExtendCouple = function(destination, source, maxDepth) {
-        var combine, recurse, sharedArrayKey, sharedArrayKeys, sharedObjectKey, sharedObjectKeys, _i, _j, _len, _len1;
-        if (maxDepth == null) {
-            maxDepth = 20;
-        }
-        if (maxDepth <= 0) {
-            console.warn('_.deepExtend(): Maximum depth of recursion hit.');
-            return _.extend(destination, source);
-        }
-        sharedObjectKeys = _.intersection(basicObjects(destination), basicObjects(source));
-        recurse = function(key) {
-            return source[key] = deepExtendCouple(destination[key], source[key], maxDepth - 1);
-        };
-        for (_i = 0, _len = sharedObjectKeys.length; _i < _len; _i++) {
-            sharedObjectKey = sharedObjectKeys[_i];
-            recurse(sharedObjectKey);
-        }
-        sharedArrayKeys = _.intersection(arrays(destination), arrays(source));
-        combine = function(key) {
-            return source[key];
-            // Replace array and not replaced
-            //return source[key] = _.union(destination[key], source[key]);
-        };
-        for (_j = 0, _len1 = sharedArrayKeys.length; _j < _len1; _j++) {
-            sharedArrayKey = sharedArrayKeys[_j];
-            combine(sharedArrayKey);
-        }
-        return _.extend(destination, source);
-    };
-
-    deepExtend = function() {
-        var finalObj, maxDepth, objects, _i;
-        objects = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), maxDepth = arguments[_i++];
-        if (!_.isNumber(maxDepth)) {
-            objects.push(maxDepth);
-            maxDepth = 20;
-        }
-        if (objects.length <= 1) {
-            return objects[0];
-        }
-        if (maxDepth <= 0) {
-            return _.extend.apply(this, objects);
-        }
-        finalObj = objects.shift();
-        while (objects.length > 0) {
-            finalObj = deepExtendCouple(finalObj, deepClone(objects.shift()), maxDepth);
-        }
-        return finalObj;
-    };
-
-    sum = function(obj) {
-      if (!$.isArray(obj) || obj.length == 0) return 0;
-      return _.reduce(obj, function(sum, n) {
-        return sum += n;
-      });
-    };
-
-    removeHtml = function(t) {
-        return $("<div>").html(t).text();
-    },
-
-    _.mixin({
-        deepClone: deepClone,
-        isBasicObject: isBasicObject,
-        basicObjects: basicObjects,
-        arrays: arrays,
-        deepExtend: deepExtend,
-        sum: sum,
-        removeHtml: removeHtml
-    });
-
-    return _;
-});
 define('hr/hr',[
+    "q",
     "hr/shims",
     "hr/configs",
-    "hr/core/class",
-    "hr/core/view",
-    "hr/core/application",
-    "hr/core/head",
-    "hr/core/history",
-    "hr/core/router",
-    "hr/core/model",
-    "hr/core/collection",
-    "hr/core/list",
-
-    "hr/utils/logger",
-    "hr/utils/requests",
-    "hr/utils/urls",
-    "hr/utils/storage",
-    "hr/utils/cache",
-    "hr/utils/template",
-    "hr/utils/resources",
-    "hr/utils/deferred",
-    "hr/utils/queue",
-    "hr/utils/i18n",
-    "hr/utils/views",
-
-    "hr/vendors/underscore-more"
-], function(shims, configs, 
+    "hr/class",
+    "hr/view",
+    "hr/application",
+    "hr/head",
+    "hr/history",
+    "hr/router",
+    "hr/model",
+    "hr/collection",
+    "hr/list",
+    "hr/logger",
+    "hr/requests",
+    "hr/urls",
+    "hr/storage",
+    "hr/cache",
+    "hr/template",
+    "hr/resources",
+    "hr/queue",
+    "hr/i18n",
+    "hr/views"
+], function(Q, shims, configs, 
 Class, View, Application, Head, History, Router, Model, Collection, ListView,
-Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I18n, views) {    
-    return {
+Logger, Requests, Urls, Storage, Cache, Template, Resources, Queue, I18n, views) {
+
+
+    Q.onerror = function(err) {
+        Logger.logging.error(err);
+    };
+
+
+    var hr = {
         configs: configs,
         Class: Class,
         View: View,
@@ -25504,7 +25407,6 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
         Urls: Urls,
         Template: Template,
         Resources: Resources,
-        Deferred: Deferred,
         Queue: Queue,
         I18n: I18n,
         views: views,
@@ -25525,9 +25427,11 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Deferred, Queue, I1
                 baseUrl: args.baseUrl || ""
             });
         }
-    }
-});
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1382284823387,"baseUrl":"/"}; });
+    };
+    
+    return hr;
+});}());
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385422141904,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -25542,9 +25446,10 @@ define("vendors/moment", (function (global) {
 }(this)));
 
 define('api',[
-    "Underscore",
-    "hr/hr"
-], function(_, hr) {
+    "underscore",
+    "hr/hr",
+    "q"
+], function(_, hr, Q) {
     return {
         /*
          *  Execute a request
@@ -25554,14 +25459,9 @@ define('api',[
          *  @args : args for the request
          */
         request: function(mode, method, args, options) {
-            var d = new hr.Deferred();
-            hr.Requests[mode]("/api/"+method, args, options).then(function(o) {
-                d.resolve(JSON.parse(o));
-            }, function(err) {
-                d.reject(err);
+            return hr.Requests[mode]("/api/"+method, args, options).then(function(o) {
+                return JSON.parse(o);
             });
-
-            return d;
         },
     };
 });
@@ -29355,7 +29255,7 @@ define("vendors/socket.io", (function (global) {
 }(this)));
 
 define('notifications',[
-    "Underscore",
+    "underscore",
     "hr/hr",
     "vendors/socket.io"
 ], function(_, hr, io) {
@@ -29397,7 +29297,7 @@ define('notifications',[
 });
 define('models/report',[
     "hr/hr",
-    "Underscore"
+    "underscore"
 ], function(hr, _) {
     var Report = hr.Model.extend({
         defaults: {
@@ -30063,7 +29963,7 @@ define('models/eventinfo',[
 define('views/report',[
     "hr/hr",
     "jQuery",
-    "Underscore",
+    "underscore",
     "api",
     "models/user",
     "models/eventinfo"
@@ -33999,7 +33899,7 @@ define('views/reports/line',[
             }, this);
             
             if (_.size(seriesD) > 0) {
-                hr.Deferred.when.apply(null, seriesD).done(function() {
+                Q.all(seriesD).then(function() {
                     that.chart.setData(series);
                     that.chart.setupGrid();
                     that.chart.draw();  
@@ -34229,7 +34129,7 @@ define('models/event',[
     return Event;
 });
 define('collections/events',[
-    "Underscore",
+    "underscore",
     "hr/hr",
     "api",
     "notifications",
@@ -34755,7 +34655,7 @@ define('resources/resources',[
     return {}
 });
 require([
-    "Underscore",
+    "underscore",
     "hr/hr",
     "hr/args",
 

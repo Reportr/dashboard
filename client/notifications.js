@@ -1,5 +1,5 @@
 define([
-    "Underscore",
+    "underscore",
     "hr/hr",
     "vendors/socket.io"
 ], function(_, hr, io) {

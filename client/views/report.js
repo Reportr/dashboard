@@ -1,7 +1,7 @@
 define([
     "hr/hr",
     "jQuery",
-    "Underscore",
+    "underscore",
     "api",
     "models/user",
     "models/eventinfo"
