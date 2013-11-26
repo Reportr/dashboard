@@ -25431,7 +25431,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Queue, I18n, views)
     
     return hr;
 });}());
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385422829114,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385424083369,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -34712,7 +34712,7 @@ require([
 
             this.user = User.current;
             this.user.models = new EventModels();
-            this.user.on("change:token", this.render, this);
+            this.user.on("change:token", this.update, this);
 
             return this;
         },

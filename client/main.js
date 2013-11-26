@@ -56,7 +56,7 @@ require([
 
             this.user = User.current;
             this.user.models = new EventModels();
-            this.user.on("change:token", this.render, this);
+            this.user.on("change:token", this.update, this);
 
             return this;
         },
