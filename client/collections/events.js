@@ -53,7 +53,7 @@ define([
             return api.request("get", User.current.get('token')+"/events/"+this.options.eventNamespace+"/"+this.options.eventName, {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
             	self.add({
                     list: data.events,
                     n: data.count
@@ -72,7 +72,7 @@ define([
             return api.request("get", User.current.get('token')+"/events/last", {
                 'start': this.options.startIndex,
                 'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
                 self.add({
                     list: data.events,
                     n: data.count

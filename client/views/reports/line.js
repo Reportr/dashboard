@@ -138,7 +138,7 @@ define([
                     'period': this.report.settings.period,
                     'interval': this.report.settings.interval
                 });
-                d.done(function(data) {
+                d.then(function(data) {
                     series.push({
                         'data': data.data,
                         'label': property || 'Default',

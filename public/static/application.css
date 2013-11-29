@@ -1241,7 +1241,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 #homepage #intro:before,#homepage #intro:after{content:" ";display:table;}
 #homepage #intro:after{clear:both;}
 @media (max-width:768px){#homepage #intro{padding:40px 5px;}}#homepage #intro a{color:inherit;text-decoration:underline;cursor:pointer;}#homepage #intro a:hover{color:inherit;}
-#homepage #intro .intro-inner{width:100%;max-width:1200px;margin:0px auto;}#homepage #intro .intro-inner .intro-forms{margin-top:65px;font-weight:200;}#homepage #intro .intro-inner .intro-forms button{border:2px solid #fff;background:transparent;color:#fff;}
+#homepage #intro .intro-inner{width:100%;max-width:1200px;margin:0px auto;}#homepage #intro .intro-inner .intro-forms{margin-top:50px;font-weight:200;}#homepage #intro .intro-inner .intro-forms button{border:2px solid #fff;background:transparent;color:#fff;}
 #homepage #intro .intro-inner .intro-forms .form-group input,#homepage #intro .intro-inner .intro-forms .form-group input:focus{border-color:#fff;-webkit-box-shadow:none;box-shadow:none;}
 #homepage #intro .intro-inner .intro-forms .form-group.has-error input{border-color:#e74c3c;color:#e74c3c;}
 #homepage #intro .intro-inner .intro-title{}#homepage #intro .intro-inner .intro-title h1{font-size:100px;font-weight:200;font-family:'reportrNormal';line-height:130px;margin:0px;}

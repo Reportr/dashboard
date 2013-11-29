@@ -50,7 +50,7 @@ define([
             return api.request("get", User.current.get('token')+"/models", {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
             	self.add({
                     list: data.models,
                     n: data.count

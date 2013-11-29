@@ -24398,6 +24398,9 @@ define('hr/model',[
         // Joints with others models
         joints: {},
 
+        // Model unique identifier
+        idAttribute: 'id',
+
         /*
          *  Initialize the model
          */
@@ -24496,6 +24499,15 @@ define('hr/model',[
             // Calcul new attributes
             this.attributes = this.attributes || {};
             newattributes = _.clone(_.deepExtend(this.toJSON(), attrs));
+
+            // New unique id
+            var oldId = this.id;
+            if (this.idAttribute in newattributes) {
+                this.id = newattributes[this.idAttribute];
+            } else {
+                this.id = this.cid;
+            }
+            if (oldId != this.id) this.trigger("id", this.id, oldId);
 
             // Calcul diffs
             diffs = this.diff(newattributes);
@@ -24748,7 +24760,7 @@ define('hr/collection',[
             } else {
                 this.models.sort(boundComparator);
             }
-            if (!options.silent) this.trigger('reset', this, options);
+            if (!options.silent) this.trigger('sort', this, options);
             return this;
         },
 
@@ -24805,7 +24817,7 @@ define('hr/collection',[
             index = options.at;
             this.models.splice(index, 0, model);
 
-            if (this.comparator) this.sort({silent: true});
+            if (this.comparator) this.sort({silent: options.silent});
             if (options.silent) return this;
             options.index = index;
             this.trigger('add', model, this, options);
@@ -25044,7 +25056,7 @@ define('hr/list',[
             } else {
                 this.collection = new this.Collection(this.options.collection);
             }
-            this.collection.on("reset", function() {
+            this.collection.on("reset sort", function() {
                 this.resetModels();
             }, this);
             this.collection.on("add", function(elementmodel, collection, options) {
@@ -25080,14 +25092,24 @@ define('hr/list',[
                 render: true,
                 at: _.size(this.items),
             });
+
+            if (this.items[model.id] != null) {
+                this.removeModel(model);
+            }
+
             item = new this.Item({
                 "model": model,
                 "list": this,
                 "collection": this.collection
             });
+            item.$el.attr("model", model.id);
             model.on("change", function() {
                 item.update();
             });
+            model.on("id", function(newId, oldId) {
+                this.items[newId] = this.items[oldId];
+                delete this.items[oldId];
+            })
             item.update();
             tag = this.Item.prototype.tagName+"."+this.Item.prototype.className.split(" ")[0];
 
@@ -25096,7 +25118,7 @@ define('hr/list',[
             } else {
                 this.$el.prepend(item.$el);
             }
-            this.items[model.cid] = item;
+            this.items[model.id] = item;
 
             if (!options.silent) this.trigger("change:add", model);
             if (options.render) this.update();
@@ -25115,11 +25137,11 @@ define('hr/list',[
                 silent: false,
                 render: true
             });
-            if (this.items[model.cid] == null) return this;
+            if (this.items[model.id] == null) return this;
 
-            this.items[model.cid].remove();
-            this.items[model.cid] = null;
-            delete this.items[model.cid];
+            this.items[model.id].remove();
+            this.items[model.id] = null;
+            delete this.items[model.id];
 
             if (!options.silent) this.trigger("change:remove", model);
             if (options.render) this.update();
@@ -25144,6 +25166,7 @@ define('hr/list',[
                 });
             }, this);
             this.items = {};
+            this.$el.empty();
 
             // add new models
             this.collection.forEach(function(model) {
@@ -25431,7 +25454,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Queue, I18n, views)
     
     return hr;
 });}());
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385424083369,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385735714226,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -29401,7 +29424,7 @@ define('models/user',[
         	return api.request("post", "auth/login", {
                 'email': email,
                 'password': password
-            }).done(function(data) {
+            }).then(function(data) {
                 that.loadSettings({
                     'token': data.token
                 });
@@ -29418,7 +29441,7 @@ define('models/user',[
         	return api.request("post", "auth/signup", {
                 'email': email,
                 'password': password
-            }).done(function(data) {
+            }).then(function(data) {
             	that.set(data);
             });
         },
@@ -29428,7 +29451,7 @@ define('models/user',[
          */
         logout: function() {
             var that = this;
-            return api.request("post", "auth/logout").done(function(data) {
+            return api.request("post", "auth/logout").then(function(data) {
                 that.set({
                     'email': null,
                     'token': null,
@@ -29514,9 +29537,9 @@ define('models/user',[
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").done(function(data) {
+            return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").then(function(data) {
                 if (data.url == null) {
-                    that.loadSettings().done(function() {
+                    that.loadSettings().then(function() {
                         that.trigger("trackers:toggle", tId);
                     });                    
                 } else {
@@ -29569,7 +29592,7 @@ define('models/eventmodel',[
          */
         removeEvents: function() {
             var that = this;
-            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event')).done(function() {
+            return api.request("delete", User.current.get("token")+"/event/"+this.get('namespace')+"/"+this.get('event')).then(function() {
                 that.destroy();
             });
         }
@@ -29637,7 +29660,7 @@ define('collections/eventmodels',[
             return api.request("get", User.current.get('token')+"/models", {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
             	self.add({
                     list: data.models,
                     n: data.count
@@ -33876,7 +33899,7 @@ define('views/reports/line',[
                     'period': this.report.settings.period,
                     'interval': this.report.settings.interval
                 });
-                d.done(function(data) {
+                d.then(function(data) {
                     series.push({
                         'data': data.data,
                         'label': property || 'Default',
@@ -34183,7 +34206,7 @@ define('collections/events',[
             return api.request("get", User.current.get('token')+"/events/"+this.options.eventNamespace+"/"+this.options.eventName, {
             	'start': this.options.startIndex,
             	'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
             	self.add({
                     list: data.events,
                     n: data.count
@@ -34202,7 +34225,7 @@ define('collections/events',[
             return api.request("get", User.current.get('token')+"/events/last", {
                 'start': this.options.startIndex,
                 'limit': this.options.limit
-            }).done(function(data) {
+            }).then(function(data) {
                 self.add({
                     list: data.events,
                     n: data.count

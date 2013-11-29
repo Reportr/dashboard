@@ -69,7 +69,7 @@ define([
         	return api.request("post", "auth/login", {
                 'email': email,
                 'password': password
-            }).done(function(data) {
+            }).then(function(data) {
                 that.loadSettings({
                     'token': data.token
                 });
@@ -86,7 +86,7 @@ define([
         	return api.request("post", "auth/signup", {
                 'email': email,
                 'password': password
-            }).done(function(data) {
+            }).then(function(data) {
             	that.set(data);
             });
         },
@@ -96,7 +96,7 @@ define([
          */
         logout: function() {
             var that = this;
-            return api.request("post", "auth/logout").done(function(data) {
+            return api.request("post", "auth/logout").then(function(data) {
                 that.set({
                     'email': null,
                     'token': null,
@@ -182,9 +182,9 @@ define([
             })
 
             // Sync with server
-            return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").done(function(data) {
+            return api.request("post", this.get("token")+"/tracker/"+tId+"/toggle").then(function(data) {
                 if (data.url == null) {
-                    that.loadSettings().done(function() {
+                    that.loadSettings().then(function() {
                         that.trigger("trackers:toggle", tId);
                     });                    
                 } else {

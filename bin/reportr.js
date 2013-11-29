@@ -24,7 +24,6 @@ var modulesSection = {
         "./tracker.github",
         "./tracker.runkeeper",
         "./tracker.fitbit",
-        "./tracker.ping",
 
         "./model.user",
         "./model.event",
@@ -71,7 +70,6 @@ cli
         return;
     }
 
-    var modules = _.union(modulesSection["*"], modulesSection[this.mode]);
     var app = new engineer.Application({
         'paths': [
             path.resolve(__dirname, '..', 'lib')
@@ -83,7 +81,9 @@ cli
         // Kill process
         process.exit(1);
     });
-    return app.load(modules).then(function() {
+    return app.load(modulesSection["*"]).then(function() {
+        return app.load(modulesSection[that.mode]);
+    }).then(function() {
         return Q(app);
     });
 });
