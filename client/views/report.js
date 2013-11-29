@@ -225,6 +225,7 @@ define([
         actionToggleOptions: function(e) {
             if (e != null) e.preventDefault();
             this.$el.toggleClass("mode-options");
+            this.trigger("mode:options", this.$el.hasClass("mode-options"));
         },
 
         /*

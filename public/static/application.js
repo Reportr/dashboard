@@ -25454,7 +25454,7 @@ Logger, Requests, Urls, Storage, Cache, Template, Resources, Queue, I18n, views)
     
     return hr;
 });}());
-define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385735714226,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"map":{"apiKey":"AIzaSyAAeM47baWKdmKoqWeIuK5bQCxtur6mWm0"},"revision":1385736531076,"baseUrl":"/"}; });
 //! moment.js
 //! version : 2.2.1
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -30210,6 +30210,7 @@ define('views/report',[
         actionToggleOptions: function(e) {
             if (e != null) e.preventDefault();
             this.$el.toggleClass("mode-options");
+            this.trigger("mode:options", this.$el.hasClass("mode-options"));
         },
 
         /*
@@ -34397,6 +34398,15 @@ define('views/reports/map',[
         initialize: function() {
             ReportMapView.__super__.initialize.apply(this, arguments);
 
+            // Options mode
+            this.report.on("mode:options", function(modeOption) {
+                if (!this.map) return;
+                this.map.setOptions({
+                    scrollwheel: modeOption,
+                    draggable: modeOption
+                });
+            }, this);
+
             // Map
             this.map = null;
             this.previousMarker = null;
@@ -34425,7 +34435,9 @@ define('views/reports/map',[
                 'center': new google.maps.LatLng(parseFloat(this.report.settings.lat || 51.508742), parseFloat(this.report.settings.lng || -0.120850)),
                 'zoom': parseInt(this.report.settings.zoom || 2),
                 'disableDefaultUI': true,
-                'mapTypeId': google.maps.MapTypeId.ROADMAP
+                'mapTypeId': google.maps.MapTypeId.ROADMAP,
+                'scrollwheel': false,
+                'draggable': false
             });
 
             google.maps.event.addListener(this.map, 'center_changed', function() {

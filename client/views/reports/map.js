@@ -35,6 +35,15 @@ define([
         initialize: function() {
             ReportMapView.__super__.initialize.apply(this, arguments);
 
+            // Options mode
+            this.report.on("mode:options", function(modeOption) {
+                if (!this.map) return;
+                this.map.setOptions({
+                    scrollwheel: modeOption,
+                    draggable: modeOption
+                });
+            }, this);
+
             // Map
             this.map = null;
             this.previousMarker = null;
@@ -63,7 +72,9 @@ define([
                 'center': new google.maps.LatLng(parseFloat(this.report.settings.lat || 51.508742), parseFloat(this.report.settings.lng || -0.120850)),
                 'zoom': parseInt(this.report.settings.zoom || 2),
                 'disableDefaultUI': true,
-                'mapTypeId': google.maps.MapTypeId.ROADMAP
+                'mapTypeId': google.maps.MapTypeId.ROADMAP,
+                'scrollwheel': false,
+                'draggable': false
             });
 
             google.maps.event.addListener(this.map, 'center_changed', function() {
