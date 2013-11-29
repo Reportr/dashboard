@@ -67,16 +67,40 @@ For running it in local, use [foreman from heroku](https://toolbelt.heroku.com/)
 foreman start
 ```
 
-#### Build and test the client
-
-Reportr client uses [HappyRhino.js](https://github.com/FriendCode/hr.js) which needs a build process.
+#### Run it on Ubuntu 12.04
 
 ```
-# Build and run
-make
+# Install dependencies:
+sudo apt-get install -y mongodb
 
-# or only build
+# Clone reportr
+git clone https://github.com/SamyPesse/reportr.git && cd ./reportr
+npm install
+
+# Build client
 make build
+
+# Write a run script with your configuration
+echo -e "
+PORT=8000 \
+FACEBOOK_CLIENTID=1 \
+FACEBOOK_CLIENTSECRET=1 \
+TWITTER_CLIENTID=1 \
+TWITTER_CLIENTSECRET=1 \
+FOURSQUARE_CLIENTID=1 \
+FOURSQUARE_CLIENTSECRET=1 \
+GITHUB_CLIENTID=1 \
+GITHUB_CLIENTSECRET=1 \
+RUNKEEPER_CLIENTID=1 \
+RUNKEEPER_CLIENTSECRET=1 \
+FITBIT_CLIENTID=1 \
+FITBIT_CLIENTSECRET=1 \
+node bin/reportr.js run --mode=all" > run.sh
+
+chmod +x run.sh
+
+# Start Reportr
+./run.sh
 ```
 
 #### Run for free on heroku (only one web dynoo)
