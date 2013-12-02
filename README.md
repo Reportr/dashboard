@@ -55,6 +55,23 @@ $ heroku addons:add mongolab:sandbox
 # Deploy the application
 $ git push heroku master
 
+# Set environment variables
+$ heroku config:set \
+HOST="<host>" \
+SESSION_SECRET="<secret>" \
+FACEBOOK_CLIENTID=1 \
+FACEBOOK_CLIENTSECRET=1 \
+TWITTER_CLIENTID=1 \
+TWITTER_CLIENTSECRET=1 \
+FOURSQUARE_CLIENTID=1 \
+FOURSQUARE_CLIENTSECRET=1 \
+GITHUB_CLIENTID=1 \
+GITHUB_CLIENTSECRET=1 \
+RUNKEEPER_CLIENTID=1 \
+RUNKEEPER_CLIENTSECRET=1 \
+FITBIT_CLIENTID=1 \
+FITBIT_CLIENTSECRET=1
+
 # Open the application in your browser
 $ heroku open
 ```
