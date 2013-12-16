@@ -7,6 +7,8 @@ The project is entirely open source and you can host your own Reportr instance o
 
 A simple instance of Reportr runs at [www.reportr.io](http://www.reportr.io). This is a very small instance and you can't use it yet for tracking a lot of events, but I'll probably scale this in the future.
 
+**Edit 16 december 2013**: Because of the high price and the evolution of the database, I stopped the reportr.io instance.
+
 [![Screen](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)](https://raw.github.com/SamyPesse/reportr/master/public/static/images/screens/1.png)
 
 ## Why is Reportr great?
