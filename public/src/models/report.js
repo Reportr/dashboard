@@ -26,6 +26,7 @@ define([
         // Update a report
         edit: function(data) {
             var that = this;
+            data = data || this.toJSON();
 
             return api.execute("put:report/"+this.get("id"), data)
             .then(function(_data) {

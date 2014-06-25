@@ -7,8 +7,10 @@ require([
     "models/report",
     "collections/reports",
     "utils/dialogs",
+    "views/visualizations",
+    "views/visualizations/all",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, Report, Reports, dialogs, template) {
+], function(_, $, Q, hr, args, Report, Reports, dialogs, VisualizationsList, allVisualizations, template) {
     // Configure hr
     hr.configure(args);
 
@@ -22,7 +24,8 @@ require([
         template: template,
         events: {
             "click .action-report-select": "selectReport",
-            "click .action-report-edit": "editReport"
+            "click .action-report-edit": "editReport",
+            "click .action-visualization-create": "createVisualization"
         },
 
 
@@ -35,6 +38,11 @@ require([
 
             // All reports
             this.reports = new Reports();
+
+            // Visualizations
+            this.visualizations = new VisualizationsList({
+                collection: this.report.visualizations
+            });
         },
 
         templateContext: function() {
@@ -52,6 +60,13 @@ require([
             return Application.__super__.render.apply(this, arguments);
         },
 
+        finish: function() {
+            this.visualizations.appendTo(this.$(".report-body"));
+
+            return Application.__super__.finish.apply(this, arguments);
+        },
+
+        // Change current report
         selectReport: function() {
             var that = this;
 
@@ -86,6 +101,8 @@ require([
                 return that.report;
             });
         },
+
+        // Create a new report
         createReport: function() {
             var that = this;
 
@@ -99,6 +116,8 @@ require([
                 return that.reports.create(args);
             });
         },
+
+        // Edit current report
         editReport: function() {
             var that = this;
             return dialogs.fields("Edit report", {
@@ -109,6 +128,35 @@ require([
             }, this.report.toJSON())
             .then(function(data) {
                 return that.report.edit(data);
+            });
+        },
+
+        // Create a new visualization
+        createVisualization: function() {
+            var that = this;
+
+            return dialogs.fields("New visualization", {
+                "eventName": {
+                    'label': "Event",
+                    'type': "text"
+                },
+                "type": {
+                    'type': "select",
+                    'options': _.chain(allVisualizations)
+                    .map(function(visualization) {
+                        return [
+                            visualization.id,
+                            visualization.title
+                        ];
+                    })
+                    .object()
+                    .value()
+                }
+            })
+            .then(function(data) {
+                that.report.visualizations.add(data);
+
+                return that.report.edit().fail(dialogs.error);
             });
         }
     });
