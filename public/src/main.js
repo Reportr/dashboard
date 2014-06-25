@@ -21,7 +21,8 @@ require([
         name: "Reportr",
         template: template,
         events: {
-            "click .action-select-report": "selectReport"
+            "click .action-report-select": "selectReport",
+            "click .action-report-edit": "editReport"
         },
 
 
@@ -96,6 +97,18 @@ require([
             })
             .then(function(args) {
                 return that.reports.create(args);
+            });
+        },
+        editReport: function() {
+            var that = this;
+            return dialogs.fields("Edit report", {
+                "title": {
+                    label: "Title",
+                    type: "text"
+                }
+            }, this.report.toJSON())
+            .then(function(data) {
+                return that.report.edit(data);
             });
         }
     });
