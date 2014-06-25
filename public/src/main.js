@@ -141,6 +141,7 @@ require([
                     'type': "text"
                 },
                 "type": {
+                    'label': "Type",
                     'type': "select",
                     'options': _.chain(allVisualizations)
                     .map(function(visualization) {
