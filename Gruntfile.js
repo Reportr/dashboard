@@ -8,10 +8,18 @@ module.exports = function (grunt) {
 
     // Load grunt modules
     grunt.loadNpmTasks('hr.js');
+    grunt.loadNpmTasks("grunt-bower-install-simple");
 
     // Init GRUNT configuraton
     grunt.initConfig({
         "pkg": pkg,
+        "bower-install-simple": {
+            options: {
+                color:       true,
+                production:  false,
+                directory:   "public/src/vendors"
+            }
+        },
         "hr": {
             "app": {
                 // Base directory for the application
@@ -55,12 +63,18 @@ module.exports = function (grunt) {
         }
     });
 
+    // Prepare build
+    grunt.registerTask("prepare", [
+        "bower-install-simple"
+    ]);
+
     // Build
     grunt.registerTask('build', [
         'hr:app'
     ]);
 
     grunt.registerTask('default', [
+        'prepare',
         'build'
     ]);
 };
