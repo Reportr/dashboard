@@ -2,15 +2,25 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
-    "views/visualizations/base"
-], function(_, $, hr, BaseVisualization) {
-    var BarVisualization = hr.View.extend({
+    "core/api",
+    "views/visualizations/base",
+    "text!resources/templates/visualizations/bar.html"
+], function(_, $, hr, api, BaseVisualization, template) {
+
+    var BarVisualization = BaseVisualization.extend({
         className: "visualization visualization-bar",
         defaults: {},
         events: {},
+        template: template,
 
-        initialize: function(options) {
-            BarVisualization.__super__.initialize.apply(this, arguments);
+        pull: function() {
+            return api.execute("get:stats/categories", {
+                type: this.model.get("eventName"),
+                field: "domain"
+            })
+            .then(function(data) {
+                return data.slice(0, 4);
+            });
         }
     });
 

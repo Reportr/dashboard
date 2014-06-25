@@ -8,7 +8,7 @@ define([
 ], function(_, $, hr, Visualizations, allVisualizations, template) {
 
     var VisualizationView = hr.List.Item.extend({
-        className: "visualization",
+        className: "visualization-container",
         defaults: {},
         events: {},
         template: template,

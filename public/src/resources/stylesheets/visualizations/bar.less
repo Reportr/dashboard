@@ -1,0 +1,43 @@
+.visualization.visualization-bar {
+    width: 100%;
+    height: @bar-height;
+    position: relative;
+    padding-top: @bar-label-height;
+    .clearfix();
+
+    .bar {
+        height: 100%;
+        display: block;
+        vertical-align: baseline;
+        box-sizing: content-box;
+        position: relative;
+        float: left;
+
+        .bar-inner {
+            background: #eee;
+            color: #fff;
+
+            margin: 0 2px;
+            position: absolute;
+            bottom: @bar-label-height;
+            width: 100%;
+            border-right: 2px solid #fff;
+
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: @bar-label-height;
+            text-align: center;
+
+            line-height: @bar-label-height;
+            text-overflow: hidden;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+}
