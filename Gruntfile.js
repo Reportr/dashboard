@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 "name": "Reportr",
 
                 // Mode debug
-                "debug": false,
+                "debug": process.env.DEBUG != null,
 
                 // Main entry point for application
                 "main": "main",
@@ -56,7 +56,19 @@ module.exports = function (grunt) {
                 "shim": {
                     "main": {
                         "deps": [
-                            'hr/dom'
+                            'hr/dom',
+                            'vendors/bootstrap/js/carousel',
+                            'vendors/bootstrap/js/dropdown',
+                            'vendors/bootstrap/js/button',
+                            'vendors/bootstrap/js/modal',
+                            'vendors/bootstrap/js/affix',
+                            'vendors/bootstrap/js/alert',
+                            'vendors/bootstrap/js/collapse',
+                            'vendors/bootstrap/js/tooltip',
+                            'vendors/bootstrap/js/popover',
+                            'vendors/bootstrap/js/scrollspy',
+                            'vendors/bootstrap/js/tab',
+                            'vendors/bootstrap/js/transition'
                         ]
                     }
                 },
