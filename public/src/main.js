@@ -30,15 +30,25 @@ require([
 
             // Active report
             this.report = new Report();
+            this.listenTo(this.report, "set", this.update);
 
             // All reports
             this.reports = new Reports();
         },
 
-        finish: function() {
-            this.reports.loadAll().fail(dialogs.error);
+        templateContext: function() {
+            return {
+                hasReport: this.report.get("id") != null,
+                report: this.report
+            };
+        },
 
-            return Application.__super__.finish.apply(this, arguments);
+        render: function() {
+            if (this.report.get("id") == null && this.reports.size() > 0) {
+                this.report.set(this.reports.first().toJSON(), { silent: true });
+            }
+
+            return Application.__super__.render.apply(this, arguments);
         },
 
         selectReport: function() {
@@ -91,5 +101,5 @@ require([
     });
 
     var app = new Application();
-    app.run();
+    app.reports.loadAll().then(app.run.bind(app), dialogs.error);
 });

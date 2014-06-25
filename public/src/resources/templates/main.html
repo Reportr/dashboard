@@ -1,10 +1,14 @@
+<% if (hasReport) { %>
 <header>
     <div class="container">
-        <div class="pull-right">
+        <div class="pull-right actions">
             <div class="btn-group">
                 <button class="btn btn-link action-select-report" title="Change report"><span class="octicon octicon-three-bars"></span></button>
             </div>
         </div>
-        <h1>reportr</h1>
+        <h1 class="report-title"><%- report.get("title") %></h1>
     </div>
 </header>
+<% } else { %>
+
+<% } %>
