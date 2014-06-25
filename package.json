@@ -19,6 +19,7 @@
         "cookie-parser": "1.0.1",
         "express-session": "1.0.4",
         "connect-mongo-store": "0.1.8",
+        "basic-auth-connect": "1.0.0",
         "morgan": "1.0.1"
     },
     "devDependencies": {
