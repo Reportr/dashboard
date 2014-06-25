@@ -3,8 +3,9 @@ require([
     "hr/dom",
     "hr/promise",
     "hr/hr",
-    "hr/args"
-], function(_, $, Q, hr, args) {
+    "hr/args",
+    "text!resources/templates/main.html",
+], function(_, $, Q, hr, args, template) {
     // Configure hr
     hr.configure(args);
 
@@ -15,9 +16,9 @@ require([
     // Define base application
     var Application = hr.Application.extend({
         name: "Reportr",
-        metas: {},
-        links: {},
+        template: template,
         events: {},
+
 
         initialize: function() {
             Application.__super__.initialize.apply(this, arguments);

@@ -37,10 +37,13 @@ module.exports = function (grunt) {
                 // Build output directory
                 "build": path.resolve(__dirname, "public/build"),
 
+                // HTML entry point
+                'index': grunt.file.read(path.resolve(srcPath, "index.html")),
+
                 // Static files mappage
                 "static": {
-                    "fonts": path.resolve(srcPath, "resources", "fonts"),
-                    "images": path.resolve(srcPath, "resources", "images")
+                    "octicons": path.resolve(srcPath, "vendors/octicons/octicons"),
+                    "images": path.resolve(srcPath, "resources/images")
                 },
 
                 // Stylesheet entry point
