@@ -1,11 +1,26 @@
 define([
     "hr/hr",
-    "core/api"
-], function(hr, api) {
+    "core/api",
+    "collections/visualizations"
+], function(hr, api, Visualizations) {
     var Report = hr.Model.extend({
         defaults: {
             id: null,
-            title: null
+            title: null,
+            visualizations: []
+        },
+
+        initialize: function() {
+            Report.__super__.initialize.apply(this, arguments);
+
+            this.visualizations = new Visualizations();
+            this.visualizations.reset(this.get("visualizations"));
+            this.listenTo(this.visualizations, "add remove change reset", function() {
+                this.set("visualizations", this.visualizations.toJSON(), { silent: true });
+            });
+            this.listenTo(this, "change:visualizations", function() {
+                this.visualizations.reset(this.get("visualizations"));
+            });
         },
 
         // Update a report
