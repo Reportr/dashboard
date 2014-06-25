@@ -32,6 +32,9 @@
     "bin": {
         "reportr": "./bin/reportr.js"
     },
+    "scripts": {
+        "test": "export TESTING=true; mocha --reporter list"
+    },
     "engines": {
         "node": "0.8.x",
         "npm":  "1.1.x"
