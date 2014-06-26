@@ -23,7 +23,7 @@ define([
             var that = this;
 
             return api.execute("post:reports", args)
-            .then(function(data) {
+            .then(function() {
                 return that.loadAll();
             });
         }

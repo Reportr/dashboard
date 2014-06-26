@@ -25,6 +25,7 @@ require([
         events: {
             "click .action-report-select": "selectReport",
             "click .action-report-edit": "editReport",
+            "click .action-report-remove": "removeReport",
             "click .action-visualization-create": "createVisualization"
         },
 
@@ -129,6 +130,24 @@ require([
             .then(function(data) {
                 return that.report.edit(data);
             });
+        },
+
+        // Remove current report
+        removeReport: function() {
+            var that = this;
+
+            return dialogs.confirm("Remove this report?")
+            .then(function() {
+                return that.report.remove();
+            })
+            .then(function() {
+                that.report.clear();
+                return that.reports.loadAll();
+            })
+            .then(function() {
+                that.update();
+            })
+            .fail(dialogs.error);
         },
 
         // Create a new visualization

@@ -35,6 +35,12 @@ define([
                 that.set(_data);
                 return that;
             });
+        },
+
+        // Delete this report
+        remove: function() {
+            var that = this;
+            return api.execute("delete:report/"+this.get("id"));
         }
     });
 
