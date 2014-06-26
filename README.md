@@ -47,7 +47,19 @@ Reportr is configured using environment variables.
 
 | Name | Description |
 | ---- | ----------- |
+| PORT | Port for running the application, default is 5000 |
 | MONGODB_URL | Url for the mongoDB database |
 | AUTH_USERNAME | Username for authentication |
 | AUTH_PASSWORD | Password for authentication |
 
+## Concepts
+
+* **Event**: an event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
+
+```
+$ curl -X POST --data '{ "type":"home.temperature", "properties": { "temperature": 66 } }' http://localhost:5000/api/events
+```
+
+* **Report**: a report is a collection of event visualizations, it groups in the dashboard visualizations that are related, for example: I can have 2 reports: "My Home Activity" and "My GitHub Activity"
+
+* **Visualization**: a visualization is a configured way to show data, for example in a pie, bar chart or time graph.
