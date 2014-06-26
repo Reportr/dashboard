@@ -1,9 +1,9 @@
 .visualization.visualization-bar {
-    height: @bar-height;
+    height: @visualization-content-height;
     position: relative;
 
-    padding-top: @bar-label-height;
-    margin: 15px;
+    padding: @visualization-content-padding;
+    padding-top: @visualization-content-padding+@bar-label-height;
 
     .clearfix();
 
@@ -32,6 +32,7 @@
             font-size: 20px;
 
             display: table;
+            overflow: hidden;
 
             .percent {
                 display: table-cell;
@@ -46,7 +47,7 @@
             width: 100%;
             height: @bar-label-height;
             text-align: center;
-
+            font-size: 12px;
             line-height: @bar-label-height;
             text-overflow: hidden;
             overflow: hidden;

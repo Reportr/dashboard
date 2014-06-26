@@ -3,6 +3,8 @@
     "version": "1.0.0",
     "dependencies": {
         "bootstrap": "3.1.1",
-        "octicons": "2.0.2"
+        "octicons": "2.0.2",
+        "d3": "3.4.8",
+        "rickshaw": "1.4.6"
     }
 }

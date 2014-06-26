@@ -1,10 +1,12 @@
 define([
     "views/visualizations/bar",
-    "views/visualizations/value"
-], function(bar, value) {
+    "views/visualizations/value",
+    "views/visualizations/time"
+], function(bar, value, time) {
 
     return {
         'bar': bar,
-        'value': value
+        'value': value,
+        'time': time
     };
 });
