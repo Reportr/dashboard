@@ -56,7 +56,14 @@ define([
         Item: VisualizationView,
         defaults: _.defaults({
 
-        }, hr.List.prototype.defaults)
+        }, hr.List.prototype.defaults),
+
+        displayEmptyList: function() {
+            return $("<div>", {
+                'class': "visualizations-list-empty",
+                'html': '<span class="octicon octicon-pulse"></span> <p>This report is empty.</p>'
+            });
+        },
     });
 
     return VisualizationsList;
