@@ -55,7 +55,7 @@ require([
 
         render: function() {
             if (this.report.get("id") == null && this.reports.size() > 0) {
-                this.report.set(this.reports.first().toJSON(), { silent: true });
+                return this.report.set(this.reports.first().toJSON());
             }
             this.visualizations.$el.detach();
 
