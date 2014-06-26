@@ -1,7 +1,7 @@
 <% _.each(data, function(st) { %>
 <div class="bar" style="width: <%- Math.floor(100/data.length) %>%">
     <div class="bar-inner" style="height: <%- st.percents.max.toFixed(2) %>%;">
-    <%- st.percents.total %>%
+        <span class="percent"><%- st.percents.total %>%</span>
     </div>
     <div class="bar-label">
     <%- st.key %>

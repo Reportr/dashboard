@@ -14,9 +14,12 @@
         .btn {
             color: @main-toolbar-color;
             font-size: 26px;
+            box-shadow: none;
+            outline: none;
 
-            &:hover {
+            &:hover, &:focus {
                 color: darken(@main-toolbar-color, 15%);
+                box-shadow: none;
             }
         }
 
