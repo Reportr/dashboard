@@ -31,6 +31,7 @@ define([
                     "size": {
                         'label': "Layout",
                         'type': "select",
+                        'default': "small",
                         'options': {
                             'big': "Large",
                             'small': "Normal"

@@ -8,6 +8,7 @@
 @brand-danger:          #fb6b5b;
 
 @modal-backdrop-bg:     #fff;
+@grid-gutter-width:     15px;
 
 
 /* Header */
@@ -17,13 +18,16 @@
 
 /* Body */
 @main-body-background: #f3f5f9;
-@main-body-padding: 15px;
+@main-body-padding: @grid-gutter-width @grid-gutter-width/2;
 
 /* Toolbar */
 @main-toolbar-width: 50px;
 @main-toolbar-background: @main-header-background;
 @main-toolbar-border: @main-header-border;
 @main-toolbar-color: #ccc;
+
+/* Visualizations */
+@visualization-action-color: #ccc;
 
 /* Bar charts */
 @bar-height: 220px;

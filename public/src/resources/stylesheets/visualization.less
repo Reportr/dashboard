@@ -6,7 +6,7 @@
     .visualization-container {
         padding: 5px;
         margin: 0px;
-        margin-bottom: @main-body-padding;
+        margin-bottom: @grid-gutter-width;
         background: #fff;
         border-radius: 2px;
         border: 1px solid #ebeff6;
@@ -24,7 +24,11 @@
             }
 
             .btn-link {
-                color: #888;
+                color: @visualization-action-color;
+
+                &:hover, &:focus {
+                    color: darken(@visualization-action-color, 15%);
+                }
             }
         }
 

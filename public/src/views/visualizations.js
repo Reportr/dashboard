@@ -8,7 +8,7 @@ define([
 ], function(_, $, hr, Visualizations, allVisualizations, template) {
 
     var VisualizationView = hr.View.extend({
-        className: "visualization-container",
+        className: "",
         defaults: {},
         events: {
             "click .action-visualization-edit": "editConfig"
