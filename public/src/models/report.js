@@ -18,6 +18,7 @@ define([
             });
             this.visualizations.reset(this.get("visualizations"));
             this.listenTo(this.visualizations, "add remove change reset", function() {
+                this.del("visualizations", { silent: true });
                 this.set("visualizations", this.visualizations.toJSON(), { silent: true });
             });
             this.listenTo(this, "change:visualizations", function() {

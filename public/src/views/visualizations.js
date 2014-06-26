@@ -2,15 +2,17 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/dialogs",
     "collections/visualizations",
     "views/visualizations/all",
     "text!resources/templates/visualization.html"
-], function(_, $, hr, Visualizations, allVisualizations, template) {
+], function(_, $, hr, dialogs, Visualizations, allVisualizations, template) {
 
     var VisualizationView = hr.View.extend({
         className: "",
         defaults: {},
         events: {
+            "click .action-visualization-remove": "removeVisu",
             "click .action-visualization-edit": "editConfig"
         },
         template: template,
@@ -45,6 +47,18 @@ define([
             .then(function() {
 
             })
+        },
+
+        removeVisu: function() {
+            var that = this;
+            var report = this.model.report;
+
+            dialogs.confirm("Do you really want to remove this visualization?")
+            .then(function() {
+                that.model.destroy();
+
+                return report.edit().fail(dialogs.fail);
+            });
         }
     });
 
