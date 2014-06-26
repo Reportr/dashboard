@@ -63,7 +63,6 @@ require([
 
         finish: function() {
             this.visualizations.appendTo(this.$(".report-body"));
-
             return Application.__super__.finish.apply(this, arguments);
         },
 

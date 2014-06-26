@@ -1,17 +1,21 @@
 <% if (hasReport) { %>
-<header>
+<div class="main-header">
     <div class="container">
-        <div class="pull-right actions">
-            <div class="btn-group">
-                <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>
-                <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>
-                <button class="btn btn-link action-report-select" title="Change report"><span class="octicon octicon-three-bars"></span></button>
-            </div>
-        </div>
-        <h1 class="report-title"><%- report.get("title") %></h1>
+        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>
     </div>
-</header>
-<div class="container">
+</div>
+<div class="main-toolbar">
+    <div class="group-actions primary">
+        <button class="btn btn-link action-report-select" title="Change report"><span class="octicon octicon-pulse"></span></button>
+        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>
+        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>
+    </div>
+    <div class="group-actions secondary">
+        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>
+        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>
+    </div>
+</div>
+<div class="main-body">
     <div class="report-body"></div>
 </div>
 <% } else { %>
