@@ -1,5 +1,4 @@
 node_modules/
-*.pyc
-chrome-extension.zip
 .env
-./public
+public/build/
+public/src/vendors/

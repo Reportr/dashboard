@@ -1,0 +1,31 @@
+.main-toolbar {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    width: @main-toolbar-width;
+
+    background: @main-toolbar-background;
+    border-right: 1px solid @main-toolbar-border;
+
+    text-align: center;
+
+    .group-actions {
+        .btn {
+            color: @main-toolbar-color;
+            font-size: 26px;
+            box-shadow: none;
+            outline: none;
+
+            &:hover, &:focus {
+                color: darken(@main-toolbar-color, 15%);
+                box-shadow: none;
+            }
+        }
+
+        &.secondary {
+            position: absolute;
+            bottom: 0px;
+        }
+    }
+}
