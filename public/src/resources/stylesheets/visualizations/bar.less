@@ -1,8 +1,10 @@
 .visualization.visualization-bar {
-    width: 100%;
     height: @bar-height;
     position: relative;
+
     padding-top: @bar-label-height;
+    margin: 15px;
+
     .clearfix();
 
     .bar {
@@ -14,13 +16,17 @@
         float: left;
 
         .bar-inner {
-            background: #eee;
+            background: @brand-success;
             color: #fff;
 
             margin: 0 2px;
+            padding: 15px 0px;
+
             position: absolute;
             bottom: @bar-label-height;
             width: 100%;
+
+            border-radius: 2px;
             border-right: 2px solid #fff;
 
             text-align: center;
@@ -38,6 +44,12 @@
             text-overflow: hidden;
             overflow: hidden;
             white-space: nowrap;
+        }
+
+        &:hover {
+            .bar-inner {
+                background: darken(@brand-success, 20%);
+            }
         }
     }
 }
