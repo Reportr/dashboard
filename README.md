@@ -9,3 +9,19 @@ The project is entirely open source and you can host your own Reportr instance o
 
 [![Screen Preview](./preview.png)](./preview.png)
 
+## API and Events
+
+Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
+
+| Endpoint | HTTP Method | Description | Arguments |
+| -------- | ----------- | ----------- | --------- |
+| /api/infos | GET | Get informations about this instance |  |
+| /api/events | POST | Post a new event | `<string>type`, `<object>properties` |
+| /api/events | GET | List all events | `<string>type`, `<int>start(0)`, `<int>limit` |
+| /api/stats/categories | GET | Get categorized events stats | `<string>type`,`<string>field` |
+| /api/stats/time | GET | Get time stats | `<string>type`,`<string>fields`, `<string>interval`, `<string>func` |
+| /api/reports | POST | Create a new report | `<string>title` |
+| /api/reports | GET | List all reports |  |
+| /api/report/:id | PUT | Update a report | `<string>title`, `<array>visualizations` |
+| /api/report/:id | DELETE | Remove a report |  |
+
