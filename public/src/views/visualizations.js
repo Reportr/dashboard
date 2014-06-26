@@ -23,7 +23,7 @@ define([
         },
 
         render: function() {
-            var size = (this.model.get("size") == "big") ? 12 : 6;
+            var size = (this.model.get("configuration.size") == "big") ? 12 : 6;
             this.$el.attr("class", this.className+" col-md-"+size);
 
             this.visu.$el.detach();
