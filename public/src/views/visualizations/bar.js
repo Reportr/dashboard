@@ -16,7 +16,7 @@ define([
         pull: function() {
             return api.execute("get:stats/categories", {
                 type: this.model.get("eventName"),
-                field: "domain"
+                field: this.model.get("configuration.field")
             })
             .then(function(data) {
                 return data.slice(0, 4);
@@ -30,7 +30,7 @@ define([
         View: BarVisualization,
         config: {
             field: {
-                type: "string",
+                type: "text",
                 label: "Field"
             }
         }

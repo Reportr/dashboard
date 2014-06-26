@@ -7,15 +7,16 @@ define([
     "text!resources/templates/visualization.html"
 ], function(_, $, hr, Visualizations, allVisualizations, template) {
 
-    var VisualizationView = hr.List.Item.extend({
+    var VisualizationView = hr.View.extend({
         className: "visualization-container",
         defaults: {},
-        events: {},
+        events: {
+            "click .action-visualization-edit": "editConfig"
+        },
         template: template,
 
         initialize: function() {
             VisualizationView.__super__.initialize.apply(this, arguments);
-
             this.visu = new allVisualizations[this.model.get("type")].View({
                 model: this.model
             });
@@ -26,7 +27,6 @@ define([
             this.$el.attr("class", this.className+" col-md-"+size);
 
             this.visu.$el.detach();
-
             return VisualizationView.__super__.render.apply(this, arguments);
         },
 
@@ -34,7 +34,17 @@ define([
             this.visu.appendTo(this.$(".visualization-body"));
             this.visu.update();
 
+            this.delegateEvents();
             return VisualizationView.__super__.finish.apply(this, arguments);
+        },
+
+        editConfig: function(e) {
+            if (e) e.preventDefault();
+
+            this.model.configure()
+            .then(function() {
+
+            })
         }
     });
 

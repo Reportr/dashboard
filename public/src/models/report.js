@@ -13,7 +13,9 @@ define([
         initialize: function() {
             Report.__super__.initialize.apply(this, arguments);
 
-            this.visualizations = new Visualizations();
+            this.visualizations = new Visualizations({
+                report: this
+            });
             this.visualizations.reset(this.get("visualizations"));
             this.listenTo(this.visualizations, "add remove change reset", function() {
                 this.set("visualizations", this.visualizations.toJSON(), { silent: true });

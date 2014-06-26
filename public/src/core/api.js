@@ -20,7 +20,7 @@ define([
             var httpMethod = parts[0];
             var pathMethod = parts.slice(1).join(":");
 
-            return hr.Requests[httpMethod]("api/"+pathMethod, args, options).then(function(data) {
+            return hr.Requests[httpMethod]("api/"+pathMethod, httpMethod == "get" ? args : JSON.stringify(args), options).then(function(data) {
                 return data;
             }, function(err) {
                 try {

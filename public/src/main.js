@@ -56,6 +56,7 @@ require([
             if (this.report.get("id") == null && this.reports.size() > 0) {
                 this.report.set(this.reports.first().toJSON(), { silent: true });
             }
+            this.visualizations.$el.detach();
 
             return Application.__super__.render.apply(this, arguments);
         },
