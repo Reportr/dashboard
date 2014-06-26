@@ -145,9 +145,9 @@ require([
                     'label': "Type",
                     'type': "select",
                     'options': _.chain(allVisualizations)
-                    .map(function(visualization) {
+                    .map(function(visualization, vId) {
                         return [
-                            visualization.id,
+                            vId,
                             visualization.title
                         ];
                     })

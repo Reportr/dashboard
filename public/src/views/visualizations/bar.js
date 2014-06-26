@@ -25,7 +25,6 @@ define([
     });
 
     return {
-        id: "bar",
         title: "Bar Chart",
         View: BarVisualization,
         config: {
