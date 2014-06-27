@@ -40,6 +40,7 @@ require([
 
             // All reports
             this.reports = new Reports();
+            this.listenTo(this.reports, "add remove reset", this.update);
 
             // Visualizations
             this.visualizations = new VisualizationsList({
@@ -75,30 +76,16 @@ require([
             return that.reports.loadAll()
             .then(function() {
                 return dialogs.select("Select a report", "Choose a new report to open.",
-                    _.chain(that.reports.map(function(r) {
+                    _.object(that.reports.map(function(r) {
                         return [
                             r.get("id"),
                             r.get("title")
                         ]
-                    }))
-                    .concat([
-                        [
-                            '',
-                            '-------------------'
-                        ],
-                        [
-                            'new',
-                            'Create a new report'
-                        ]
-                    ])
-                    .object()
-                    .value(),
+                    })),
                     that.report.get("id")
                 );
             })
             .then(function(rId) {
-                if (rId == "new") return that.createReport();
-
                 that.report.set(that.reports.get(rId).toJSON());
                 return that.report;
             });
