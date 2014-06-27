@@ -5,13 +5,13 @@ define([
     "core/api",
     "views/visualizations/base",
     "text!resources/templates/visualizations/bar.html"
-], function(_, $, hr, api, BaseVisualization, template) {
+], function(_, $, hr, api, BaseVisualization, templateFile) {
 
     var BarVisualization = BaseVisualization.extend({
         className: "visualization visualization-bar",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         pull: function() {
             var that = this;

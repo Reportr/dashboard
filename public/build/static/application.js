@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403905401552,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403906655630,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26631,13 +26631,13 @@ define('views/visualizations/bar',[
     "core/api",
     "views/visualizations/base",
     "text!resources/templates/visualizations/bar.html"
-], function(_, $, hr, api, BaseVisualization, template) {
+], function(_, $, hr, api, BaseVisualization, templateFile) {
 
     var BarVisualization = BaseVisualization.extend({
         className: "visualization visualization-bar",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         pull: function() {
             var that = this;
@@ -26706,13 +26706,13 @@ define('views/visualizations/value',[
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, template, BaseVisualization, template) {
+], function(_, $, hr, api, template, BaseVisualization, templateFile) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         templateContext: function() {
             return {
@@ -40023,14 +40023,14 @@ define('views/visualizations/time',[
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, template) {
+], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, templateFile) {
     window.d3 = d3;
 
     var TimeVisualization = BaseVisualization.extend({
         className: "visualization visualization-time",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         finish: function() {
             try {

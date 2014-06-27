@@ -8,14 +8,14 @@ define([
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, template) {
+], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, templateFile) {
     window.d3 = d3;
 
     var TimeVisualization = BaseVisualization.extend({
         className: "visualization visualization-time",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         finish: function() {
             try {

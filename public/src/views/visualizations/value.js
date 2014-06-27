@@ -6,13 +6,13 @@ define([
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, template, BaseVisualization, template) {
+], function(_, $, hr, api, template, BaseVisualization, templateFile) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
         defaults: {},
         events: {},
-        template: template,
+        template: templateFile,
 
         templateContext: function() {
             return {
