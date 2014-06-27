@@ -57,7 +57,7 @@ require([
 
         render: function() {
             if (this.report.get("id") == null && this.reports.size() > 0) {
-                return this.report.set(this.reports.first().toJSON());
+                return this.setReport(this.reports.first());
             }
             this.visualizations.$el.detach();
 
@@ -67,6 +67,14 @@ require([
         finish: function() {
             this.visualizations.appendTo(this.$(".report-body"));
             return Application.__super__.finish.apply(this, arguments);
+        },
+
+        // Set active report
+        setReport: function(r) {
+            r = r.toJSON? r.toJSON() : r;
+
+            this.report.del("visualizations", { silent: true });
+            this.report.set(r);
         },
 
         // Change current report
@@ -86,7 +94,7 @@ require([
                 );
             })
             .then(function(rId) {
-                that.report.set(that.reports.get(rId).toJSON());
+                that.setReport(that.reports.get(rId));
                 return that.report;
             });
         },
