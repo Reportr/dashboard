@@ -56,6 +56,10 @@
                 &:hover, &:focus {
                     color: darken(@visualization-action-color, 15%);
                 }
+                &.active {
+                    color: @brand-success;
+                    .box-shadow(none);
+                }
             }
 
             .visualization-actions {
