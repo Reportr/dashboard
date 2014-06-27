@@ -2,25 +2,60 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/dragdrop",
     "utils/dialogs",
     "collections/visualizations",
     "views/visualizations/all",
     "text!resources/templates/visualization.html"
-], function(_, $, hr, dialogs, Visualizations, allVisualizations, template) {
+], function(_, $, hr, dnd, dialogs, Visualizations, allVisualizations, template) {
+    var drag = new dnd.DraggableType();
 
-    var VisualizationView = hr.View.extend({
-        className: "",
+    var VisualizationView = hr.List.Item.extend({
+        className: "visualization-el",
         defaults: {},
         events: {
+            "click .action-visualization-move": "moveVisu",
             "click .action-visualization-remove": "removeVisu",
             "click .action-visualization-edit": "editConfig"
         },
         template: template,
 
         initialize: function() {
+            var that = this;
             VisualizationView.__super__.initialize.apply(this, arguments);
+
             this.visu = new allVisualizations[this.model.get("type")].View({
                 model: this.model
+            });
+
+            this.dropArea = new dnd.DropArea({
+                view: this,
+                dragType: drag,
+                handler: function(visu) {
+                    var i = that.collection.indexOf(that.model);
+                    var ib = that.collection.indexOf(visu);
+
+                    if (ib >= 0 && ib < i) {
+                        i = i - 1;
+                    }
+                    visu.collection.remove(visu);
+                    that.collection.add(visu, {
+                        at: i
+                    });
+
+                    visu.report.edit();
+                }
+            });
+
+            drag.enableDrag({
+                view: this,
+                data: this.model,
+                start: function() {
+                    return that.$el.hasClass("movable");
+                },
+                end: function() {
+                    that.moveVisu(false);
+                }
             });
         },
 
@@ -59,6 +94,12 @@ define([
 
                 return report.edit().fail(dialogs.fail);
             });
+        },
+
+        moveVisu: function(st) {
+            if (!_.isBoolean(st)) st = null;
+            this.$el.toggleClass("movable", st);
+            this.$(".action-visualization-move").toggleClass("active", this.$el.hasClass("movable"));
         }
     });
 

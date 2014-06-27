@@ -3,6 +3,32 @@
     padding: 0px;
     margin: 0px;
 
+    .visualization-el {
+        padding: @grid-gutter-width/2;
+
+        &.move,
+        &.active.move {
+            position: fixed;
+            z-index: 100000;
+            pointer-events:none;
+
+            * {
+                pointer-events:none;
+            }
+        }
+
+        &.dragover {
+            &.col-md-6 {
+                border-left: 2px solid @brand-success;
+            }
+
+            &.col-md-12 {
+                border-top: 2px solid @brand-success;
+            }
+        }
+    }
+
+
     .visualization-container {
         padding: 0px;
         margin: 0px;
