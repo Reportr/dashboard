@@ -61,12 +61,13 @@
                 }
 
                 .visualization-actions {
-                    display: none;
+                    opacity: 0;
+                    .transition(all ease @transition-duration);
                 }
 
                 &:hover {
                     .visualization-actions {
-                        display: block;
+                        opacity: 1;
                     }
                 }
             }
