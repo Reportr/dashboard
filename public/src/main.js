@@ -4,13 +4,14 @@ require([
     "hr/promise",
     "hr/hr",
     "hr/args",
+    "core/api",
     "models/report",
     "collections/reports",
     "utils/dialogs",
     "views/visualizations",
     "views/visualizations/all",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, Report, Reports, dialogs, VisualizationsList, allVisualizations, template) {
+], function(_, $, Q, hr, args, api, Report, Reports, dialogs, VisualizationsList, allVisualizations, template) {
     // Configure hr
     hr.configure(args);
 
@@ -150,24 +151,33 @@ require([
         createVisualization: function() {
             var that = this;
 
-            return dialogs.fields("New visualization", {
-                "eventName": {
-                    'label': "Event",
-                    'type': "text"
-                },
-                "type": {
-                    'label': "Type",
-                    'type': "select",
-                    'options': _.chain(allVisualizations)
-                    .map(function(visualization, vId) {
-                        return [
-                            vId,
-                            visualization.title
-                        ];
-                    })
-                    .object()
-                    .value()
-                }
+            return api.execute("get:types")
+            .then(function(types) {
+                return dialogs.fields("New visualization", {
+                    "eventName": {
+                        'label': "Event",
+                        'type': "select",
+                        'options': _.chain(types)
+                        .map(function(type) {
+                            return [type.type, type.type];
+                        })
+                        .object()
+                        .value()
+                    },
+                    "type": {
+                        'label': "Type",
+                        'type': "select",
+                        'options': _.chain(allVisualizations)
+                        .map(function(visualization, vId) {
+                            return [
+                                vId,
+                                visualization.title
+                            ];
+                        })
+                        .object()
+                        .value()
+                    }
+                })
             })
             .then(function(data) {
                 that.report.visualizations.add(data);

@@ -32,6 +32,7 @@ Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
 | Endpoint | HTTP Method | Description | Arguments |
 | -------- | ----------- | ----------- | --------- |
 | /api/infos | GET | Get informations about this instance |  |
+| /api/types | GET | Return all event types |  |
 | /api/events | POST | Post a new event | `<string>type`, `<object>properties` |
 | /api/events | GET | List all events | `<string>type`, `<int>start(0)`, `<int>limit` |
 | /api/stats/categories | GET | Get categorized events stats | `<string>type`,`<string>field` |
