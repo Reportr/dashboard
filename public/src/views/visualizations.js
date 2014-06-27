@@ -60,8 +60,9 @@ define([
         },
 
         render: function() {
-            var size = (this.model.getConf("size") == "big") ? 12 : 6;
-            this.$el.attr("class", this.className+" col-md-"+size);
+            var size = (this.model.getConf("size") == "big") ? "big" : "small";
+            var csize = (size == "big") ? 12 : 6;
+            this.$el.attr("class", this.className+" col-md-"+csize+" size-"+size);
 
             this.visu.$el.detach();
             return VisualizationView.__super__.render.apply(this, arguments);

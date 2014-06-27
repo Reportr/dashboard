@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403904466975,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403905401552,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40751,8 +40751,9 @@ define('views/visualizations',[
         },
 
         render: function() {
-            var size = (this.model.getConf("size") == "big") ? 12 : 6;
-            this.$el.attr("class", this.className+" col-md-"+size);
+            var size = (this.model.getConf("size") == "big") ? "big" : "small";
+            var csize = (size == "big") ? 12 : 6;
+            this.$el.attr("class", this.className+" col-md-"+csize+" size-"+size);
 
             this.visu.$el.detach();
             return VisualizationView.__super__.render.apply(this, arguments);
