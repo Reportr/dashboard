@@ -22,7 +22,9 @@ define([
 
                 // Build series from data
                 var series = _.chain(this.model.get("configuration.fields", "").split(",")).compact().concat([""])
-                .map(function(field) {
+                .map(function(field, i, list) {
+                    if (list.length > 1 && !field) return null;
+
                     return {
                         name: field? field : "Count",
                         color: 'lightblue',
@@ -34,6 +36,7 @@ define([
                         })
                     }
                 })
+                .compact()
                 .value();
 
                 // Build graph
