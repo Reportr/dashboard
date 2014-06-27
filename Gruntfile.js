@@ -54,7 +54,8 @@ module.exports = function (grunt) {
                 'paths': {
                     'rickshaw': "vendors/rickshaw/rickshaw",
                     'd3': "vendors/d3/d3",
-                    'leaflet': "vendors/leaflet/dist/leaflet"
+                    'leaflet': "vendors/leaflet/dist/leaflet",
+                    "leaflet.markercluster": "vendors/leaflet.markercluster/dist/leaflet.markercluster"
                 },
                 "shim": {
                     "main": {
@@ -85,6 +86,11 @@ module.exports = function (grunt) {
                     },
                     "leaflet": {
                         "exports": "L"
+                    },
+                    "leaflet.markercluster": {
+                        "deps": [
+                            "leaflet"
+                        ]
                     }
                 },
                 'args': {},
