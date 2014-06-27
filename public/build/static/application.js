@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403894027872,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403904466975,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26644,10 +26644,10 @@ define('views/visualizations/bar',[
 
             return api.execute("get:stats/categories", {
                 type: this.model.get("eventName"),
-                field: this.model.get("configuration.field")
+                field: this.model.getConf("field")
             })
             .then(function(data) {
-                return data.slice(0, that.model.get("configuration.max", 4));
+                return data.slice(0, that.model.getConf("max", 4));
             });
         }
     });
@@ -26670,22 +26670,60 @@ define('views/visualizations/bar',[
         }
     };
 });
-define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- model.get("configuration.before", "") %>\n        <%- data.properties[model.get("configuration.field")] || "null" %>\n        <%- model.get("configuration.after", "") %>\n        </span>\n    </p>\n    <p class="value-label"><%- model.get("configuration.label") || model.get("configuration.field") %></p>\n</div>';});
+define('utils/template',[
+    "hr/utils",
+    "hr/template"
+], function (_, hrTemplate) {
+    var formatDate = function(d) {
+        if (_.isNumber(d)) {
+            d = d*1000;
+        }
+
+        return (new Date(d)).toUTCString()
+    };
+
+    var template = function(s, data) {
+        return _.template(s, _.extend({}, data, {
+            '$': {
+                'date': formatDate
+            }
+        }));
+    };
+
+    hrTemplate.extendContext({
+        '$template': template
+    });
+
+    return template;
+});
+define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- $template(templates.value, data) %>\n        </span>\n    </p>\n    <p class="value-label"><%- $template(templates.label, data) %></p>\n</div>';});
 
 define('views/visualizations/value',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
     "core/api",
+    "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, BaseVisualization, template) {
+], function(_, $, hr, api, template, BaseVisualization, template) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
         defaults: {},
         events: {},
         template: template,
+
+        templateContext: function() {
+            return {
+                model: this.model,
+                data: this.data,
+                templates: {
+                    label: this.model.getConf("label") || '<%- $.date(date) %>',
+                    value: this.model.getConf("value") || "<%- properties."+this.model.getConf("field")+" %>"
+                }
+            }
+        },
 
         pull: function() {
             return api.execute("get:events", {
@@ -26703,17 +26741,15 @@ define('views/visualizations/value',[
                 type: "text",
                 label: "Field"
             },
-            before: {
+            value: {
                 type: "text",
-                label: "Label Before"
-            },
-            after: {
-                type: "text",
-                label: "Label After"
+                label: "Value",
+                help: "Template for the value display, see documentation for more infos about templates."
             },
             label: {
                 type: "text",
-                label: "Label"
+                label: "Label",
+                help: "Template for the label, see documentation for more infos about templates."
             }
         }
     };
@@ -39984,9 +40020,10 @@ define('views/visualizations/time',[
     "d3",
     "rickshaw",
     "core/api",
+    "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, BaseVisualization, template) {
+], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, template) {
     window.d3 = d3;
 
     var TimeVisualization = BaseVisualization.extend({
@@ -39998,14 +40035,17 @@ define('views/visualizations/time',[
         finish: function() {
             try {
                 var that = this;
+                var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var series = _.chain(this.model.get("configuration.fields", "").split(",")).compact().concat([""])
+                var series = _.chain(this.model.getConf("fields", "").split(",")).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
 
                     return {
-                        name: field? field : "Count",
+                        name: template(tplMessage, {
+                            'field': field
+                        }),
                         color: 'lightblue',
                         data: _.map(that.data, function(d) {
                             return {
@@ -40023,7 +40063,7 @@ define('views/visualizations/time',[
                     element: this.$('.graph').get(0),
                     renderer: 'line',
                     series: series,
-                    interpolation: that.model.get("configuration.interpolation", "cardinal")
+                    interpolation: that.model.getConf("interpolation", "cardinal")
                 });
                 graph.render();
 
@@ -40041,8 +40081,8 @@ define('views/visualizations/time',[
         pull: function() {
             return api.execute("get:stats/time", {
                 type: this.model.get("eventName"),
-                fields: this.model.get("configuration.fields"),
-                interval: this.model.get("configuration.interval")
+                fields: this.model.getConf("fields"),
+                interval: this.model.getConf("interval")
             });
         }
     });
@@ -40067,6 +40107,11 @@ define('views/visualizations/time',[
                     "week": "Week",
                     "month": "Month"
                 }
+            },
+            'name': {
+                'type': "text",
+                'label': "Name",
+                'help': "Template for the hover serie name, see documentation for more infos about templates."
             },
             'interpolation': {
                 'type': "select",
@@ -40105,9 +40150,10 @@ define('views/visualizations/map',[
     "hr/hr",
     "leaflet",
     "leaflet.markercluster",
+    "utils/template",
     "core/api",
     "views/visualizations/base"
-], function(_, $, hr, L, MarkerClusterGroup, api, BaseVisualization) {
+], function(_, $, hr, L, MarkerClusterGroup, template, api, BaseVisualization) {
     L.Icon.Default.imagePath = 'static/leaflet/';
 
     var Visualization = BaseVisualization.extend({
@@ -40143,7 +40189,7 @@ define('views/visualizations/map',[
         finish: function() {
             var that = this;
             var latLngs = [];
-            var tplMessage = that.model.get("configuration.message") || "<%- (new Date(date)).toUTCString() %>";
+            var tplMessage = that.model.getConf("message") || "<%- $.date(date) %>";
 
             try {
                 // Remove old markers
@@ -40165,7 +40211,7 @@ define('views/visualizations/map',[
                     var marker = L.marker([
                         e.properties.position.latitude,
                         e.properties.position.longitude
-                    ]).bindPopup(_.template(tplMessage, e));
+                    ]).bindPopup(template(tplMessage, e));
                     that.markers.addLayer(marker);
                 });
 
@@ -40197,10 +40243,10 @@ define('views/visualizations/map',[
         title: "Map",
         View: Visualization,
         config: {
-            message: {
-                type: "text",
-                label: "Marker Message",
-                help: "Template for the message"
+            'message': {
+                'type': "text",
+                'label': "Marker Message",
+                'help': "Template for the message, see documentation for more infos about templates."
             }
         }
     };
@@ -40265,6 +40311,12 @@ define('models/visualization',[
                 that.set("configuration", data);
                 return that.report.edit();
             });
+        },
+
+
+        // Return a configuration
+        getConf: function(k, d) {
+            return this.get("configuration."+k, d);
         }
     });
 
@@ -40699,7 +40751,7 @@ define('views/visualizations',[
         },
 
         render: function() {
-            var size = (this.model.get("configuration.size") == "big") ? 12 : 6;
+            var size = (this.model.getConf("size") == "big") ? 12 : 6;
             this.$el.attr("class", this.className+" col-md-"+size);
 
             this.visu.$el.detach();

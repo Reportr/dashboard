@@ -1,10 +1,8 @@
 <div class="content">
     <p>
         <span class="value">
-        <%- model.get("configuration.before", "") %>
-        <%- data.properties[model.get("configuration.field")] || "null" %>
-        <%- model.get("configuration.after", "") %>
+        <%- $template(templates.value, data) %>
         </span>
     </p>
-    <p class="value-label"><%- model.get("configuration.label") || model.get("configuration.field") %></p>
+    <p class="value-label"><%- $template(templates.label, data) %></p>
 </div>

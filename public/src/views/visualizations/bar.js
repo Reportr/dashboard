@@ -18,10 +18,10 @@ define([
 
             return api.execute("get:stats/categories", {
                 type: this.model.get("eventName"),
-                field: this.model.get("configuration.field")
+                field: this.model.getConf("field")
             })
             .then(function(data) {
-                return data.slice(0, that.model.get("configuration.max", 4));
+                return data.slice(0, that.model.getConf("max", 4));
             });
         }
     });

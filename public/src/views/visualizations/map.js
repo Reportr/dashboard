@@ -4,9 +4,10 @@ define([
     "hr/hr",
     "leaflet",
     "leaflet.markercluster",
+    "utils/template",
     "core/api",
     "views/visualizations/base"
-], function(_, $, hr, L, MarkerClusterGroup, api, BaseVisualization) {
+], function(_, $, hr, L, MarkerClusterGroup, template, api, BaseVisualization) {
     L.Icon.Default.imagePath = 'static/leaflet/';
 
     var Visualization = BaseVisualization.extend({
@@ -42,7 +43,7 @@ define([
         finish: function() {
             var that = this;
             var latLngs = [];
-            var tplMessage = that.model.get("configuration.message") || "<%- (new Date(date)).toUTCString() %>";
+            var tplMessage = that.model.getConf("message") || "<%- $.date(date) %>";
 
             try {
                 // Remove old markers
@@ -64,7 +65,7 @@ define([
                     var marker = L.marker([
                         e.properties.position.latitude,
                         e.properties.position.longitude
-                    ]).bindPopup(_.template(tplMessage, e));
+                    ]).bindPopup(template(tplMessage, e));
                     that.markers.addLayer(marker);
                 });
 
@@ -96,10 +97,10 @@ define([
         title: "Map",
         View: Visualization,
         config: {
-            message: {
-                type: "text",
-                label: "Marker Message",
-                help: "Template for the message"
+            'message': {
+                'type': "text",
+                'label': "Marker Message",
+                'help': "Template for the message, see documentation for more infos about templates."
             }
         }
     };

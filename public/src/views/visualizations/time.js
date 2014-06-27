@@ -5,9 +5,10 @@ define([
     "d3",
     "rickshaw",
     "core/api",
+    "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, BaseVisualization, template) {
+], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, template) {
     window.d3 = d3;
 
     var TimeVisualization = BaseVisualization.extend({
@@ -19,14 +20,17 @@ define([
         finish: function() {
             try {
                 var that = this;
+                var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var series = _.chain(this.model.get("configuration.fields", "").split(",")).compact().concat([""])
+                var series = _.chain(this.model.getConf("fields", "").split(",")).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
 
                     return {
-                        name: field? field : "Count",
+                        name: template(tplMessage, {
+                            'field': field
+                        }),
                         color: 'lightblue',
                         data: _.map(that.data, function(d) {
                             return {
@@ -44,7 +48,7 @@ define([
                     element: this.$('.graph').get(0),
                     renderer: 'line',
                     series: series,
-                    interpolation: that.model.get("configuration.interpolation", "cardinal")
+                    interpolation: that.model.getConf("interpolation", "cardinal")
                 });
                 graph.render();
 
@@ -62,8 +66,8 @@ define([
         pull: function() {
             return api.execute("get:stats/time", {
                 type: this.model.get("eventName"),
-                fields: this.model.get("configuration.fields"),
-                interval: this.model.get("configuration.interval")
+                fields: this.model.getConf("fields"),
+                interval: this.model.getConf("interval")
             });
         }
     });
@@ -88,6 +92,11 @@ define([
                     "week": "Week",
                     "month": "Month"
                 }
+            },
+            'name': {
+                'type': "text",
+                'label': "Name",
+                'help': "Template for the hover serie name, see documentation for more infos about templates."
             },
             'interpolation': {
                 'type': "select",

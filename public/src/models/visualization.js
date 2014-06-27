@@ -44,6 +44,12 @@ define([
                 that.set("configuration", data);
                 return that.report.edit();
             });
+        },
+
+
+        // Return a configuration
+        getConf: function(k, d) {
+            return this.get("configuration."+k, d);
         }
     });
 

@@ -3,15 +3,27 @@ define([
     "hr/dom",
     "hr/hr",
     "core/api",
+    "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, BaseVisualization, template) {
+], function(_, $, hr, api, template, BaseVisualization, template) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
         defaults: {},
         events: {},
         template: template,
+
+        templateContext: function() {
+            return {
+                model: this.model,
+                data: this.data,
+                templates: {
+                    label: this.model.getConf("label") || '<%- $.date(date) %>',
+                    value: this.model.getConf("value") || "<%- properties."+this.model.getConf("field")+" %>"
+                }
+            }
+        },
 
         pull: function() {
             return api.execute("get:events", {
@@ -29,17 +41,15 @@ define([
                 type: "text",
                 label: "Field"
             },
-            before: {
+            value: {
                 type: "text",
-                label: "Label Before"
-            },
-            after: {
-                type: "text",
-                label: "Label After"
+                label: "Value",
+                help: "Template for the value display, see documentation for more infos about templates."
             },
             label: {
                 type: "text",
-                label: "Label"
+                label: "Label",
+                help: "Template for the label, see documentation for more infos about templates."
             }
         }
     };
