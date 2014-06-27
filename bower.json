@@ -4,6 +4,7 @@
         "bootstrap": "3.1.1",
         "octicons": "2.0.2",
         "d3": "3.4.8",
-        "rickshaw": "1.4.6"
+        "rickshaw": "1.4.6",
+        "leaflet": "v0.7.3"
     }
 }

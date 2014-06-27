@@ -52,7 +52,8 @@ module.exports = function (grunt) {
                 // Modules paths
                 'paths': {
                     'rickshaw': "vendors/rickshaw/rickshaw",
-                    'd3': "vendors/d3/d3"
+                    'd3': "vendors/d3/d3",
+                    'leaflet': "vendors/leaflet/dist/leaflet"
                 },
                 "shim": {
                     "main": {
@@ -80,6 +81,9 @@ module.exports = function (grunt) {
                     },
                     "d3": {
                         "exports": "d3"
+                    },
+                    "leaflet": {
+                        "exports": "L"
                     }
                 },
                 'args': {},
