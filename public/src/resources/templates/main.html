@@ -6,7 +6,7 @@
 </div>
 <div class="main-toolbar">
     <div class="group-actions primary">
-        <button class="btn btn-link action-report-select" title="Change report"><span class="octicon octicon-pulse"></span></button>
+        <button class="btn btn-link action-report-create" title="Create report"><span class="octicon octicon-pulse"></span></button>
         <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>
         <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>
     </div>
@@ -19,5 +19,15 @@
     <div class="report-body"></div>
 </div>
 <% } else { %>
-
+<div class="main-start">
+    <div class="message-no-reports">
+        <div class="icon">
+            <span class="octicon octicon-pulse"></span>
+        </div>
+        <p>There is no reports yet to show.</p>
+        <p>
+            <button class="btn btn-default btn-lg action-report-create">Create a report</button>
+        </p>
+    </div>
+</div>
 <% } %>

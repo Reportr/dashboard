@@ -23,6 +23,7 @@ require([
         name: "Reportr",
         template: template,
         events: {
+            "click .action-report-create": "createReport",
             "click .action-report-select": "selectReport",
             "click .action-report-edit": "editReport",
             "click .action-report-remove": "removeReport",
