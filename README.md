@@ -16,13 +16,21 @@ Reportr is really easy to run locally or on heroku-compatible services.
 ```
 $ git clone https://github.com/Reportr/dashboard.git
 $ npm install .
-$ grunt
 ```
 
 To run it locally (configuration can be stored in a .env file):
 
 ```
 $ foreman start
+```
+
+To deploy it on Heroku:
+
+```
+$ heroku config:set MONGODB_URL=mongodb://...
+$ heroku config:set AUTH_USERNAME=...
+$ heroku config:set AUTH_PASSWORD=...
+$ git push heroku master
 ```
 
 ## API and Events
