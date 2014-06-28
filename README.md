@@ -49,6 +49,8 @@ Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
 | /api/reports | GET | List all reports |  |
 | /api/report/:id | PUT | Update a report | `<string>title`, `<array>visualizations` |
 | /api/report/:id | DELETE | Remove a report |  |
+| /api/alerts | GET | List all alerts |  |
+| /api/alerts | POST | Create an alert | `<string>type`, `<string>eventName`, `<string>condition`, `<string>title` |
 
 ## Configuration
 
@@ -70,5 +72,5 @@ $ curl -X POST --data '{ "type":"home.temperature", "properties": { "temperature
 ```
 
 * **Report**: a report is a collection of event visualizations, it groups in the dashboard visualizations that are related, for example: I can have 2 reports: "My Home Activity" and "My GitHub Activity"
-
 * **Visualization**: a visualization is a configured way to show data, for example in a pie, bar chart or time graph.
+* **Alert**: an alert represent a way to send notifications for specific events (by email, sms, webhook, ...)
