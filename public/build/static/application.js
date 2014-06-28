@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403957017470,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403962204152,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26260,7 +26260,7 @@ define('text!resources/templates/dialogs/prompt.html',[],function () { return '<
 
 define('text!resources/templates/dialogs/select.html',[],function () { return '<div class="modal-dialog">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title"><%- options.title || "Select" %></h4>\n        </div>\n        <div class="modal-body">\n            <p><%= options.message %></p>\n            <select class="input form-control">\n                <% _.each(options.choices, function(choice, key) { %>\n                    <option value="<%- key %>" <% if (!key) { %>disabled<% } %> <% if (options.default == key) { %>selected<% } %>><%- choice %></option>\n                <% }); %>\n            </select>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
 
-define('views/dialog',[
+define('views/dialogs/base',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
@@ -26343,7 +26343,7 @@ define('views/dialog',[
 
             // Unbind document keydown
             $(document).unbind("keydown", this.keydownHandler);
-            
+
             // Hide modal
             this.$el.modal('hide');
         },
@@ -26410,7 +26410,7 @@ define('views/dialog',[
             // Enter: valid
             if (key == 13 && this.options.keyboardEnter) {
                 this.actionConfirm(e);
-            } else 
+            } else
             // Esc: close
             if (key == 27) {
                 this.close(e);
@@ -26426,7 +26426,7 @@ define('utils/dialogs',[
     "hr/promise",
     "hr/dom",
     "hr/hr",
-    "views/dialog"
+    "views/dialogs/base"
 ], function (Q, $, hr, DialogView) {
     var Dialogs = {
         /**
@@ -40448,6 +40448,90 @@ define('models/report',[
 
     return Report;
 });
+define('models/alert',[
+    "hr/hr",
+    "utils/dialogs",
+    "core/api"
+], function(hr, dialogs, api) {
+    var Alert = hr.Model.extend({
+        defaults: {
+            type: null,
+            eventName: null,
+            configuration: {},
+            options: {}
+        },
+
+        initialize: function() {
+            Alert.__super__.initialize.apply(this, arguments);
+        },
+
+        // Update alert
+        edit: function(data) {
+            var that = this;
+            data = data || this.toJSON();
+
+            return api.execute("put:alert/"+this.get("id"), data)
+            .then(function(_data) {
+                that.set(_data);
+                return that;
+            });
+        },
+
+        // Open configuration dialogs
+        configure: function() {
+            var that = this;
+
+            return dialogs.fields("Edit", [
+                {
+                    "title": {
+                        'label': "Title",
+                        'type': "text"
+                    }
+                },
+                this.get("options")
+            ], this.get("configuration"))
+            .then(function(data) {
+                that.set("configuration", data);
+                return that.edit();
+            });
+        }
+    });
+
+    return Alert;
+});
+define('collections/alerts',[
+    "hr/hr",
+    "hr/utils",
+    "models/alert",
+    "core/api"
+], function(hr, _, Alert, api) {
+    var Alerts = hr.Collection.extend({
+        model: Alert,
+
+        // Load all alerts
+        loadAll: function() {
+            var that = this;
+
+            return api.execute("get:alerts")
+            .then(function(data) {
+                that.reset(data);
+                return that;
+            });
+        },
+
+        // Create a new alert
+        create: function(args) {
+            var that = this;
+
+            return api.execute("post:alerts", args)
+            .then(function() {
+                return that.loadAll();
+            });
+        }
+    });
+
+    return Alerts;
+});
 define('collections/reports',[
     "hr/hr",
     "hr/utils",
@@ -40748,7 +40832,7 @@ define('utils/dragdrop',[
 });
 define('text!resources/templates/visualization.html',[],function () { return '<div class="visualization-container">\n    <div class="visualization-header">\n        <div class="pull-right visualization-actions">\n        <button class="btn btn-link action-visualization-move"><span class="octicon octicon-alignment-align"></span></button>\n            <button class="btn btn-link action-visualization-remove"><span class="octicon octicon-trashcan"></span></button>\n            <button class="btn btn-link action-visualization-edit"><span class="octicon octicon-gear"></span></button>\n        </div>\n        <h3><%- model.get("configuration.title") || model.get("eventName") %></h3>\n    </div>\n    <div class="visualization-body">\n\n    </div>\n</div>';});
 
-define('views/visualizations',[
+define('views/lists/visualizations',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
@@ -40866,7 +40950,7 @@ define('views/visualizations',[
 
         displayEmptyList: function() {
             return $("<div>", {
-                'class': "visualizations-list-empty",
+                'class': "message-list-empty",
                 'html': '<span class="octicon octicon-pulse"></span> <p>This report is empty.</p>'
             });
         },
@@ -40874,7 +40958,88 @@ define('views/visualizations',[
 
     return VisualizationsList;
 });
-define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="Create report"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-body">\n    <div class="report-body"></div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
+define('text!resources/templates/alert.html',[],function () { return '<span><%- model.get("configuration.title") %></span>';});
+
+define('views/lists/alerts',[
+    "hr/utils",
+    "hr/dom",
+    "hr/hr",
+    "utils/dialogs",
+    "collections/alerts",
+    "text!resources/templates/alert.html"
+], function(_, $, hr, dialogs, Alerts, template) {
+    var AlertView = hr.List.Item.extend({
+        className: "alert-item",
+        defaults: {},
+        events: {
+            "click .action-alert-edit": "editConfig"
+        },
+        template: template,
+
+        editConfig: function(e) {
+            if (e) e.preventDefault();
+
+            this.model.configure()
+            .then(function() {
+
+            })
+        }
+    });
+
+
+    var AlertsList = hr.List.extend({
+        tagName: "div",
+        className: "alerts-list",
+        Collection: Alerts,
+        Item: AlertView,
+        defaults: _.defaults({
+
+        }, hr.List.prototype.defaults),
+
+        displayEmptyList: function() {
+            return $("<div>", {
+                'class': "message-list-empty",
+                'html': '<span class="octicon octicon-mail"></span> <p>No alerts yet.</p>'
+            });
+        },
+    });
+
+    return AlertsList;
+});
+define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
+
+define('views/dialogs/alerts',[
+    "hr/utils",
+    "hr/dom",
+    "hr/hr",
+    "views/dialogs/base",
+    "views/lists/alerts",
+    "text!resources/templates/dialogs/alerts.html"
+], function(_, $, hr, DialogView, AlertsList, templateFile) {
+    var AlertsDialog = DialogView.extend({
+        className: "dialog-alerts modal fade",
+        template: templateFile,
+        events: _.extend({}, DialogView.prototype.events,{
+
+        }),
+
+        initialize: function() {
+            AlertsDialog.__super__.initialize.apply(this, arguments);
+
+            this.alerts = new AlertsList({
+                collection: this.options.alerts
+            });
+        },
+
+        finish: function() {
+            this.alerts.appendTo(this.$(".alerts-container"))
+            return AlertsDialog.__super__.finish.apply(this, arguments);
+        }
+    });
+
+    return AlertsDialog;
+});
+define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="Create a report"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="Manage alerts"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-toggle-notifications" title="Toggle notifications"><span class="octicon octicon-inbox"></span></button>\n        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-body">\n    <div class="report-body"></div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
 
 require([
     "hr/utils",
@@ -40884,12 +41049,14 @@ require([
     "hr/args",
     "core/api",
     "models/report",
+    "collections/alerts",
     "collections/reports",
     "utils/dialogs",
-    "views/visualizations",
+    "views/lists/visualizations",
     "views/visualizations/all",
+    "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, Reports, dialogs, VisualizationsList, allVisualizations, template) {
+], function(_, $, Q, hr, args, api, Report, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -40906,7 +41073,8 @@ require([
             "click .action-report-select": "selectReport",
             "click .action-report-edit": "editReport",
             "click .action-report-remove": "removeReport",
-            "click .action-visualization-create": "createVisualization"
+            "click .action-visualization-create": "createVisualization",
+            "click .action-alert-manage": "manageAlerts"
         },
 
 
@@ -40916,6 +41084,9 @@ require([
             // Active report
             this.report = new Report();
             this.listenTo(this.report, "set", this.update);
+
+            // All alerts
+            this.alerts = new Alerts();
 
             // All reports
             this.reports = new Reports();
@@ -41061,6 +41232,18 @@ require([
                 that.report.visualizations.add(data);
 
                 return that.report.edit().fail(dialogs.error);
+            });
+        },
+
+        // Manage alerts
+        manageAlerts: function() {
+            var that = this;
+
+            return this.alerts.loadAll()
+            .then(function() {
+                return dialogs.open(AlertsDialog, {
+                    alerts: that.alerts
+                });
             });
         }
     });

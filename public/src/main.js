@@ -6,12 +6,14 @@ require([
     "hr/args",
     "core/api",
     "models/report",
+    "collections/alerts",
     "collections/reports",
     "utils/dialogs",
-    "views/visualizations",
+    "views/lists/visualizations",
     "views/visualizations/all",
+    "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, Reports, dialogs, VisualizationsList, allVisualizations, template) {
+], function(_, $, Q, hr, args, api, Report, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -28,7 +30,8 @@ require([
             "click .action-report-select": "selectReport",
             "click .action-report-edit": "editReport",
             "click .action-report-remove": "removeReport",
-            "click .action-visualization-create": "createVisualization"
+            "click .action-visualization-create": "createVisualization",
+            "click .action-alert-manage": "manageAlerts"
         },
 
 
@@ -38,6 +41,9 @@ require([
             // Active report
             this.report = new Report();
             this.listenTo(this.report, "set", this.update);
+
+            // All alerts
+            this.alerts = new Alerts();
 
             // All reports
             this.reports = new Reports();
@@ -183,6 +189,18 @@ require([
                 that.report.visualizations.add(data);
 
                 return that.report.edit().fail(dialogs.error);
+            });
+        },
+
+        // Manage alerts
+        manageAlerts: function() {
+            var that = this;
+
+            return this.alerts.loadAll()
+            .then(function() {
+                return dialogs.open(AlertsDialog, {
+                    alerts: that.alerts
+                });
             });
         }
     });

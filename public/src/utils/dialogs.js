@@ -2,7 +2,7 @@ define([
     "hr/promise",
     "hr/dom",
     "hr/hr",
-    "views/dialog"
+    "views/dialogs/base"
 ], function (Q, $, hr, DialogView) {
     var Dialogs = {
         /**

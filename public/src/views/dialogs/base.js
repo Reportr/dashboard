@@ -81,7 +81,7 @@ define([
 
             // Unbind document keydown
             $(document).unbind("keydown", this.keydownHandler);
-            
+
             // Hide modal
             this.$el.modal('hide');
         },
@@ -148,7 +148,7 @@ define([
             // Enter: valid
             if (key == 13 && this.options.keyboardEnter) {
                 this.actionConfirm(e);
-            } else 
+            } else
             // Esc: close
             if (key == 27) {
                 this.close(e);

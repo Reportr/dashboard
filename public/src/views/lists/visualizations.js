@@ -116,7 +116,7 @@ define([
 
         displayEmptyList: function() {
             return $("<div>", {
-                'class': "visualizations-list-empty",
+                'class': "message-list-empty",
                 'html': '<span class="octicon octicon-pulse"></span> <p>This report is empty.</p>'
             });
         },
