@@ -19,7 +19,10 @@ define([
     };
 
     hrTemplate.extendContext({
-        '$template': template
+        '$': {
+            'date': formatDate,
+            'template': template
+        }
     });
 
     return template;

@@ -1,0 +1,22 @@
+<div class="table-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: <%- twidth %>%;">Date</th>
+                <% _.each(fields, function(field) { %>
+                <th style="width: <%- twidth %>%;"><%- field %></th>
+                <% }); %>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(data, function(e) { %>
+            <tr>
+                <td style="width: <%- twidth %>%;"><%- $.date(e.date) %></td>
+                <% _.each(fields, function(field) { %>
+                <td style="width: <%- twidth %>%;"><%- e.properties[field] %></td>
+                <% }); %>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>

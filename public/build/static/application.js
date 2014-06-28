@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403909076588,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403957017470,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26691,12 +26691,69 @@ define('utils/template',[
     };
 
     hrTemplate.extendContext({
-        '$template': template
+        '$': {
+            'date': formatDate,
+            'template': template
+        }
     });
 
     return template;
 });
-define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- $template(templates.value, data) %>\n        </span>\n    </p>\n    <p class="value-label"><%- $template(templates.label, data) %></p>\n</div>';});
+define('text!resources/templates/visualizations/table.html',[],function () { return '<div class="table-container">\n    <table class="table table-striped">\n        <thead>\n            <tr>\n                <th style="width: <%- twidth %>%;">Date</th>\n                <% _.each(fields, function(field) { %>\n                <th style="width: <%- twidth %>%;"><%- field %></th>\n                <% }); %>\n            </tr>\n        </thead>\n        <tbody>\n            <% _.each(data, function(e) { %>\n            <tr>\n                <td style="width: <%- twidth %>%;"><%- $.date(e.date) %></td>\n                <% _.each(fields, function(field) { %>\n                <td style="width: <%- twidth %>%;"><%- e.properties[field] %></td>\n                <% }); %>\n            </tr>\n            <% }); %>\n        </tbody>\n    </table>\n</div>';});
+
+define('views/visualizations/table',[
+    "hr/utils",
+    "hr/dom",
+    "hr/hr",
+    "core/api",
+    "utils/template",
+    "views/visualizations/base",
+    "text!resources/templates/visualizations/table.html"
+], function(_, $, hr, api, template, BaseVisualization, templateFile) {
+
+    var Visualization = BaseVisualization.extend({
+        className: "visualization visualization-table",
+        defaults: {},
+        events: {},
+        template: templateFile,
+
+        templateContext: function() {
+            var fields = this.model.getConf("fields").split(",");
+
+            return {
+                model: this.model,
+                data: this.data,
+                fields: fields,
+                twidth: (100/(fields.length+1)).toFixed(2)
+            };
+        },
+
+        pull: function() {
+            return api.execute("get:events", {
+                type: this.model.get("eventName"),
+                limit: this.model.getConf("limit") || 50
+            });
+        }
+    });
+
+    return {
+        title: "Table",
+        View: Visualization,
+        config: {
+            'fields': {
+                'type': "text",
+                'label': "Fields",
+                'help': "Separated by comas"
+            },
+            'limit': {
+                'type': "number",
+                'label': "Limit",
+                'default': 50
+            }
+        }
+    };
+});
+define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- $.template(templates.value, data) %>\n        </span>\n    </p>\n    <p class="value-label"><%- $.template(templates.label, data) %></p>\n</div>';});
 
 define('views/visualizations/value',[
     "hr/utils",
@@ -40253,15 +40310,17 @@ define('views/visualizations/map',[
 });
 define('views/visualizations/all',[
     "views/visualizations/bar",
+    "views/visualizations/table",
     "views/visualizations/value",
     "views/visualizations/time",
     "views/visualizations/map"
-], function(bar, value, time, map) {
+], function(bar, table, value, time, map) {
 
     return {
+        'time': time,
+        'table': table,
         'bar': bar,
         'value': value,
-        'time': time,
         'map': map
     };
 });
