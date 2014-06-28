@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403962204152,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403963107390,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40999,7 +40999,7 @@ define('views/lists/alerts',[
         displayEmptyList: function() {
             return $("<div>", {
                 'class': "message-list-empty",
-                'html': '<span class="octicon octicon-mail"></span> <p>No alerts yet.</p>'
+                'html': '<span class="octicon octicon-mail"></span> <p>No alerts yet.</p> <p><button class="action-alert-create btn btn-default">Create an alert</button></p>'
             });
         },
     });
@@ -41074,7 +41074,8 @@ require([
             "click .action-report-edit": "editReport",
             "click .action-report-remove": "removeReport",
             "click .action-visualization-create": "createVisualization",
-            "click .action-alert-manage": "manageAlerts"
+            "click .action-alert-manage": "manageAlerts",
+            "click .action-alert-create": "createAlert"
         },
 
 
@@ -41244,6 +41245,62 @@ require([
                 return dialogs.open(AlertsDialog, {
                     alerts: that.alerts
                 });
+            });
+        },
+
+        // Create an alert
+        createAlert: function() {
+            var that = this;
+
+            return Q.all([
+                api.execute("get:types"),
+                api.execute("get:alerts/types")
+            ])
+            .fail(dialogs.error)
+            .spread(function(events, types) {
+
+                return dialogs.fields("Create a new alert", {
+                    "title": {
+                        "label": "Title",
+                        "type": "text"
+                    },
+                    "eventName": {
+                        'label': "Event",
+                        'type': "select",
+                        'options': _.chain(events)
+                        .map(function(type) {
+                            return [type.type, type.type];
+                        })
+                        .object()
+                        .value()
+                    },
+                    "type": {
+                        'label': "Type",
+                        'type': "select",
+                        'options': _.chain(types)
+                        .map(function(a) {
+                            return [a.id, a.title];
+                        })
+                        .object()
+                        .value()
+                    },
+                    "condition": {
+                        "label": "Condition",
+                        "type": "text",
+                        "help": "Learn more about alert conditions in the documentation"
+                    },
+                });
+            })
+            .then(function(data) {
+                return that.alerts.create({
+                    'condition': data.condition,
+                    'eventName': data.eventName,
+                    'type': data.type,
+                    'configuration': {
+                        'title': data.title
+                    }
+                })
+                .then(that.manageAlerts.bind(that), dialogs.error)
             });
         }
     });
