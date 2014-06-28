@@ -241,6 +241,13 @@ require([
                         .object()
                         .value()
                     },
+                    "interval": {
+                        "label": "Interval",
+                        "type": "number",
+                        'min': 1,
+                        'default': 1,
+                        'help': "Minimum interval for notifications in minutes."
+                    },
                     "condition": {
                         "label": "Condition",
                         "type": "text",
@@ -252,6 +259,7 @@ require([
                 return that.alerts.create({
                     'condition': data.condition,
                     'eventName': data.eventName,
+                    'interval': data.interval,
                     'type': data.type,
                     'configuration': {
                         'title': data.title

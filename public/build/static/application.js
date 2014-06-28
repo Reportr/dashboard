@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403963107390,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1403963339724,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -41006,7 +41006,7 @@ define('views/lists/alerts',[
 
     return AlertsList;
 });
-define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
+define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <div class="btn-toolbar">\n                <div class="btn-group">\n                    <button class="action-alert-create btn btn-default">Create an alert</button>\n                </div>\n            </div>\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
 
 define('views/dialogs/alerts',[
     "hr/utils",
@@ -41284,6 +41284,13 @@ require([
                         .object()
                         .value()
                     },
+                    "interval": {
+                        "label": "Interval",
+                        "type": "number",
+                        'min': 1,
+                        'default': 1,
+                        'help': "Minimum interval for notifications in minutes."
+                    },
                     "condition": {
                         "label": "Condition",
                         "type": "text",
@@ -41295,6 +41302,7 @@ require([
                 return that.alerts.create({
                     'condition': data.condition,
                     'eventName': data.eventName,
+                    'interval': data.interval,
                     'type': data.type,
                     'configuration': {
                         'title': data.title
