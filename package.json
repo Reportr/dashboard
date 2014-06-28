@@ -18,7 +18,8 @@
         "body-parser": "1.0.2",
         "cookie-parser": "1.0.1",
         "basic-auth-connect": "1.0.0",
-        "morgan": "1.0.1"
+        "morgan": "1.0.1",
+        "request": "2.36.0"
     },
     "devDependencies": {
         "mocha": "1.18.2",
