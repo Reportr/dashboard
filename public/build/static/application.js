@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404077279748,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404078514977,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40523,6 +40523,7 @@ define('collections/alerts',[
 
             return api.execute("get:alerts")
             .then(function(data) {
+                console.log("alerts", data);
                 that.reset(data);
                 return that;
             });
@@ -40967,7 +40968,7 @@ define('views/lists/visualizations',[
 
     return VisualizationsList;
 });
-define('text!resources/templates/alert.html',[],function () { return '<td><%- model.get("title") %></td>\n<td><%- model.get("condition") %></td>\n<td><%- model.get("interval") %> min</td>\n<td>\n    <a href="#" class="action-alert-edit">Edit</a>\n</td>';});
+define('text!resources/templates/alert.html',[],function () { return '<div class="row">\n    <div class="col-md-4"><%- model.get("title") %></div>\n    <div class="col-md-3"><%- model.get("condition") %></div>\n    <div class="col-md-3"><%- model.get("interval") %> min</div>\n    <div class="col-md-2">\n        <a href="#" class="action-alert-edit">Edit</a>\n        | <a href="#" class="action-alert-remove">Remove</a>\n    </div>\n</div>';});
 
 define('views/lists/alerts',[
     "hr/utils",
@@ -40978,7 +40979,7 @@ define('views/lists/alerts',[
     "text!resources/templates/alert.html"
 ], function(_, $, hr, dialogs, Alerts, template) {
     var AlertView = hr.List.Item.extend({
-        tagName: "tr",
+        tagName: "div",
         className: "alert-item",
         defaults: {},
         events: {
@@ -40998,8 +40999,8 @@ define('views/lists/alerts',[
 
 
     var AlertsList = hr.List.extend({
-        tagName: "table",
-        className: "table alerts-list",
+        tagName: "div",
+        className: "alerts-list",
         Collection: Alerts,
         Item: AlertView,
         defaults: _.defaults({
@@ -41016,7 +41017,7 @@ define('views/lists/alerts',[
 
     return AlertsList;
 });
-define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <% if (n > 0) { %>\n            <div class="btn-toolbar">\n                <div class="btn-group">\n                    <button class="action-alert-create btn btn-default">Create an alert</button>\n                </div>\n            </div>\n            <% } %>\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
+define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <% if (n > 0) { %>\n            <a href="#" class="action-alert-create">Create a new alert</a>\n            <% } %>\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
 
 define('views/dialogs/alerts',[
     "hr/utils",
@@ -41265,7 +41266,8 @@ require([
         },
 
         // Create an alert
-        createAlert: function() {
+        createAlert: function(e) {
+            if (e) e.preventDefault();
             var that = this;
 
             return Q.all([

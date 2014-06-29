@@ -13,6 +13,7 @@ define([
 
             return api.execute("get:alerts")
             .then(function(data) {
+                console.log("alerts", data);
                 that.reset(data);
                 return that;
             });

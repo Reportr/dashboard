@@ -206,7 +206,8 @@ require([
         },
 
         // Create an alert
-        createAlert: function() {
+        createAlert: function(e) {
+            if (e) e.preventDefault();
             var that = this;
 
             return Q.all([
