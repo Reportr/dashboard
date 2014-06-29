@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404043239577,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404043841328,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40486,12 +40486,21 @@ define('models/alert',[
                     "title": {
                         'label': "Title",
                         'type': "text"
+                    },
+                    "condition": {
+                        'label': "Condition",
+                        'type': "text"
                     }
                 },
                 this.get("options")
-            ], this.get("configuration"))
+            ], _.extend({}, this.get("configuration"), {
+                'title': this.get("title"),
+                'condition': this.get("condition")
+            }))
             .then(function(data) {
-                that.set("configuration", data);
+                that.set("title", data.title);
+                that.set("condition", data.condition);
+                that.set("configuration", _.omit(data, "title", "condition"));
                 return that.edit();
             });
         }
@@ -40958,7 +40967,7 @@ define('views/lists/visualizations',[
 
     return VisualizationsList;
 });
-define('text!resources/templates/alert.html',[],function () { return '<span><%- model.get("configuration.title") %></span>';});
+define('text!resources/templates/alert.html',[],function () { return '<span><%- model.get("title") %></span>\n<span><%- model.get("condition") %></span>';});
 
 define('views/lists/alerts',[
     "hr/utils",
@@ -41300,13 +41309,11 @@ require([
             })
             .then(function(data) {
                 return that.alerts.create({
+                    'title': data.title,
                     'condition': data.condition,
                     'eventName': data.eventName,
                     'interval': data.interval,
-                    'type': data.type,
-                    'configuration': {
-                        'title': data.title
-                    }
+                    'type': data.type
                 })
                 .then(that.manageAlerts.bind(that), dialogs.error)
             });

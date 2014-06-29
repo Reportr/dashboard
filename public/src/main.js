@@ -257,13 +257,11 @@ require([
             })
             .then(function(data) {
                 return that.alerts.create({
+                    'title': data.title,
                     'condition': data.condition,
                     'eventName': data.eventName,
                     'interval': data.interval,
-                    'type': data.type,
-                    'configuration': {
-                        'title': data.title
-                    }
+                    'type': data.type
                 })
                 .then(that.manageAlerts.bind(that), dialogs.error)
             });

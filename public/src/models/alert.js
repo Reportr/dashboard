@@ -36,12 +36,21 @@ define([
                     "title": {
                         'label': "Title",
                         'type': "text"
+                    },
+                    "condition": {
+                        'label': "Condition",
+                        'type': "text"
                     }
                 },
                 this.get("options")
-            ], this.get("configuration"))
+            ], _.extend({}, this.get("configuration"), {
+                'title': this.get("title"),
+                'condition': this.get("condition")
+            }))
             .then(function(data) {
-                that.set("configuration", data);
+                that.set("title", data.title);
+                that.set("condition", data.condition);
+                that.set("configuration", _.omit(data, "title", "condition"));
                 return that.edit();
             });
         }
