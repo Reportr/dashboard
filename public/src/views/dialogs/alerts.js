@@ -21,6 +21,12 @@ define([
             });
         },
 
+        templateContext: function() {
+            return {
+                n: this.alerts.size()
+            };
+        },
+
         finish: function() {
             this.alerts.appendTo(this.$(".alerts-container"))
             return AlertsDialog.__super__.finish.apply(this, arguments);

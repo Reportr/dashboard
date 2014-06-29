@@ -7,6 +7,7 @@ define([
     "text!resources/templates/alert.html"
 ], function(_, $, hr, dialogs, Alerts, template) {
     var AlertView = hr.List.Item.extend({
+        tagName: "tr",
         className: "alert-item",
         defaults: {},
         events: {
@@ -26,8 +27,8 @@ define([
 
 
     var AlertsList = hr.List.extend({
-        tagName: "div",
-        className: "alerts-list",
+        tagName: "table",
+        className: "table alerts-list",
         Collection: Alerts,
         Item: AlertView,
         defaults: _.defaults({

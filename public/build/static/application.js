@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404043841328,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404044653417,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40967,7 +40967,7 @@ define('views/lists/visualizations',[
 
     return VisualizationsList;
 });
-define('text!resources/templates/alert.html',[],function () { return '<span><%- model.get("title") %></span>\n<span><%- model.get("condition") %></span>';});
+define('text!resources/templates/alert.html',[],function () { return '<td><%- model.get("title") %></td>\n<td><%- model.get("condition") %></td>\n<td><%- model.get("interval") %> min</td>\n<td>\n    <a href="#" class="action-alert-edit">Edit</a>\n</td>';});
 
 define('views/lists/alerts',[
     "hr/utils",
@@ -40978,6 +40978,7 @@ define('views/lists/alerts',[
     "text!resources/templates/alert.html"
 ], function(_, $, hr, dialogs, Alerts, template) {
     var AlertView = hr.List.Item.extend({
+        tagName: "tr",
         className: "alert-item",
         defaults: {},
         events: {
@@ -40997,8 +40998,8 @@ define('views/lists/alerts',[
 
 
     var AlertsList = hr.List.extend({
-        tagName: "div",
-        className: "alerts-list",
+        tagName: "table",
+        className: "table alerts-list",
         Collection: Alerts,
         Item: AlertView,
         defaults: _.defaults({
@@ -41015,7 +41016,7 @@ define('views/lists/alerts',[
 
     return AlertsList;
 });
-define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <div class="btn-toolbar">\n                <div class="btn-group">\n                    <button class="action-alert-create btn btn-default">Create an alert</button>\n                </div>\n            </div>\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
+define('text!resources/templates/dialogs/alerts.html',[],function () { return '<div class="modal-dialog modal-lg">\n    <div class="modal-content">\n        <div class="modal-header">\n            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>\n            <h4 class="modal-title">Manage Alerts</h4>\n        </div>\n        <div class="modal-body">\n            <% if (n > 0) { %>\n            <div class="btn-toolbar">\n                <div class="btn-group">\n                    <button class="action-alert-create btn btn-default">Create an alert</button>\n                </div>\n            </div>\n            <% } %>\n            <div class="alerts-container"></div>\n        </div>\n        <div class="modal-footer">\n            <button class="btn btn-default action-confirm">OK</button>\n        </div>\n    </div>\n</div>';});
 
 define('views/dialogs/alerts',[
     "hr/utils",
@@ -41038,6 +41039,12 @@ define('views/dialogs/alerts',[
             this.alerts = new AlertsList({
                 collection: this.options.alerts
             });
+        },
+
+        templateContext: function() {
+            return {
+                n: this.alerts.size()
+            };
         },
 
         finish: function() {

@@ -5,11 +5,13 @@
             <h4 class="modal-title">Manage Alerts</h4>
         </div>
         <div class="modal-body">
+            <% if (n > 0) { %>
             <div class="btn-toolbar">
                 <div class="btn-group">
                     <button class="action-alert-create btn btn-default">Create an alert</button>
                 </div>
             </div>
+            <% } %>
             <div class="alerts-container"></div>
         </div>
         <div class="modal-footer">
