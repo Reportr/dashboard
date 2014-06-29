@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1403963339724,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404043239577,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40999,7 +40999,7 @@ define('views/lists/alerts',[
         displayEmptyList: function() {
             return $("<div>", {
                 'class': "message-list-empty",
-                'html': '<span class="octicon octicon-mail"></span> <p>No alerts yet.</p> <p><button class="action-alert-create btn btn-default">Create an alert</button></p>'
+                'html': '<span class="octicon octicon-rss"></span> <p>No alerts yet.</p> <p><button class="action-alert-create btn btn-default">Create an alert</button></p>'
             });
         },
     });
@@ -41039,7 +41039,7 @@ define('views/dialogs/alerts',[
 
     return AlertsDialog;
 });
-define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="Create a report"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="Manage alerts"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-toggle-notifications" title="Toggle notifications"><span class="octicon octicon-inbox"></span></button>\n        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-body">\n    <div class="report-body"></div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
+define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="Create a report"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="Manage alerts"><span class="octicon octicon-rss"></span></button>\n        <button class="btn btn-link action-toggle-notifications" title="Toggle notifications"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-body">\n    <div class="report-body"></div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
 
 require([
     "hr/utils",

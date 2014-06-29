@@ -37,7 +37,7 @@ define([
         displayEmptyList: function() {
             return $("<div>", {
                 'class': "message-list-empty",
-                'html': '<span class="octicon octicon-mail"></span> <p>No alerts yet.</p> <p><button class="action-alert-create btn btn-default">Create an alert</button></p>'
+                'html': '<span class="octicon octicon-rss"></span> <p>No alerts yet.</p> <p><button class="action-alert-create btn btn-default">Create an alert</button></p>'
             });
         },
     });
