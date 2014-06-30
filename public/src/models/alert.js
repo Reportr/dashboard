@@ -27,6 +27,15 @@ define([
             });
         },
 
+        // Delete this report
+        remove: function() {
+            var that = this;
+            return api.execute("delete:alert/"+this.get("id"))
+            .then(function() {
+                that.destroy();
+            });
+        },
+
         // Open configuration dialogs
         configure: function() {
             var that = this;

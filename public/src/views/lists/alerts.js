@@ -11,7 +11,8 @@ define([
         className: "alert-item",
         defaults: {},
         events: {
-            "click .action-alert-edit": "editConfig"
+            "click .action-alert-edit": "editConfig",
+            "click .action-alert-remove": "removeAlert"
         },
         template: template,
 
@@ -22,6 +23,15 @@ define([
             .then(function() {
 
             })
+        },
+
+        removeAlert: function() {
+            var that = this;
+
+            dialogs.confirm("Do you want to remove this alert '"+_.escape(this.model.get("title"))+"' ?")
+            .then(function() {
+                return that.model.remove();
+            });
         }
     });
 
