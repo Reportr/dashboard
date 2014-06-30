@@ -31,7 +31,7 @@ define([
                         name: template(tplMessage, {
                             'field': field
                         }),
-                        color: 'lightblue',
+                        color: '#a6d87a',
                         data: _.map(that.data, function(d) {
                             return {
                                 x: d.date,
