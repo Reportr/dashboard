@@ -60,6 +60,7 @@ Reportr is configured using environment variables.
 | ---- | ----------- |
 | PORT | Port for running the application, default is 5000 |
 | MONGODB_URL | Url for the mongoDB database |
+| REDIS_URL | (Optional) Url for a redis database when using worker mode |
 | AUTH_USERNAME | Username for authentication |
 | AUTH_PASSWORD | Password for authentication |
 
@@ -88,3 +89,7 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 #### Condition
 
 Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
+
+## Scale it
+
+Reportr can easily be scaled on Heroku (and compatibles), use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
