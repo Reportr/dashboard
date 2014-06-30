@@ -74,3 +74,17 @@ $ curl -X POST --data '{ "type":"home.temperature", "properties": { "temperature
 * **Report**: a report is a collection of event visualizations, it groups in the dashboard visualizations that are related, for example: I can have 2 reports: "My Home Activity" and "My GitHub Activity"
 * **Visualization**: a visualization is a configured way to show data, for example in a pie, bar chart or time graph.
 * **Alert**: an alert represent a way to send notifications for specific events (by email, sms, webhook, ...)
+
+## Alerts
+
+Reportr lets you configure alerts to be triggered when specific condition is valid at a specific interval.
+
+#### Types
+
+| Type | Description |
+| ---- | ----------- |
+| webhook | Post an HTTP request to a specific url with the data encoded in the body |
+
+#### Condition
+
+Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
