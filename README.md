@@ -64,6 +64,7 @@ Reportr is configured using environment variables.
 | AUTH_USERNAME | Username for authentication |
 | AUTH_PASSWORD | Password for authentication |
 
+
 ## Concepts
 
 * **Event**: an event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
@@ -82,10 +83,10 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 
 #### Types
 
-| Type | Description |
-| ---- | ----------- |
-| webhook | Post an HTTP request to a specific url with the data encoded in the body |
-| mail | Send an email notification |
+| Type | Description | Configuration |
+| ---- | ----------- | ------------- |
+| webhook | Post an HTTP request to a specific url with the data encoded in the body | |
+| mail | Send an email notification | `<string>MAIL_SERVICE`, `<string>MAIL_USERNAME`, `<string>MAIL_PASSWORD`, `<string>MAIL_FROM` |
 
 #### Condition
 
