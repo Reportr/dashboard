@@ -67,7 +67,8 @@ define([
             return api.execute("get:stats/time", {
                 type: this.model.get("eventName"),
                 fields: this.model.getConf("fields"),
-                interval: this.model.getConf("interval")
+                interval: this.model.getConf("interval"),
+                fillEmpty: this.model.getConf("fillEmpty", false)? "true" : undefined
             });
         }
     });
@@ -108,6 +109,12 @@ define([
                     'cardinal': "Cardinal - smooth curves via cardinal splines (default)",
                     'basis': "Basis - smooth curves via B-splines"
                 }
+            },
+            'fillEmpty': {
+                'type': "checkbox",
+                'label': "Fill Empty",
+                'help': "Fill when there is no events with zero values.",
+                'default': true
             }
         }
     };
