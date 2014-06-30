@@ -44,7 +44,6 @@ module.exports = function (grunt) {
                 "static": {
                     "octicons": path.resolve(srcPath, "vendors/octicons/octicons"),
                     "images": path.resolve(srcPath, "resources/images"),
-                    "leaflet": path.resolve(srcPath, "vendors/leaflet/dist/images"),
                 },
 
                 // Stylesheet entry point
@@ -54,8 +53,8 @@ module.exports = function (grunt) {
                 'paths': {
                     'rickshaw': "vendors/rickshaw/rickshaw",
                     'd3': "vendors/d3/d3",
-                    'leaflet': "vendors/leaflet/dist/leaflet",
-                    "leaflet.markercluster": "vendors/leaflet.markercluster/dist/leaflet.markercluster"
+                    "datamaps": "vendors/datamaps/dist/datamaps.world",
+                    "topojson": "vendors/topojson/topojson"
                 },
                 "shim": {
                     "main": {
@@ -84,12 +83,9 @@ module.exports = function (grunt) {
                     "d3": {
                         "exports": "d3"
                     },
-                    "leaflet": {
-                        "exports": "L"
-                    },
-                    "leaflet.markercluster": {
+                    "datamaps": {
                         "deps": [
-                            "leaflet"
+                            "topojson"
                         ]
                     }
                 },

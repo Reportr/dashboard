@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404124027016,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404127471284,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40184,35 +40184,12609 @@ define('views/visualizations/time',[
         }
     };
 });
-/*
- Leaflet, a JavaScript library for mobile-friendly interactive maps. http://leafletjs.com
- (c) 2010-2013, Vladimir Agafonkin
- (c) 2010-2011, CloudMade
-*/
-!function(t,e,i){var n=t.L,o={};o.version="0.7.3","object"==typeof module&&"object"==typeof module.exports?module.exports=o:"function"==typeof define&&define.amd&&define('leaflet',o),o.noConflict=function(){return t.L=n,this},t.L=o,o.Util={extend:function(t){var e,i,n,o,s=Array.prototype.slice.call(arguments,1);for(i=0,n=s.length;n>i;i++){o=s[i]||{};for(e in o)o.hasOwnProperty(e)&&(t[e]=o[e])}return t},bind:function(t,e){var i=arguments.length>2?Array.prototype.slice.call(arguments,2):null;return function(){return t.apply(e,i||arguments)}},stamp:function(){var t=0,e="_leaflet_id";return function(i){return i[e]=i[e]||++t,i[e]}}(),invokeEach:function(t,e,i){var n,o;if("object"==typeof t){o=Array.prototype.slice.call(arguments,3);for(n in t)e.apply(i,[n,t[n]].concat(o));return!0}return!1},limitExecByInterval:function(t,e,i){var n,o;return function s(){var a=arguments;return n?void(o=!0):(n=!0,setTimeout(function(){n=!1,o&&(s.apply(i,a),o=!1)},e),void t.apply(i,a))}},falseFn:function(){return!1},formatNum:function(t,e){var i=Math.pow(10,e||5);return Math.round(t*i)/i},trim:function(t){return t.trim?t.trim():t.replace(/^\s+|\s+$/g,"")},splitWords:function(t){return o.Util.trim(t).split(/\s+/)},setOptions:function(t,e){return t.options=o.extend({},t.options,e),t.options},getParamString:function(t,e,i){var n=[];for(var o in t)n.push(encodeURIComponent(i?o.toUpperCase():o)+"="+encodeURIComponent(t[o]));return(e&&-1!==e.indexOf("?")?"&":"?")+n.join("&")},template:function(t,e){return t.replace(/\{ *([\w_]+) *\}/g,function(t,n){var o=e[n];if(o===i)throw new Error("No value provided for variable "+t);return"function"==typeof o&&(o=o(e)),o})},isArray:Array.isArray||function(t){return"[object Array]"===Object.prototype.toString.call(t)},emptyImageUrl:"data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="},function(){function e(e){var i,n,o=["webkit","moz","o","ms"];for(i=0;i<o.length&&!n;i++)n=t[o[i]+e];return n}function i(e){var i=+new Date,o=Math.max(0,16-(i-n));return n=i+o,t.setTimeout(e,o)}var n=0,s=t.requestAnimationFrame||e("RequestAnimationFrame")||i,a=t.cancelAnimationFrame||e("CancelAnimationFrame")||e("CancelRequestAnimationFrame")||function(e){t.clearTimeout(e)};o.Util.requestAnimFrame=function(e,n,a,r){return e=o.bind(e,n),a&&s===i?void e():s.call(t,e,r)},o.Util.cancelAnimFrame=function(e){e&&a.call(t,e)}}(),o.extend=o.Util.extend,o.bind=o.Util.bind,o.stamp=o.Util.stamp,o.setOptions=o.Util.setOptions,o.Class=function(){},o.Class.extend=function(t){var e=function(){this.initialize&&this.initialize.apply(this,arguments),this._initHooks&&this.callInitHooks()},i=function(){};i.prototype=this.prototype;var n=new i;n.constructor=e,e.prototype=n;for(var s in this)this.hasOwnProperty(s)&&"prototype"!==s&&(e[s]=this[s]);t.statics&&(o.extend(e,t.statics),delete t.statics),t.includes&&(o.Util.extend.apply(null,[n].concat(t.includes)),delete t.includes),t.options&&n.options&&(t.options=o.extend({},n.options,t.options)),o.extend(n,t),n._initHooks=[];var a=this;return e.__super__=a.prototype,n.callInitHooks=function(){if(!this._initHooksCalled){a.prototype.callInitHooks&&a.prototype.callInitHooks.call(this),this._initHooksCalled=!0;for(var t=0,e=n._initHooks.length;e>t;t++)n._initHooks[t].call(this)}},e},o.Class.include=function(t){o.extend(this.prototype,t)},o.Class.mergeOptions=function(t){o.extend(this.prototype.options,t)},o.Class.addInitHook=function(t){var e=Array.prototype.slice.call(arguments,1),i="function"==typeof t?t:function(){this[t].apply(this,e)};this.prototype._initHooks=this.prototype._initHooks||[],this.prototype._initHooks.push(i)};var s="_leaflet_events";o.Mixin={},o.Mixin.Events={addEventListener:function(t,e,i){if(o.Util.invokeEach(t,this.addEventListener,this,e,i))return this;var n,a,r,h,l,u,c,d=this[s]=this[s]||{},p=i&&i!==this&&o.stamp(i);for(t=o.Util.splitWords(t),n=0,a=t.length;a>n;n++)r={action:e,context:i||this},h=t[n],p?(l=h+"_idx",u=l+"_len",c=d[l]=d[l]||{},c[p]||(c[p]=[],d[u]=(d[u]||0)+1),c[p].push(r)):(d[h]=d[h]||[],d[h].push(r));return this},hasEventListeners:function(t){var e=this[s];return!!e&&(t in e&&e[t].length>0||t+"_idx"in e&&e[t+"_idx_len"]>0)},removeEventListener:function(t,e,i){if(!this[s])return this;if(!t)return this.clearAllEventListeners();if(o.Util.invokeEach(t,this.removeEventListener,this,e,i))return this;var n,a,r,h,l,u,c,d,p,_=this[s],m=i&&i!==this&&o.stamp(i);for(t=o.Util.splitWords(t),n=0,a=t.length;a>n;n++)if(r=t[n],u=r+"_idx",c=u+"_len",d=_[u],e){if(h=m&&d?d[m]:_[r]){for(l=h.length-1;l>=0;l--)h[l].action!==e||i&&h[l].context!==i||(p=h.splice(l,1),p[0].action=o.Util.falseFn);i&&d&&0===h.length&&(delete d[m],_[c]--)}}else delete _[r],delete _[u],delete _[c];return this},clearAllEventListeners:function(){return delete this[s],this},fireEvent:function(t,e){if(!this.hasEventListeners(t))return this;var i,n,a,r,h,l=o.Util.extend({},e,{type:t,target:this}),u=this[s];if(u[t])for(i=u[t].slice(),n=0,a=i.length;a>n;n++)i[n].action.call(i[n].context,l);r=u[t+"_idx"];for(h in r)if(i=r[h].slice())for(n=0,a=i.length;a>n;n++)i[n].action.call(i[n].context,l);return this},addOneTimeEventListener:function(t,e,i){if(o.Util.invokeEach(t,this.addOneTimeEventListener,this,e,i))return this;var n=o.bind(function(){this.removeEventListener(t,e,i).removeEventListener(t,n,i)},this);return this.addEventListener(t,e,i).addEventListener(t,n,i)}},o.Mixin.Events.on=o.Mixin.Events.addEventListener,o.Mixin.Events.off=o.Mixin.Events.removeEventListener,o.Mixin.Events.once=o.Mixin.Events.addOneTimeEventListener,o.Mixin.Events.fire=o.Mixin.Events.fireEvent,function(){var n="ActiveXObject"in t,s=n&&!e.addEventListener,a=navigator.userAgent.toLowerCase(),r=-1!==a.indexOf("webkit"),h=-1!==a.indexOf("chrome"),l=-1!==a.indexOf("phantom"),u=-1!==a.indexOf("android"),c=-1!==a.search("android [23]"),d=-1!==a.indexOf("gecko"),p=typeof orientation!=i+"",_=t.navigator&&t.navigator.msPointerEnabled&&t.navigator.msMaxTouchPoints&&!t.PointerEvent,m=t.PointerEvent&&t.navigator.pointerEnabled&&t.navigator.maxTouchPoints||_,f="devicePixelRatio"in t&&t.devicePixelRatio>1||"matchMedia"in t&&t.matchMedia("(min-resolution:144dpi)")&&t.matchMedia("(min-resolution:144dpi)").matches,g=e.documentElement,v=n&&"transition"in g.style,y="WebKitCSSMatrix"in t&&"m11"in new t.WebKitCSSMatrix&&!c,P="MozPerspective"in g.style,L="OTransition"in g.style,x=!t.L_DISABLE_3D&&(v||y||P||L)&&!l,w=!t.L_NO_TOUCH&&!l&&function(){var t="ontouchstart";if(m||t in g)return!0;var i=e.createElement("div"),n=!1;return i.setAttribute?(i.setAttribute(t,"return;"),"function"==typeof i[t]&&(n=!0),i.removeAttribute(t),i=null,n):!1}();o.Browser={ie:n,ielt9:s,webkit:r,gecko:d&&!r&&!t.opera&&!n,android:u,android23:c,chrome:h,ie3d:v,webkit3d:y,gecko3d:P,opera3d:L,any3d:x,mobile:p,mobileWebkit:p&&r,mobileWebkit3d:p&&y,mobileOpera:p&&t.opera,touch:w,msPointer:_,pointer:m,retina:f}}(),o.Point=function(t,e,i){this.x=i?Math.round(t):t,this.y=i?Math.round(e):e},o.Point.prototype={clone:function(){return new o.Point(this.x,this.y)},add:function(t){return this.clone()._add(o.point(t))},_add:function(t){return this.x+=t.x,this.y+=t.y,this},subtract:function(t){return this.clone()._subtract(o.point(t))},_subtract:function(t){return this.x-=t.x,this.y-=t.y,this},divideBy:function(t){return this.clone()._divideBy(t)},_divideBy:function(t){return this.x/=t,this.y/=t,this},multiplyBy:function(t){return this.clone()._multiplyBy(t)},_multiplyBy:function(t){return this.x*=t,this.y*=t,this},round:function(){return this.clone()._round()},_round:function(){return this.x=Math.round(this.x),this.y=Math.round(this.y),this},floor:function(){return this.clone()._floor()},_floor:function(){return this.x=Math.floor(this.x),this.y=Math.floor(this.y),this},distanceTo:function(t){t=o.point(t);var e=t.x-this.x,i=t.y-this.y;return Math.sqrt(e*e+i*i)},equals:function(t){return t=o.point(t),t.x===this.x&&t.y===this.y},contains:function(t){return t=o.point(t),Math.abs(t.x)<=Math.abs(this.x)&&Math.abs(t.y)<=Math.abs(this.y)},toString:function(){return"Point("+o.Util.formatNum(this.x)+", "+o.Util.formatNum(this.y)+")"}},o.point=function(t,e,n){return t instanceof o.Point?t:o.Util.isArray(t)?new o.Point(t[0],t[1]):t===i||null===t?t:new o.Point(t,e,n)},o.Bounds=function(t,e){if(t)for(var i=e?[t,e]:t,n=0,o=i.length;o>n;n++)this.extend(i[n])},o.Bounds.prototype={extend:function(t){return t=o.point(t),this.min||this.max?(this.min.x=Math.min(t.x,this.min.x),this.max.x=Math.max(t.x,this.max.x),this.min.y=Math.min(t.y,this.min.y),this.max.y=Math.max(t.y,this.max.y)):(this.min=t.clone(),this.max=t.clone()),this},getCenter:function(t){return new o.Point((this.min.x+this.max.x)/2,(this.min.y+this.max.y)/2,t)},getBottomLeft:function(){return new o.Point(this.min.x,this.max.y)},getTopRight:function(){return new o.Point(this.max.x,this.min.y)},getSize:function(){return this.max.subtract(this.min)},contains:function(t){var e,i;return t="number"==typeof t[0]||t instanceof o.Point?o.point(t):o.bounds(t),t instanceof o.Bounds?(e=t.min,i=t.max):e=i=t,e.x>=this.min.x&&i.x<=this.max.x&&e.y>=this.min.y&&i.y<=this.max.y},intersects:function(t){t=o.bounds(t);var e=this.min,i=this.max,n=t.min,s=t.max,a=s.x>=e.x&&n.x<=i.x,r=s.y>=e.y&&n.y<=i.y;return a&&r},isValid:function(){return!(!this.min||!this.max)}},o.bounds=function(t,e){return!t||t instanceof o.Bounds?t:new o.Bounds(t,e)},o.Transformation=function(t,e,i,n){this._a=t,this._b=e,this._c=i,this._d=n},o.Transformation.prototype={transform:function(t,e){return this._transform(t.clone(),e)},_transform:function(t,e){return e=e||1,t.x=e*(this._a*t.x+this._b),t.y=e*(this._c*t.y+this._d),t},untransform:function(t,e){return e=e||1,new o.Point((t.x/e-this._b)/this._a,(t.y/e-this._d)/this._c)}},o.DomUtil={get:function(t){return"string"==typeof t?e.getElementById(t):t},getStyle:function(t,i){var n=t.style[i];if(!n&&t.currentStyle&&(n=t.currentStyle[i]),(!n||"auto"===n)&&e.defaultView){var o=e.defaultView.getComputedStyle(t,null);n=o?o[i]:null}return"auto"===n?null:n},getViewportOffset:function(t){var i,n=0,s=0,a=t,r=e.body,h=e.documentElement;do{if(n+=a.offsetTop||0,s+=a.offsetLeft||0,n+=parseInt(o.DomUtil.getStyle(a,"borderTopWidth"),10)||0,s+=parseInt(o.DomUtil.getStyle(a,"borderLeftWidth"),10)||0,i=o.DomUtil.getStyle(a,"position"),a.offsetParent===r&&"absolute"===i)break;if("fixed"===i){n+=r.scrollTop||h.scrollTop||0,s+=r.scrollLeft||h.scrollLeft||0;break}if("relative"===i&&!a.offsetLeft){var l=o.DomUtil.getStyle(a,"width"),u=o.DomUtil.getStyle(a,"max-width"),c=a.getBoundingClientRect();("none"!==l||"none"!==u)&&(s+=c.left+a.clientLeft),n+=c.top+(r.scrollTop||h.scrollTop||0);break}a=a.offsetParent}while(a);a=t;do{if(a===r)break;n-=a.scrollTop||0,s-=a.scrollLeft||0,a=a.parentNode}while(a);return new o.Point(s,n)},documentIsLtr:function(){return o.DomUtil._docIsLtrCached||(o.DomUtil._docIsLtrCached=!0,o.DomUtil._docIsLtr="ltr"===o.DomUtil.getStyle(e.body,"direction")),o.DomUtil._docIsLtr},create:function(t,i,n){var o=e.createElement(t);return o.className=i,n&&n.appendChild(o),o},hasClass:function(t,e){if(t.classList!==i)return t.classList.contains(e);var n=o.DomUtil._getClass(t);return n.length>0&&new RegExp("(^|\\s)"+e+"(\\s|$)").test(n)},addClass:function(t,e){if(t.classList!==i)for(var n=o.Util.splitWords(e),s=0,a=n.length;a>s;s++)t.classList.add(n[s]);else if(!o.DomUtil.hasClass(t,e)){var r=o.DomUtil._getClass(t);o.DomUtil._setClass(t,(r?r+" ":"")+e)}},removeClass:function(t,e){t.classList!==i?t.classList.remove(e):o.DomUtil._setClass(t,o.Util.trim((" "+o.DomUtil._getClass(t)+" ").replace(" "+e+" "," ")))},_setClass:function(t,e){t.className.baseVal===i?t.className=e:t.className.baseVal=e},_getClass:function(t){return t.className.baseVal===i?t.className:t.className.baseVal},setOpacity:function(t,e){if("opacity"in t.style)t.style.opacity=e;else if("filter"in t.style){var i=!1,n="DXImageTransform.Microsoft.Alpha";try{i=t.filters.item(n)}catch(o){if(1===e)return}e=Math.round(100*e),i?(i.Enabled=100!==e,i.Opacity=e):t.style.filter+=" progid:"+n+"(opacity="+e+")"}},testProp:function(t){for(var i=e.documentElement.style,n=0;n<t.length;n++)if(t[n]in i)return t[n];return!1},getTranslateString:function(t){var e=o.Browser.webkit3d,i="translate"+(e?"3d":"")+"(",n=(e?",0":"")+")";return i+t.x+"px,"+t.y+"px"+n},getScaleString:function(t,e){var i=o.DomUtil.getTranslateString(e.add(e.multiplyBy(-1*t))),n=" scale("+t+") ";return i+n},setPosition:function(t,e,i){t._leaflet_pos=e,!i&&o.Browser.any3d?t.style[o.DomUtil.TRANSFORM]=o.DomUtil.getTranslateString(e):(t.style.left=e.x+"px",t.style.top=e.y+"px")},getPosition:function(t){return t._leaflet_pos}},o.DomUtil.TRANSFORM=o.DomUtil.testProp(["transform","WebkitTransform","OTransform","MozTransform","msTransform"]),o.DomUtil.TRANSITION=o.DomUtil.testProp(["webkitTransition","transition","OTransition","MozTransition","msTransition"]),o.DomUtil.TRANSITION_END="webkitTransition"===o.DomUtil.TRANSITION||"OTransition"===o.DomUtil.TRANSITION?o.DomUtil.TRANSITION+"End":"transitionend",function(){if("onselectstart"in e)o.extend(o.DomUtil,{disableTextSelection:function(){o.DomEvent.on(t,"selectstart",o.DomEvent.preventDefault)},enableTextSelection:function(){o.DomEvent.off(t,"selectstart",o.DomEvent.preventDefault)}});else{var i=o.DomUtil.testProp(["userSelect","WebkitUserSelect","OUserSelect","MozUserSelect","msUserSelect"]);o.extend(o.DomUtil,{disableTextSelection:function(){if(i){var t=e.documentElement.style;this._userSelect=t[i],t[i]="none"}},enableTextSelection:function(){i&&(e.documentElement.style[i]=this._userSelect,delete this._userSelect)}})}o.extend(o.DomUtil,{disableImageDrag:function(){o.DomEvent.on(t,"dragstart",o.DomEvent.preventDefault)},enableImageDrag:function(){o.DomEvent.off(t,"dragstart",o.DomEvent.preventDefault)}})}(),o.LatLng=function(t,e,n){if(t=parseFloat(t),e=parseFloat(e),isNaN(t)||isNaN(e))throw new Error("Invalid LatLng object: ("+t+", "+e+")");this.lat=t,this.lng=e,n!==i&&(this.alt=parseFloat(n))},o.extend(o.LatLng,{DEG_TO_RAD:Math.PI/180,RAD_TO_DEG:180/Math.PI,MAX_MARGIN:1e-9}),o.LatLng.prototype={equals:function(t){if(!t)return!1;t=o.latLng(t);var e=Math.max(Math.abs(this.lat-t.lat),Math.abs(this.lng-t.lng));return e<=o.LatLng.MAX_MARGIN},toString:function(t){return"LatLng("+o.Util.formatNum(this.lat,t)+", "+o.Util.formatNum(this.lng,t)+")"},distanceTo:function(t){t=o.latLng(t);var e=6378137,i=o.LatLng.DEG_TO_RAD,n=(t.lat-this.lat)*i,s=(t.lng-this.lng)*i,a=this.lat*i,r=t.lat*i,h=Math.sin(n/2),l=Math.sin(s/2),u=h*h+l*l*Math.cos(a)*Math.cos(r);return 2*e*Math.atan2(Math.sqrt(u),Math.sqrt(1-u))},wrap:function(t,e){var i=this.lng;return t=t||-180,e=e||180,i=(i+e)%(e-t)+(t>i||i===e?e:t),new o.LatLng(this.lat,i)}},o.latLng=function(t,e){return t instanceof o.LatLng?t:o.Util.isArray(t)?"number"==typeof t[0]||"string"==typeof t[0]?new o.LatLng(t[0],t[1],t[2]):null:t===i||null===t?t:"object"==typeof t&&"lat"in t?new o.LatLng(t.lat,"lng"in t?t.lng:t.lon):e===i?null:new o.LatLng(t,e)},o.LatLngBounds=function(t,e){if(t)for(var i=e?[t,e]:t,n=0,o=i.length;o>n;n++)this.extend(i[n])},o.LatLngBounds.prototype={extend:function(t){if(!t)return this;var e=o.latLng(t);return t=null!==e?e:o.latLngBounds(t),t instanceof o.LatLng?this._southWest||this._northEast?(this._southWest.lat=Math.min(t.lat,this._southWest.lat),this._southWest.lng=Math.min(t.lng,this._southWest.lng),this._northEast.lat=Math.max(t.lat,this._northEast.lat),this._northEast.lng=Math.max(t.lng,this._northEast.lng)):(this._southWest=new o.LatLng(t.lat,t.lng),this._northEast=new o.LatLng(t.lat,t.lng)):t instanceof o.LatLngBounds&&(this.extend(t._southWest),this.extend(t._northEast)),this},pad:function(t){var e=this._southWest,i=this._northEast,n=Math.abs(e.lat-i.lat)*t,s=Math.abs(e.lng-i.lng)*t;return new o.LatLngBounds(new o.LatLng(e.lat-n,e.lng-s),new o.LatLng(i.lat+n,i.lng+s))},getCenter:function(){return new o.LatLng((this._southWest.lat+this._northEast.lat)/2,(this._southWest.lng+this._northEast.lng)/2)},getSouthWest:function(){return this._southWest},getNorthEast:function(){return this._northEast},getNorthWest:function(){return new o.LatLng(this.getNorth(),this.getWest())},getSouthEast:function(){return new o.LatLng(this.getSouth(),this.getEast())},getWest:function(){return this._southWest.lng},getSouth:function(){return this._southWest.lat},getEast:function(){return this._northEast.lng},getNorth:function(){return this._northEast.lat},contains:function(t){t="number"==typeof t[0]||t instanceof o.LatLng?o.latLng(t):o.latLngBounds(t);var e,i,n=this._southWest,s=this._northEast;return t instanceof o.LatLngBounds?(e=t.getSouthWest(),i=t.getNorthEast()):e=i=t,e.lat>=n.lat&&i.lat<=s.lat&&e.lng>=n.lng&&i.lng<=s.lng},intersects:function(t){t=o.latLngBounds(t);var e=this._southWest,i=this._northEast,n=t.getSouthWest(),s=t.getNorthEast(),a=s.lat>=e.lat&&n.lat<=i.lat,r=s.lng>=e.lng&&n.lng<=i.lng;return a&&r},toBBoxString:function(){return[this.getWest(),this.getSouth(),this.getEast(),this.getNorth()].join(",")},equals:function(t){return t?(t=o.latLngBounds(t),this._southWest.equals(t.getSouthWest())&&this._northEast.equals(t.getNorthEast())):!1},isValid:function(){return!(!this._southWest||!this._northEast)}},o.latLngBounds=function(t,e){return!t||t instanceof o.LatLngBounds?t:new o.LatLngBounds(t,e)},o.Projection={},o.Projection.SphericalMercator={MAX_LATITUDE:85.0511287798,project:function(t){var e=o.LatLng.DEG_TO_RAD,i=this.MAX_LATITUDE,n=Math.max(Math.min(i,t.lat),-i),s=t.lng*e,a=n*e;return a=Math.log(Math.tan(Math.PI/4+a/2)),new o.Point(s,a)},unproject:function(t){var e=o.LatLng.RAD_TO_DEG,i=t.x*e,n=(2*Math.atan(Math.exp(t.y))-Math.PI/2)*e;return new o.LatLng(n,i)}},o.Projection.LonLat={project:function(t){return new o.Point(t.lng,t.lat)},unproject:function(t){return new o.LatLng(t.y,t.x)}},o.CRS={latLngToPoint:function(t,e){var i=this.projection.project(t),n=this.scale(e);return this.transformation._transform(i,n)},pointToLatLng:function(t,e){var i=this.scale(e),n=this.transformation.untransform(t,i);return this.projection.unproject(n)},project:function(t){return this.projection.project(t)},scale:function(t){return 256*Math.pow(2,t)},getSize:function(t){var e=this.scale(t);return o.point(e,e)}},o.CRS.Simple=o.extend({},o.CRS,{projection:o.Projection.LonLat,transformation:new o.Transformation(1,0,-1,0),scale:function(t){return Math.pow(2,t)}}),o.CRS.EPSG3857=o.extend({},o.CRS,{code:"EPSG:3857",projection:o.Projection.SphericalMercator,transformation:new o.Transformation(.5/Math.PI,.5,-.5/Math.PI,.5),project:function(t){var e=this.projection.project(t),i=6378137;return e.multiplyBy(i)}}),o.CRS.EPSG900913=o.extend({},o.CRS.EPSG3857,{code:"EPSG:900913"}),o.CRS.EPSG4326=o.extend({},o.CRS,{code:"EPSG:4326",projection:o.Projection.LonLat,transformation:new o.Transformation(1/360,.5,-1/360,.5)}),o.Map=o.Class.extend({includes:o.Mixin.Events,options:{crs:o.CRS.EPSG3857,fadeAnimation:o.DomUtil.TRANSITION&&!o.Browser.android23,trackResize:!0,markerZoomAnimation:o.DomUtil.TRANSITION&&o.Browser.any3d},initialize:function(t,e){e=o.setOptions(this,e),this._initContainer(t),this._initLayout(),this._onResize=o.bind(this._onResize,this),this._initEvents(),e.maxBounds&&this.setMaxBounds(e.maxBounds),e.center&&e.zoom!==i&&this.setView(o.latLng(e.center),e.zoom,{reset:!0}),this._handlers=[],this._layers={},this._zoomBoundLayers={},this._tileLayersNum=0,this.callInitHooks(),this._addLayers(e.layers)},setView:function(t,e){return e=e===i?this.getZoom():e,this._resetView(o.latLng(t),this._limitZoom(e)),this},setZoom:function(t,e){return this._loaded?this.setView(this.getCenter(),t,{zoom:e}):(this._zoom=this._limitZoom(t),this)},zoomIn:function(t,e){return this.setZoom(this._zoom+(t||1),e)},zoomOut:function(t,e){return this.setZoom(this._zoom-(t||1),e)},setZoomAround:function(t,e,i){var n=this.getZoomScale(e),s=this.getSize().divideBy(2),a=t instanceof o.Point?t:this.latLngToContainerPoint(t),r=a.subtract(s).multiplyBy(1-1/n),h=this.containerPointToLatLng(s.add(r));return this.setView(h,e,{zoom:i})},fitBounds:function(t,e){e=e||{},t=t.getBounds?t.getBounds():o.latLngBounds(t);var i=o.point(e.paddingTopLeft||e.padding||[0,0]),n=o.point(e.paddingBottomRight||e.padding||[0,0]),s=this.getBoundsZoom(t,!1,i.add(n)),a=n.subtract(i).divideBy(2),r=this.project(t.getSouthWest(),s),h=this.project(t.getNorthEast(),s),l=this.unproject(r.add(h).divideBy(2).add(a),s);return s=e&&e.maxZoom?Math.min(e.maxZoom,s):s,this.setView(l,s,e)},fitWorld:function(t){return this.fitBounds([[-90,-180],[90,180]],t)},panTo:function(t,e){return this.setView(t,this._zoom,{pan:e})},panBy:function(t){return this.fire("movestart"),this._rawPanBy(o.point(t)),this.fire("move"),this.fire("moveend")},setMaxBounds:function(t){return t=o.latLngBounds(t),this.options.maxBounds=t,t?(this._loaded&&this._panInsideMaxBounds(),this.on("moveend",this._panInsideMaxBounds,this)):this.off("moveend",this._panInsideMaxBounds,this)},panInsideBounds:function(t,e){var i=this.getCenter(),n=this._limitCenter(i,this._zoom,t);return i.equals(n)?this:this.panTo(n,e)},addLayer:function(t){var e=o.stamp(t);return this._layers[e]?this:(this._layers[e]=t,!t.options||isNaN(t.options.maxZoom)&&isNaN(t.options.minZoom)||(this._zoomBoundLayers[e]=t,this._updateZoomLevels()),this.options.zoomAnimation&&o.TileLayer&&t instanceof o.TileLayer&&(this._tileLayersNum++,this._tileLayersToLoad++,t.on("load",this._onTileLayerLoad,this)),this._loaded&&this._layerAdd(t),this)},removeLayer:function(t){var e=o.stamp(t);return this._layers[e]?(this._loaded&&t.onRemove(this),delete this._layers[e],this._loaded&&this.fire("layerremove",{layer:t}),this._zoomBoundLayers[e]&&(delete this._zoomBoundLayers[e],this._updateZoomLevels()),this.options.zoomAnimation&&o.TileLayer&&t instanceof o.TileLayer&&(this._tileLayersNum--,this._tileLayersToLoad--,t.off("load",this._onTileLayerLoad,this)),this):this},hasLayer:function(t){return t?o.stamp(t)in this._layers:!1},eachLayer:function(t,e){for(var i in this._layers)t.call(e,this._layers[i]);return this},invalidateSize:function(t){if(!this._loaded)return this;t=o.extend({animate:!1,pan:!0},t===!0?{animate:!0}:t);var e=this.getSize();this._sizeChanged=!0,this._initialCenter=null;var i=this.getSize(),n=e.divideBy(2).round(),s=i.divideBy(2).round(),a=n.subtract(s);return a.x||a.y?(t.animate&&t.pan?this.panBy(a):(t.pan&&this._rawPanBy(a),this.fire("move"),t.debounceMoveend?(clearTimeout(this._sizeTimer),this._sizeTimer=setTimeout(o.bind(this.fire,this,"moveend"),200)):this.fire("moveend")),this.fire("resize",{oldSize:e,newSize:i})):this},addHandler:function(t,e){if(!e)return this;var i=this[t]=new e(this);return this._handlers.push(i),this.options[t]&&i.enable(),this},remove:function(){this._loaded&&this.fire("unload"),this._initEvents("off");try{delete this._container._leaflet}catch(t){this._container._leaflet=i}return this._clearPanes(),this._clearControlPos&&this._clearControlPos(),this._clearHandlers(),this},getCenter:function(){return this._checkIfLoaded(),this._initialCenter&&!this._moved()?this._initialCenter:this.layerPointToLatLng(this._getCenterLayerPoint())},getZoom:function(){return this._zoom},getBounds:function(){var t=this.getPixelBounds(),e=this.unproject(t.getBottomLeft()),i=this.unproject(t.getTopRight());return new o.LatLngBounds(e,i)},getMinZoom:function(){return this.options.minZoom===i?this._layersMinZoom===i?0:this._layersMinZoom:this.options.minZoom},getMaxZoom:function(){return this.options.maxZoom===i?this._layersMaxZoom===i?1/0:this._layersMaxZoom:this.options.maxZoom},getBoundsZoom:function(t,e,i){t=o.latLngBounds(t);var n,s=this.getMinZoom()-(e?1:0),a=this.getMaxZoom(),r=this.getSize(),h=t.getNorthWest(),l=t.getSouthEast(),u=!0;i=o.point(i||[0,0]);do s++,n=this.project(l,s).subtract(this.project(h,s)).add(i),u=e?n.x<r.x||n.y<r.y:r.contains(n);while(u&&a>=s);return u&&e?null:e?s:s-1},getSize:function(){return(!this._size||this._sizeChanged)&&(this._size=new o.Point(this._container.clientWidth,this._container.clientHeight),this._sizeChanged=!1),this._size.clone()},getPixelBounds:function(){var t=this._getTopLeftPoint();return new o.Bounds(t,t.add(this.getSize()))},getPixelOrigin:function(){return this._checkIfLoaded(),this._initialTopLeftPoint},getPanes:function(){return this._panes},getContainer:function(){return this._container},getZoomScale:function(t){var e=this.options.crs;return e.scale(t)/e.scale(this._zoom)},getScaleZoom:function(t){return this._zoom+Math.log(t)/Math.LN2},project:function(t,e){return e=e===i?this._zoom:e,this.options.crs.latLngToPoint(o.latLng(t),e)},unproject:function(t,e){return e=e===i?this._zoom:e,this.options.crs.pointToLatLng(o.point(t),e)},layerPointToLatLng:function(t){var e=o.point(t).add(this.getPixelOrigin());return this.unproject(e)},latLngToLayerPoint:function(t){var e=this.project(o.latLng(t))._round();return e._subtract(this.getPixelOrigin())},containerPointToLayerPoint:function(t){return o.point(t).subtract(this._getMapPanePos())},layerPointToContainerPoint:function(t){return o.point(t).add(this._getMapPanePos())},containerPointToLatLng:function(t){var e=this.containerPointToLayerPoint(o.point(t));return this.layerPointToLatLng(e)},latLngToContainerPoint:function(t){return this.layerPointToContainerPoint(this.latLngToLayerPoint(o.latLng(t)))},mouseEventToContainerPoint:function(t){return o.DomEvent.getMousePosition(t,this._container)},mouseEventToLayerPoint:function(t){return this.containerPointToLayerPoint(this.mouseEventToContainerPoint(t))},mouseEventToLatLng:function(t){return this.layerPointToLatLng(this.mouseEventToLayerPoint(t))},_initContainer:function(t){var e=this._container=o.DomUtil.get(t);if(!e)throw new Error("Map container not found.");if(e._leaflet)throw new Error("Map container is already initialized.");e._leaflet=!0},_initLayout:function(){var t=this._container;o.DomUtil.addClass(t,"leaflet-container"+(o.Browser.touch?" leaflet-touch":"")+(o.Browser.retina?" leaflet-retina":"")+(o.Browser.ielt9?" leaflet-oldie":"")+(this.options.fadeAnimation?" leaflet-fade-anim":""));var e=o.DomUtil.getStyle(t,"position");"absolute"!==e&&"relative"!==e&&"fixed"!==e&&(t.style.position="relative"),this._initPanes(),this._initControlPos&&this._initControlPos()},_initPanes:function(){var t=this._panes={};this._mapPane=t.mapPane=this._createPane("leaflet-map-pane",this._container),this._tilePane=t.tilePane=this._createPane("leaflet-tile-pane",this._mapPane),t.objectsPane=this._createPane("leaflet-objects-pane",this._mapPane),t.shadowPane=this._createPane("leaflet-shadow-pane"),t.overlayPane=this._createPane("leaflet-overlay-pane"),t.markerPane=this._createPane("leaflet-marker-pane"),t.popupPane=this._createPane("leaflet-popup-pane");var e=" leaflet-zoom-hide";this.options.markerZoomAnimation||(o.DomUtil.addClass(t.markerPane,e),o.DomUtil.addClass(t.shadowPane,e),o.DomUtil.addClass(t.popupPane,e))},_createPane:function(t,e){return o.DomUtil.create("div",t,e||this._panes.objectsPane)},_clearPanes:function(){this._container.removeChild(this._mapPane)},_addLayers:function(t){t=t?o.Util.isArray(t)?t:[t]:[];for(var e=0,i=t.length;i>e;e++)this.addLayer(t[e])},_resetView:function(t,e,i,n){var s=this._zoom!==e;n||(this.fire("movestart"),s&&this.fire("zoomstart")),this._zoom=e,this._initialCenter=t,this._initialTopLeftPoint=this._getNewTopLeftPoint(t),i?this._initialTopLeftPoint._add(this._getMapPanePos()):o.DomUtil.setPosition(this._mapPane,new o.Point(0,0)),this._tileLayersToLoad=this._tileLayersNum;var a=!this._loaded;this._loaded=!0,this.fire("viewreset",{hard:!i}),a&&(this.fire("load"),this.eachLayer(this._layerAdd,this)),this.fire("move"),(s||n)&&this.fire("zoomend"),this.fire("moveend",{hard:!i})},_rawPanBy:function(t){o.DomUtil.setPosition(this._mapPane,this._getMapPanePos().subtract(t))},_getZoomSpan:function(){return this.getMaxZoom()-this.getMinZoom()},_updateZoomLevels:function(){var t,e=1/0,n=-1/0,o=this._getZoomSpan();for(t in this._zoomBoundLayers){var s=this._zoomBoundLayers[t];isNaN(s.options.minZoom)||(e=Math.min(e,s.options.minZoom)),isNaN(s.options.maxZoom)||(n=Math.max(n,s.options.maxZoom))}t===i?this._layersMaxZoom=this._layersMinZoom=i:(this._layersMaxZoom=n,this._layersMinZoom=e),o!==this._getZoomSpan()&&this.fire("zoomlevelschange")},_panInsideMaxBounds:function(){this.panInsideBounds(this.options.maxBounds)},_checkIfLoaded:function(){if(!this._loaded)throw new Error("Set map center and zoom first.")},_initEvents:function(e){if(o.DomEvent){e=e||"on",o.DomEvent[e](this._container,"click",this._onMouseClick,this);var i,n,s=["dblclick","mousedown","mouseup","mouseenter","mouseleave","mousemove","contextmenu"];for(i=0,n=s.length;n>i;i++)o.DomEvent[e](this._container,s[i],this._fireMouseEvent,this);this.options.trackResize&&o.DomEvent[e](t,"resize",this._onResize,this)}},_onResize:function(){o.Util.cancelAnimFrame(this._resizeRequest),this._resizeRequest=o.Util.requestAnimFrame(function(){this.invalidateSize({debounceMoveend:!0})},this,!1,this._container)},_onMouseClick:function(t){!this._loaded||!t._simulated&&(this.dragging&&this.dragging.moved()||this.boxZoom&&this.boxZoom.moved())||o.DomEvent._skipped(t)||(this.fire("preclick"),this._fireMouseEvent(t))},_fireMouseEvent:function(t){if(this._loaded&&!o.DomEvent._skipped(t)){var e=t.type;if(e="mouseenter"===e?"mouseover":"mouseleave"===e?"mouseout":e,this.hasEventListeners(e)){"contextmenu"===e&&o.DomEvent.preventDefault(t);var i=this.mouseEventToContainerPoint(t),n=this.containerPointToLayerPoint(i),s=this.layerPointToLatLng(n);this.fire(e,{latlng:s,layerPoint:n,containerPoint:i,originalEvent:t})}}},_onTileLayerLoad:function(){this._tileLayersToLoad--,this._tileLayersNum&&!this._tileLayersToLoad&&this.fire("tilelayersload")},_clearHandlers:function(){for(var t=0,e=this._handlers.length;e>t;t++)this._handlers[t].disable()},whenReady:function(t,e){return this._loaded?t.call(e||this,this):this.on("load",t,e),this},_layerAdd:function(t){t.onAdd(this),this.fire("layeradd",{layer:t})},_getMapPanePos:function(){return o.DomUtil.getPosition(this._mapPane)},_moved:function(){var t=this._getMapPanePos();return t&&!t.equals([0,0])},_getTopLeftPoint:function(){return this.getPixelOrigin().subtract(this._getMapPanePos())},_getNewTopLeftPoint:function(t,e){var i=this.getSize()._divideBy(2);return this.project(t,e)._subtract(i)._round()},_latLngToNewLayerPoint:function(t,e,i){var n=this._getNewTopLeftPoint(i,e).add(this._getMapPanePos());return this.project(t,e)._subtract(n)},_getCenterLayerPoint:function(){return this.containerPointToLayerPoint(this.getSize()._divideBy(2))},_getCenterOffset:function(t){return this.latLngToLayerPoint(t).subtract(this._getCenterLayerPoint())},_limitCenter:function(t,e,i){if(!i)return t;var n=this.project(t,e),s=this.getSize().divideBy(2),a=new o.Bounds(n.subtract(s),n.add(s)),r=this._getBoundsOffset(a,i,e);return this.unproject(n.add(r),e)},_limitOffset:function(t,e){if(!e)return t;var i=this.getPixelBounds(),n=new o.Bounds(i.min.add(t),i.max.add(t));return t.add(this._getBoundsOffset(n,e))},_getBoundsOffset:function(t,e,i){var n=this.project(e.getNorthWest(),i).subtract(t.min),s=this.project(e.getSouthEast(),i).subtract(t.max),a=this._rebound(n.x,-s.x),r=this._rebound(n.y,-s.y);return new o.Point(a,r)},_rebound:function(t,e){return t+e>0?Math.round(t-e)/2:Math.max(0,Math.ceil(t))-Math.max(0,Math.floor(e))},_limitZoom:function(t){var e=this.getMinZoom(),i=this.getMaxZoom();return Math.max(e,Math.min(i,t))}}),o.map=function(t,e){return new o.Map(t,e)},o.Projection.Mercator={MAX_LATITUDE:85.0840591556,R_MINOR:6356752.314245179,R_MAJOR:6378137,project:function(t){var e=o.LatLng.DEG_TO_RAD,i=this.MAX_LATITUDE,n=Math.max(Math.min(i,t.lat),-i),s=this.R_MAJOR,a=this.R_MINOR,r=t.lng*e*s,h=n*e,l=a/s,u=Math.sqrt(1-l*l),c=u*Math.sin(h);c=Math.pow((1-c)/(1+c),.5*u);var d=Math.tan(.5*(.5*Math.PI-h))/c;return h=-s*Math.log(d),new o.Point(r,h)},unproject:function(t){for(var e,i=o.LatLng.RAD_TO_DEG,n=this.R_MAJOR,s=this.R_MINOR,a=t.x*i/n,r=s/n,h=Math.sqrt(1-r*r),l=Math.exp(-t.y/n),u=Math.PI/2-2*Math.atan(l),c=15,d=1e-7,p=c,_=.1;Math.abs(_)>d&&--p>0;)e=h*Math.sin(u),_=Math.PI/2-2*Math.atan(l*Math.pow((1-e)/(1+e),.5*h))-u,u+=_;
-return new o.LatLng(u*i,a)}},o.CRS.EPSG3395=o.extend({},o.CRS,{code:"EPSG:3395",projection:o.Projection.Mercator,transformation:function(){var t=o.Projection.Mercator,e=t.R_MAJOR,i=.5/(Math.PI*e);return new o.Transformation(i,.5,-i,.5)}()}),o.TileLayer=o.Class.extend({includes:o.Mixin.Events,options:{minZoom:0,maxZoom:18,tileSize:256,subdomains:"abc",errorTileUrl:"",attribution:"",zoomOffset:0,opacity:1,unloadInvisibleTiles:o.Browser.mobile,updateWhenIdle:o.Browser.mobile},initialize:function(t,e){e=o.setOptions(this,e),e.detectRetina&&o.Browser.retina&&e.maxZoom>0&&(e.tileSize=Math.floor(e.tileSize/2),e.zoomOffset++,e.minZoom>0&&e.minZoom--,this.options.maxZoom--),e.bounds&&(e.bounds=o.latLngBounds(e.bounds)),this._url=t;var i=this.options.subdomains;"string"==typeof i&&(this.options.subdomains=i.split(""))},onAdd:function(t){this._map=t,this._animated=t._zoomAnimated,this._initContainer(),t.on({viewreset:this._reset,moveend:this._update},this),this._animated&&t.on({zoomanim:this._animateZoom,zoomend:this._endZoomAnim},this),this.options.updateWhenIdle||(this._limitedUpdate=o.Util.limitExecByInterval(this._update,150,this),t.on("move",this._limitedUpdate,this)),this._reset(),this._update()},addTo:function(t){return t.addLayer(this),this},onRemove:function(t){this._container.parentNode.removeChild(this._container),t.off({viewreset:this._reset,moveend:this._update},this),this._animated&&t.off({zoomanim:this._animateZoom,zoomend:this._endZoomAnim},this),this.options.updateWhenIdle||t.off("move",this._limitedUpdate,this),this._container=null,this._map=null},bringToFront:function(){var t=this._map._panes.tilePane;return this._container&&(t.appendChild(this._container),this._setAutoZIndex(t,Math.max)),this},bringToBack:function(){var t=this._map._panes.tilePane;return this._container&&(t.insertBefore(this._container,t.firstChild),this._setAutoZIndex(t,Math.min)),this},getAttribution:function(){return this.options.attribution},getContainer:function(){return this._container},setOpacity:function(t){return this.options.opacity=t,this._map&&this._updateOpacity(),this},setZIndex:function(t){return this.options.zIndex=t,this._updateZIndex(),this},setUrl:function(t,e){return this._url=t,e||this.redraw(),this},redraw:function(){return this._map&&(this._reset({hard:!0}),this._update()),this},_updateZIndex:function(){this._container&&this.options.zIndex!==i&&(this._container.style.zIndex=this.options.zIndex)},_setAutoZIndex:function(t,e){var i,n,o,s=t.children,a=-e(1/0,-1/0);for(n=0,o=s.length;o>n;n++)s[n]!==this._container&&(i=parseInt(s[n].style.zIndex,10),isNaN(i)||(a=e(a,i)));this.options.zIndex=this._container.style.zIndex=(isFinite(a)?a:0)+e(1,-1)},_updateOpacity:function(){var t,e=this._tiles;if(o.Browser.ielt9)for(t in e)o.DomUtil.setOpacity(e[t],this.options.opacity);else o.DomUtil.setOpacity(this._container,this.options.opacity)},_initContainer:function(){var t=this._map._panes.tilePane;if(!this._container){if(this._container=o.DomUtil.create("div","leaflet-layer"),this._updateZIndex(),this._animated){var e="leaflet-tile-container";this._bgBuffer=o.DomUtil.create("div",e,this._container),this._tileContainer=o.DomUtil.create("div",e,this._container)}else this._tileContainer=this._container;t.appendChild(this._container),this.options.opacity<1&&this._updateOpacity()}},_reset:function(t){for(var e in this._tiles)this.fire("tileunload",{tile:this._tiles[e]});this._tiles={},this._tilesToLoad=0,this.options.reuseTiles&&(this._unusedTiles=[]),this._tileContainer.innerHTML="",this._animated&&t&&t.hard&&this._clearBgBuffer(),this._initContainer()},_getTileSize:function(){var t=this._map,e=t.getZoom()+this.options.zoomOffset,i=this.options.maxNativeZoom,n=this.options.tileSize;return i&&e>i&&(n=Math.round(t.getZoomScale(e)/t.getZoomScale(i)*n)),n},_update:function(){if(this._map){var t=this._map,e=t.getPixelBounds(),i=t.getZoom(),n=this._getTileSize();if(!(i>this.options.maxZoom||i<this.options.minZoom)){var s=o.bounds(e.min.divideBy(n)._floor(),e.max.divideBy(n)._floor());this._addTilesFromCenterOut(s),(this.options.unloadInvisibleTiles||this.options.reuseTiles)&&this._removeOtherTiles(s)}}},_addTilesFromCenterOut:function(t){var i,n,s,a=[],r=t.getCenter();for(i=t.min.y;i<=t.max.y;i++)for(n=t.min.x;n<=t.max.x;n++)s=new o.Point(n,i),this._tileShouldBeLoaded(s)&&a.push(s);var h=a.length;if(0!==h){a.sort(function(t,e){return t.distanceTo(r)-e.distanceTo(r)});var l=e.createDocumentFragment();for(this._tilesToLoad||this.fire("loading"),this._tilesToLoad+=h,n=0;h>n;n++)this._addTile(a[n],l);this._tileContainer.appendChild(l)}},_tileShouldBeLoaded:function(t){if(t.x+":"+t.y in this._tiles)return!1;var e=this.options;if(!e.continuousWorld){var i=this._getWrapTileNum();if(e.noWrap&&(t.x<0||t.x>=i.x)||t.y<0||t.y>=i.y)return!1}if(e.bounds){var n=e.tileSize,o=t.multiplyBy(n),s=o.add([n,n]),a=this._map.unproject(o),r=this._map.unproject(s);if(e.continuousWorld||e.noWrap||(a=a.wrap(),r=r.wrap()),!e.bounds.intersects([a,r]))return!1}return!0},_removeOtherTiles:function(t){var e,i,n,o;for(o in this._tiles)e=o.split(":"),i=parseInt(e[0],10),n=parseInt(e[1],10),(i<t.min.x||i>t.max.x||n<t.min.y||n>t.max.y)&&this._removeTile(o)},_removeTile:function(t){var e=this._tiles[t];this.fire("tileunload",{tile:e,url:e.src}),this.options.reuseTiles?(o.DomUtil.removeClass(e,"leaflet-tile-loaded"),this._unusedTiles.push(e)):e.parentNode===this._tileContainer&&this._tileContainer.removeChild(e),o.Browser.android||(e.onload=null,e.src=o.Util.emptyImageUrl),delete this._tiles[t]},_addTile:function(t,e){var i=this._getTilePos(t),n=this._getTile();o.DomUtil.setPosition(n,i,o.Browser.chrome),this._tiles[t.x+":"+t.y]=n,this._loadTile(n,t),n.parentNode!==this._tileContainer&&e.appendChild(n)},_getZoomForUrl:function(){var t=this.options,e=this._map.getZoom();return t.zoomReverse&&(e=t.maxZoom-e),e+=t.zoomOffset,t.maxNativeZoom?Math.min(e,t.maxNativeZoom):e},_getTilePos:function(t){var e=this._map.getPixelOrigin(),i=this._getTileSize();return t.multiplyBy(i).subtract(e)},getTileUrl:function(t){return o.Util.template(this._url,o.extend({s:this._getSubdomain(t),z:t.z,x:t.x,y:t.y},this.options))},_getWrapTileNum:function(){var t=this._map.options.crs,e=t.getSize(this._map.getZoom());return e.divideBy(this._getTileSize())._floor()},_adjustTilePoint:function(t){var e=this._getWrapTileNum();this.options.continuousWorld||this.options.noWrap||(t.x=(t.x%e.x+e.x)%e.x),this.options.tms&&(t.y=e.y-t.y-1),t.z=this._getZoomForUrl()},_getSubdomain:function(t){var e=Math.abs(t.x+t.y)%this.options.subdomains.length;return this.options.subdomains[e]},_getTile:function(){if(this.options.reuseTiles&&this._unusedTiles.length>0){var t=this._unusedTiles.pop();return this._resetTile(t),t}return this._createTile()},_resetTile:function(){},_createTile:function(){var t=o.DomUtil.create("img","leaflet-tile");return t.style.width=t.style.height=this._getTileSize()+"px",t.galleryimg="no",t.onselectstart=t.onmousemove=o.Util.falseFn,o.Browser.ielt9&&this.options.opacity!==i&&o.DomUtil.setOpacity(t,this.options.opacity),o.Browser.mobileWebkit3d&&(t.style.WebkitBackfaceVisibility="hidden"),t},_loadTile:function(t,e){t._layer=this,t.onload=this._tileOnLoad,t.onerror=this._tileOnError,this._adjustTilePoint(e),t.src=this.getTileUrl(e),this.fire("tileloadstart",{tile:t,url:t.src})},_tileLoaded:function(){this._tilesToLoad--,this._animated&&o.DomUtil.addClass(this._tileContainer,"leaflet-zoom-animated"),this._tilesToLoad||(this.fire("load"),this._animated&&(clearTimeout(this._clearBgBufferTimer),this._clearBgBufferTimer=setTimeout(o.bind(this._clearBgBuffer,this),500)))},_tileOnLoad:function(){var t=this._layer;this.src!==o.Util.emptyImageUrl&&(o.DomUtil.addClass(this,"leaflet-tile-loaded"),t.fire("tileload",{tile:this,url:this.src})),t._tileLoaded()},_tileOnError:function(){var t=this._layer;t.fire("tileerror",{tile:this,url:this.src});var e=t.options.errorTileUrl;e&&(this.src=e),t._tileLoaded()}}),o.tileLayer=function(t,e){return new o.TileLayer(t,e)},o.TileLayer.WMS=o.TileLayer.extend({defaultWmsParams:{service:"WMS",request:"GetMap",version:"1.1.1",layers:"",styles:"",format:"image/jpeg",transparent:!1},initialize:function(t,e){this._url=t;var i=o.extend({},this.defaultWmsParams),n=e.tileSize||this.options.tileSize;i.width=i.height=e.detectRetina&&o.Browser.retina?2*n:n;for(var s in e)this.options.hasOwnProperty(s)||"crs"===s||(i[s]=e[s]);this.wmsParams=i,o.setOptions(this,e)},onAdd:function(t){this._crs=this.options.crs||t.options.crs,this._wmsVersion=parseFloat(this.wmsParams.version);var e=this._wmsVersion>=1.3?"crs":"srs";this.wmsParams[e]=this._crs.code,o.TileLayer.prototype.onAdd.call(this,t)},getTileUrl:function(t){var e=this._map,i=this.options.tileSize,n=t.multiplyBy(i),s=n.add([i,i]),a=this._crs.project(e.unproject(n,t.z)),r=this._crs.project(e.unproject(s,t.z)),h=this._wmsVersion>=1.3&&this._crs===o.CRS.EPSG4326?[r.y,a.x,a.y,r.x].join(","):[a.x,r.y,r.x,a.y].join(","),l=o.Util.template(this._url,{s:this._getSubdomain(t)});return l+o.Util.getParamString(this.wmsParams,l,!0)+"&BBOX="+h},setParams:function(t,e){return o.extend(this.wmsParams,t),e||this.redraw(),this}}),o.tileLayer.wms=function(t,e){return new o.TileLayer.WMS(t,e)},o.TileLayer.Canvas=o.TileLayer.extend({options:{async:!1},initialize:function(t){o.setOptions(this,t)},redraw:function(){this._map&&(this._reset({hard:!0}),this._update());for(var t in this._tiles)this._redrawTile(this._tiles[t]);return this},_redrawTile:function(t){this.drawTile(t,t._tilePoint,this._map._zoom)},_createTile:function(){var t=o.DomUtil.create("canvas","leaflet-tile");return t.width=t.height=this.options.tileSize,t.onselectstart=t.onmousemove=o.Util.falseFn,t},_loadTile:function(t,e){t._layer=this,t._tilePoint=e,this._redrawTile(t),this.options.async||this.tileDrawn(t)},drawTile:function(){},tileDrawn:function(t){this._tileOnLoad.call(t)}}),o.tileLayer.canvas=function(t){return new o.TileLayer.Canvas(t)},o.ImageOverlay=o.Class.extend({includes:o.Mixin.Events,options:{opacity:1},initialize:function(t,e,i){this._url=t,this._bounds=o.latLngBounds(e),o.setOptions(this,i)},onAdd:function(t){this._map=t,this._image||this._initImage(),t._panes.overlayPane.appendChild(this._image),t.on("viewreset",this._reset,this),t.options.zoomAnimation&&o.Browser.any3d&&t.on("zoomanim",this._animateZoom,this),this._reset()},onRemove:function(t){t.getPanes().overlayPane.removeChild(this._image),t.off("viewreset",this._reset,this),t.options.zoomAnimation&&t.off("zoomanim",this._animateZoom,this)},addTo:function(t){return t.addLayer(this),this},setOpacity:function(t){return this.options.opacity=t,this._updateOpacity(),this},bringToFront:function(){return this._image&&this._map._panes.overlayPane.appendChild(this._image),this},bringToBack:function(){var t=this._map._panes.overlayPane;return this._image&&t.insertBefore(this._image,t.firstChild),this},setUrl:function(t){this._url=t,this._image.src=this._url},getAttribution:function(){return this.options.attribution},_initImage:function(){this._image=o.DomUtil.create("img","leaflet-image-layer"),this._map.options.zoomAnimation&&o.Browser.any3d?o.DomUtil.addClass(this._image,"leaflet-zoom-animated"):o.DomUtil.addClass(this._image,"leaflet-zoom-hide"),this._updateOpacity(),o.extend(this._image,{galleryimg:"no",onselectstart:o.Util.falseFn,onmousemove:o.Util.falseFn,onload:o.bind(this._onImageLoad,this),src:this._url})},_animateZoom:function(t){var e=this._map,i=this._image,n=e.getZoomScale(t.zoom),s=this._bounds.getNorthWest(),a=this._bounds.getSouthEast(),r=e._latLngToNewLayerPoint(s,t.zoom,t.center),h=e._latLngToNewLayerPoint(a,t.zoom,t.center)._subtract(r),l=r._add(h._multiplyBy(.5*(1-1/n)));i.style[o.DomUtil.TRANSFORM]=o.DomUtil.getTranslateString(l)+" scale("+n+") "},_reset:function(){var t=this._image,e=this._map.latLngToLayerPoint(this._bounds.getNorthWest()),i=this._map.latLngToLayerPoint(this._bounds.getSouthEast())._subtract(e);o.DomUtil.setPosition(t,e),t.style.width=i.x+"px",t.style.height=i.y+"px"},_onImageLoad:function(){this.fire("load")},_updateOpacity:function(){o.DomUtil.setOpacity(this._image,this.options.opacity)}}),o.imageOverlay=function(t,e,i){return new o.ImageOverlay(t,e,i)},o.Icon=o.Class.extend({options:{className:""},initialize:function(t){o.setOptions(this,t)},createIcon:function(t){return this._createIcon("icon",t)},createShadow:function(t){return this._createIcon("shadow",t)},_createIcon:function(t,e){var i=this._getIconUrl(t);if(!i){if("icon"===t)throw new Error("iconUrl not set in Icon options (see the docs).");return null}var n;return n=e&&"IMG"===e.tagName?this._createImg(i,e):this._createImg(i),this._setIconStyles(n,t),n},_setIconStyles:function(t,e){var i,n=this.options,s=o.point(n[e+"Size"]);i=o.point("shadow"===e?n.shadowAnchor||n.iconAnchor:n.iconAnchor),!i&&s&&(i=s.divideBy(2,!0)),t.className="leaflet-marker-"+e+" "+n.className,i&&(t.style.marginLeft=-i.x+"px",t.style.marginTop=-i.y+"px"),s&&(t.style.width=s.x+"px",t.style.height=s.y+"px")},_createImg:function(t,i){return i=i||e.createElement("img"),i.src=t,i},_getIconUrl:function(t){return o.Browser.retina&&this.options[t+"RetinaUrl"]?this.options[t+"RetinaUrl"]:this.options[t+"Url"]}}),o.icon=function(t){return new o.Icon(t)},o.Icon.Default=o.Icon.extend({options:{iconSize:[25,41],iconAnchor:[12,41],popupAnchor:[1,-34],shadowSize:[41,41]},_getIconUrl:function(t){var e=t+"Url";if(this.options[e])return this.options[e];o.Browser.retina&&"icon"===t&&(t+="-2x");var i=o.Icon.Default.imagePath;if(!i)throw new Error("Couldn't autodetect L.Icon.Default.imagePath, set it manually.");return i+"/marker-"+t+".png"}}),o.Icon.Default.imagePath=function(){var t,i,n,o,s,a=e.getElementsByTagName("script"),r=/[\/^]leaflet[\-\._]?([\w\-\._]*)\.js\??/;for(t=0,i=a.length;i>t;t++)if(n=a[t].src,o=n.match(r))return s=n.split(r)[0],(s?s+"/":"")+"images"}(),o.Marker=o.Class.extend({includes:o.Mixin.Events,options:{icon:new o.Icon.Default,title:"",alt:"",clickable:!0,draggable:!1,keyboard:!0,zIndexOffset:0,opacity:1,riseOnHover:!1,riseOffset:250},initialize:function(t,e){o.setOptions(this,e),this._latlng=o.latLng(t)},onAdd:function(t){this._map=t,t.on("viewreset",this.update,this),this._initIcon(),this.update(),this.fire("add"),t.options.zoomAnimation&&t.options.markerZoomAnimation&&t.on("zoomanim",this._animateZoom,this)},addTo:function(t){return t.addLayer(this),this},onRemove:function(t){this.dragging&&this.dragging.disable(),this._removeIcon(),this._removeShadow(),this.fire("remove"),t.off({viewreset:this.update,zoomanim:this._animateZoom},this),this._map=null},getLatLng:function(){return this._latlng},setLatLng:function(t){return this._latlng=o.latLng(t),this.update(),this.fire("move",{latlng:this._latlng})},setZIndexOffset:function(t){return this.options.zIndexOffset=t,this.update(),this},setIcon:function(t){return this.options.icon=t,this._map&&(this._initIcon(),this.update()),this._popup&&this.bindPopup(this._popup),this},update:function(){if(this._icon){var t=this._map.latLngToLayerPoint(this._latlng).round();this._setPos(t)}return this},_initIcon:function(){var t=this.options,e=this._map,i=e.options.zoomAnimation&&e.options.markerZoomAnimation,n=i?"leaflet-zoom-animated":"leaflet-zoom-hide",s=t.icon.createIcon(this._icon),a=!1;s!==this._icon&&(this._icon&&this._removeIcon(),a=!0,t.title&&(s.title=t.title),t.alt&&(s.alt=t.alt)),o.DomUtil.addClass(s,n),t.keyboard&&(s.tabIndex="0"),this._icon=s,this._initInteraction(),t.riseOnHover&&o.DomEvent.on(s,"mouseover",this._bringToFront,this).on(s,"mouseout",this._resetZIndex,this);var r=t.icon.createShadow(this._shadow),h=!1;r!==this._shadow&&(this._removeShadow(),h=!0),r&&o.DomUtil.addClass(r,n),this._shadow=r,t.opacity<1&&this._updateOpacity();var l=this._map._panes;a&&l.markerPane.appendChild(this._icon),r&&h&&l.shadowPane.appendChild(this._shadow)},_removeIcon:function(){this.options.riseOnHover&&o.DomEvent.off(this._icon,"mouseover",this._bringToFront).off(this._icon,"mouseout",this._resetZIndex),this._map._panes.markerPane.removeChild(this._icon),this._icon=null},_removeShadow:function(){this._shadow&&this._map._panes.shadowPane.removeChild(this._shadow),this._shadow=null},_setPos:function(t){o.DomUtil.setPosition(this._icon,t),this._shadow&&o.DomUtil.setPosition(this._shadow,t),this._zIndex=t.y+this.options.zIndexOffset,this._resetZIndex()},_updateZIndex:function(t){this._icon.style.zIndex=this._zIndex+t},_animateZoom:function(t){var e=this._map._latLngToNewLayerPoint(this._latlng,t.zoom,t.center).round();this._setPos(e)},_initInteraction:function(){if(this.options.clickable){var t=this._icon,e=["dblclick","mousedown","mouseover","mouseout","contextmenu"];o.DomUtil.addClass(t,"leaflet-clickable"),o.DomEvent.on(t,"click",this._onMouseClick,this),o.DomEvent.on(t,"keypress",this._onKeyPress,this);for(var i=0;i<e.length;i++)o.DomEvent.on(t,e[i],this._fireMouseEvent,this);o.Handler.MarkerDrag&&(this.dragging=new o.Handler.MarkerDrag(this),this.options.draggable&&this.dragging.enable())}},_onMouseClick:function(t){var e=this.dragging&&this.dragging.moved();(this.hasEventListeners(t.type)||e)&&o.DomEvent.stopPropagation(t),e||(this.dragging&&this.dragging._enabled||!this._map.dragging||!this._map.dragging.moved())&&this.fire(t.type,{originalEvent:t,latlng:this._latlng})},_onKeyPress:function(t){13===t.keyCode&&this.fire("click",{originalEvent:t,latlng:this._latlng})},_fireMouseEvent:function(t){this.fire(t.type,{originalEvent:t,latlng:this._latlng}),"contextmenu"===t.type&&this.hasEventListeners(t.type)&&o.DomEvent.preventDefault(t),"mousedown"!==t.type?o.DomEvent.stopPropagation(t):o.DomEvent.preventDefault(t)},setOpacity:function(t){return this.options.opacity=t,this._map&&this._updateOpacity(),this},_updateOpacity:function(){o.DomUtil.setOpacity(this._icon,this.options.opacity),this._shadow&&o.DomUtil.setOpacity(this._shadow,this.options.opacity)},_bringToFront:function(){this._updateZIndex(this.options.riseOffset)},_resetZIndex:function(){this._updateZIndex(0)}}),o.marker=function(t,e){return new o.Marker(t,e)},o.DivIcon=o.Icon.extend({options:{iconSize:[12,12],className:"leaflet-div-icon",html:!1},createIcon:function(t){var i=t&&"DIV"===t.tagName?t:e.createElement("div"),n=this.options;return i.innerHTML=n.html!==!1?n.html:"",n.bgPos&&(i.style.backgroundPosition=-n.bgPos.x+"px "+-n.bgPos.y+"px"),this._setIconStyles(i,"icon"),i},createShadow:function(){return null}}),o.divIcon=function(t){return new o.DivIcon(t)},o.Map.mergeOptions({closePopupOnClick:!0}),o.Popup=o.Class.extend({includes:o.Mixin.Events,options:{minWidth:50,maxWidth:300,autoPan:!0,closeButton:!0,offset:[0,7],autoPanPadding:[5,5],keepInView:!1,className:"",zoomAnimation:!0},initialize:function(t,e){o.setOptions(this,t),this._source=e,this._animated=o.Browser.any3d&&this.options.zoomAnimation,this._isOpen=!1},onAdd:function(t){this._map=t,this._container||this._initLayout();var e=t.options.fadeAnimation;e&&o.DomUtil.setOpacity(this._container,0),t._panes.popupPane.appendChild(this._container),t.on(this._getEvents(),this),this.update(),e&&o.DomUtil.setOpacity(this._container,1),this.fire("open"),t.fire("popupopen",{popup:this}),this._source&&this._source.fire("popupopen",{popup:this})},addTo:function(t){return t.addLayer(this),this},openOn:function(t){return t.openPopup(this),this},onRemove:function(t){t._panes.popupPane.removeChild(this._container),o.Util.falseFn(this._container.offsetWidth),t.off(this._getEvents(),this),t.options.fadeAnimation&&o.DomUtil.setOpacity(this._container,0),this._map=null,this.fire("close"),t.fire("popupclose",{popup:this}),this._source&&this._source.fire("popupclose",{popup:this})},getLatLng:function(){return this._latlng},setLatLng:function(t){return this._latlng=o.latLng(t),this._map&&(this._updatePosition(),this._adjustPan()),this},getContent:function(){return this._content},setContent:function(t){return this._content=t,this.update(),this},update:function(){this._map&&(this._container.style.visibility="hidden",this._updateContent(),this._updateLayout(),this._updatePosition(),this._container.style.visibility="",this._adjustPan())},_getEvents:function(){var t={viewreset:this._updatePosition};return this._animated&&(t.zoomanim=this._zoomAnimation),("closeOnClick"in this.options?this.options.closeOnClick:this._map.options.closePopupOnClick)&&(t.preclick=this._close),this.options.keepInView&&(t.moveend=this._adjustPan),t},_close:function(){this._map&&this._map.closePopup(this)},_initLayout:function(){var t,e="leaflet-popup",i=e+" "+this.options.className+" leaflet-zoom-"+(this._animated?"animated":"hide"),n=this._container=o.DomUtil.create("div",i);this.options.closeButton&&(t=this._closeButton=o.DomUtil.create("a",e+"-close-button",n),t.href="#close",t.innerHTML="&#215;",o.DomEvent.disableClickPropagation(t),o.DomEvent.on(t,"click",this._onCloseButtonClick,this));var s=this._wrapper=o.DomUtil.create("div",e+"-content-wrapper",n);o.DomEvent.disableClickPropagation(s),this._contentNode=o.DomUtil.create("div",e+"-content",s),o.DomEvent.disableScrollPropagation(this._contentNode),o.DomEvent.on(s,"contextmenu",o.DomEvent.stopPropagation),this._tipContainer=o.DomUtil.create("div",e+"-tip-container",n),this._tip=o.DomUtil.create("div",e+"-tip",this._tipContainer)},_updateContent:function(){if(this._content){if("string"==typeof this._content)this._contentNode.innerHTML=this._content;else{for(;this._contentNode.hasChildNodes();)this._contentNode.removeChild(this._contentNode.firstChild);this._contentNode.appendChild(this._content)}this.fire("contentupdate")}},_updateLayout:function(){var t=this._contentNode,e=t.style;e.width="",e.whiteSpace="nowrap";var i=t.offsetWidth;i=Math.min(i,this.options.maxWidth),i=Math.max(i,this.options.minWidth),e.width=i+1+"px",e.whiteSpace="",e.height="";var n=t.offsetHeight,s=this.options.maxHeight,a="leaflet-popup-scrolled";s&&n>s?(e.height=s+"px",o.DomUtil.addClass(t,a)):o.DomUtil.removeClass(t,a),this._containerWidth=this._container.offsetWidth},_updatePosition:function(){if(this._map){var t=this._map.latLngToLayerPoint(this._latlng),e=this._animated,i=o.point(this.options.offset);e&&o.DomUtil.setPosition(this._container,t),this._containerBottom=-i.y-(e?0:t.y),this._containerLeft=-Math.round(this._containerWidth/2)+i.x+(e?0:t.x),this._container.style.bottom=this._containerBottom+"px",this._container.style.left=this._containerLeft+"px"}},_zoomAnimation:function(t){var e=this._map._latLngToNewLayerPoint(this._latlng,t.zoom,t.center);o.DomUtil.setPosition(this._container,e)},_adjustPan:function(){if(this.options.autoPan){var t=this._map,e=this._container.offsetHeight,i=this._containerWidth,n=new o.Point(this._containerLeft,-e-this._containerBottom);this._animated&&n._add(o.DomUtil.getPosition(this._container));var s=t.layerPointToContainerPoint(n),a=o.point(this.options.autoPanPadding),r=o.point(this.options.autoPanPaddingTopLeft||a),h=o.point(this.options.autoPanPaddingBottomRight||a),l=t.getSize(),u=0,c=0;s.x+i+h.x>l.x&&(u=s.x+i-l.x+h.x),s.x-u-r.x<0&&(u=s.x-r.x),s.y+e+h.y>l.y&&(c=s.y+e-l.y+h.y),s.y-c-r.y<0&&(c=s.y-r.y),(u||c)&&t.fire("autopanstart").panBy([u,c])}},_onCloseButtonClick:function(t){this._close(),o.DomEvent.stop(t)}}),o.popup=function(t,e){return new o.Popup(t,e)},o.Map.include({openPopup:function(t,e,i){if(this.closePopup(),!(t instanceof o.Popup)){var n=t;t=new o.Popup(i).setLatLng(e).setContent(n)}return t._isOpen=!0,this._popup=t,this.addLayer(t)},closePopup:function(t){return t&&t!==this._popup||(t=this._popup,this._popup=null),t&&(this.removeLayer(t),t._isOpen=!1),this}}),o.Marker.include({openPopup:function(){return this._popup&&this._map&&!this._map.hasLayer(this._popup)&&(this._popup.setLatLng(this._latlng),this._map.openPopup(this._popup)),this},closePopup:function(){return this._popup&&this._popup._close(),this},togglePopup:function(){return this._popup&&(this._popup._isOpen?this.closePopup():this.openPopup()),this},bindPopup:function(t,e){var i=o.point(this.options.icon.options.popupAnchor||[0,0]);return i=i.add(o.Popup.prototype.options.offset),e&&e.offset&&(i=i.add(e.offset)),e=o.extend({offset:i},e),this._popupHandlersAdded||(this.on("click",this.togglePopup,this).on("remove",this.closePopup,this).on("move",this._movePopup,this),this._popupHandlersAdded=!0),t instanceof o.Popup?(o.setOptions(t,e),this._popup=t):this._popup=new o.Popup(e,this).setContent(t),this},setPopupContent:function(t){return this._popup&&this._popup.setContent(t),this},unbindPopup:function(){return this._popup&&(this._popup=null,this.off("click",this.togglePopup,this).off("remove",this.closePopup,this).off("move",this._movePopup,this),this._popupHandlersAdded=!1),this},getPopup:function(){return this._popup},_movePopup:function(t){this._popup.setLatLng(t.latlng)}}),o.LayerGroup=o.Class.extend({initialize:function(t){this._layers={};var e,i;if(t)for(e=0,i=t.length;i>e;e++)this.addLayer(t[e])},addLayer:function(t){var e=this.getLayerId(t);return this._layers[e]=t,this._map&&this._map.addLayer(t),this},removeLayer:function(t){var e=t in this._layers?t:this.getLayerId(t);return this._map&&this._layers[e]&&this._map.removeLayer(this._layers[e]),delete this._layers[e],this},hasLayer:function(t){return t?t in this._layers||this.getLayerId(t)in this._layers:!1},clearLayers:function(){return this.eachLayer(this.removeLayer,this),this},invoke:function(t){var e,i,n=Array.prototype.slice.call(arguments,1);for(e in this._layers)i=this._layers[e],i[t]&&i[t].apply(i,n);return this},onAdd:function(t){this._map=t,this.eachLayer(t.addLayer,t)},onRemove:function(t){this.eachLayer(t.removeLayer,t),this._map=null},addTo:function(t){return t.addLayer(this),this},eachLayer:function(t,e){for(var i in this._layers)t.call(e,this._layers[i]);return this},getLayer:function(t){return this._layers[t]},getLayers:function(){var t=[];for(var e in this._layers)t.push(this._layers[e]);return t},setZIndex:function(t){return this.invoke("setZIndex",t)},getLayerId:function(t){return o.stamp(t)}}),o.layerGroup=function(t){return new o.LayerGroup(t)},o.FeatureGroup=o.LayerGroup.extend({includes:o.Mixin.Events,statics:{EVENTS:"click dblclick mouseover mouseout mousemove contextmenu popupopen popupclose"},addLayer:function(t){return this.hasLayer(t)?this:("on"in t&&t.on(o.FeatureGroup.EVENTS,this._propagateEvent,this),o.LayerGroup.prototype.addLayer.call(this,t),this._popupContent&&t.bindPopup&&t.bindPopup(this._popupContent,this._popupOptions),this.fire("layeradd",{layer:t}))},removeLayer:function(t){return this.hasLayer(t)?(t in this._layers&&(t=this._layers[t]),t.off(o.FeatureGroup.EVENTS,this._propagateEvent,this),o.LayerGroup.prototype.removeLayer.call(this,t),this._popupContent&&this.invoke("unbindPopup"),this.fire("layerremove",{layer:t})):this},bindPopup:function(t,e){return this._popupContent=t,this._popupOptions=e,this.invoke("bindPopup",t,e)},openPopup:function(t){for(var e in this._layers){this._layers[e].openPopup(t);break}return this},setStyle:function(t){return this.invoke("setStyle",t)},bringToFront:function(){return this.invoke("bringToFront")},bringToBack:function(){return this.invoke("bringToBack")},getBounds:function(){var t=new o.LatLngBounds;return this.eachLayer(function(e){t.extend(e instanceof o.Marker?e.getLatLng():e.getBounds())}),t},_propagateEvent:function(t){t=o.extend({layer:t.target,target:this},t),this.fire(t.type,t)}}),o.featureGroup=function(t){return new o.FeatureGroup(t)},o.Path=o.Class.extend({includes:[o.Mixin.Events],statics:{CLIP_PADDING:function(){var e=o.Browser.mobile?1280:2e3,i=(e/Math.max(t.outerWidth,t.outerHeight)-1)/2;return Math.max(0,Math.min(.5,i))}()},options:{stroke:!0,color:"#0033ff",dashArray:null,lineCap:null,lineJoin:null,weight:5,opacity:.5,fill:!1,fillColor:null,fillOpacity:.2,clickable:!0},initialize:function(t){o.setOptions(this,t)},onAdd:function(t){this._map=t,this._container||(this._initElements(),this._initEvents()),this.projectLatlngs(),this._updatePath(),this._container&&this._map._pathRoot.appendChild(this._container),this.fire("add"),t.on({viewreset:this.projectLatlngs,moveend:this._updatePath},this)},addTo:function(t){return t.addLayer(this),this},onRemove:function(t){t._pathRoot.removeChild(this._container),this.fire("remove"),this._map=null,o.Browser.vml&&(this._container=null,this._stroke=null,this._fill=null),t.off({viewreset:this.projectLatlngs,moveend:this._updatePath},this)},projectLatlngs:function(){},setStyle:function(t){return o.setOptions(this,t),this._container&&this._updateStyle(),this},redraw:function(){return this._map&&(this.projectLatlngs(),this._updatePath()),this}}),o.Map.include({_updatePathViewport:function(){var t=o.Path.CLIP_PADDING,e=this.getSize(),i=o.DomUtil.getPosition(this._mapPane),n=i.multiplyBy(-1)._subtract(e.multiplyBy(t)._round()),s=n.add(e.multiplyBy(1+2*t)._round());this._pathViewport=new o.Bounds(n,s)}}),o.Path.SVG_NS="http://www.w3.org/2000/svg",o.Browser.svg=!(!e.createElementNS||!e.createElementNS(o.Path.SVG_NS,"svg").createSVGRect),o.Path=o.Path.extend({statics:{SVG:o.Browser.svg},bringToFront:function(){var t=this._map._pathRoot,e=this._container;return e&&t.lastChild!==e&&t.appendChild(e),this},bringToBack:function(){var t=this._map._pathRoot,e=this._container,i=t.firstChild;return e&&i!==e&&t.insertBefore(e,i),this},getPathString:function(){},_createElement:function(t){return e.createElementNS(o.Path.SVG_NS,t)},_initElements:function(){this._map._initPathRoot(),this._initPath(),this._initStyle()},_initPath:function(){this._container=this._createElement("g"),this._path=this._createElement("path"),this.options.className&&o.DomUtil.addClass(this._path,this.options.className),this._container.appendChild(this._path)},_initStyle:function(){this.options.stroke&&(this._path.setAttribute("stroke-linejoin","round"),this._path.setAttribute("stroke-linecap","round")),this.options.fill&&this._path.setAttribute("fill-rule","evenodd"),this.options.pointerEvents&&this._path.setAttribute("pointer-events",this.options.pointerEvents),this.options.clickable||this.options.pointerEvents||this._path.setAttribute("pointer-events","none"),this._updateStyle()},_updateStyle:function(){this.options.stroke?(this._path.setAttribute("stroke",this.options.color),this._path.setAttribute("stroke-opacity",this.options.opacity),this._path.setAttribute("stroke-width",this.options.weight),this.options.dashArray?this._path.setAttribute("stroke-dasharray",this.options.dashArray):this._path.removeAttribute("stroke-dasharray"),this.options.lineCap&&this._path.setAttribute("stroke-linecap",this.options.lineCap),this.options.lineJoin&&this._path.setAttribute("stroke-linejoin",this.options.lineJoin)):this._path.setAttribute("stroke","none"),this.options.fill?(this._path.setAttribute("fill",this.options.fillColor||this.options.color),this._path.setAttribute("fill-opacity",this.options.fillOpacity)):this._path.setAttribute("fill","none")},_updatePath:function(){var t=this.getPathString();t||(t="M0 0"),this._path.setAttribute("d",t)},_initEvents:function(){if(this.options.clickable){(o.Browser.svg||!o.Browser.vml)&&o.DomUtil.addClass(this._path,"leaflet-clickable"),o.DomEvent.on(this._container,"click",this._onMouseClick,this);for(var t=["dblclick","mousedown","mouseover","mouseout","mousemove","contextmenu"],e=0;e<t.length;e++)o.DomEvent.on(this._container,t[e],this._fireMouseEvent,this)}},_onMouseClick:function(t){this._map.dragging&&this._map.dragging.moved()||this._fireMouseEvent(t)},_fireMouseEvent:function(t){if(this.hasEventListeners(t.type)){var e=this._map,i=e.mouseEventToContainerPoint(t),n=e.containerPointToLayerPoint(i),s=e.layerPointToLatLng(n);this.fire(t.type,{latlng:s,layerPoint:n,containerPoint:i,originalEvent:t}),"contextmenu"===t.type&&o.DomEvent.preventDefault(t),"mousemove"!==t.type&&o.DomEvent.stopPropagation(t)}}}),o.Map.include({_initPathRoot:function(){this._pathRoot||(this._pathRoot=o.Path.prototype._createElement("svg"),this._panes.overlayPane.appendChild(this._pathRoot),this.options.zoomAnimation&&o.Browser.any3d?(o.DomUtil.addClass(this._pathRoot,"leaflet-zoom-animated"),this.on({zoomanim:this._animatePathZoom,zoomend:this._endPathZoom})):o.DomUtil.addClass(this._pathRoot,"leaflet-zoom-hide"),this.on("moveend",this._updateSvgViewport),this._updateSvgViewport())
-},_animatePathZoom:function(t){var e=this.getZoomScale(t.zoom),i=this._getCenterOffset(t.center)._multiplyBy(-e)._add(this._pathViewport.min);this._pathRoot.style[o.DomUtil.TRANSFORM]=o.DomUtil.getTranslateString(i)+" scale("+e+") ",this._pathZooming=!0},_endPathZoom:function(){this._pathZooming=!1},_updateSvgViewport:function(){if(!this._pathZooming){this._updatePathViewport();var t=this._pathViewport,e=t.min,i=t.max,n=i.x-e.x,s=i.y-e.y,a=this._pathRoot,r=this._panes.overlayPane;o.Browser.mobileWebkit&&r.removeChild(a),o.DomUtil.setPosition(a,e),a.setAttribute("width",n),a.setAttribute("height",s),a.setAttribute("viewBox",[e.x,e.y,n,s].join(" ")),o.Browser.mobileWebkit&&r.appendChild(a)}}}),o.Path.include({bindPopup:function(t,e){return t instanceof o.Popup?this._popup=t:((!this._popup||e)&&(this._popup=new o.Popup(e,this)),this._popup.setContent(t)),this._popupHandlersAdded||(this.on("click",this._openPopup,this).on("remove",this.closePopup,this),this._popupHandlersAdded=!0),this},unbindPopup:function(){return this._popup&&(this._popup=null,this.off("click",this._openPopup).off("remove",this.closePopup),this._popupHandlersAdded=!1),this},openPopup:function(t){return this._popup&&(t=t||this._latlng||this._latlngs[Math.floor(this._latlngs.length/2)],this._openPopup({latlng:t})),this},closePopup:function(){return this._popup&&this._popup._close(),this},_openPopup:function(t){this._popup.setLatLng(t.latlng),this._map.openPopup(this._popup)}}),o.Browser.vml=!o.Browser.svg&&function(){try{var t=e.createElement("div");t.innerHTML='<v:shape adj="1"/>';var i=t.firstChild;return i.style.behavior="url(#default#VML)",i&&"object"==typeof i.adj}catch(n){return!1}}(),o.Path=o.Browser.svg||!o.Browser.vml?o.Path:o.Path.extend({statics:{VML:!0,CLIP_PADDING:.02},_createElement:function(){try{return e.namespaces.add("lvml","urn:schemas-microsoft-com:vml"),function(t){return e.createElement("<lvml:"+t+' class="lvml">')}}catch(t){return function(t){return e.createElement("<"+t+' xmlns="urn:schemas-microsoft.com:vml" class="lvml">')}}}(),_initPath:function(){var t=this._container=this._createElement("shape");o.DomUtil.addClass(t,"leaflet-vml-shape"+(this.options.className?" "+this.options.className:"")),this.options.clickable&&o.DomUtil.addClass(t,"leaflet-clickable"),t.coordsize="1 1",this._path=this._createElement("path"),t.appendChild(this._path),this._map._pathRoot.appendChild(t)},_initStyle:function(){this._updateStyle()},_updateStyle:function(){var t=this._stroke,e=this._fill,i=this.options,n=this._container;n.stroked=i.stroke,n.filled=i.fill,i.stroke?(t||(t=this._stroke=this._createElement("stroke"),t.endcap="round",n.appendChild(t)),t.weight=i.weight+"px",t.color=i.color,t.opacity=i.opacity,t.dashStyle=i.dashArray?o.Util.isArray(i.dashArray)?i.dashArray.join(" "):i.dashArray.replace(/( *, *)/g," "):"",i.lineCap&&(t.endcap=i.lineCap.replace("butt","flat")),i.lineJoin&&(t.joinstyle=i.lineJoin)):t&&(n.removeChild(t),this._stroke=null),i.fill?(e||(e=this._fill=this._createElement("fill"),n.appendChild(e)),e.color=i.fillColor||i.color,e.opacity=i.fillOpacity):e&&(n.removeChild(e),this._fill=null)},_updatePath:function(){var t=this._container.style;t.display="none",this._path.v=this.getPathString()+" ",t.display=""}}),o.Map.include(o.Browser.svg||!o.Browser.vml?{}:{_initPathRoot:function(){if(!this._pathRoot){var t=this._pathRoot=e.createElement("div");t.className="leaflet-vml-container",this._panes.overlayPane.appendChild(t),this.on("moveend",this._updatePathViewport),this._updatePathViewport()}}}),o.Browser.canvas=function(){return!!e.createElement("canvas").getContext}(),o.Path=o.Path.SVG&&!t.L_PREFER_CANVAS||!o.Browser.canvas?o.Path:o.Path.extend({statics:{CANVAS:!0,SVG:!1},redraw:function(){return this._map&&(this.projectLatlngs(),this._requestUpdate()),this},setStyle:function(t){return o.setOptions(this,t),this._map&&(this._updateStyle(),this._requestUpdate()),this},onRemove:function(t){t.off("viewreset",this.projectLatlngs,this).off("moveend",this._updatePath,this),this.options.clickable&&(this._map.off("click",this._onClick,this),this._map.off("mousemove",this._onMouseMove,this)),this._requestUpdate(),this.fire("remove"),this._map=null},_requestUpdate:function(){this._map&&!o.Path._updateRequest&&(o.Path._updateRequest=o.Util.requestAnimFrame(this._fireMapMoveEnd,this._map))},_fireMapMoveEnd:function(){o.Path._updateRequest=null,this.fire("moveend")},_initElements:function(){this._map._initPathRoot(),this._ctx=this._map._canvasCtx},_updateStyle:function(){var t=this.options;t.stroke&&(this._ctx.lineWidth=t.weight,this._ctx.strokeStyle=t.color),t.fill&&(this._ctx.fillStyle=t.fillColor||t.color)},_drawPath:function(){var t,e,i,n,s,a;for(this._ctx.beginPath(),t=0,i=this._parts.length;i>t;t++){for(e=0,n=this._parts[t].length;n>e;e++)s=this._parts[t][e],a=(0===e?"move":"line")+"To",this._ctx[a](s.x,s.y);this instanceof o.Polygon&&this._ctx.closePath()}},_checkIfEmpty:function(){return!this._parts.length},_updatePath:function(){if(!this._checkIfEmpty()){var t=this._ctx,e=this.options;this._drawPath(),t.save(),this._updateStyle(),e.fill&&(t.globalAlpha=e.fillOpacity,t.fill()),e.stroke&&(t.globalAlpha=e.opacity,t.stroke()),t.restore()}},_initEvents:function(){this.options.clickable&&(this._map.on("mousemove",this._onMouseMove,this),this._map.on("click",this._onClick,this))},_onClick:function(t){this._containsPoint(t.layerPoint)&&this.fire("click",t)},_onMouseMove:function(t){this._map&&!this._map._animatingZoom&&(this._containsPoint(t.layerPoint)?(this._ctx.canvas.style.cursor="pointer",this._mouseInside=!0,this.fire("mouseover",t)):this._mouseInside&&(this._ctx.canvas.style.cursor="",this._mouseInside=!1,this.fire("mouseout",t)))}}),o.Map.include(o.Path.SVG&&!t.L_PREFER_CANVAS||!o.Browser.canvas?{}:{_initPathRoot:function(){var t,i=this._pathRoot;i||(i=this._pathRoot=e.createElement("canvas"),i.style.position="absolute",t=this._canvasCtx=i.getContext("2d"),t.lineCap="round",t.lineJoin="round",this._panes.overlayPane.appendChild(i),this.options.zoomAnimation&&(this._pathRoot.className="leaflet-zoom-animated",this.on("zoomanim",this._animatePathZoom),this.on("zoomend",this._endPathZoom)),this.on("moveend",this._updateCanvasViewport),this._updateCanvasViewport())},_updateCanvasViewport:function(){if(!this._pathZooming){this._updatePathViewport();var t=this._pathViewport,e=t.min,i=t.max.subtract(e),n=this._pathRoot;o.DomUtil.setPosition(n,e),n.width=i.x,n.height=i.y,n.getContext("2d").translate(-e.x,-e.y)}}}),o.LineUtil={simplify:function(t,e){if(!e||!t.length)return t.slice();var i=e*e;return t=this._reducePoints(t,i),t=this._simplifyDP(t,i)},pointToSegmentDistance:function(t,e,i){return Math.sqrt(this._sqClosestPointOnSegment(t,e,i,!0))},closestPointOnSegment:function(t,e,i){return this._sqClosestPointOnSegment(t,e,i)},_simplifyDP:function(t,e){var n=t.length,o=typeof Uint8Array!=i+""?Uint8Array:Array,s=new o(n);s[0]=s[n-1]=1,this._simplifyDPStep(t,s,e,0,n-1);var a,r=[];for(a=0;n>a;a++)s[a]&&r.push(t[a]);return r},_simplifyDPStep:function(t,e,i,n,o){var s,a,r,h=0;for(a=n+1;o-1>=a;a++)r=this._sqClosestPointOnSegment(t[a],t[n],t[o],!0),r>h&&(s=a,h=r);h>i&&(e[s]=1,this._simplifyDPStep(t,e,i,n,s),this._simplifyDPStep(t,e,i,s,o))},_reducePoints:function(t,e){for(var i=[t[0]],n=1,o=0,s=t.length;s>n;n++)this._sqDist(t[n],t[o])>e&&(i.push(t[n]),o=n);return s-1>o&&i.push(t[s-1]),i},clipSegment:function(t,e,i,n){var o,s,a,r=n?this._lastCode:this._getBitCode(t,i),h=this._getBitCode(e,i);for(this._lastCode=h;;){if(!(r|h))return[t,e];if(r&h)return!1;o=r||h,s=this._getEdgeIntersection(t,e,o,i),a=this._getBitCode(s,i),o===r?(t=s,r=a):(e=s,h=a)}},_getEdgeIntersection:function(t,e,i,n){var s=e.x-t.x,a=e.y-t.y,r=n.min,h=n.max;return 8&i?new o.Point(t.x+s*(h.y-t.y)/a,h.y):4&i?new o.Point(t.x+s*(r.y-t.y)/a,r.y):2&i?new o.Point(h.x,t.y+a*(h.x-t.x)/s):1&i?new o.Point(r.x,t.y+a*(r.x-t.x)/s):void 0},_getBitCode:function(t,e){var i=0;return t.x<e.min.x?i|=1:t.x>e.max.x&&(i|=2),t.y<e.min.y?i|=4:t.y>e.max.y&&(i|=8),i},_sqDist:function(t,e){var i=e.x-t.x,n=e.y-t.y;return i*i+n*n},_sqClosestPointOnSegment:function(t,e,i,n){var s,a=e.x,r=e.y,h=i.x-a,l=i.y-r,u=h*h+l*l;return u>0&&(s=((t.x-a)*h+(t.y-r)*l)/u,s>1?(a=i.x,r=i.y):s>0&&(a+=h*s,r+=l*s)),h=t.x-a,l=t.y-r,n?h*h+l*l:new o.Point(a,r)}},o.Polyline=o.Path.extend({initialize:function(t,e){o.Path.prototype.initialize.call(this,e),this._latlngs=this._convertLatLngs(t)},options:{smoothFactor:1,noClip:!1},projectLatlngs:function(){this._originalPoints=[];for(var t=0,e=this._latlngs.length;e>t;t++)this._originalPoints[t]=this._map.latLngToLayerPoint(this._latlngs[t])},getPathString:function(){for(var t=0,e=this._parts.length,i="";e>t;t++)i+=this._getPathPartStr(this._parts[t]);return i},getLatLngs:function(){return this._latlngs},setLatLngs:function(t){return this._latlngs=this._convertLatLngs(t),this.redraw()},addLatLng:function(t){return this._latlngs.push(o.latLng(t)),this.redraw()},spliceLatLngs:function(){var t=[].splice.apply(this._latlngs,arguments);return this._convertLatLngs(this._latlngs,!0),this.redraw(),t},closestLayerPoint:function(t){for(var e,i,n=1/0,s=this._parts,a=null,r=0,h=s.length;h>r;r++)for(var l=s[r],u=1,c=l.length;c>u;u++){e=l[u-1],i=l[u];var d=o.LineUtil._sqClosestPointOnSegment(t,e,i,!0);n>d&&(n=d,a=o.LineUtil._sqClosestPointOnSegment(t,e,i))}return a&&(a.distance=Math.sqrt(n)),a},getBounds:function(){return new o.LatLngBounds(this.getLatLngs())},_convertLatLngs:function(t,e){var i,n,s=e?t:[];for(i=0,n=t.length;n>i;i++){if(o.Util.isArray(t[i])&&"number"!=typeof t[i][0])return;s[i]=o.latLng(t[i])}return s},_initEvents:function(){o.Path.prototype._initEvents.call(this)},_getPathPartStr:function(t){for(var e,i=o.Path.VML,n=0,s=t.length,a="";s>n;n++)e=t[n],i&&e._round(),a+=(n?"L":"M")+e.x+" "+e.y;return a},_clipPoints:function(){var t,e,i,n=this._originalPoints,s=n.length;if(this.options.noClip)return void(this._parts=[n]);this._parts=[];var a=this._parts,r=this._map._pathViewport,h=o.LineUtil;for(t=0,e=0;s-1>t;t++)i=h.clipSegment(n[t],n[t+1],r,t),i&&(a[e]=a[e]||[],a[e].push(i[0]),(i[1]!==n[t+1]||t===s-2)&&(a[e].push(i[1]),e++))},_simplifyPoints:function(){for(var t=this._parts,e=o.LineUtil,i=0,n=t.length;n>i;i++)t[i]=e.simplify(t[i],this.options.smoothFactor)},_updatePath:function(){this._map&&(this._clipPoints(),this._simplifyPoints(),o.Path.prototype._updatePath.call(this))}}),o.polyline=function(t,e){return new o.Polyline(t,e)},o.PolyUtil={},o.PolyUtil.clipPolygon=function(t,e){var i,n,s,a,r,h,l,u,c,d=[1,4,2,8],p=o.LineUtil;for(n=0,l=t.length;l>n;n++)t[n]._code=p._getBitCode(t[n],e);for(a=0;4>a;a++){for(u=d[a],i=[],n=0,l=t.length,s=l-1;l>n;s=n++)r=t[n],h=t[s],r._code&u?h._code&u||(c=p._getEdgeIntersection(h,r,u,e),c._code=p._getBitCode(c,e),i.push(c)):(h._code&u&&(c=p._getEdgeIntersection(h,r,u,e),c._code=p._getBitCode(c,e),i.push(c)),i.push(r));t=i}return t},o.Polygon=o.Polyline.extend({options:{fill:!0},initialize:function(t,e){o.Polyline.prototype.initialize.call(this,t,e),this._initWithHoles(t)},_initWithHoles:function(t){var e,i,n;if(t&&o.Util.isArray(t[0])&&"number"!=typeof t[0][0])for(this._latlngs=this._convertLatLngs(t[0]),this._holes=t.slice(1),e=0,i=this._holes.length;i>e;e++)n=this._holes[e]=this._convertLatLngs(this._holes[e]),n[0].equals(n[n.length-1])&&n.pop();t=this._latlngs,t.length>=2&&t[0].equals(t[t.length-1])&&t.pop()},projectLatlngs:function(){if(o.Polyline.prototype.projectLatlngs.call(this),this._holePoints=[],this._holes){var t,e,i,n;for(t=0,i=this._holes.length;i>t;t++)for(this._holePoints[t]=[],e=0,n=this._holes[t].length;n>e;e++)this._holePoints[t][e]=this._map.latLngToLayerPoint(this._holes[t][e])}},setLatLngs:function(t){return t&&o.Util.isArray(t[0])&&"number"!=typeof t[0][0]?(this._initWithHoles(t),this.redraw()):o.Polyline.prototype.setLatLngs.call(this,t)},_clipPoints:function(){var t=this._originalPoints,e=[];if(this._parts=[t].concat(this._holePoints),!this.options.noClip){for(var i=0,n=this._parts.length;n>i;i++){var s=o.PolyUtil.clipPolygon(this._parts[i],this._map._pathViewport);s.length&&e.push(s)}this._parts=e}},_getPathPartStr:function(t){var e=o.Polyline.prototype._getPathPartStr.call(this,t);return e+(o.Browser.svg?"z":"x")}}),o.polygon=function(t,e){return new o.Polygon(t,e)},function(){function t(t){return o.FeatureGroup.extend({initialize:function(t,e){this._layers={},this._options=e,this.setLatLngs(t)},setLatLngs:function(e){var i=0,n=e.length;for(this.eachLayer(function(t){n>i?t.setLatLngs(e[i++]):this.removeLayer(t)},this);n>i;)this.addLayer(new t(e[i++],this._options));return this},getLatLngs:function(){var t=[];return this.eachLayer(function(e){t.push(e.getLatLngs())}),t}})}o.MultiPolyline=t(o.Polyline),o.MultiPolygon=t(o.Polygon),o.multiPolyline=function(t,e){return new o.MultiPolyline(t,e)},o.multiPolygon=function(t,e){return new o.MultiPolygon(t,e)}}(),o.Rectangle=o.Polygon.extend({initialize:function(t,e){o.Polygon.prototype.initialize.call(this,this._boundsToLatLngs(t),e)},setBounds:function(t){this.setLatLngs(this._boundsToLatLngs(t))},_boundsToLatLngs:function(t){return t=o.latLngBounds(t),[t.getSouthWest(),t.getNorthWest(),t.getNorthEast(),t.getSouthEast()]}}),o.rectangle=function(t,e){return new o.Rectangle(t,e)},o.Circle=o.Path.extend({initialize:function(t,e,i){o.Path.prototype.initialize.call(this,i),this._latlng=o.latLng(t),this._mRadius=e},options:{fill:!0},setLatLng:function(t){return this._latlng=o.latLng(t),this.redraw()},setRadius:function(t){return this._mRadius=t,this.redraw()},projectLatlngs:function(){var t=this._getLngRadius(),e=this._latlng,i=this._map.latLngToLayerPoint([e.lat,e.lng-t]);this._point=this._map.latLngToLayerPoint(e),this._radius=Math.max(this._point.x-i.x,1)},getBounds:function(){var t=this._getLngRadius(),e=this._mRadius/40075017*360,i=this._latlng;return new o.LatLngBounds([i.lat-e,i.lng-t],[i.lat+e,i.lng+t])},getLatLng:function(){return this._latlng},getPathString:function(){var t=this._point,e=this._radius;return this._checkIfEmpty()?"":o.Browser.svg?"M"+t.x+","+(t.y-e)+"A"+e+","+e+",0,1,1,"+(t.x-.1)+","+(t.y-e)+" z":(t._round(),e=Math.round(e),"AL "+t.x+","+t.y+" "+e+","+e+" 0,23592600")},getRadius:function(){return this._mRadius},_getLatRadius:function(){return this._mRadius/40075017*360},_getLngRadius:function(){return this._getLatRadius()/Math.cos(o.LatLng.DEG_TO_RAD*this._latlng.lat)},_checkIfEmpty:function(){if(!this._map)return!1;var t=this._map._pathViewport,e=this._radius,i=this._point;return i.x-e>t.max.x||i.y-e>t.max.y||i.x+e<t.min.x||i.y+e<t.min.y}}),o.circle=function(t,e,i){return new o.Circle(t,e,i)},o.CircleMarker=o.Circle.extend({options:{radius:10,weight:2},initialize:function(t,e){o.Circle.prototype.initialize.call(this,t,null,e),this._radius=this.options.radius},projectLatlngs:function(){this._point=this._map.latLngToLayerPoint(this._latlng)},_updateStyle:function(){o.Circle.prototype._updateStyle.call(this),this.setRadius(this.options.radius)},setLatLng:function(t){return o.Circle.prototype.setLatLng.call(this,t),this._popup&&this._popup._isOpen&&this._popup.setLatLng(t),this},setRadius:function(t){return this.options.radius=this._radius=t,this.redraw()},getRadius:function(){return this._radius}}),o.circleMarker=function(t,e){return new o.CircleMarker(t,e)},o.Polyline.include(o.Path.CANVAS?{_containsPoint:function(t,e){var i,n,s,a,r,h,l,u=this.options.weight/2;for(o.Browser.touch&&(u+=10),i=0,a=this._parts.length;a>i;i++)for(l=this._parts[i],n=0,r=l.length,s=r-1;r>n;s=n++)if((e||0!==n)&&(h=o.LineUtil.pointToSegmentDistance(t,l[s],l[n]),u>=h))return!0;return!1}}:{}),o.Polygon.include(o.Path.CANVAS?{_containsPoint:function(t){var e,i,n,s,a,r,h,l,u=!1;if(o.Polyline.prototype._containsPoint.call(this,t,!0))return!0;for(s=0,h=this._parts.length;h>s;s++)for(e=this._parts[s],a=0,l=e.length,r=l-1;l>a;r=a++)i=e[a],n=e[r],i.y>t.y!=n.y>t.y&&t.x<(n.x-i.x)*(t.y-i.y)/(n.y-i.y)+i.x&&(u=!u);return u}}:{}),o.Circle.include(o.Path.CANVAS?{_drawPath:function(){var t=this._point;this._ctx.beginPath(),this._ctx.arc(t.x,t.y,this._radius,0,2*Math.PI,!1)},_containsPoint:function(t){var e=this._point,i=this.options.stroke?this.options.weight/2:0;return t.distanceTo(e)<=this._radius+i}}:{}),o.CircleMarker.include(o.Path.CANVAS?{_updateStyle:function(){o.Path.prototype._updateStyle.call(this)}}:{}),o.GeoJSON=o.FeatureGroup.extend({initialize:function(t,e){o.setOptions(this,e),this._layers={},t&&this.addData(t)},addData:function(t){var e,i,n,s=o.Util.isArray(t)?t:t.features;if(s){for(e=0,i=s.length;i>e;e++)n=s[e],(n.geometries||n.geometry||n.features||n.coordinates)&&this.addData(s[e]);return this}var a=this.options;if(!a.filter||a.filter(t)){var r=o.GeoJSON.geometryToLayer(t,a.pointToLayer,a.coordsToLatLng,a);return r.feature=o.GeoJSON.asFeature(t),r.defaultOptions=r.options,this.resetStyle(r),a.onEachFeature&&a.onEachFeature(t,r),this.addLayer(r)}},resetStyle:function(t){var e=this.options.style;e&&(o.Util.extend(t.options,t.defaultOptions),this._setLayerStyle(t,e))},setStyle:function(t){this.eachLayer(function(e){this._setLayerStyle(e,t)},this)},_setLayerStyle:function(t,e){"function"==typeof e&&(e=e(t.feature)),t.setStyle&&t.setStyle(e)}}),o.extend(o.GeoJSON,{geometryToLayer:function(t,e,i,n){var s,a,r,h,l="Feature"===t.type?t.geometry:t,u=l.coordinates,c=[];switch(i=i||this.coordsToLatLng,l.type){case"Point":return s=i(u),e?e(t,s):new o.Marker(s);case"MultiPoint":for(r=0,h=u.length;h>r;r++)s=i(u[r]),c.push(e?e(t,s):new o.Marker(s));return new o.FeatureGroup(c);case"LineString":return a=this.coordsToLatLngs(u,0,i),new o.Polyline(a,n);case"Polygon":if(2===u.length&&!u[1].length)throw new Error("Invalid GeoJSON object.");return a=this.coordsToLatLngs(u,1,i),new o.Polygon(a,n);case"MultiLineString":return a=this.coordsToLatLngs(u,1,i),new o.MultiPolyline(a,n);case"MultiPolygon":return a=this.coordsToLatLngs(u,2,i),new o.MultiPolygon(a,n);case"GeometryCollection":for(r=0,h=l.geometries.length;h>r;r++)c.push(this.geometryToLayer({geometry:l.geometries[r],type:"Feature",properties:t.properties},e,i,n));return new o.FeatureGroup(c);default:throw new Error("Invalid GeoJSON object.")}},coordsToLatLng:function(t){return new o.LatLng(t[1],t[0],t[2])},coordsToLatLngs:function(t,e,i){var n,o,s,a=[];for(o=0,s=t.length;s>o;o++)n=e?this.coordsToLatLngs(t[o],e-1,i):(i||this.coordsToLatLng)(t[o]),a.push(n);return a},latLngToCoords:function(t){var e=[t.lng,t.lat];return t.alt!==i&&e.push(t.alt),e},latLngsToCoords:function(t){for(var e=[],i=0,n=t.length;n>i;i++)e.push(o.GeoJSON.latLngToCoords(t[i]));return e},getFeature:function(t,e){return t.feature?o.extend({},t.feature,{geometry:e}):o.GeoJSON.asFeature(e)},asFeature:function(t){return"Feature"===t.type?t:{type:"Feature",properties:{},geometry:t}}});var a={toGeoJSON:function(){return o.GeoJSON.getFeature(this,{type:"Point",coordinates:o.GeoJSON.latLngToCoords(this.getLatLng())})}};o.Marker.include(a),o.Circle.include(a),o.CircleMarker.include(a),o.Polyline.include({toGeoJSON:function(){return o.GeoJSON.getFeature(this,{type:"LineString",coordinates:o.GeoJSON.latLngsToCoords(this.getLatLngs())})}}),o.Polygon.include({toGeoJSON:function(){var t,e,i,n=[o.GeoJSON.latLngsToCoords(this.getLatLngs())];if(n[0].push(n[0][0]),this._holes)for(t=0,e=this._holes.length;e>t;t++)i=o.GeoJSON.latLngsToCoords(this._holes[t]),i.push(i[0]),n.push(i);return o.GeoJSON.getFeature(this,{type:"Polygon",coordinates:n})}}),function(){function t(t){return function(){var e=[];return this.eachLayer(function(t){e.push(t.toGeoJSON().geometry.coordinates)}),o.GeoJSON.getFeature(this,{type:t,coordinates:e})}}o.MultiPolyline.include({toGeoJSON:t("MultiLineString")}),o.MultiPolygon.include({toGeoJSON:t("MultiPolygon")}),o.LayerGroup.include({toGeoJSON:function(){var e,i=this.feature&&this.feature.geometry,n=[];if(i&&"MultiPoint"===i.type)return t("MultiPoint").call(this);var s=i&&"GeometryCollection"===i.type;return this.eachLayer(function(t){t.toGeoJSON&&(e=t.toGeoJSON(),n.push(s?e.geometry:o.GeoJSON.asFeature(e)))}),s?o.GeoJSON.getFeature(this,{geometries:n,type:"GeometryCollection"}):{type:"FeatureCollection",features:n}}})}(),o.geoJson=function(t,e){return new o.GeoJSON(t,e)},o.DomEvent={addListener:function(t,e,i,n){var s,a,r,h=o.stamp(i),l="_leaflet_"+e+h;return t[l]?this:(s=function(e){return i.call(n||t,e||o.DomEvent._getEvent())},o.Browser.pointer&&0===e.indexOf("touch")?this.addPointerListener(t,e,s,h):(o.Browser.touch&&"dblclick"===e&&this.addDoubleTapListener&&this.addDoubleTapListener(t,s,h),"addEventListener"in t?"mousewheel"===e?(t.addEventListener("DOMMouseScroll",s,!1),t.addEventListener(e,s,!1)):"mouseenter"===e||"mouseleave"===e?(a=s,r="mouseenter"===e?"mouseover":"mouseout",s=function(e){return o.DomEvent._checkMouse(t,e)?a(e):void 0},t.addEventListener(r,s,!1)):"click"===e&&o.Browser.android?(a=s,s=function(t){return o.DomEvent._filterClick(t,a)},t.addEventListener(e,s,!1)):t.addEventListener(e,s,!1):"attachEvent"in t&&t.attachEvent("on"+e,s),t[l]=s,this))},removeListener:function(t,e,i){var n=o.stamp(i),s="_leaflet_"+e+n,a=t[s];return a?(o.Browser.pointer&&0===e.indexOf("touch")?this.removePointerListener(t,e,n):o.Browser.touch&&"dblclick"===e&&this.removeDoubleTapListener?this.removeDoubleTapListener(t,n):"removeEventListener"in t?"mousewheel"===e?(t.removeEventListener("DOMMouseScroll",a,!1),t.removeEventListener(e,a,!1)):"mouseenter"===e||"mouseleave"===e?t.removeEventListener("mouseenter"===e?"mouseover":"mouseout",a,!1):t.removeEventListener(e,a,!1):"detachEvent"in t&&t.detachEvent("on"+e,a),t[s]=null,this):this},stopPropagation:function(t){return t.stopPropagation?t.stopPropagation():t.cancelBubble=!0,o.DomEvent._skipped(t),this},disableScrollPropagation:function(t){var e=o.DomEvent.stopPropagation;return o.DomEvent.on(t,"mousewheel",e).on(t,"MozMousePixelScroll",e)},disableClickPropagation:function(t){for(var e=o.DomEvent.stopPropagation,i=o.Draggable.START.length-1;i>=0;i--)o.DomEvent.on(t,o.Draggable.START[i],e);return o.DomEvent.on(t,"click",o.DomEvent._fakeStop).on(t,"dblclick",e)},preventDefault:function(t){return t.preventDefault?t.preventDefault():t.returnValue=!1,this},stop:function(t){return o.DomEvent.preventDefault(t).stopPropagation(t)},getMousePosition:function(t,e){if(!e)return new o.Point(t.clientX,t.clientY);var i=e.getBoundingClientRect();return new o.Point(t.clientX-i.left-e.clientLeft,t.clientY-i.top-e.clientTop)},getWheelDelta:function(t){var e=0;return t.wheelDelta&&(e=t.wheelDelta/120),t.detail&&(e=-t.detail/3),e},_skipEvents:{},_fakeStop:function(t){o.DomEvent._skipEvents[t.type]=!0},_skipped:function(t){var e=this._skipEvents[t.type];return this._skipEvents[t.type]=!1,e},_checkMouse:function(t,e){var i=e.relatedTarget;if(!i)return!0;try{for(;i&&i!==t;)i=i.parentNode}catch(n){return!1}return i!==t},_getEvent:function(){var e=t.event;if(!e)for(var i=arguments.callee.caller;i&&(e=i.arguments[0],!e||t.Event!==e.constructor);)i=i.caller;return e},_filterClick:function(t,e){var i=t.timeStamp||t.originalEvent.timeStamp,n=o.DomEvent._lastClick&&i-o.DomEvent._lastClick;return n&&n>100&&500>n||t.target._simulatedClick&&!t._simulated?void o.DomEvent.stop(t):(o.DomEvent._lastClick=i,e(t))}},o.DomEvent.on=o.DomEvent.addListener,o.DomEvent.off=o.DomEvent.removeListener,o.Draggable=o.Class.extend({includes:o.Mixin.Events,statics:{START:o.Browser.touch?["touchstart","mousedown"]:["mousedown"],END:{mousedown:"mouseup",touchstart:"touchend",pointerdown:"touchend",MSPointerDown:"touchend"},MOVE:{mousedown:"mousemove",touchstart:"touchmove",pointerdown:"touchmove",MSPointerDown:"touchmove"}},initialize:function(t,e){this._element=t,this._dragStartTarget=e||t},enable:function(){if(!this._enabled){for(var t=o.Draggable.START.length-1;t>=0;t--)o.DomEvent.on(this._dragStartTarget,o.Draggable.START[t],this._onDown,this);this._enabled=!0}},disable:function(){if(this._enabled){for(var t=o.Draggable.START.length-1;t>=0;t--)o.DomEvent.off(this._dragStartTarget,o.Draggable.START[t],this._onDown,this);this._enabled=!1,this._moved=!1}},_onDown:function(t){if(this._moved=!1,!(t.shiftKey||1!==t.which&&1!==t.button&&!t.touches||(o.DomEvent.stopPropagation(t),o.Draggable._disabled||(o.DomUtil.disableImageDrag(),o.DomUtil.disableTextSelection(),this._moving)))){var i=t.touches?t.touches[0]:t;this._startPoint=new o.Point(i.clientX,i.clientY),this._startPos=this._newPos=o.DomUtil.getPosition(this._element),o.DomEvent.on(e,o.Draggable.MOVE[t.type],this._onMove,this).on(e,o.Draggable.END[t.type],this._onUp,this)}},_onMove:function(t){if(t.touches&&t.touches.length>1)return void(this._moved=!0);var i=t.touches&&1===t.touches.length?t.touches[0]:t,n=new o.Point(i.clientX,i.clientY),s=n.subtract(this._startPoint);(s.x||s.y)&&(o.Browser.touch&&Math.abs(s.x)+Math.abs(s.y)<3||(o.DomEvent.preventDefault(t),this._moved||(this.fire("dragstart"),this._moved=!0,this._startPos=o.DomUtil.getPosition(this._element).subtract(s),o.DomUtil.addClass(e.body,"leaflet-dragging"),this._lastTarget=t.target||t.srcElement,o.DomUtil.addClass(this._lastTarget,"leaflet-drag-target")),this._newPos=this._startPos.add(s),this._moving=!0,o.Util.cancelAnimFrame(this._animRequest),this._animRequest=o.Util.requestAnimFrame(this._updatePosition,this,!0,this._dragStartTarget)))},_updatePosition:function(){this.fire("predrag"),o.DomUtil.setPosition(this._element,this._newPos),this.fire("drag")},_onUp:function(){o.DomUtil.removeClass(e.body,"leaflet-dragging"),this._lastTarget&&(o.DomUtil.removeClass(this._lastTarget,"leaflet-drag-target"),this._lastTarget=null);for(var t in o.Draggable.MOVE)o.DomEvent.off(e,o.Draggable.MOVE[t],this._onMove).off(e,o.Draggable.END[t],this._onUp);o.DomUtil.enableImageDrag(),o.DomUtil.enableTextSelection(),this._moved&&this._moving&&(o.Util.cancelAnimFrame(this._animRequest),this.fire("dragend",{distance:this._newPos.distanceTo(this._startPos)})),this._moving=!1}}),o.Handler=o.Class.extend({initialize:function(t){this._map=t},enable:function(){this._enabled||(this._enabled=!0,this.addHooks())},disable:function(){this._enabled&&(this._enabled=!1,this.removeHooks())},enabled:function(){return!!this._enabled}}),o.Map.mergeOptions({dragging:!0,inertia:!o.Browser.android23,inertiaDeceleration:3400,inertiaMaxSpeed:1/0,inertiaThreshold:o.Browser.touch?32:18,easeLinearity:.25,worldCopyJump:!1}),o.Map.Drag=o.Handler.extend({addHooks:function(){if(!this._draggable){var t=this._map;this._draggable=new o.Draggable(t._mapPane,t._container),this._draggable.on({dragstart:this._onDragStart,drag:this._onDrag,dragend:this._onDragEnd},this),t.options.worldCopyJump&&(this._draggable.on("predrag",this._onPreDrag,this),t.on("viewreset",this._onViewReset,this),t.whenReady(this._onViewReset,this))}this._draggable.enable()},removeHooks:function(){this._draggable.disable()},moved:function(){return this._draggable&&this._draggable._moved},_onDragStart:function(){var t=this._map;t._panAnim&&t._panAnim.stop(),t.fire("movestart").fire("dragstart"),t.options.inertia&&(this._positions=[],this._times=[])},_onDrag:function(){if(this._map.options.inertia){var t=this._lastTime=+new Date,e=this._lastPos=this._draggable._newPos;this._positions.push(e),this._times.push(t),t-this._times[0]>200&&(this._positions.shift(),this._times.shift())}this._map.fire("move").fire("drag")},_onViewReset:function(){var t=this._map.getSize()._divideBy(2),e=this._map.latLngToLayerPoint([0,0]);this._initialWorldOffset=e.subtract(t).x,this._worldWidth=this._map.project([0,180]).x},_onPreDrag:function(){var t=this._worldWidth,e=Math.round(t/2),i=this._initialWorldOffset,n=this._draggable._newPos.x,o=(n-e+i)%t+e-i,s=(n+e+i)%t-e-i,a=Math.abs(o+i)<Math.abs(s+i)?o:s;this._draggable._newPos.x=a},_onDragEnd:function(t){var e=this._map,i=e.options,n=+new Date-this._lastTime,s=!i.inertia||n>i.inertiaThreshold||!this._positions[0];if(e.fire("dragend",t),s)e.fire("moveend");else{var a=this._lastPos.subtract(this._positions[0]),r=(this._lastTime+n-this._times[0])/1e3,h=i.easeLinearity,l=a.multiplyBy(h/r),u=l.distanceTo([0,0]),c=Math.min(i.inertiaMaxSpeed,u),d=l.multiplyBy(c/u),p=c/(i.inertiaDeceleration*h),_=d.multiplyBy(-p/2).round();_.x&&_.y?(_=e._limitOffset(_,e.options.maxBounds),o.Util.requestAnimFrame(function(){e.panBy(_,{duration:p,easeLinearity:h,noMoveStart:!0})})):e.fire("moveend")}}}),o.Map.addInitHook("addHandler","dragging",o.Map.Drag),o.Map.mergeOptions({doubleClickZoom:!0}),o.Map.DoubleClickZoom=o.Handler.extend({addHooks:function(){this._map.on("dblclick",this._onDoubleClick,this)},removeHooks:function(){this._map.off("dblclick",this._onDoubleClick,this)},_onDoubleClick:function(t){var e=this._map,i=e.getZoom()+(t.originalEvent.shiftKey?-1:1);"center"===e.options.doubleClickZoom?e.setZoom(i):e.setZoomAround(t.containerPoint,i)}}),o.Map.addInitHook("addHandler","doubleClickZoom",o.Map.DoubleClickZoom),o.Map.mergeOptions({scrollWheelZoom:!0}),o.Map.ScrollWheelZoom=o.Handler.extend({addHooks:function(){o.DomEvent.on(this._map._container,"mousewheel",this._onWheelScroll,this),o.DomEvent.on(this._map._container,"MozMousePixelScroll",o.DomEvent.preventDefault),this._delta=0},removeHooks:function(){o.DomEvent.off(this._map._container,"mousewheel",this._onWheelScroll),o.DomEvent.off(this._map._container,"MozMousePixelScroll",o.DomEvent.preventDefault)},_onWheelScroll:function(t){var e=o.DomEvent.getWheelDelta(t);this._delta+=e,this._lastMousePos=this._map.mouseEventToContainerPoint(t),this._startTime||(this._startTime=+new Date);var i=Math.max(40-(+new Date-this._startTime),0);clearTimeout(this._timer),this._timer=setTimeout(o.bind(this._performZoom,this),i),o.DomEvent.preventDefault(t),o.DomEvent.stopPropagation(t)},_performZoom:function(){var t=this._map,e=this._delta,i=t.getZoom();e=e>0?Math.ceil(e):Math.floor(e),e=Math.max(Math.min(e,4),-4),e=t._limitZoom(i+e)-i,this._delta=0,this._startTime=null,e&&("center"===t.options.scrollWheelZoom?t.setZoom(i+e):t.setZoomAround(this._lastMousePos,i+e))}}),o.Map.addInitHook("addHandler","scrollWheelZoom",o.Map.ScrollWheelZoom),o.extend(o.DomEvent,{_touchstart:o.Browser.msPointer?"MSPointerDown":o.Browser.pointer?"pointerdown":"touchstart",_touchend:o.Browser.msPointer?"MSPointerUp":o.Browser.pointer?"pointerup":"touchend",addDoubleTapListener:function(t,i,n){function s(t){var e;if(o.Browser.pointer?(_.push(t.pointerId),e=_.length):e=t.touches.length,!(e>1)){var i=Date.now(),n=i-(r||i);h=t.touches?t.touches[0]:t,l=n>0&&u>=n,r=i}}function a(t){if(o.Browser.pointer){var e=_.indexOf(t.pointerId);if(-1===e)return;_.splice(e,1)}if(l){if(o.Browser.pointer){var n,s={};for(var a in h)n=h[a],s[a]="function"==typeof n?n.bind(h):n;h=s}h.type="dblclick",i(h),r=null}}var r,h,l=!1,u=250,c="_leaflet_",d=this._touchstart,p=this._touchend,_=[];t[c+d+n]=s,t[c+p+n]=a;var m=o.Browser.pointer?e.documentElement:t;return t.addEventListener(d,s,!1),m.addEventListener(p,a,!1),o.Browser.pointer&&m.addEventListener(o.DomEvent.POINTER_CANCEL,a,!1),this},removeDoubleTapListener:function(t,i){var n="_leaflet_";return t.removeEventListener(this._touchstart,t[n+this._touchstart+i],!1),(o.Browser.pointer?e.documentElement:t).removeEventListener(this._touchend,t[n+this._touchend+i],!1),o.Browser.pointer&&e.documentElement.removeEventListener(o.DomEvent.POINTER_CANCEL,t[n+this._touchend+i],!1),this}}),o.extend(o.DomEvent,{POINTER_DOWN:o.Browser.msPointer?"MSPointerDown":"pointerdown",POINTER_MOVE:o.Browser.msPointer?"MSPointerMove":"pointermove",POINTER_UP:o.Browser.msPointer?"MSPointerUp":"pointerup",POINTER_CANCEL:o.Browser.msPointer?"MSPointerCancel":"pointercancel",_pointers:[],_pointerDocumentListener:!1,addPointerListener:function(t,e,i,n){switch(e){case"touchstart":return this.addPointerListenerStart(t,e,i,n);case"touchend":return this.addPointerListenerEnd(t,e,i,n);case"touchmove":return this.addPointerListenerMove(t,e,i,n);default:throw"Unknown touch event type"}},addPointerListenerStart:function(t,i,n,s){var a="_leaflet_",r=this._pointers,h=function(t){o.DomEvent.preventDefault(t);for(var e=!1,i=0;i<r.length;i++)if(r[i].pointerId===t.pointerId){e=!0;
-break}e||r.push(t),t.touches=r.slice(),t.changedTouches=[t],n(t)};if(t[a+"touchstart"+s]=h,t.addEventListener(this.POINTER_DOWN,h,!1),!this._pointerDocumentListener){var l=function(t){for(var e=0;e<r.length;e++)if(r[e].pointerId===t.pointerId){r.splice(e,1);break}};e.documentElement.addEventListener(this.POINTER_UP,l,!1),e.documentElement.addEventListener(this.POINTER_CANCEL,l,!1),this._pointerDocumentListener=!0}return this},addPointerListenerMove:function(t,e,i,n){function o(t){if(t.pointerType!==t.MSPOINTER_TYPE_MOUSE&&"mouse"!==t.pointerType||0!==t.buttons){for(var e=0;e<a.length;e++)if(a[e].pointerId===t.pointerId){a[e]=t;break}t.touches=a.slice(),t.changedTouches=[t],i(t)}}var s="_leaflet_",a=this._pointers;return t[s+"touchmove"+n]=o,t.addEventListener(this.POINTER_MOVE,o,!1),this},addPointerListenerEnd:function(t,e,i,n){var o="_leaflet_",s=this._pointers,a=function(t){for(var e=0;e<s.length;e++)if(s[e].pointerId===t.pointerId){s.splice(e,1);break}t.touches=s.slice(),t.changedTouches=[t],i(t)};return t[o+"touchend"+n]=a,t.addEventListener(this.POINTER_UP,a,!1),t.addEventListener(this.POINTER_CANCEL,a,!1),this},removePointerListener:function(t,e,i){var n="_leaflet_",o=t[n+e+i];switch(e){case"touchstart":t.removeEventListener(this.POINTER_DOWN,o,!1);break;case"touchmove":t.removeEventListener(this.POINTER_MOVE,o,!1);break;case"touchend":t.removeEventListener(this.POINTER_UP,o,!1),t.removeEventListener(this.POINTER_CANCEL,o,!1)}return this}}),o.Map.mergeOptions({touchZoom:o.Browser.touch&&!o.Browser.android23,bounceAtZoomLimits:!0}),o.Map.TouchZoom=o.Handler.extend({addHooks:function(){o.DomEvent.on(this._map._container,"touchstart",this._onTouchStart,this)},removeHooks:function(){o.DomEvent.off(this._map._container,"touchstart",this._onTouchStart,this)},_onTouchStart:function(t){var i=this._map;if(t.touches&&2===t.touches.length&&!i._animatingZoom&&!this._zooming){var n=i.mouseEventToLayerPoint(t.touches[0]),s=i.mouseEventToLayerPoint(t.touches[1]),a=i._getCenterLayerPoint();this._startCenter=n.add(s)._divideBy(2),this._startDist=n.distanceTo(s),this._moved=!1,this._zooming=!0,this._centerOffset=a.subtract(this._startCenter),i._panAnim&&i._panAnim.stop(),o.DomEvent.on(e,"touchmove",this._onTouchMove,this).on(e,"touchend",this._onTouchEnd,this),o.DomEvent.preventDefault(t)}},_onTouchMove:function(t){var e=this._map;if(t.touches&&2===t.touches.length&&this._zooming){var i=e.mouseEventToLayerPoint(t.touches[0]),n=e.mouseEventToLayerPoint(t.touches[1]);this._scale=i.distanceTo(n)/this._startDist,this._delta=i._add(n)._divideBy(2)._subtract(this._startCenter),1!==this._scale&&(e.options.bounceAtZoomLimits||!(e.getZoom()===e.getMinZoom()&&this._scale<1||e.getZoom()===e.getMaxZoom()&&this._scale>1))&&(this._moved||(o.DomUtil.addClass(e._mapPane,"leaflet-touching"),e.fire("movestart").fire("zoomstart"),this._moved=!0),o.Util.cancelAnimFrame(this._animRequest),this._animRequest=o.Util.requestAnimFrame(this._updateOnMove,this,!0,this._map._container),o.DomEvent.preventDefault(t))}},_updateOnMove:function(){var t=this._map,e=this._getScaleOrigin(),i=t.layerPointToLatLng(e),n=t.getScaleZoom(this._scale);t._animateZoom(i,n,this._startCenter,this._scale,this._delta,!1,!0)},_onTouchEnd:function(){if(!this._moved||!this._zooming)return void(this._zooming=!1);var t=this._map;this._zooming=!1,o.DomUtil.removeClass(t._mapPane,"leaflet-touching"),o.Util.cancelAnimFrame(this._animRequest),o.DomEvent.off(e,"touchmove",this._onTouchMove).off(e,"touchend",this._onTouchEnd);var i=this._getScaleOrigin(),n=t.layerPointToLatLng(i),s=t.getZoom(),a=t.getScaleZoom(this._scale)-s,r=a>0?Math.ceil(a):Math.floor(a),h=t._limitZoom(s+r),l=t.getZoomScale(h)/this._scale;t._animateZoom(n,h,i,l)},_getScaleOrigin:function(){var t=this._centerOffset.subtract(this._delta).divideBy(this._scale);return this._startCenter.add(t)}}),o.Map.addInitHook("addHandler","touchZoom",o.Map.TouchZoom),o.Map.mergeOptions({tap:!0,tapTolerance:15}),o.Map.Tap=o.Handler.extend({addHooks:function(){o.DomEvent.on(this._map._container,"touchstart",this._onDown,this)},removeHooks:function(){o.DomEvent.off(this._map._container,"touchstart",this._onDown,this)},_onDown:function(t){if(t.touches){if(o.DomEvent.preventDefault(t),this._fireClick=!0,t.touches.length>1)return this._fireClick=!1,void clearTimeout(this._holdTimeout);var i=t.touches[0],n=i.target;this._startPos=this._newPos=new o.Point(i.clientX,i.clientY),n.tagName&&"a"===n.tagName.toLowerCase()&&o.DomUtil.addClass(n,"leaflet-active"),this._holdTimeout=setTimeout(o.bind(function(){this._isTapValid()&&(this._fireClick=!1,this._onUp(),this._simulateEvent("contextmenu",i))},this),1e3),o.DomEvent.on(e,"touchmove",this._onMove,this).on(e,"touchend",this._onUp,this)}},_onUp:function(t){if(clearTimeout(this._holdTimeout),o.DomEvent.off(e,"touchmove",this._onMove,this).off(e,"touchend",this._onUp,this),this._fireClick&&t&&t.changedTouches){var i=t.changedTouches[0],n=i.target;n&&n.tagName&&"a"===n.tagName.toLowerCase()&&o.DomUtil.removeClass(n,"leaflet-active"),this._isTapValid()&&this._simulateEvent("click",i)}},_isTapValid:function(){return this._newPos.distanceTo(this._startPos)<=this._map.options.tapTolerance},_onMove:function(t){var e=t.touches[0];this._newPos=new o.Point(e.clientX,e.clientY)},_simulateEvent:function(i,n){var o=e.createEvent("MouseEvents");o._simulated=!0,n.target._simulatedClick=!0,o.initMouseEvent(i,!0,!0,t,1,n.screenX,n.screenY,n.clientX,n.clientY,!1,!1,!1,!1,0,null),n.target.dispatchEvent(o)}}),o.Browser.touch&&!o.Browser.pointer&&o.Map.addInitHook("addHandler","tap",o.Map.Tap),o.Map.mergeOptions({boxZoom:!0}),o.Map.BoxZoom=o.Handler.extend({initialize:function(t){this._map=t,this._container=t._container,this._pane=t._panes.overlayPane,this._moved=!1},addHooks:function(){o.DomEvent.on(this._container,"mousedown",this._onMouseDown,this)},removeHooks:function(){o.DomEvent.off(this._container,"mousedown",this._onMouseDown),this._moved=!1},moved:function(){return this._moved},_onMouseDown:function(t){return this._moved=!1,!t.shiftKey||1!==t.which&&1!==t.button?!1:(o.DomUtil.disableTextSelection(),o.DomUtil.disableImageDrag(),this._startLayerPoint=this._map.mouseEventToLayerPoint(t),void o.DomEvent.on(e,"mousemove",this._onMouseMove,this).on(e,"mouseup",this._onMouseUp,this).on(e,"keydown",this._onKeyDown,this))},_onMouseMove:function(t){this._moved||(this._box=o.DomUtil.create("div","leaflet-zoom-box",this._pane),o.DomUtil.setPosition(this._box,this._startLayerPoint),this._container.style.cursor="crosshair",this._map.fire("boxzoomstart"));var e=this._startLayerPoint,i=this._box,n=this._map.mouseEventToLayerPoint(t),s=n.subtract(e),a=new o.Point(Math.min(n.x,e.x),Math.min(n.y,e.y));o.DomUtil.setPosition(i,a),this._moved=!0,i.style.width=Math.max(0,Math.abs(s.x)-4)+"px",i.style.height=Math.max(0,Math.abs(s.y)-4)+"px"},_finish:function(){this._moved&&(this._pane.removeChild(this._box),this._container.style.cursor=""),o.DomUtil.enableTextSelection(),o.DomUtil.enableImageDrag(),o.DomEvent.off(e,"mousemove",this._onMouseMove).off(e,"mouseup",this._onMouseUp).off(e,"keydown",this._onKeyDown)},_onMouseUp:function(t){this._finish();var e=this._map,i=e.mouseEventToLayerPoint(t);if(!this._startLayerPoint.equals(i)){var n=new o.LatLngBounds(e.layerPointToLatLng(this._startLayerPoint),e.layerPointToLatLng(i));e.fitBounds(n),e.fire("boxzoomend",{boxZoomBounds:n})}},_onKeyDown:function(t){27===t.keyCode&&this._finish()}}),o.Map.addInitHook("addHandler","boxZoom",o.Map.BoxZoom),o.Map.mergeOptions({keyboard:!0,keyboardPanOffset:80,keyboardZoomOffset:1}),o.Map.Keyboard=o.Handler.extend({keyCodes:{left:[37],right:[39],down:[40],up:[38],zoomIn:[187,107,61,171],zoomOut:[189,109,173]},initialize:function(t){this._map=t,this._setPanOffset(t.options.keyboardPanOffset),this._setZoomOffset(t.options.keyboardZoomOffset)},addHooks:function(){var t=this._map._container;-1===t.tabIndex&&(t.tabIndex="0"),o.DomEvent.on(t,"focus",this._onFocus,this).on(t,"blur",this._onBlur,this).on(t,"mousedown",this._onMouseDown,this),this._map.on("focus",this._addHooks,this).on("blur",this._removeHooks,this)},removeHooks:function(){this._removeHooks();var t=this._map._container;o.DomEvent.off(t,"focus",this._onFocus,this).off(t,"blur",this._onBlur,this).off(t,"mousedown",this._onMouseDown,this),this._map.off("focus",this._addHooks,this).off("blur",this._removeHooks,this)},_onMouseDown:function(){if(!this._focused){var i=e.body,n=e.documentElement,o=i.scrollTop||n.scrollTop,s=i.scrollLeft||n.scrollLeft;this._map._container.focus(),t.scrollTo(s,o)}},_onFocus:function(){this._focused=!0,this._map.fire("focus")},_onBlur:function(){this._focused=!1,this._map.fire("blur")},_setPanOffset:function(t){var e,i,n=this._panKeys={},o=this.keyCodes;for(e=0,i=o.left.length;i>e;e++)n[o.left[e]]=[-1*t,0];for(e=0,i=o.right.length;i>e;e++)n[o.right[e]]=[t,0];for(e=0,i=o.down.length;i>e;e++)n[o.down[e]]=[0,t];for(e=0,i=o.up.length;i>e;e++)n[o.up[e]]=[0,-1*t]},_setZoomOffset:function(t){var e,i,n=this._zoomKeys={},o=this.keyCodes;for(e=0,i=o.zoomIn.length;i>e;e++)n[o.zoomIn[e]]=t;for(e=0,i=o.zoomOut.length;i>e;e++)n[o.zoomOut[e]]=-t},_addHooks:function(){o.DomEvent.on(e,"keydown",this._onKeyDown,this)},_removeHooks:function(){o.DomEvent.off(e,"keydown",this._onKeyDown,this)},_onKeyDown:function(t){var e=t.keyCode,i=this._map;if(e in this._panKeys){if(i._panAnim&&i._panAnim._inProgress)return;i.panBy(this._panKeys[e]),i.options.maxBounds&&i.panInsideBounds(i.options.maxBounds)}else{if(!(e in this._zoomKeys))return;i.setZoom(i.getZoom()+this._zoomKeys[e])}o.DomEvent.stop(t)}}),o.Map.addInitHook("addHandler","keyboard",o.Map.Keyboard),o.Handler.MarkerDrag=o.Handler.extend({initialize:function(t){this._marker=t},addHooks:function(){var t=this._marker._icon;this._draggable||(this._draggable=new o.Draggable(t,t)),this._draggable.on("dragstart",this._onDragStart,this).on("drag",this._onDrag,this).on("dragend",this._onDragEnd,this),this._draggable.enable(),o.DomUtil.addClass(this._marker._icon,"leaflet-marker-draggable")},removeHooks:function(){this._draggable.off("dragstart",this._onDragStart,this).off("drag",this._onDrag,this).off("dragend",this._onDragEnd,this),this._draggable.disable(),o.DomUtil.removeClass(this._marker._icon,"leaflet-marker-draggable")},moved:function(){return this._draggable&&this._draggable._moved},_onDragStart:function(){this._marker.closePopup().fire("movestart").fire("dragstart")},_onDrag:function(){var t=this._marker,e=t._shadow,i=o.DomUtil.getPosition(t._icon),n=t._map.layerPointToLatLng(i);e&&o.DomUtil.setPosition(e,i),t._latlng=n,t.fire("move",{latlng:n}).fire("drag")},_onDragEnd:function(t){this._marker.fire("moveend").fire("dragend",t)}}),o.Control=o.Class.extend({options:{position:"topright"},initialize:function(t){o.setOptions(this,t)},getPosition:function(){return this.options.position},setPosition:function(t){var e=this._map;return e&&e.removeControl(this),this.options.position=t,e&&e.addControl(this),this},getContainer:function(){return this._container},addTo:function(t){this._map=t;var e=this._container=this.onAdd(t),i=this.getPosition(),n=t._controlCorners[i];return o.DomUtil.addClass(e,"leaflet-control"),-1!==i.indexOf("bottom")?n.insertBefore(e,n.firstChild):n.appendChild(e),this},removeFrom:function(t){var e=this.getPosition(),i=t._controlCorners[e];return i.removeChild(this._container),this._map=null,this.onRemove&&this.onRemove(t),this},_refocusOnMap:function(){this._map&&this._map.getContainer().focus()}}),o.control=function(t){return new o.Control(t)},o.Map.include({addControl:function(t){return t.addTo(this),this},removeControl:function(t){return t.removeFrom(this),this},_initControlPos:function(){function t(t,s){var a=i+t+" "+i+s;e[t+s]=o.DomUtil.create("div",a,n)}var e=this._controlCorners={},i="leaflet-",n=this._controlContainer=o.DomUtil.create("div",i+"control-container",this._container);t("top","left"),t("top","right"),t("bottom","left"),t("bottom","right")},_clearControlPos:function(){this._container.removeChild(this._controlContainer)}}),o.Control.Zoom=o.Control.extend({options:{position:"topleft",zoomInText:"+",zoomInTitle:"Zoom in",zoomOutText:"-",zoomOutTitle:"Zoom out"},onAdd:function(t){var e="leaflet-control-zoom",i=o.DomUtil.create("div",e+" leaflet-bar");return this._map=t,this._zoomInButton=this._createButton(this.options.zoomInText,this.options.zoomInTitle,e+"-in",i,this._zoomIn,this),this._zoomOutButton=this._createButton(this.options.zoomOutText,this.options.zoomOutTitle,e+"-out",i,this._zoomOut,this),this._updateDisabled(),t.on("zoomend zoomlevelschange",this._updateDisabled,this),i},onRemove:function(t){t.off("zoomend zoomlevelschange",this._updateDisabled,this)},_zoomIn:function(t){this._map.zoomIn(t.shiftKey?3:1)},_zoomOut:function(t){this._map.zoomOut(t.shiftKey?3:1)},_createButton:function(t,e,i,n,s,a){var r=o.DomUtil.create("a",i,n);r.innerHTML=t,r.href="#",r.title=e;var h=o.DomEvent.stopPropagation;return o.DomEvent.on(r,"click",h).on(r,"mousedown",h).on(r,"dblclick",h).on(r,"click",o.DomEvent.preventDefault).on(r,"click",s,a).on(r,"click",this._refocusOnMap,a),r},_updateDisabled:function(){var t=this._map,e="leaflet-disabled";o.DomUtil.removeClass(this._zoomInButton,e),o.DomUtil.removeClass(this._zoomOutButton,e),t._zoom===t.getMinZoom()&&o.DomUtil.addClass(this._zoomOutButton,e),t._zoom===t.getMaxZoom()&&o.DomUtil.addClass(this._zoomInButton,e)}}),o.Map.mergeOptions({zoomControl:!0}),o.Map.addInitHook(function(){this.options.zoomControl&&(this.zoomControl=new o.Control.Zoom,this.addControl(this.zoomControl))}),o.control.zoom=function(t){return new o.Control.Zoom(t)},o.Control.Attribution=o.Control.extend({options:{position:"bottomright",prefix:'<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'},initialize:function(t){o.setOptions(this,t),this._attributions={}},onAdd:function(t){this._container=o.DomUtil.create("div","leaflet-control-attribution"),o.DomEvent.disableClickPropagation(this._container);for(var e in t._layers)t._layers[e].getAttribution&&this.addAttribution(t._layers[e].getAttribution());return t.on("layeradd",this._onLayerAdd,this).on("layerremove",this._onLayerRemove,this),this._update(),this._container},onRemove:function(t){t.off("layeradd",this._onLayerAdd).off("layerremove",this._onLayerRemove)},setPrefix:function(t){return this.options.prefix=t,this._update(),this},addAttribution:function(t){return t?(this._attributions[t]||(this._attributions[t]=0),this._attributions[t]++,this._update(),this):void 0},removeAttribution:function(t){return t?(this._attributions[t]&&(this._attributions[t]--,this._update()),this):void 0},_update:function(){if(this._map){var t=[];for(var e in this._attributions)this._attributions[e]&&t.push(e);var i=[];this.options.prefix&&i.push(this.options.prefix),t.length&&i.push(t.join(", ")),this._container.innerHTML=i.join(" | ")}},_onLayerAdd:function(t){t.layer.getAttribution&&this.addAttribution(t.layer.getAttribution())},_onLayerRemove:function(t){t.layer.getAttribution&&this.removeAttribution(t.layer.getAttribution())}}),o.Map.mergeOptions({attributionControl:!0}),o.Map.addInitHook(function(){this.options.attributionControl&&(this.attributionControl=(new o.Control.Attribution).addTo(this))}),o.control.attribution=function(t){return new o.Control.Attribution(t)},o.Control.Scale=o.Control.extend({options:{position:"bottomleft",maxWidth:100,metric:!0,imperial:!0,updateWhenIdle:!1},onAdd:function(t){this._map=t;var e="leaflet-control-scale",i=o.DomUtil.create("div",e),n=this.options;return this._addScales(n,e,i),t.on(n.updateWhenIdle?"moveend":"move",this._update,this),t.whenReady(this._update,this),i},onRemove:function(t){t.off(this.options.updateWhenIdle?"moveend":"move",this._update,this)},_addScales:function(t,e,i){t.metric&&(this._mScale=o.DomUtil.create("div",e+"-line",i)),t.imperial&&(this._iScale=o.DomUtil.create("div",e+"-line",i))},_update:function(){var t=this._map.getBounds(),e=t.getCenter().lat,i=6378137*Math.PI*Math.cos(e*Math.PI/180),n=i*(t.getNorthEast().lng-t.getSouthWest().lng)/180,o=this._map.getSize(),s=this.options,a=0;o.x>0&&(a=n*(s.maxWidth/o.x)),this._updateScales(s,a)},_updateScales:function(t,e){t.metric&&e&&this._updateMetric(e),t.imperial&&e&&this._updateImperial(e)},_updateMetric:function(t){var e=this._getRoundNum(t);this._mScale.style.width=this._getScaleWidth(e/t)+"px",this._mScale.innerHTML=1e3>e?e+" m":e/1e3+" km"},_updateImperial:function(t){var e,i,n,o=3.2808399*t,s=this._iScale;o>5280?(e=o/5280,i=this._getRoundNum(e),s.style.width=this._getScaleWidth(i/e)+"px",s.innerHTML=i+" mi"):(n=this._getRoundNum(o),s.style.width=this._getScaleWidth(n/o)+"px",s.innerHTML=n+" ft")},_getScaleWidth:function(t){return Math.round(this.options.maxWidth*t)-10},_getRoundNum:function(t){var e=Math.pow(10,(Math.floor(t)+"").length-1),i=t/e;return i=i>=10?10:i>=5?5:i>=3?3:i>=2?2:1,e*i}}),o.control.scale=function(t){return new o.Control.Scale(t)},o.Control.Layers=o.Control.extend({options:{collapsed:!0,position:"topright",autoZIndex:!0},initialize:function(t,e,i){o.setOptions(this,i),this._layers={},this._lastZIndex=0,this._handlingClick=!1;for(var n in t)this._addLayer(t[n],n);for(n in e)this._addLayer(e[n],n,!0)},onAdd:function(t){return this._initLayout(),this._update(),t.on("layeradd",this._onLayerChange,this).on("layerremove",this._onLayerChange,this),this._container},onRemove:function(t){t.off("layeradd",this._onLayerChange,this).off("layerremove",this._onLayerChange,this)},addBaseLayer:function(t,e){return this._addLayer(t,e),this._update(),this},addOverlay:function(t,e){return this._addLayer(t,e,!0),this._update(),this},removeLayer:function(t){var e=o.stamp(t);return delete this._layers[e],this._update(),this},_initLayout:function(){var t="leaflet-control-layers",e=this._container=o.DomUtil.create("div",t);e.setAttribute("aria-haspopup",!0),o.Browser.touch?o.DomEvent.on(e,"click",o.DomEvent.stopPropagation):o.DomEvent.disableClickPropagation(e).disableScrollPropagation(e);var i=this._form=o.DomUtil.create("form",t+"-list");if(this.options.collapsed){o.Browser.android||o.DomEvent.on(e,"mouseover",this._expand,this).on(e,"mouseout",this._collapse,this);var n=this._layersLink=o.DomUtil.create("a",t+"-toggle",e);n.href="#",n.title="Layers",o.Browser.touch?o.DomEvent.on(n,"click",o.DomEvent.stop).on(n,"click",this._expand,this):o.DomEvent.on(n,"focus",this._expand,this),o.DomEvent.on(i,"click",function(){setTimeout(o.bind(this._onInputClick,this),0)},this),this._map.on("click",this._collapse,this)}else this._expand();this._baseLayersList=o.DomUtil.create("div",t+"-base",i),this._separator=o.DomUtil.create("div",t+"-separator",i),this._overlaysList=o.DomUtil.create("div",t+"-overlays",i),e.appendChild(i)},_addLayer:function(t,e,i){var n=o.stamp(t);this._layers[n]={layer:t,name:e,overlay:i},this.options.autoZIndex&&t.setZIndex&&(this._lastZIndex++,t.setZIndex(this._lastZIndex))},_update:function(){if(this._container){this._baseLayersList.innerHTML="",this._overlaysList.innerHTML="";var t,e,i=!1,n=!1;for(t in this._layers)e=this._layers[t],this._addItem(e),n=n||e.overlay,i=i||!e.overlay;this._separator.style.display=n&&i?"":"none"}},_onLayerChange:function(t){var e=this._layers[o.stamp(t.layer)];if(e){this._handlingClick||this._update();var i=e.overlay?"layeradd"===t.type?"overlayadd":"overlayremove":"layeradd"===t.type?"baselayerchange":null;i&&this._map.fire(i,e)}},_createRadioElement:function(t,i){var n='<input type="radio" class="leaflet-control-layers-selector" name="'+t+'"';i&&(n+=' checked="checked"'),n+="/>";var o=e.createElement("div");return o.innerHTML=n,o.firstChild},_addItem:function(t){var i,n=e.createElement("label"),s=this._map.hasLayer(t.layer);t.overlay?(i=e.createElement("input"),i.type="checkbox",i.className="leaflet-control-layers-selector",i.defaultChecked=s):i=this._createRadioElement("leaflet-base-layers",s),i.layerId=o.stamp(t.layer),o.DomEvent.on(i,"click",this._onInputClick,this);var a=e.createElement("span");a.innerHTML=" "+t.name,n.appendChild(i),n.appendChild(a);var r=t.overlay?this._overlaysList:this._baseLayersList;return r.appendChild(n),n},_onInputClick:function(){var t,e,i,n=this._form.getElementsByTagName("input"),o=n.length;for(this._handlingClick=!0,t=0;o>t;t++)e=n[t],i=this._layers[e.layerId],e.checked&&!this._map.hasLayer(i.layer)?this._map.addLayer(i.layer):!e.checked&&this._map.hasLayer(i.layer)&&this._map.removeLayer(i.layer);this._handlingClick=!1,this._refocusOnMap()},_expand:function(){o.DomUtil.addClass(this._container,"leaflet-control-layers-expanded")},_collapse:function(){this._container.className=this._container.className.replace(" leaflet-control-layers-expanded","")}}),o.control.layers=function(t,e,i){return new o.Control.Layers(t,e,i)},o.PosAnimation=o.Class.extend({includes:o.Mixin.Events,run:function(t,e,i,n){this.stop(),this._el=t,this._inProgress=!0,this._newPos=e,this.fire("start"),t.style[o.DomUtil.TRANSITION]="all "+(i||.25)+"s cubic-bezier(0,0,"+(n||.5)+",1)",o.DomEvent.on(t,o.DomUtil.TRANSITION_END,this._onTransitionEnd,this),o.DomUtil.setPosition(t,e),o.Util.falseFn(t.offsetWidth),this._stepTimer=setInterval(o.bind(this._onStep,this),50)},stop:function(){this._inProgress&&(o.DomUtil.setPosition(this._el,this._getPos()),this._onTransitionEnd(),o.Util.falseFn(this._el.offsetWidth))},_onStep:function(){var t=this._getPos();return t?(this._el._leaflet_pos=t,void this.fire("step")):void this._onTransitionEnd()},_transformRe:/([-+]?(?:\d*\.)?\d+)\D*, ([-+]?(?:\d*\.)?\d+)\D*\)/,_getPos:function(){var e,i,n,s=this._el,a=t.getComputedStyle(s);if(o.Browser.any3d){if(n=a[o.DomUtil.TRANSFORM].match(this._transformRe),!n)return;e=parseFloat(n[1]),i=parseFloat(n[2])}else e=parseFloat(a.left),i=parseFloat(a.top);return new o.Point(e,i,!0)},_onTransitionEnd:function(){o.DomEvent.off(this._el,o.DomUtil.TRANSITION_END,this._onTransitionEnd,this),this._inProgress&&(this._inProgress=!1,this._el.style[o.DomUtil.TRANSITION]="",this._el._leaflet_pos=this._newPos,clearInterval(this._stepTimer),this.fire("step").fire("end"))}}),o.Map.include({setView:function(t,e,n){if(e=e===i?this._zoom:this._limitZoom(e),t=this._limitCenter(o.latLng(t),e,this.options.maxBounds),n=n||{},this._panAnim&&this._panAnim.stop(),this._loaded&&!n.reset&&n!==!0){n.animate!==i&&(n.zoom=o.extend({animate:n.animate},n.zoom),n.pan=o.extend({animate:n.animate},n.pan));var s=this._zoom!==e?this._tryAnimatedZoom&&this._tryAnimatedZoom(t,e,n.zoom):this._tryAnimatedPan(t,n.pan);if(s)return clearTimeout(this._sizeTimer),this}return this._resetView(t,e),this},panBy:function(t,e){if(t=o.point(t).round(),e=e||{},!t.x&&!t.y)return this;if(this._panAnim||(this._panAnim=new o.PosAnimation,this._panAnim.on({step:this._onPanTransitionStep,end:this._onPanTransitionEnd},this)),e.noMoveStart||this.fire("movestart"),e.animate!==!1){o.DomUtil.addClass(this._mapPane,"leaflet-pan-anim");var i=this._getMapPanePos().subtract(t);this._panAnim.run(this._mapPane,i,e.duration||.25,e.easeLinearity)}else this._rawPanBy(t),this.fire("move").fire("moveend");return this},_onPanTransitionStep:function(){this.fire("move")},_onPanTransitionEnd:function(){o.DomUtil.removeClass(this._mapPane,"leaflet-pan-anim"),this.fire("moveend")},_tryAnimatedPan:function(t,e){var i=this._getCenterOffset(t)._floor();return(e&&e.animate)===!0||this.getSize().contains(i)?(this.panBy(i,e),!0):!1}}),o.PosAnimation=o.DomUtil.TRANSITION?o.PosAnimation:o.PosAnimation.extend({run:function(t,e,i,n){this.stop(),this._el=t,this._inProgress=!0,this._duration=i||.25,this._easeOutPower=1/Math.max(n||.5,.2),this._startPos=o.DomUtil.getPosition(t),this._offset=e.subtract(this._startPos),this._startTime=+new Date,this.fire("start"),this._animate()},stop:function(){this._inProgress&&(this._step(),this._complete())},_animate:function(){this._animId=o.Util.requestAnimFrame(this._animate,this),this._step()},_step:function(){var t=+new Date-this._startTime,e=1e3*this._duration;e>t?this._runFrame(this._easeOut(t/e)):(this._runFrame(1),this._complete())},_runFrame:function(t){var e=this._startPos.add(this._offset.multiplyBy(t));o.DomUtil.setPosition(this._el,e),this.fire("step")},_complete:function(){o.Util.cancelAnimFrame(this._animId),this._inProgress=!1,this.fire("end")},_easeOut:function(t){return 1-Math.pow(1-t,this._easeOutPower)}}),o.Map.mergeOptions({zoomAnimation:!0,zoomAnimationThreshold:4}),o.DomUtil.TRANSITION&&o.Map.addInitHook(function(){this._zoomAnimated=this.options.zoomAnimation&&o.DomUtil.TRANSITION&&o.Browser.any3d&&!o.Browser.android23&&!o.Browser.mobileOpera,this._zoomAnimated&&o.DomEvent.on(this._mapPane,o.DomUtil.TRANSITION_END,this._catchTransitionEnd,this)}),o.Map.include(o.DomUtil.TRANSITION?{_catchTransitionEnd:function(t){this._animatingZoom&&t.propertyName.indexOf("transform")>=0&&this._onZoomTransitionEnd()},_nothingToAnimate:function(){return!this._container.getElementsByClassName("leaflet-zoom-animated").length},_tryAnimatedZoom:function(t,e,i){if(this._animatingZoom)return!0;if(i=i||{},!this._zoomAnimated||i.animate===!1||this._nothingToAnimate()||Math.abs(e-this._zoom)>this.options.zoomAnimationThreshold)return!1;var n=this.getZoomScale(e),o=this._getCenterOffset(t)._divideBy(1-1/n),s=this._getCenterLayerPoint()._add(o);return i.animate===!0||this.getSize().contains(o)?(this.fire("movestart").fire("zoomstart"),this._animateZoom(t,e,s,n,null,!0),!0):!1},_animateZoom:function(t,e,i,n,s,a,r){r||(this._animatingZoom=!0),o.DomUtil.addClass(this._mapPane,"leaflet-zoom-anim"),this._animateToCenter=t,this._animateToZoom=e,o.Draggable&&(o.Draggable._disabled=!0),o.Util.requestAnimFrame(function(){this.fire("zoomanim",{center:t,zoom:e,origin:i,scale:n,delta:s,backwards:a})},this)},_onZoomTransitionEnd:function(){this._animatingZoom=!1,o.DomUtil.removeClass(this._mapPane,"leaflet-zoom-anim"),this._resetView(this._animateToCenter,this._animateToZoom,!0,!0),o.Draggable&&(o.Draggable._disabled=!1)}}:{}),o.TileLayer.include({_animateZoom:function(t){this._animating||(this._animating=!0,this._prepareBgBuffer());var e=this._bgBuffer,i=o.DomUtil.TRANSFORM,n=t.delta?o.DomUtil.getTranslateString(t.delta):e.style[i],s=o.DomUtil.getScaleString(t.scale,t.origin);e.style[i]=t.backwards?s+" "+n:n+" "+s},_endZoomAnim:function(){var t=this._tileContainer,e=this._bgBuffer;t.style.visibility="",t.parentNode.appendChild(t),o.Util.falseFn(e.offsetWidth),this._animating=!1},_clearBgBuffer:function(){var t=this._map;!t||t._animatingZoom||t.touchZoom._zooming||(this._bgBuffer.innerHTML="",this._bgBuffer.style[o.DomUtil.TRANSFORM]="")},_prepareBgBuffer:function(){var t=this._tileContainer,e=this._bgBuffer,i=this._getLoadedTilesPercentage(e),n=this._getLoadedTilesPercentage(t);return e&&i>.5&&.5>n?(t.style.visibility="hidden",void this._stopLoadingImages(t)):(e.style.visibility="hidden",e.style[o.DomUtil.TRANSFORM]="",this._tileContainer=e,e=this._bgBuffer=t,this._stopLoadingImages(e),void clearTimeout(this._clearBgBufferTimer))},_getLoadedTilesPercentage:function(t){var e,i,n=t.getElementsByTagName("img"),o=0;for(e=0,i=n.length;i>e;e++)n[e].complete&&o++;return o/i},_stopLoadingImages:function(t){var e,i,n,s=Array.prototype.slice.call(t.getElementsByTagName("img"));for(e=0,i=s.length;i>e;e++)n=s[e],n.complete||(n.onload=o.Util.falseFn,n.onerror=o.Util.falseFn,n.src=o.Util.emptyImageUrl,n.parentNode.removeChild(n))}}),o.Map.include({_defaultLocateOptions:{watch:!1,setView:!1,maxZoom:1/0,timeout:1e4,maximumAge:0,enableHighAccuracy:!1},locate:function(t){if(t=this._locateOptions=o.extend(this._defaultLocateOptions,t),!navigator.geolocation)return this._handleGeolocationError({code:0,message:"Geolocation not supported."}),this;var e=o.bind(this._handleGeolocationResponse,this),i=o.bind(this._handleGeolocationError,this);return t.watch?this._locationWatchId=navigator.geolocation.watchPosition(e,i,t):navigator.geolocation.getCurrentPosition(e,i,t),this},stopLocate:function(){return navigator.geolocation&&navigator.geolocation.clearWatch(this._locationWatchId),this._locateOptions&&(this._locateOptions.setView=!1),this},_handleGeolocationError:function(t){var e=t.code,i=t.message||(1===e?"permission denied":2===e?"position unavailable":"timeout");this._locateOptions.setView&&!this._loaded&&this.fitWorld(),this.fire("locationerror",{code:e,message:"Geolocation error: "+i+"."})},_handleGeolocationResponse:function(t){var e=t.coords.latitude,i=t.coords.longitude,n=new o.LatLng(e,i),s=180*t.coords.accuracy/40075017,a=s/Math.cos(o.LatLng.DEG_TO_RAD*e),r=o.latLngBounds([e-s,i-a],[e+s,i+a]),h=this._locateOptions;if(h.setView){var l=Math.min(this.getBoundsZoom(r),h.maxZoom);this.setView(n,l)}var u={latlng:n,bounds:r,timestamp:t.timestamp};for(var c in t.coords)"number"==typeof t.coords[c]&&(u[c]=t.coords[c]);this.fire("locationfound",u)}})}(window,document);
-/*
- Leaflet.markercluster, Provides Beautiful Animated Marker Clustering functionality for Leaflet, a JS library for interactive maps.
- https://github.com/Leaflet/Leaflet.markercluster
- (c) 2012-2013, Dave Leaver, smartrak
-*/
-!function(t,e){L.MarkerClusterGroup=L.FeatureGroup.extend({options:{maxClusterRadius:80,iconCreateFunction:null,spiderfyOnMaxZoom:!0,showCoverageOnHover:!0,zoomToBoundsOnClick:!0,singleMarkerMode:!1,disableClusteringAtZoom:null,removeOutsideVisibleBounds:!0,animateAddingMarkers:!1,spiderfyDistanceMultiplier:1,polygonOptions:{}},initialize:function(t){L.Util.setOptions(this,t),this.options.iconCreateFunction||(this.options.iconCreateFunction=this._defaultIconCreateFunction),this._featureGroup=L.featureGroup(),this._featureGroup.on(L.FeatureGroup.EVENTS,this._propagateEvent,this),this._nonPointGroup=L.featureGroup(),this._nonPointGroup.on(L.FeatureGroup.EVENTS,this._propagateEvent,this),this._inZoomAnimation=0,this._needsClustering=[],this._needsRemoving=[],this._currentShownBounds=null,this._queue=[]},addLayer:function(t){if(t instanceof L.LayerGroup){var e=[];for(var i in t._layers)e.push(t._layers[i]);return this.addLayers(e)}if(!t.getLatLng)return this._nonPointGroup.addLayer(t),this;if(!this._map)return this._needsClustering.push(t),this;if(this.hasLayer(t))return this;this._unspiderfy&&this._unspiderfy(),this._addLayer(t,this._maxZoom);var n=t,s=this._map.getZoom();if(t.__parent)for(;n.__parent._zoom>=s;)n=n.__parent;return this._currentShownBounds.contains(n.getLatLng())&&(this.options.animateAddingMarkers?this._animationAddLayer(t,n):this._animationAddLayerNonAnimated(t,n)),this},removeLayer:function(t){if(t instanceof L.LayerGroup){var e=[];for(var i in t._layers)e.push(t._layers[i]);return this.removeLayers(e)}return t.getLatLng?this._map?t.__parent?(this._unspiderfy&&(this._unspiderfy(),this._unspiderfyLayer(t)),this._removeLayer(t,!0),this._featureGroup.hasLayer(t)&&(this._featureGroup.removeLayer(t),t.setOpacity&&t.setOpacity(1)),this):this:(!this._arraySplice(this._needsClustering,t)&&this.hasLayer(t)&&this._needsRemoving.push(t),this):(this._nonPointGroup.removeLayer(t),this)},addLayers:function(t){var e,i,n,s=this._map,r=this._featureGroup,o=this._nonPointGroup;for(e=0,i=t.length;i>e;e++)if(n=t[e],n.getLatLng){if(!this.hasLayer(n))if(s){if(this._addLayer(n,this._maxZoom),n.__parent&&2===n.__parent.getChildCount()){var a=n.__parent.getAllChildMarkers(),h=a[0]===n?a[1]:a[0];r.removeLayer(h)}}else this._needsClustering.push(n)}else o.addLayer(n);return s&&(r.eachLayer(function(t){t instanceof L.MarkerCluster&&t._iconNeedsUpdate&&t._updateIcon()}),this._topClusterLevel._recursivelyAddChildrenToMap(null,this._zoom,this._currentShownBounds)),this},removeLayers:function(t){var e,i,n,s=this._featureGroup,r=this._nonPointGroup;if(!this._map){for(e=0,i=t.length;i>e;e++)n=t[e],this._arraySplice(this._needsClustering,n),r.removeLayer(n);return this}for(e=0,i=t.length;i>e;e++)n=t[e],n.__parent?(this._removeLayer(n,!0,!0),s.hasLayer(n)&&(s.removeLayer(n),n.setOpacity&&n.setOpacity(1))):r.removeLayer(n);return this._topClusterLevel._recursivelyAddChildrenToMap(null,this._zoom,this._currentShownBounds),s.eachLayer(function(t){t instanceof L.MarkerCluster&&t._updateIcon()}),this},clearLayers:function(){return this._map||(this._needsClustering=[],delete this._gridClusters,delete this._gridUnclustered),this._noanimationUnspiderfy&&this._noanimationUnspiderfy(),this._featureGroup.clearLayers(),this._nonPointGroup.clearLayers(),this.eachLayer(function(t){delete t.__parent}),this._map&&this._generateInitialClusters(),this},getBounds:function(){var t=new L.LatLngBounds;if(this._topClusterLevel)t.extend(this._topClusterLevel._bounds);else for(var e=this._needsClustering.length-1;e>=0;e--)t.extend(this._needsClustering[e].getLatLng());return t.extend(this._nonPointGroup.getBounds()),t},eachLayer:function(t,e){var i,n=this._needsClustering.slice();for(this._topClusterLevel&&this._topClusterLevel.getAllChildMarkers(n),i=n.length-1;i>=0;i--)t.call(e,n[i]);this._nonPointGroup.eachLayer(t,e)},getLayers:function(){var t=[];return this.eachLayer(function(e){t.push(e)}),t},getLayer:function(t){var e=null;return this.eachLayer(function(i){L.stamp(i)===t&&(e=i)}),e},hasLayer:function(t){if(!t)return!1;var e,i=this._needsClustering;for(e=i.length-1;e>=0;e--)if(i[e]===t)return!0;for(i=this._needsRemoving,e=i.length-1;e>=0;e--)if(i[e]===t)return!1;return!(!t.__parent||t.__parent._group!==this)||this._nonPointGroup.hasLayer(t)},zoomToShowLayer:function(t,e){var i=function(){if((t._icon||t.__parent._icon)&&!this._inZoomAnimation)if(this._map.off("moveend",i,this),this.off("animationend",i,this),t._icon)e();else if(t.__parent._icon){var n=function(){this.off("spiderfied",n,this),e()};this.on("spiderfied",n,this),t.__parent.spiderfy()}};t._icon&&this._map.getBounds().contains(t.getLatLng())?e():t.__parent._zoom<this._map.getZoom()?(this._map.on("moveend",i,this),this._map.panTo(t.getLatLng())):(this._map.on("moveend",i,this),this.on("animationend",i,this),this._map.setView(t.getLatLng(),t.__parent._zoom+1),t.__parent.zoomToBounds())},onAdd:function(t){this._map=t;var e,i,n;if(!isFinite(this._map.getMaxZoom()))throw"Map has no maxZoom specified";for(this._featureGroup.onAdd(t),this._nonPointGroup.onAdd(t),this._gridClusters||this._generateInitialClusters(),e=0,i=this._needsRemoving.length;i>e;e++)n=this._needsRemoving[e],this._removeLayer(n,!0);for(this._needsRemoving=[],e=0,i=this._needsClustering.length;i>e;e++)n=this._needsClustering[e],n.getLatLng?n.__parent||this._addLayer(n,this._maxZoom):this._featureGroup.addLayer(n);this._needsClustering=[],this._map.on("zoomend",this._zoomEnd,this),this._map.on("moveend",this._moveEnd,this),this._spiderfierOnAdd&&this._spiderfierOnAdd(),this._bindEvents(),this._zoom=this._map.getZoom(),this._currentShownBounds=this._getExpandedVisibleBounds(),this._topClusterLevel._recursivelyAddChildrenToMap(null,this._zoom,this._currentShownBounds)},onRemove:function(t){t.off("zoomend",this._zoomEnd,this),t.off("moveend",this._moveEnd,this),this._unbindEvents(),this._map._mapPane.className=this._map._mapPane.className.replace(" leaflet-cluster-anim",""),this._spiderfierOnRemove&&this._spiderfierOnRemove(),this._hideCoverage(),this._featureGroup.onRemove(t),this._nonPointGroup.onRemove(t),this._featureGroup.clearLayers(),this._map=null},getVisibleParent:function(t){for(var e=t;e&&!e._icon;)e=e.__parent;return e||null},_arraySplice:function(t,e){for(var i=t.length-1;i>=0;i--)if(t[i]===e)return t.splice(i,1),!0},_removeLayer:function(t,e,i){var n=this._gridClusters,s=this._gridUnclustered,r=this._featureGroup,o=this._map;if(e)for(var a=this._maxZoom;a>=0&&s[a].removeObject(t,o.project(t.getLatLng(),a));a--);var h,_=t.__parent,u=_._markers;for(this._arraySplice(u,t);_&&(_._childCount--,!(_._zoom<0));)e&&_._childCount<=1?(h=_._markers[0]===t?_._markers[1]:_._markers[0],n[_._zoom].removeObject(_,o.project(_._cLatLng,_._zoom)),s[_._zoom].addObject(h,o.project(h.getLatLng(),_._zoom)),this._arraySplice(_.__parent._childClusters,_),_.__parent._markers.push(h),h.__parent=_.__parent,_._icon&&(r.removeLayer(_),i||r.addLayer(h))):(_._recalculateBounds(),i&&_._icon||_._updateIcon()),_=_.__parent;delete t.__parent},_isOrIsParent:function(t,e){for(;e;){if(t===e)return!0;e=e.parentNode}return!1},_propagateEvent:function(t){if(t.layer instanceof L.MarkerCluster){if(t.originalEvent&&this._isOrIsParent(t.layer._icon,t.originalEvent.relatedTarget))return;t.type="cluster"+t.type}this.fire(t.type,t)},_defaultIconCreateFunction:function(t){var e=t.getChildCount(),i=" marker-cluster-";return i+=10>e?"small":100>e?"medium":"large",new L.DivIcon({html:"<div><span>"+e+"</span></div>",className:"marker-cluster"+i,iconSize:new L.Point(40,40)})},_bindEvents:function(){var t=this._map,e=this.options.spiderfyOnMaxZoom,i=this.options.showCoverageOnHover,n=this.options.zoomToBoundsOnClick;(e||n)&&this.on("clusterclick",this._zoomOrSpiderfy,this),i&&(this.on("clustermouseover",this._showCoverage,this),this.on("clustermouseout",this._hideCoverage,this),t.on("zoomend",this._hideCoverage,this))},_zoomOrSpiderfy:function(t){var e=this._map;e.getMaxZoom()===e.getZoom()?this.options.spiderfyOnMaxZoom&&t.layer.spiderfy():this.options.zoomToBoundsOnClick&&t.layer.zoomToBounds(),t.originalEvent&&13===t.originalEvent.keyCode&&e._container.focus()},_showCoverage:function(t){var e=this._map;this._inZoomAnimation||(this._shownPolygon&&e.removeLayer(this._shownPolygon),t.layer.getChildCount()>2&&t.layer!==this._spiderfied&&(this._shownPolygon=new L.Polygon(t.layer.getConvexHull(),this.options.polygonOptions),e.addLayer(this._shownPolygon)))},_hideCoverage:function(){this._shownPolygon&&(this._map.removeLayer(this._shownPolygon),this._shownPolygon=null)},_unbindEvents:function(){var t=this.options.spiderfyOnMaxZoom,e=this.options.showCoverageOnHover,i=this.options.zoomToBoundsOnClick,n=this._map;(t||i)&&this.off("clusterclick",this._zoomOrSpiderfy,this),e&&(this.off("clustermouseover",this._showCoverage,this),this.off("clustermouseout",this._hideCoverage,this),n.off("zoomend",this._hideCoverage,this))},_zoomEnd:function(){this._map&&(this._mergeSplitClusters(),this._zoom=this._map._zoom,this._currentShownBounds=this._getExpandedVisibleBounds())},_moveEnd:function(){if(!this._inZoomAnimation){var t=this._getExpandedVisibleBounds();this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds,this._zoom,t),this._topClusterLevel._recursivelyAddChildrenToMap(null,this._map._zoom,t),this._currentShownBounds=t}},_generateInitialClusters:function(){var t=this._map.getMaxZoom(),e=this.options.maxClusterRadius;this.options.disableClusteringAtZoom&&(t=this.options.disableClusteringAtZoom-1),this._maxZoom=t,this._gridClusters={},this._gridUnclustered={};for(var i=t;i>=0;i--)this._gridClusters[i]=new L.DistanceGrid(e),this._gridUnclustered[i]=new L.DistanceGrid(e);this._topClusterLevel=new L.MarkerCluster(this,-1)},_addLayer:function(t,e){var i,n,s=this._gridClusters,r=this._gridUnclustered;for(this.options.singleMarkerMode&&(t.options.icon=this.options.iconCreateFunction({getChildCount:function(){return 1},getAllChildMarkers:function(){return[t]}}));e>=0;e--){i=this._map.project(t.getLatLng(),e);var o=s[e].getNearObject(i);if(o)return o._addChild(t),t.__parent=o,void 0;if(o=r[e].getNearObject(i)){var a=o.__parent;a&&this._removeLayer(o,!1);var h=new L.MarkerCluster(this,e,o,t);s[e].addObject(h,this._map.project(h._cLatLng,e)),o.__parent=h,t.__parent=h;var _=h;for(n=e-1;n>a._zoom;n--)_=new L.MarkerCluster(this,n,_),s[n].addObject(_,this._map.project(o.getLatLng(),n));for(a._addChild(_),n=e;n>=0&&r[n].removeObject(o,this._map.project(o.getLatLng(),n));n--);return}r[e].addObject(t,i)}this._topClusterLevel._addChild(t),t.__parent=this._topClusterLevel},_enqueue:function(t){this._queue.push(t),this._queueTimeout||(this._queueTimeout=setTimeout(L.bind(this._processQueue,this),300))},_processQueue:function(){for(var t=0;t<this._queue.length;t++)this._queue[t].call(this);this._queue.length=0,clearTimeout(this._queueTimeout),this._queueTimeout=null},_mergeSplitClusters:function(){this._processQueue(),this._zoom<this._map._zoom&&this._currentShownBounds.contains(this._getExpandedVisibleBounds())?(this._animationStart(),this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds,this._zoom,this._getExpandedVisibleBounds()),this._animationZoomIn(this._zoom,this._map._zoom)):this._zoom>this._map._zoom?(this._animationStart(),this._animationZoomOut(this._zoom,this._map._zoom)):this._moveEnd()},_getExpandedVisibleBounds:function(){if(!this.options.removeOutsideVisibleBounds)return this.getBounds();var t=this._map,e=t.getBounds(),i=e._southWest,n=e._northEast,s=L.Browser.mobile?0:Math.abs(i.lat-n.lat),r=L.Browser.mobile?0:Math.abs(i.lng-n.lng);return new L.LatLngBounds(new L.LatLng(i.lat-s,i.lng-r,!0),new L.LatLng(n.lat+s,n.lng+r,!0))},_animationAddLayerNonAnimated:function(t,e){if(e===t)this._featureGroup.addLayer(t);else if(2===e._childCount){e._addToMap();var i=e.getAllChildMarkers();this._featureGroup.removeLayer(i[0]),this._featureGroup.removeLayer(i[1])}else e._updateIcon()}}),L.MarkerClusterGroup.include(L.DomUtil.TRANSITION?{_animationStart:function(){this._map._mapPane.className+=" leaflet-cluster-anim",this._inZoomAnimation++},_animationEnd:function(){this._map&&(this._map._mapPane.className=this._map._mapPane.className.replace(" leaflet-cluster-anim","")),this._inZoomAnimation--,this.fire("animationend")},_animationZoomIn:function(t,e){var i,n=this._getExpandedVisibleBounds(),s=this._featureGroup;this._topClusterLevel._recursively(n,t,0,function(r){var o,a=r._latlng,h=r._markers;for(n.contains(a)||(a=null),r._isSingleParent()&&t+1===e?(s.removeLayer(r),r._recursivelyAddChildrenToMap(null,e,n)):(r.setOpacity(0),r._recursivelyAddChildrenToMap(a,e,n)),i=h.length-1;i>=0;i--)o=h[i],n.contains(o._latlng)||s.removeLayer(o)}),this._forceLayout(),this._topClusterLevel._recursivelyBecomeVisible(n,e),s.eachLayer(function(t){t instanceof L.MarkerCluster||!t._icon||t.setOpacity(1)}),this._topClusterLevel._recursively(n,t,e,function(t){t._recursivelyRestoreChildPositions(e)}),this._enqueue(function(){this._topClusterLevel._recursively(n,t,0,function(t){s.removeLayer(t),t.setOpacity(1)}),this._animationEnd()})},_animationZoomOut:function(t,e){this._animationZoomOutSingle(this._topClusterLevel,t-1,e),this._topClusterLevel._recursivelyAddChildrenToMap(null,e,this._getExpandedVisibleBounds()),this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds,t,this._getExpandedVisibleBounds())},_animationZoomOutSingle:function(t,e,i){var n=this._getExpandedVisibleBounds();t._recursivelyAnimateChildrenInAndAddSelfToMap(n,e+1,i);var s=this;this._forceLayout(),t._recursivelyBecomeVisible(n,i),this._enqueue(function(){if(1===t._childCount){var r=t._markers[0];r.setLatLng(r.getLatLng()),r.setOpacity(1)}else t._recursively(n,i,0,function(t){t._recursivelyRemoveChildrenFromMap(n,e+1)});s._animationEnd()})},_animationAddLayer:function(t,e){var i=this,n=this._featureGroup;n.addLayer(t),e!==t&&(e._childCount>2?(e._updateIcon(),this._forceLayout(),this._animationStart(),t._setPos(this._map.latLngToLayerPoint(e.getLatLng())),t.setOpacity(0),this._enqueue(function(){n.removeLayer(t),t.setOpacity(1),i._animationEnd()})):(this._forceLayout(),i._animationStart(),i._animationZoomOutSingle(e,this._map.getMaxZoom(),this._map.getZoom())))},_forceLayout:function(){L.Util.falseFn(e.body.offsetWidth)}}:{_animationStart:function(){},_animationZoomIn:function(t,e){this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds,t),this._topClusterLevel._recursivelyAddChildrenToMap(null,e,this._getExpandedVisibleBounds())},_animationZoomOut:function(t,e){this._topClusterLevel._recursivelyRemoveChildrenFromMap(this._currentShownBounds,t),this._topClusterLevel._recursivelyAddChildrenToMap(null,e,this._getExpandedVisibleBounds())},_animationAddLayer:function(t,e){this._animationAddLayerNonAnimated(t,e)}}),L.markerClusterGroup=function(t){return new L.MarkerClusterGroup(t)},L.MarkerCluster=L.Marker.extend({initialize:function(t,e,i,n){L.Marker.prototype.initialize.call(this,i?i._cLatLng||i.getLatLng():new L.LatLng(0,0),{icon:this}),this._group=t,this._zoom=e,this._markers=[],this._childClusters=[],this._childCount=0,this._iconNeedsUpdate=!0,this._bounds=new L.LatLngBounds,i&&this._addChild(i),n&&this._addChild(n)},getAllChildMarkers:function(t){t=t||[];for(var e=this._childClusters.length-1;e>=0;e--)this._childClusters[e].getAllChildMarkers(t);for(var i=this._markers.length-1;i>=0;i--)t.push(this._markers[i]);return t},getChildCount:function(){return this._childCount},zoomToBounds:function(){for(var t,e=this._childClusters.slice(),i=this._group._map,n=i.getBoundsZoom(this._bounds),s=this._zoom+1,r=i.getZoom();e.length>0&&n>s;){s++;var o=[];for(t=0;t<e.length;t++)o=o.concat(e[t]._childClusters);e=o}n>s?this._group._map.setView(this._latlng,s):r>=n?this._group._map.setView(this._latlng,r+1):this._group._map.fitBounds(this._bounds)},getBounds:function(){var t=new L.LatLngBounds;return t.extend(this._bounds),t},_updateIcon:function(){this._iconNeedsUpdate=!0,this._icon&&this.setIcon(this)},createIcon:function(){return this._iconNeedsUpdate&&(this._iconObj=this._group.options.iconCreateFunction(this),this._iconNeedsUpdate=!1),this._iconObj.createIcon()},createShadow:function(){return this._iconObj.createShadow()},_addChild:function(t,e){this._iconNeedsUpdate=!0,this._expandBounds(t),t instanceof L.MarkerCluster?(e||(this._childClusters.push(t),t.__parent=this),this._childCount+=t._childCount):(e||this._markers.push(t),this._childCount++),this.__parent&&this.__parent._addChild(t,!0)},_expandBounds:function(t){var e,i=t._wLatLng||t._latlng;t instanceof L.MarkerCluster?(this._bounds.extend(t._bounds),e=t._childCount):(this._bounds.extend(i),e=1),this._cLatLng||(this._cLatLng=t._cLatLng||i);var n=this._childCount+e;this._wLatLng?(this._wLatLng.lat=(i.lat*e+this._wLatLng.lat*this._childCount)/n,this._wLatLng.lng=(i.lng*e+this._wLatLng.lng*this._childCount)/n):this._latlng=this._wLatLng=new L.LatLng(i.lat,i.lng)},_addToMap:function(t){t&&(this._backupLatlng=this._latlng,this.setLatLng(t)),this._group._featureGroup.addLayer(this)},_recursivelyAnimateChildrenIn:function(t,e,i){this._recursively(t,0,i-1,function(t){var i,n,s=t._markers;for(i=s.length-1;i>=0;i--)n=s[i],n._icon&&(n._setPos(e),n.setOpacity(0))},function(t){var i,n,s=t._childClusters;for(i=s.length-1;i>=0;i--)n=s[i],n._icon&&(n._setPos(e),n.setOpacity(0))})},_recursivelyAnimateChildrenInAndAddSelfToMap:function(t,e,i){this._recursively(t,i,0,function(n){n._recursivelyAnimateChildrenIn(t,n._group._map.latLngToLayerPoint(n.getLatLng()).round(),e),n._isSingleParent()&&e-1===i?(n.setOpacity(1),n._recursivelyRemoveChildrenFromMap(t,e)):n.setOpacity(0),n._addToMap()})},_recursivelyBecomeVisible:function(t,e){this._recursively(t,0,e,null,function(t){t.setOpacity(1)})},_recursivelyAddChildrenToMap:function(t,e,i){this._recursively(i,-1,e,function(n){if(e!==n._zoom)for(var s=n._markers.length-1;s>=0;s--){var r=n._markers[s];i.contains(r._latlng)&&(t&&(r._backupLatlng=r.getLatLng(),r.setLatLng(t),r.setOpacity&&r.setOpacity(0)),n._group._featureGroup.addLayer(r))}},function(e){e._addToMap(t)})},_recursivelyRestoreChildPositions:function(t){for(var e=this._markers.length-1;e>=0;e--){var i=this._markers[e];i._backupLatlng&&(i.setLatLng(i._backupLatlng),delete i._backupLatlng)}if(t-1===this._zoom)for(var n=this._childClusters.length-1;n>=0;n--)this._childClusters[n]._restorePosition();else for(var s=this._childClusters.length-1;s>=0;s--)this._childClusters[s]._recursivelyRestoreChildPositions(t)},_restorePosition:function(){this._backupLatlng&&(this.setLatLng(this._backupLatlng),delete this._backupLatlng)},_recursivelyRemoveChildrenFromMap:function(t,e,i){var n,s;this._recursively(t,-1,e-1,function(t){for(s=t._markers.length-1;s>=0;s--)n=t._markers[s],i&&i.contains(n._latlng)||(t._group._featureGroup.removeLayer(n),n.setOpacity&&n.setOpacity(1))},function(t){for(s=t._childClusters.length-1;s>=0;s--)n=t._childClusters[s],i&&i.contains(n._latlng)||(t._group._featureGroup.removeLayer(n),n.setOpacity&&n.setOpacity(1))})},_recursively:function(t,e,i,n,s){var r,o,a=this._childClusters,h=this._zoom;if(e>h)for(r=a.length-1;r>=0;r--)o=a[r],t.intersects(o._bounds)&&o._recursively(t,e,i,n,s);else if(n&&n(this),s&&this._zoom===i&&s(this),i>h)for(r=a.length-1;r>=0;r--)o=a[r],t.intersects(o._bounds)&&o._recursively(t,e,i,n,s)},_recalculateBounds:function(){var t,e=this._markers,i=this._childClusters;for(this._bounds=new L.LatLngBounds,delete this._wLatLng,t=e.length-1;t>=0;t--)this._expandBounds(e[t]);for(t=i.length-1;t>=0;t--)this._expandBounds(i[t])},_isSingleParent:function(){return this._childClusters.length>0&&this._childClusters[0]._childCount===this._childCount}}),L.DistanceGrid=function(t){this._cellSize=t,this._sqCellSize=t*t,this._grid={},this._objectPoint={}},L.DistanceGrid.prototype={addObject:function(t,e){var i=this._getCoord(e.x),n=this._getCoord(e.y),s=this._grid,r=s[n]=s[n]||{},o=r[i]=r[i]||[],a=L.Util.stamp(t);this._objectPoint[a]=e,o.push(t)},updateObject:function(t,e){this.removeObject(t),this.addObject(t,e)},removeObject:function(t,e){var i,n,s=this._getCoord(e.x),r=this._getCoord(e.y),o=this._grid,a=o[r]=o[r]||{},h=a[s]=a[s]||[];for(delete this._objectPoint[L.Util.stamp(t)],i=0,n=h.length;n>i;i++)if(h[i]===t)return h.splice(i,1),1===n&&delete a[s],!0},eachObject:function(t,e){var i,n,s,r,o,a,h,_=this._grid;for(i in _){o=_[i];for(n in o)for(a=o[n],s=0,r=a.length;r>s;s++)h=t.call(e,a[s]),h&&(s--,r--)}},getNearObject:function(t){var e,i,n,s,r,o,a,h,_=this._getCoord(t.x),u=this._getCoord(t.y),l=this._objectPoint,d=this._sqCellSize,p=null;for(e=u-1;u+1>=e;e++)if(s=this._grid[e])for(i=_-1;_+1>=i;i++)if(r=s[i])for(n=0,o=r.length;o>n;n++)a=r[n],h=this._sqDist(l[L.Util.stamp(a)],t),d>h&&(d=h,p=a);return p},_getCoord:function(t){return Math.floor(t/this._cellSize)},_sqDist:function(t,e){var i=e.x-t.x,n=e.y-t.y;return i*i+n*n}},function(){L.QuickHull={getDistant:function(t,e){var i=e[1].lat-e[0].lat,n=e[0].lng-e[1].lng;return n*(t.lat-e[0].lat)+i*(t.lng-e[0].lng)},findMostDistantPointFromBaseLine:function(t,e){var i,n,s,r=0,o=null,a=[];for(i=e.length-1;i>=0;i--)n=e[i],s=this.getDistant(n,t),s>0&&(a.push(n),s>r&&(r=s,o=n));return{maxPoint:o,newPoints:a}},buildConvexHull:function(t,e){var i=[],n=this.findMostDistantPointFromBaseLine(t,e);return n.maxPoint?(i=i.concat(this.buildConvexHull([t[0],n.maxPoint],n.newPoints)),i=i.concat(this.buildConvexHull([n.maxPoint,t[1]],n.newPoints))):[t[0]]},getConvexHull:function(t){var e,i=!1,n=!1,s=null,r=null;for(e=t.length-1;e>=0;e--){var o=t[e];(i===!1||o.lat>i)&&(s=o,i=o.lat),(n===!1||o.lat<n)&&(r=o,n=o.lat)}var a=[].concat(this.buildConvexHull([r,s],t),this.buildConvexHull([s,r],t));return a}}}(),L.MarkerCluster.include({getConvexHull:function(){var t,e,i=this.getAllChildMarkers(),n=[];for(e=i.length-1;e>=0;e--)t=i[e].getLatLng(),n.push(t);return L.QuickHull.getConvexHull(n)}}),L.MarkerCluster.include({_2PI:2*Math.PI,_circleFootSeparation:25,_circleStartAngle:Math.PI/6,_spiralFootSeparation:28,_spiralLengthStart:11,_spiralLengthFactor:5,_circleSpiralSwitchover:9,spiderfy:function(){if(this._group._spiderfied!==this&&!this._group._inZoomAnimation){var t,e=this.getAllChildMarkers(),i=this._group,n=i._map,s=n.latLngToLayerPoint(this._latlng);this._group._unspiderfy(),this._group._spiderfied=this,e.length>=this._circleSpiralSwitchover?t=this._generatePointsSpiral(e.length,s):(s.y+=10,t=this._generatePointsCircle(e.length,s)),this._animationSpiderfy(e,t)}},unspiderfy:function(t){this._group._inZoomAnimation||(this._animationUnspiderfy(t),this._group._spiderfied=null)},_generatePointsCircle:function(t,e){var i,n,s=this._group.options.spiderfyDistanceMultiplier*this._circleFootSeparation*(2+t),r=s/this._2PI,o=this._2PI/t,a=[];for(a.length=t,i=t-1;i>=0;i--)n=this._circleStartAngle+i*o,a[i]=new L.Point(e.x+r*Math.cos(n),e.y+r*Math.sin(n))._round();return a},_generatePointsSpiral:function(t,e){var i,n=this._group.options.spiderfyDistanceMultiplier*this._spiralLengthStart,s=this._group.options.spiderfyDistanceMultiplier*this._spiralFootSeparation,r=this._group.options.spiderfyDistanceMultiplier*this._spiralLengthFactor,o=0,a=[];for(a.length=t,i=t-1;i>=0;i--)o+=s/n+5e-4*i,a[i]=new L.Point(e.x+n*Math.cos(o),e.y+n*Math.sin(o))._round(),n+=this._2PI*r/o;return a},_noanimationUnspiderfy:function(){var t,e,i=this._group,n=i._map,s=i._featureGroup,r=this.getAllChildMarkers();for(this.setOpacity(1),e=r.length-1;e>=0;e--)t=r[e],s.removeLayer(t),t._preSpiderfyLatlng&&(t.setLatLng(t._preSpiderfyLatlng),delete t._preSpiderfyLatlng),t.setZIndexOffset&&t.setZIndexOffset(0),t._spiderLeg&&(n.removeLayer(t._spiderLeg),delete t._spiderLeg);i._spiderfied=null}}),L.MarkerCluster.include(L.DomUtil.TRANSITION?{SVG_ANIMATION:function(){return e.createElementNS("http://www.w3.org/2000/svg","animate").toString().indexOf("SVGAnimate")>-1}(),_animationSpiderfy:function(t,i){var n,s,r,o,a=this,h=this._group,_=h._map,u=h._featureGroup,l=_.latLngToLayerPoint(this._latlng);for(n=t.length-1;n>=0;n--)s=t[n],s.setOpacity?(s.setZIndexOffset(1e6),s.setOpacity(0),u.addLayer(s),s._setPos(l)):u.addLayer(s);h._forceLayout(),h._animationStart();var d=L.Path.SVG?0:.3,p=L.Path.SVG_NS;for(n=t.length-1;n>=0;n--)if(o=_.layerPointToLatLng(i[n]),s=t[n],s._preSpiderfyLatlng=s._latlng,s.setLatLng(o),s.setOpacity&&s.setOpacity(1),r=new L.Polyline([a._latlng,o],{weight:1.5,color:"#222",opacity:d}),_.addLayer(r),s._spiderLeg=r,L.Path.SVG&&this.SVG_ANIMATION){var c=r._path.getTotalLength();r._path.setAttribute("stroke-dasharray",c+","+c);var m=e.createElementNS(p,"animate");m.setAttribute("attributeName","stroke-dashoffset"),m.setAttribute("begin","indefinite"),m.setAttribute("from",c),m.setAttribute("to",0),m.setAttribute("dur",.25),r._path.appendChild(m),m.beginElement(),m=e.createElementNS(p,"animate"),m.setAttribute("attributeName","stroke-opacity"),m.setAttribute("attributeName","stroke-opacity"),m.setAttribute("begin","indefinite"),m.setAttribute("from",0),m.setAttribute("to",.5),m.setAttribute("dur",.25),r._path.appendChild(m),m.beginElement()}if(a.setOpacity(.3),L.Path.SVG)for(this._group._forceLayout(),n=t.length-1;n>=0;n--)s=t[n]._spiderLeg,s.options.opacity=.5,s._path.setAttribute("stroke-opacity",.5);setTimeout(function(){h._animationEnd(),h.fire("spiderfied")},200)},_animationUnspiderfy:function(t){var e,i,n,s=this._group,r=s._map,o=s._featureGroup,a=t?r._latLngToNewLayerPoint(this._latlng,t.zoom,t.center):r.latLngToLayerPoint(this._latlng),h=this.getAllChildMarkers(),_=L.Path.SVG&&this.SVG_ANIMATION;for(s._animationStart(),this.setOpacity(1),i=h.length-1;i>=0;i--)e=h[i],e._preSpiderfyLatlng&&(e.setLatLng(e._preSpiderfyLatlng),delete e._preSpiderfyLatlng,e.setOpacity?(e._setPos(a),e.setOpacity(0)):o.removeLayer(e),_&&(n=e._spiderLeg._path.childNodes[0],n.setAttribute("to",n.getAttribute("from")),n.setAttribute("from",0),n.beginElement(),n=e._spiderLeg._path.childNodes[1],n.setAttribute("from",.5),n.setAttribute("to",0),n.setAttribute("stroke-opacity",0),n.beginElement(),e._spiderLeg._path.setAttribute("stroke-opacity",0)));setTimeout(function(){var t=0;for(i=h.length-1;i>=0;i--)e=h[i],e._spiderLeg&&t++;for(i=h.length-1;i>=0;i--)e=h[i],e._spiderLeg&&(e.setOpacity&&(e.setOpacity(1),e.setZIndexOffset(0)),t>1&&o.removeLayer(e),r.removeLayer(e._spiderLeg),delete e._spiderLeg);s._animationEnd()},200)}}:{_animationSpiderfy:function(t,e){var i,n,s,r,o=this._group,a=o._map,h=o._featureGroup;for(i=t.length-1;i>=0;i--)r=a.layerPointToLatLng(e[i]),n=t[i],n._preSpiderfyLatlng=n._latlng,n.setLatLng(r),n.setZIndexOffset&&n.setZIndexOffset(1e6),h.addLayer(n),s=new L.Polyline([this._latlng,r],{weight:1.5,color:"#222"}),a.addLayer(s),n._spiderLeg=s;this.setOpacity(.3),o.fire("spiderfied")},_animationUnspiderfy:function(){this._noanimationUnspiderfy()}}),L.MarkerClusterGroup.include({_spiderfied:null,_spiderfierOnAdd:function(){this._map.on("click",this._unspiderfyWrapper,this),this._map.options.zoomAnimation&&this._map.on("zoomstart",this._unspiderfyZoomStart,this),this._map.on("zoomend",this._noanimationUnspiderfy,this),L.Path.SVG&&!L.Browser.touch&&this._map._initPathRoot()},_spiderfierOnRemove:function(){this._map.off("click",this._unspiderfyWrapper,this),this._map.off("zoomstart",this._unspiderfyZoomStart,this),this._map.off("zoomanim",this._unspiderfyZoomAnim,this),this._unspiderfy()},_unspiderfyZoomStart:function(){this._map&&this._map.on("zoomanim",this._unspiderfyZoomAnim,this)},_unspiderfyZoomAnim:function(t){L.DomUtil.hasClass(this._map._mapPane,"leaflet-touching")||(this._map.off("zoomanim",this._unspiderfyZoomAnim,this),this._unspiderfy(t))},_unspiderfyWrapper:function(){this._unspiderfy()},_unspiderfy:function(t){this._spiderfied&&this._spiderfied.unspiderfy(t)},_noanimationUnspiderfy:function(){this._spiderfied&&this._spiderfied._noanimationUnspiderfy()},_unspiderfyLayer:function(t){t._spiderLeg&&(this._featureGroup.removeLayer(t),t.setOpacity(1),t.setZIndexOffset(0),this._map.removeLayer(t._spiderLeg),delete t._spiderLeg)}})}(window,document);
-define("leaflet.markercluster", ["leaflet"], function(){});
+!function() {
+  var topojson = {
+    version: "1.4.9",
+    mesh: mesh,
+    feature: featureOrCollection,
+    neighbors: neighbors,
+    presimplify: presimplify
+  };
 
+  function merge(topology, arcs) {
+    var fragmentByStart = {},
+        fragmentByEnd = {};
+
+    arcs.forEach(function(i) {
+      var e = ends(i),
+          start = e[0],
+          end = e[1],
+          f, g;
+
+      if (f = fragmentByEnd[start]) {
+        delete fragmentByEnd[f.end];
+        f.push(i);
+        f.end = end;
+        if (g = fragmentByStart[end]) {
+          delete fragmentByStart[g.start];
+          var fg = g === f ? f : f.concat(g);
+          fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.end] = fg;
+        } else if (g = fragmentByEnd[end]) {
+          delete fragmentByStart[g.start];
+          delete fragmentByEnd[g.end];
+          var fg = f.concat(g.map(function(i) { return ~i; }).reverse());
+          fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.start] = fg;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else if (f = fragmentByStart[end]) {
+        delete fragmentByStart[f.start];
+        f.unshift(i);
+        f.start = start;
+        if (g = fragmentByEnd[start]) {
+          delete fragmentByEnd[g.end];
+          var gf = g === f ? f : g.concat(f);
+          fragmentByStart[gf.start = g.start] = fragmentByEnd[gf.end = f.end] = gf;
+        } else if (g = fragmentByStart[start]) {
+          delete fragmentByStart[g.start];
+          delete fragmentByEnd[g.end];
+          var gf = g.map(function(i) { return ~i; }).reverse().concat(f);
+          fragmentByStart[gf.start = g.end] = fragmentByEnd[gf.end = f.end] = gf;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else if (f = fragmentByStart[start]) {
+        delete fragmentByStart[f.start];
+        f.unshift(~i);
+        f.start = end;
+        if (g = fragmentByEnd[end]) {
+          delete fragmentByEnd[g.end];
+          var gf = g === f ? f : g.concat(f);
+          fragmentByStart[gf.start = g.start] = fragmentByEnd[gf.end = f.end] = gf;
+        } else if (g = fragmentByStart[end]) {
+          delete fragmentByStart[g.start];
+          delete fragmentByEnd[g.end];
+          var gf = g.map(function(i) { return ~i; }).reverse().concat(f);
+          fragmentByStart[gf.start = g.end] = fragmentByEnd[gf.end = f.end] = gf;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else if (f = fragmentByEnd[end]) {
+        delete fragmentByEnd[f.end];
+        f.push(~i);
+        f.end = start;
+        if (g = fragmentByEnd[start]) {
+          delete fragmentByStart[g.start];
+          var fg = g === f ? f : f.concat(g);
+          fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.end] = fg;
+        } else if (g = fragmentByStart[start]) {
+          delete fragmentByStart[g.start];
+          delete fragmentByEnd[g.end];
+          var fg = f.concat(g.map(function(i) { return ~i; }).reverse());
+          fragmentByStart[fg.start = f.start] = fragmentByEnd[fg.end = g.start] = fg;
+        } else {
+          fragmentByStart[f.start] = fragmentByEnd[f.end] = f;
+        }
+      } else {
+        f = [i];
+        fragmentByStart[f.start = start] = fragmentByEnd[f.end = end] = f;
+      }
+    });
+
+    function ends(i) {
+      var arc = topology.arcs[i], p0 = arc[0], p1 = [0, 0];
+      arc.forEach(function(dp) { p1[0] += dp[0], p1[1] += dp[1]; });
+      return [p0, p1];
+    }
+
+    var fragments = [];
+    for (var k in fragmentByEnd) fragments.push(fragmentByEnd[k]);
+    return fragments;
+  }
+
+  function mesh(topology, o, filter) {
+    var arcs = [];
+
+    if (arguments.length > 1) {
+      var geomsByArc = [],
+          geom;
+
+      function arc(i) {
+        if (i < 0) i = ~i;
+        (geomsByArc[i] || (geomsByArc[i] = [])).push(geom);
+      }
+
+      function line(arcs) {
+        arcs.forEach(arc);
+      }
+
+      function polygon(arcs) {
+        arcs.forEach(line);
+      }
+
+      function geometry(o) {
+        if (o.type === "GeometryCollection") o.geometries.forEach(geometry);
+        else if (o.type in geometryType) {
+          geom = o;
+          geometryType[o.type](o.arcs);
+        }
+      }
+
+      var geometryType = {
+        LineString: line,
+        MultiLineString: polygon,
+        Polygon: polygon,
+        MultiPolygon: function(arcs) { arcs.forEach(polygon); }
+      };
+
+      geometry(o);
+
+      geomsByArc.forEach(arguments.length < 3
+          ? function(geoms, i) { arcs.push(i); }
+          : function(geoms, i) { if (filter(geoms[0], geoms[geoms.length - 1])) arcs.push(i); });
+    } else {
+      for (var i = 0, n = topology.arcs.length; i < n; ++i) arcs.push(i);
+    }
+
+    return object(topology, {type: "MultiLineString", arcs: merge(topology, arcs)});
+  }
+
+  function featureOrCollection(topology, o) {
+    return o.type === "GeometryCollection" ? {
+      type: "FeatureCollection",
+      features: o.geometries.map(function(o) { return feature(topology, o); })
+    } : feature(topology, o);
+  }
+
+  function feature(topology, o) {
+    var f = {
+      type: "Feature",
+      id: o.id,
+      properties: o.properties || {},
+      geometry: object(topology, o)
+    };
+    if (o.id == null) delete f.id;
+    return f;
+  }
+
+  function object(topology, o) {
+    var absolute = transformAbsolute(topology.transform),
+        arcs = topology.arcs;
+
+    function arc(i, points) {
+      if (points.length) points.pop();
+      for (var a = arcs[i < 0 ? ~i : i], k = 0, n = a.length, p; k < n; ++k) {
+        points.push(p = a[k].slice());
+        absolute(p, k);
+      }
+      if (i < 0) reverse(points, n);
+    }
+
+    function point(p) {
+      p = p.slice();
+      absolute(p, 0);
+      return p;
+    }
+
+    function line(arcs) {
+      var points = [];
+      for (var i = 0, n = arcs.length; i < n; ++i) arc(arcs[i], points);
+      if (points.length < 2) points.push(points[0].slice());
+      return points;
+    }
+
+    function ring(arcs) {
+      var points = line(arcs);
+      while (points.length < 4) points.push(points[0].slice());
+      return points;
+    }
+
+    function polygon(arcs) {
+      return arcs.map(ring);
+    }
+
+    function geometry(o) {
+      var t = o.type;
+      return t === "GeometryCollection" ? {type: t, geometries: o.geometries.map(geometry)}
+          : t in geometryType ? {type: t, coordinates: geometryType[t](o)}
+          : null;
+    }
+
+    var geometryType = {
+      Point: function(o) { return point(o.coordinates); },
+      MultiPoint: function(o) { return o.coordinates.map(point); },
+      LineString: function(o) { return line(o.arcs); },
+      MultiLineString: function(o) { return o.arcs.map(line); },
+      Polygon: function(o) { return polygon(o.arcs); },
+      MultiPolygon: function(o) { return o.arcs.map(polygon); }
+    };
+
+    return geometry(o);
+  }
+
+  function reverse(array, n) {
+    var t, j = array.length, i = j - n; while (i < --j) t = array[i], array[i++] = array[j], array[j] = t;
+  }
+
+  function bisect(a, x) {
+    var lo = 0, hi = a.length;
+    while (lo < hi) {
+      var mid = lo + hi >>> 1;
+      if (a[mid] < x) lo = mid + 1;
+      else hi = mid;
+    }
+    return lo;
+  }
+
+  function neighbors(objects) {
+    var indexesByArc = {}, // arc index -> array of object indexes
+        neighbors = objects.map(function() { return []; });
+
+    function line(arcs, i) {
+      arcs.forEach(function(a) {
+        if (a < 0) a = ~a;
+        var o = indexesByArc[a];
+        if (o) o.push(i);
+        else indexesByArc[a] = [i];
+      });
+    }
+
+    function polygon(arcs, i) {
+      arcs.forEach(function(arc) { line(arc, i); });
+    }
+
+    function geometry(o, i) {
+      if (o.type === "GeometryCollection") o.geometries.forEach(function(o) { geometry(o, i); });
+      else if (o.type in geometryType) geometryType[o.type](o.arcs, i);
+    }
+
+    var geometryType = {
+      LineString: line,
+      MultiLineString: polygon,
+      Polygon: polygon,
+      MultiPolygon: function(arcs, i) { arcs.forEach(function(arc) { polygon(arc, i); }); }
+    };
+
+    objects.forEach(geometry);
+
+    for (var i in indexesByArc) {
+      for (var indexes = indexesByArc[i], m = indexes.length, j = 0; j < m; ++j) {
+        for (var k = j + 1; k < m; ++k) {
+          var ij = indexes[j], ik = indexes[k], n;
+          if ((n = neighbors[ij])[i = bisect(n, ik)] !== ik) n.splice(i, 0, ik);
+          if ((n = neighbors[ik])[i = bisect(n, ij)] !== ij) n.splice(i, 0, ij);
+        }
+      }
+    }
+
+    return neighbors;
+  }
+
+  function presimplify(topology, triangleArea) {
+    var absolute = transformAbsolute(topology.transform),
+        relative = transformRelative(topology.transform),
+        heap = minHeap(compareArea),
+        maxArea = 0,
+        triangle;
+
+    if (!triangleArea) triangleArea = cartesianArea;
+
+    topology.arcs.forEach(function(arc) {
+      var triangles = [];
+
+      arc.forEach(absolute);
+
+      for (var i = 1, n = arc.length - 1; i < n; ++i) {
+        triangle = arc.slice(i - 1, i + 2);
+        triangle[1][2] = triangleArea(triangle);
+        triangles.push(triangle);
+        heap.push(triangle);
+      }
+
+      // Always keep the arc endpoints!
+      arc[0][2] = arc[n][2] = Infinity;
+
+      for (var i = 0, n = triangles.length; i < n; ++i) {
+        triangle = triangles[i];
+        triangle.previous = triangles[i - 1];
+        triangle.next = triangles[i + 1];
+      }
+    });
+
+    while (triangle = heap.pop()) {
+      var previous = triangle.previous,
+          next = triangle.next;
+
+      // If the area of the current point is less than that of the previous point
+      // to be eliminated, use the latter's area instead. This ensures that the
+      // current point cannot be eliminated without eliminating previously-
+      // eliminated points.
+      if (triangle[1][2] < maxArea) triangle[1][2] = maxArea;
+      else maxArea = triangle[1][2];
+
+      if (previous) {
+        previous.next = next;
+        previous[2] = triangle[2];
+        update(previous);
+      }
+
+      if (next) {
+        next.previous = previous;
+        next[0] = triangle[0];
+        update(next);
+      }
+    }
+
+    topology.arcs.forEach(function(arc) {
+      arc.forEach(relative);
+    });
+
+    function update(triangle) {
+      heap.remove(triangle);
+      triangle[1][2] = triangleArea(triangle);
+      heap.push(triangle);
+    }
+
+    return topology;
+  };
+
+  function cartesianArea(triangle) {
+    return Math.abs(
+      (triangle[0][0] - triangle[2][0]) * (triangle[1][1] - triangle[0][1])
+      - (triangle[0][0] - triangle[1][0]) * (triangle[2][1] - triangle[0][1])
+    );
+  }
+
+  function compareArea(a, b) {
+    return a[1][2] - b[1][2];
+  }
+
+  function minHeap(compare) {
+    var heap = {},
+        array = [];
+
+    heap.push = function() {
+      for (var i = 0, n = arguments.length; i < n; ++i) {
+        var object = arguments[i];
+        up(object.index = array.push(object) - 1);
+      }
+      return array.length;
+    };
+
+    heap.pop = function() {
+      var removed = array[0],
+          object = array.pop();
+      if (array.length) {
+        array[object.index = 0] = object;
+        down(0);
+      }
+      return removed;
+    };
+
+    heap.remove = function(removed) {
+      var i = removed.index,
+          object = array.pop();
+      if (i !== array.length) {
+        array[object.index = i] = object;
+        (compare(object, removed) < 0 ? up : down)(i);
+      }
+      return i;
+    };
+
+    function up(i) {
+      var object = array[i];
+      while (i > 0) {
+        var up = ((i + 1) >> 1) - 1,
+            parent = array[up];
+        if (compare(object, parent) >= 0) break;
+        array[parent.index = i] = parent;
+        array[object.index = i = up] = object;
+      }
+    }
+
+    function down(i) {
+      var object = array[i];
+      while (true) {
+        var right = (i + 1) << 1,
+            left = right - 1,
+            down = i,
+            child = array[down];
+        if (left < array.length && compare(array[left], child) < 0) child = array[down = left];
+        if (right < array.length && compare(array[right], child) < 0) child = array[down = right];
+        if (down === i) break;
+        array[child.index = i] = child;
+        array[object.index = i = down] = object;
+      }
+    }
+
+    return heap;
+  }
+
+  function transformAbsolute(transform) {
+    if (!transform) return noop;
+    var x0,
+        y0,
+        kx = transform.scale[0],
+        ky = transform.scale[1],
+        dx = transform.translate[0],
+        dy = transform.translate[1];
+    return function(point, i) {
+      if (!i) x0 = y0 = 0;
+      point[0] = (x0 += point[0]) * kx + dx;
+      point[1] = (y0 += point[1]) * ky + dy;
+    };
+  }
+
+  function transformRelative(transform) {
+    if (!transform) return noop;
+    var x0,
+        y0,
+        kx = transform.scale[0],
+        ky = transform.scale[1],
+        dx = transform.translate[0],
+        dy = transform.translate[1];
+    return function(point, i) {
+      if (!i) x0 = y0 = 0;
+      var x1 = (point[0] - dx) / kx | 0,
+          y1 = (point[1] - dy) / ky | 0;
+      point[0] = x1 - x0;
+      point[1] = y1 - y0;
+      x0 = x1;
+      y0 = y1;
+    };
+  }
+
+  function noop() {}
+
+  if (typeof define === "function" && define.amd) define('topojson',topojson);
+  else if (typeof module === "object" && module.exports) module.exports = topojson;
+  else this.topojson = topojson;
+}();
+
+(function() {
+  var svg;
+
+  //save off default references
+  var d3 = window.d3, topojson = window.topojson;
+  
+  var defaultOptions = {
+    scope: 'world',
+    setProjection: setProjection,
+    projection: 'equirectangular',
+    dataType: 'json',
+    done: function() {},
+    fills: {
+      defaultFill: '#ABDDA4'
+    },
+    geographyConfig: {
+        dataUrl: null,
+        hideAntarctica: true,
+        borderWidth: 1,
+        borderColor: '#FDFDFD',
+        popupTemplate: function(geography, data) {
+          return '<div class="hoverinfo"><strong>' + geography.properties.name + '</strong></div>';
+        },
+        popupOnHover: true,
+        highlightOnHover: true,
+        highlightFillColor: '#FC8D59',
+        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+        highlightBorderWidth: 2
+    },
+    bubblesConfig: {
+        borderWidth: 2,
+        borderColor: '#FFFFFF',
+        popupOnHover: true,
+        popupTemplate: function(geography, data) {
+          return '<div class="hoverinfo"><strong>' + data.name + '</strong></div>';
+        },
+        fillOpacity: 0.75,
+        animate: true,
+        highlightOnHover: true,
+        highlightFillColor: '#FC8D59',
+        highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+        highlightBorderWidth: 2,
+        highlightFillOpacity: 0.85,
+        exitDelay: 100
+    },
+    arcConfig: {
+      strokeColor: '#DD1C77',
+      strokeWidth: 1,
+      arcSharpness: 1,
+      animationSpeed: 600
+    }
+  };
+
+  function addContainer( element, height, width ) {
+    this.svg = d3.select( element ).append('svg')
+      .attr('width', width || element.offsetWidth)
+      .attr('class', 'datamap')
+      .attr('height', height || element.offsetHeight);
+
+    return this.svg;
+  }
+
+  // setProjection takes the svg element and options
+  function setProjection( element, options ) {
+    var width = options.width || element.offsetWidth;
+    var height = options.height || element.offsetHeight;
+    var projection, path;
+    if ( options && typeof options.scope === 'undefined') {
+      options.scope = 'world';
+    }
+
+    if ( options.scope === 'usa' ) {
+      projection = d3.geo.albersUsa()
+        .scale(width)
+        .translate([width / 2, height / 2]);
+    }
+    else if ( options.scope === 'world' ) {
+      projection = d3.geo[options.projection]()
+        .scale((width + 1) / 2 / Math.PI)
+        .translate([width / 2, height / (options.projection === "mercator" ? 1.45 : 1.8)]);
+    }
+
+    path = d3.geo.path()
+      .projection( projection );
+
+    return {path: path, projection: projection};
+  }
+
+  function addStyleBlock() {
+    if ( d3.select('.datamaps-style-block').empty() ) {
+      d3.select('head').append('style').attr('class', 'datamaps-style-block')
+      .html('.datamap path {stroke: #FFFFFF; stroke-width: 1px;} .datamaps-legend dt, .datamaps-legend dd { float: left; margin: 0 3px 0 0;} .datamaps-legend dd {width: 20px; margin-right: 6px; border-radius: 3px;} .datamaps-legend {padding-bottom: 20px; z-index: 1001; position: absolute; left: 4px; font-size: 12px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;} .datamaps-hoverover {display: none; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; } .hoverinfo {padding: 4px; border-radius: 1px; background-color: #FFF; box-shadow: 1px 1px 5px #CCC; font-size: 12px; border: 1px solid #CCC; } .hoverinfo hr {border:1px dotted #CCC; }');
+    }
+  }
+
+  function drawSubunits( data ) {
+    var fillData = this.options.fills,
+        colorCodeData = this.options.data || {},
+        geoConfig = this.options.geographyConfig;
+
+
+    var subunits = this.svg.select('g.datamaps-subunits');
+    if ( subunits.empty() ) {
+      subunits = this.addLayer('datamaps-subunits', null, true);
+    }
+
+    var geoData = topojson.feature( data, data.objects[ this.options.scope ] ).features;
+    if ( geoConfig.hideAntarctica ) {
+      geoData = geoData.filter(function(feature) {
+        return feature.id !== "ATA";
+      });
+    }
+
+    var geo = subunits.selectAll('path.datamaps-subunit').data( geoData );
+
+    geo.enter()
+      .append('path')
+      .attr('d', this.path)
+      .attr('class', function(d) {
+        return 'datamaps-subunit ' + d.id;
+      })
+      .attr('data-info', function(d) {
+        return JSON.stringify( colorCodeData[d.id]);
+      })
+      .style('fill', function(d) {
+        var fillColor;
+
+        if ( colorCodeData[d.id] ) {
+          fillColor = fillData[ colorCodeData[d.id].fillKey ];
+        }
+
+        return fillColor || fillData.defaultFill;
+      })
+      .style('stroke-width', geoConfig.borderWidth)
+      .style('stroke', geoConfig.borderColor);
+  }
+
+  function handleGeographyConfig () {
+    var hoverover;
+    var svg = this.svg;
+    var self = this;
+    var options = this.options.geographyConfig;
+
+    if ( options.highlightOnHover || options.popupOnHover ) {
+      svg.selectAll('.datamaps-subunit')
+        .on('mouseover', function(d) {
+          var $this = d3.select(this);
+
+          if ( options.highlightOnHover ) {
+            var previousAttributes = {
+              'fill':  $this.style('fill'),
+              'stroke': $this.style('stroke'),
+              'stroke-width': $this.style('stroke-width'),
+              'fill-opacity': $this.style('fill-opacity')
+            };
+
+            $this
+              .style('fill', options.highlightFillColor)
+              .style('stroke', options.highlightBorderColor)
+              .style('stroke-width', options.highlightBorderWidth)
+              .style('fill-opacity', options.highlightFillOpacity)
+              .attr('data-previousAttributes', JSON.stringify(previousAttributes));
+
+            //as per discussion on https://github.com/markmarkoh/datamaps/issues/19
+            if ( ! /((MSIE)|(Trident))/.test ) {
+             moveToFront.call(this);
+            }
+          }
+
+          if ( options.popupOnHover ) {
+            self.updatePopup($this, d, options, svg);
+          }
+        })
+        .on('mouseout', function() {
+          var $this = d3.select(this);
+
+          if (options.highlightOnHover) {
+            //reapply previous attributes
+            var previousAttributes = JSON.parse( $this.attr('data-previousAttributes') );
+            for ( var attr in previousAttributes ) {
+              $this.style(attr, previousAttributes[attr]);
+            }
+          }
+          $this.on('mousemove', null);
+          d3.selectAll('.datamaps-hoverover').style('display', 'none');
+        });
+    }
+    
+    function moveToFront() {
+      this.parentNode.appendChild(this);
+    }
+  }
+
+  //plugin to add a simple map legend
+  function addLegend(layer, data, options) {
+    data = data || {};
+    if ( !this.options.fills ) {
+      return;
+    }
+
+    var html = '<dl>';
+    var label = '';
+    if ( data.legendTitle ) {
+      html = '<h2>' + data.legendTitle + '</h2>' + html;
+    }
+    for ( var fillKey in this.options.fills ) {
+
+      if ( fillKey === 'defaultFill') {
+        if (! data.defaultFillName ) {
+          continue;
+        }
+        label = data.defaultFillName;
+      } else {
+        if (data.labels && data.labels[fillKey]) {
+          label = data.labels[fillKey];
+        } else {
+          label= fillKey + ': ';
+        }
+      }
+      html += '<dt>' + label + '</dt>';
+      html += '<dd style="background-color:' +  this.options.fills[fillKey] + '">&nbsp;</dd>';
+    }
+    html += '</dl>';
+
+    var hoverover = d3.select( this.options.element ).append('div')
+      .attr('class', 'datamaps-legend')
+      .html(html);
+  }
+
+  function handleArcs (layer, data, options) {
+    var self = this,
+        svg = this.svg;
+
+    if ( !data || (data && !data.slice) ) {
+      throw "Datamaps Error - arcs must be an array";
+    }
+
+    if ( typeof options === "undefined" ) {
+      options = defaultOptions.arcConfig;
+    }
+
+    var arcs = layer.selectAll('path.datamaps-arc').data( data, JSON.stringify );
+
+    arcs
+      .enter()
+        .append('svg:path')
+        .attr('class', 'datamaps-arc')
+        .style('stroke-linecap', 'round')
+        .style('stroke', function(datum) {
+          if ( datum.options && datum.options.strokeColor) {
+            return datum.options.strokeColor;
+          }
+          return  options.strokeColor
+        })
+        .style('fill', 'none')
+        .style('stroke-width', function(datum) {
+          if ( datum.options && datum.options.strokeWidth) {
+            return datum.options.strokeWidth;
+          }
+          return options.strokeWidth;
+        })
+        .attr('d', function(datum) {
+            var originXY = self.latLngToXY(datum.origin.latitude, datum.origin.longitude);
+            var destXY = self.latLngToXY(datum.destination.latitude, datum.destination.longitude);
+            var midXY = [ (originXY[0] + destXY[0]) / 2, (originXY[1] + destXY[1]) / 2];
+            return "M" + originXY[0] + ',' + originXY[1] + "S" + (midXY[0] + (50 * options.arcSharpness)) + "," + (midXY[1] - (75 * options.arcSharpness)) + "," + destXY[0] + "," + destXY[1];
+        })
+        .transition()
+          .delay(100)
+          .style('fill', function() {
+            /*
+              Thank you Jake Archibald, this is awesome.
+              Source: http://jakearchibald.com/2013/animated-line-drawing-svg/
+            */
+            var length = this.getTotalLength();
+            this.style.transition = this.style.WebkitTransition = 'none';
+            this.style.strokeDasharray = length + ' ' + length;
+            this.style.strokeDashoffset = length;
+            this.getBoundingClientRect();
+            this.style.transition = this.style.WebkitTransition = 'stroke-dashoffset ' + options.animationSpeed + 'ms ease-out';
+            this.style.strokeDashoffset = '0';
+            return 'none';
+          })
+
+    arcs.exit()
+      .transition()
+      .style('opacity', 0)
+      .remove();
+  }
+
+  function handleLabels ( layer, options ) {
+    var self = this;
+    options = options || {};
+    var labelStartCoodinates = this.projection([-67.707617, 42.722131]);
+    this.svg.selectAll(".datamaps-subunit")
+      .attr("data-foo", function(d) {
+        var center = self.path.centroid(d);
+        var xOffset = 7.5, yOffset = 5;
+
+        if ( ["FL", "KY", "MI"].indexOf(d.id) > -1 ) xOffset = -2.5;
+        if ( d.id === "NY" ) xOffset = -1;
+        if ( d.id === "MI" ) yOffset = 18;
+        if ( d.id === "LA" ) xOffset = 13;
+
+        var x,y;
+
+        x = center[0] - xOffset;
+        y = center[1] + yOffset;
+
+        var smallStateIndex = ["VT", "NH", "MA", "RI", "CT", "NJ", "DE", "MD", "DC"].indexOf(d.id);
+        if ( smallStateIndex > -1) {
+          var yStart = labelStartCoodinates[1];
+          x = labelStartCoodinates[0];
+          y = yStart + (smallStateIndex * (2+ (options.fontSize || 12)));
+          layer.append("line")
+            .attr("x1", x - 3)
+            .attr("y1", y - 5)
+            .attr("x2", center[0])
+            .attr("y2", center[1])
+            .style("stroke", options.labelColor || "#000")
+            .style("stroke-width", options.lineWidth || 1)
+        }
+
+        layer.append("text")
+          .attr("x", x)
+          .attr("y", y)
+          .style("font-size", (options.fontSize || 10) + 'px')
+          .style("font-family", options.fontFamily || "Verdana")
+          .style("fill", options.labelColor || "#000")
+          .text( d.id );
+        return "bar";
+      });
+  }
+
+
+  function handleBubbles (layer, data, options ) {
+    var self = this,
+        fillData = this.options.fills,
+        svg = this.svg;
+
+    if ( !data || (data && !data.slice) ) {
+      throw "Datamaps Error - bubbles must be an array";
+    }
+
+    var bubbles = layer.selectAll('circle.datamaps-bubble').data( data, JSON.stringify );
+
+    bubbles
+      .enter()
+        .append('svg:circle')
+        .attr('class', 'datamaps-bubble')
+        .attr('cx', function ( datum ) {
+          var latLng;
+          if ( datumHasCoords(datum) ) {
+            latLng = self.latLngToXY(datum.latitude, datum.longitude);
+          }
+          else if ( datum.centered ) {
+            latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+          }
+          if ( latLng ) return latLng[0];
+        })
+        .attr('cy', function ( datum ) {
+          var latLng;
+          if ( datumHasCoords(datum) ) {
+            latLng = self.latLngToXY(datum.latitude, datum.longitude);
+          }
+          else if ( datum.centered ) {
+            latLng = self.path.centroid(svg.select('path.' + datum.centered).data()[0]);
+          }
+          if ( latLng ) return latLng[1];;
+        })
+        .attr('r', 0) //for animation purposes
+        .attr('data-info', function(d) {
+          return JSON.stringify(d);
+        })
+        .style('stroke', function ( datum ) {
+          return typeof datum.borderColor !== 'undefined' ? datum.borderColor : options.borderColor;
+        })
+        .style('stroke-width', function ( datum ) {
+          return typeof datum.borderWidth !== 'undefined' ? datum.borderWidth : options.borderWidth;
+        })
+        .style('fill-opacity', function ( datum ) {
+          return typeof datum.fillOpacity !== 'undefined' ? datum.fillOpacity : options.fillOpacity;
+        })
+        .style('fill', function ( datum ) {
+          var fillColor = fillData[ datum.fillKey ];
+          return fillColor || fillData.defaultFill;
+        })
+        .on('mouseover', function ( datum ) {
+          var $this = d3.select(this);
+
+          if (options.highlightOnHover) {
+            //save all previous attributes for mouseout
+            var previousAttributes = {
+              'fill':  $this.style('fill'),
+              'stroke': $this.style('stroke'),
+              'stroke-width': $this.style('stroke-width'),
+              'fill-opacity': $this.style('fill-opacity')
+            };
+
+            $this
+              .style('fill', options.highlightFillColor)
+              .style('stroke', options.highlightBorderColor)
+              .style('stroke-width', options.highlightBorderWidth)
+              .style('fill-opacity', options.highlightFillOpacity)
+              .attr('data-previousAttributes', JSON.stringify(previousAttributes));
+          }
+
+          if (options.popupOnHover) {
+            self.updatePopup($this, datum, options, svg);
+          }
+        })
+        .on('mouseout', function ( datum ) {
+          var $this = d3.select(this);
+
+          if (options.highlightOnHover) {
+            //reapply previous attributes
+            var previousAttributes = JSON.parse( $this.attr('data-previousAttributes') );
+            for ( var attr in previousAttributes ) {
+              $this.style(attr, previousAttributes[attr]);
+            }
+          }
+
+          d3.selectAll('.datamaps-hoverover').style('display', 'none');
+        })
+        .transition().duration(400)
+          .attr('r', function ( datum ) {
+            return datum.radius;
+          });
+
+    bubbles.exit()
+      .transition()
+        .delay(options.exitDelay)
+        .attr("r", 0)
+        .remove();
+
+    function datumHasCoords (datum) {
+      return typeof datum !== 'undefined' && typeof datum.latitude !== 'undefined' && typeof datum.longitude !== 'undefined';
+    }
+
+  }
+
+  //stolen from underscore.js
+  function defaults(obj) {
+    Array.prototype.slice.call(arguments, 1).forEach(function(source) {
+      if (source) {
+        for (var prop in source) {
+          if (obj[prop] == null) obj[prop] = source[prop];
+        }
+      }
+    });
+    return obj;
+  }
+  /**************************************
+             Public Functions
+  ***************************************/
+
+  function Datamap( options ) {
+
+    if ( typeof d3 === 'undefined' || typeof topojson === 'undefined' ) {
+      throw new Error('Include d3.js (v3.0.3 or greater) and topojson on this page before creating a new map');
+   }
+
+    //set options for global use
+    this.options = defaults(options, defaultOptions);
+    this.options.geographyConfig = defaults(options.geographyConfig, defaultOptions.geographyConfig);
+    this.options.bubblesConfig = defaults(options.bubblesConfig, defaultOptions.bubblesConfig);
+    this.options.arcConfig = defaults(options.arcConfig, defaultOptions.arcConfig);
+
+    //add the SVG container
+    if ( d3.select( this.options.element ).select('svg').length > 0 ) {
+      addContainer.call(this, this.options.element, this.options.height, this.options.width );
+    }
+
+    /* Add core plugins to this instance */
+    this.addPlugin('bubbles', handleBubbles);
+    this.addPlugin('legend', addLegend);
+    this.addPlugin('arc', handleArcs);
+    this.addPlugin('labels', handleLabels);
+
+    //append style block with basic hoverover styles
+    if ( ! this.options.disableDefaultStyles ) {
+      addStyleBlock();
+    }
+
+    return this.draw();
+  }
+
+  // actually draw the features(states & countries)
+  Datamap.prototype.draw = function() {
+    //save off in a closure
+    var self = this;
+    var options = self.options;
+
+    //set projections and paths based on scope
+    var pathAndProjection = options.setProjection.apply(self, [options.element, options] );
+
+    this.path = pathAndProjection.path;
+    this.projection = pathAndProjection.projection;
+
+    //if custom URL for topojson data, retrieve it and render
+    if ( options.geographyConfig.dataUrl ) {
+      d3.json( options.geographyConfig.dataUrl, function(error, results) {
+        if ( error ) throw new Error(error);
+        self.customTopo = results;
+        draw( results );
+      });
+    }
+    else {
+      draw( this[options.scope + 'Topo'] );
+    }
+
+    return this;
+
+      function draw (data) {
+        // if fetching remote data, draw the map first then call `updateChoropleth`
+        if ( self.options.dataUrl ) {
+          //allow for csv or json data types
+          d3[self.options.dataType](self.options.dataUrl, function(data) {
+            //in the case of csv, transform data to object
+            if ( self.options.dataType === 'csv' && (data && data.slice) ) {
+              var tmpData = {};
+              for(var i = 0; i < data.length; i++) {
+                tmpData[data[i].id] = data[i];
+              } 
+              data = tmpData;
+            }
+            Datamaps.prototype.updateChoropleth.call(self, data);
+          });
+        }
+        drawSubunits.call(self, data);
+        handleGeographyConfig.call(self);
+
+        if ( self.options.geographyConfig.popupOnHover || self.options.bubblesConfig.popupOnHover) {
+          hoverover = d3.select( self.options.element ).append('div')
+            .attr('class', 'datamaps-hoverover')
+            .style('z-index', 10001)
+            .style('position', 'absolute');
+        }
+
+        //fire off finished callback
+        self.options.done(self);
+      }
+  };
+  /**************************************
+                TopoJSON
+  ***************************************/
+  Datamap.prototype.worldTopo = {
+    "type": "Topology",
+    "objects": {
+        "world": {
+            "type": "GeometryCollection",
+            "geometries": [{
+                "type": "Polygon",
+                "properties": {
+                    "name": "Afghanistan"
+                },
+                "id": "AFG",
+                "arcs": [
+                    [0, 1, 2, 3, 4, 5]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Angola"
+                },
+                "id": "AGO",
+                "arcs": [
+                    [
+                        [6, 7, 8, 9]
+                    ],
+                    [
+                        [10, 11, 12]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Albania"
+                },
+                "id": "ALB",
+                "arcs": [
+                    [13, 14, 15, 16, 17]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "United Arab Emirates"
+                },
+                "id": "ARE",
+                "arcs": [
+                    [18, 19, 20, 21, 22]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Argentina"
+                },
+                "id": "ARG",
+                "arcs": [
+                    [
+                        [23, 24]
+                    ],
+                    [
+                        [25, 26, 27, 28, 29, 30]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Armenia"
+                },
+                "id": "ARM",
+                "arcs": [
+                    [31, 32, 33, 34, 35]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Antarctica"
+                },
+                "id": "ATA",
+                "arcs": [
+                    [
+                        [36]
+                    ],
+                    [
+                        [37]
+                    ],
+                    [
+                        [38]
+                    ],
+                    [
+                        [39]
+                    ],
+                    [
+                        [40]
+                    ],
+                    [
+                        [41]
+                    ],
+                    [
+                        [42]
+                    ],
+                    [
+                        [43]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "French Southern and Antarctic Lands"
+                },
+                "id": "ATF",
+                "arcs": [
+                    [44]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Australia"
+                },
+                "id": "AUS",
+                "arcs": [
+                    [
+                        [45]
+                    ],
+                    [
+                        [46]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Austria"
+                },
+                "id": "AUT",
+                "arcs": [
+                    [47, 48, 49, 50, 51, 52, 53]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Azerbaijan"
+                },
+                "id": "AZE",
+                "arcs": [
+                    [
+                        [54, -35]
+                    ],
+                    [
+                        [55, 56, -33, 57, 58]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Burundi"
+                },
+                "id": "BDI",
+                "arcs": [
+                    [59, 60, 61]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Belgium"
+                },
+                "id": "BEL",
+                "arcs": [
+                    [62, 63, 64, 65, 66]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Benin"
+                },
+                "id": "BEN",
+                "arcs": [
+                    [67, 68, 69, 70, 71]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Burkina Faso"
+                },
+                "id": "BFA",
+                "arcs": [
+                    [72, 73, 74, -70, 75, 76]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Bangladesh"
+                },
+                "id": "BGD",
+                "arcs": [
+                    [77, 78, 79]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Bulgaria"
+                },
+                "id": "BGR",
+                "arcs": [
+                    [80, 81, 82, 83, 84, 85]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "The Bahamas"
+                },
+                "id": "BHS",
+                "arcs": [
+                    [
+                        [86]
+                    ],
+                    [
+                        [87]
+                    ],
+                    [
+                        [88]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Bosnia and Herzegovina"
+                },
+                "id": "BIH",
+                "arcs": [
+                    [89, 90, 91]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Belarus"
+                },
+                "id": "BLR",
+                "arcs": [
+                    [92, 93, 94, 95, 96]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Belize"
+                },
+                "id": "BLZ",
+                "arcs": [
+                    [97, 98, 99]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Bolivia"
+                },
+                "id": "BOL",
+                "arcs": [
+                    [100, 101, 102, 103, -31]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Brazil"
+                },
+                "id": "BRA",
+                "arcs": [
+                    [-27, 104, -103, 105, 106, 107, 108, 109, 110, 111, 112]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Brunei"
+                },
+                "id": "BRN",
+                "arcs": [
+                    [113, 114]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Bhutan"
+                },
+                "id": "BTN",
+                "arcs": [
+                    [115, 116]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Botswana"
+                },
+                "id": "BWA",
+                "arcs": [
+                    [117, 118, 119, 120]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Central African Republic"
+                },
+                "id": "CAF",
+                "arcs": [
+                    [121, 122, 123, 124, 125, 126, 127]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Canada"
+                },
+                "id": "CAN",
+                "arcs": [
+                    [
+                        [128]
+                    ],
+                    [
+                        [129]
+                    ],
+                    [
+                        [130]
+                    ],
+                    [
+                        [131]
+                    ],
+                    [
+                        [132]
+                    ],
+                    [
+                        [133]
+                    ],
+                    [
+                        [134]
+                    ],
+                    [
+                        [135]
+                    ],
+                    [
+                        [136]
+                    ],
+                    [
+                        [137]
+                    ],
+                    [
+                        [138, 139, 140, 141]
+                    ],
+                    [
+                        [142]
+                    ],
+                    [
+                        [143]
+                    ],
+                    [
+                        [144]
+                    ],
+                    [
+                        [145]
+                    ],
+                    [
+                        [146]
+                    ],
+                    [
+                        [147]
+                    ],
+                    [
+                        [148]
+                    ],
+                    [
+                        [149]
+                    ],
+                    [
+                        [150]
+                    ],
+                    [
+                        [151]
+                    ],
+                    [
+                        [152]
+                    ],
+                    [
+                        [153]
+                    ],
+                    [
+                        [154]
+                    ],
+                    [
+                        [155]
+                    ],
+                    [
+                        [156]
+                    ],
+                    [
+                        [157]
+                    ],
+                    [
+                        [158]
+                    ],
+                    [
+                        [159]
+                    ],
+                    [
+                        [160]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Switzerland"
+                },
+                "id": "CHE",
+                "arcs": [
+                    [-51, 161, 162, 163]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Chile"
+                },
+                "id": "CHL",
+                "arcs": [
+                    [
+                        [-24, 164]
+                    ],
+                    [
+                        [-30, 165, 166, -101]
+                    ]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "China"
+                },
+                "id": "CHN",
+                "arcs": [
+                    [
+                        [167]
+                    ],
+                    [
+                        [168, 169, 170, 171, 172, 173, -117, 174, 175, 176, 177, -4, 178, 179, 180, 181, 182, 183]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ivory Coast"
+                },
+                "id": "CIV",
+                "arcs": [
+                    [184, 185, 186, 187, -73, 188]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Cameroon"
+                },
+                "id": "CMR",
+                "arcs": [
+                    [189, 190, 191, 192, 193, 194, -128, 195]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Democratic Republic of the Congo"
+                },
+                "id": "COD",
+                "arcs": [
+                    [196, 197, -60, 198, 199, -10, 200, -13, 201, -126, 202]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Republic of the Congo"
+                },
+                "id": "COG",
+                "arcs": [
+                    [-12, 203, 204, -196, -127, -202]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Colombia"
+                },
+                "id": "COL",
+                "arcs": [
+                    [205, 206, 207, 208, 209, -107, 210]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Costa Rica"
+                },
+                "id": "CRI",
+                "arcs": [
+                    [211, 212, 213, 214]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Cuba"
+                },
+                "id": "CUB",
+                "arcs": [
+                    [215]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Northern Cyprus"
+                },
+                "id": "-99",
+                "arcs": [
+                    [216, 217]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Cyprus"
+                },
+                "id": "CYP",
+                "arcs": [
+                    [218, -218]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Czech Republic"
+                },
+                "id": "CZE",
+                "arcs": [
+                    [-53, 219, 220, 221]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Germany"
+                },
+                "id": "DEU",
+                "arcs": [
+                    [222, 223, -220, -52, -164, 224, 225, -64, 226, 227, 228]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Djibouti"
+                },
+                "id": "DJI",
+                "arcs": [
+                    [229, 230, 231, 232]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Denmark"
+                },
+                "id": "DNK",
+                "arcs": [
+                    [
+                        [233]
+                    ],
+                    [
+                        [-229, 234]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Dominican Republic"
+                },
+                "id": "DOM",
+                "arcs": [
+                    [235, 236]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Algeria"
+                },
+                "id": "DZA",
+                "arcs": [
+                    [237, 238, 239, 240, 241, 242, 243, 244]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ecuador"
+                },
+                "id": "ECU",
+                "arcs": [
+                    [245, -206, 246]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Egypt"
+                },
+                "id": "EGY",
+                "arcs": [
+                    [247, 248, 249, 250, 251]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Eritrea"
+                },
+                "id": "ERI",
+                "arcs": [
+                    [252, 253, 254, -233]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Spain"
+                },
+                "id": "ESP",
+                "arcs": [
+                    [255, 256, 257, 258]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Estonia"
+                },
+                "id": "EST",
+                "arcs": [
+                    [259, 260, 261]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ethiopia"
+                },
+                "id": "ETH",
+                "arcs": [
+                    [-232, 262, 263, 264, 265, 266, 267, -253]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Finland"
+                },
+                "id": "FIN",
+                "arcs": [
+                    [268, 269, 270, 271]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Fiji"
+                },
+                "id": "FJI",
+                "arcs": [
+                    [
+                        [272]
+                    ],
+                    [
+                        [273, 274]
+                    ],
+                    [
+                        [275, -275]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Falkland Islands"
+                },
+                "id": "FLK",
+                "arcs": [
+                    [276]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "France"
+                },
+                "id": "FRA",
+                "arcs": [
+                    [
+                        [277]
+                    ],
+                    [
+                        [278, -225, -163, 279, 280, -257, 281, -66]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "French Guiana"
+                },
+                "id": "GUF",
+                "arcs": [
+                    [282, 283, 284, 285, -111]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Gabon"
+                },
+                "id": "GAB",
+                "arcs": [
+                    [286, 287, -190, -205]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "United Kingdom"
+                },
+                "id": "GBR",
+                "arcs": [
+                    [
+                        [288, 289]
+                    ],
+                    [
+                        [290]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Georgia"
+                },
+                "id": "GEO",
+                "arcs": [
+                    [291, 292, -58, -32, 293]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ghana"
+                },
+                "id": "GHA",
+                "arcs": [
+                    [294, -189, -77, 295]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Guinea"
+                },
+                "id": "GIN",
+                "arcs": [
+                    [296, 297, 298, 299, 300, 301, -187]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Gambia"
+                },
+                "id": "GMB",
+                "arcs": [
+                    [302, 303]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Guinea Bissau"
+                },
+                "id": "GNB",
+                "arcs": [
+                    [304, 305, -300]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Equatorial Guinea"
+                },
+                "id": "GNQ",
+                "arcs": [
+                    [306, -191, -288]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Greece"
+                },
+                "id": "GRC",
+                "arcs": [
+                    [
+                        [307]
+                    ],
+                    [
+                        [308, -15, 309, -84, 310]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Greenland"
+                },
+                "id": "GRL",
+                "arcs": [
+                    [311]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Guatemala"
+                },
+                "id": "GTM",
+                "arcs": [
+                    [312, 313, -100, 314, 315, 316]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Guyana"
+                },
+                "id": "GUY",
+                "arcs": [
+                    [317, 318, -109, 319]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Honduras"
+                },
+                "id": "HND",
+                "arcs": [
+                    [320, 321, -316, 322, 323]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Croatia"
+                },
+                "id": "HRV",
+                "arcs": [
+                    [324, -92, 325, 326, 327, 328]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Haiti"
+                },
+                "id": "HTI",
+                "arcs": [
+                    [-237, 329]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Hungary"
+                },
+                "id": "HUN",
+                "arcs": [
+                    [-48, 330, 331, 332, 333, -329, 334]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Indonesia"
+                },
+                "id": "IDN",
+                "arcs": [
+                    [
+                        [335]
+                    ],
+                    [
+                        [336, 337]
+                    ],
+                    [
+                        [338]
+                    ],
+                    [
+                        [339]
+                    ],
+                    [
+                        [340]
+                    ],
+                    [
+                        [341]
+                    ],
+                    [
+                        [342]
+                    ],
+                    [
+                        [343]
+                    ],
+                    [
+                        [344, 345]
+                    ],
+                    [
+                        [346]
+                    ],
+                    [
+                        [347]
+                    ],
+                    [
+                        [348, 349]
+                    ],
+                    [
+                        [350]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "India"
+                },
+                "id": "IND",
+                "arcs": [
+                    [-177, 351, -175, -116, -174, 352, -80, 353, 354]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ireland"
+                },
+                "id": "IRL",
+                "arcs": [
+                    [355, -289]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Iran"
+                },
+                "id": "IRN",
+                "arcs": [
+                    [356, -6, 357, 358, 359, 360, -55, -34, -57, 361]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Iraq"
+                },
+                "id": "IRQ",
+                "arcs": [
+                    [362, 363, 364, 365, 366, 367, -360]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Iceland"
+                },
+                "id": "ISL",
+                "arcs": [
+                    [368]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Israel"
+                },
+                "id": "ISR",
+                "arcs": [
+                    [369, 370, 371, -252, 372, 373, 374]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Italy"
+                },
+                "id": "ITA",
+                "arcs": [
+                    [
+                        [375]
+                    ],
+                    [
+                        [376]
+                    ],
+                    [
+                        [377, 378, -280, -162, -50]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Jamaica"
+                },
+                "id": "JAM",
+                "arcs": [
+                    [379]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Jordan"
+                },
+                "id": "JOR",
+                "arcs": [
+                    [-370, 380, -366, 381, 382, -372, 383]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Japan"
+                },
+                "id": "JPN",
+                "arcs": [
+                    [
+                        [384]
+                    ],
+                    [
+                        [385]
+                    ],
+                    [
+                        [386]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Kazakhstan"
+                },
+                "id": "KAZ",
+                "arcs": [
+                    [387, 388, 389, 390, -181, 391]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Kenya"
+                },
+                "id": "KEN",
+                "arcs": [
+                    [392, 393, 394, 395, -265, 396]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Kyrgyzstan"
+                },
+                "id": "KGZ",
+                "arcs": [
+                    [-392, -180, 397, 398]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Cambodia"
+                },
+                "id": "KHM",
+                "arcs": [
+                    [399, 400, 401, 402]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "South Korea"
+                },
+                "id": "KOR",
+                "arcs": [
+                    [403, 404]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Kosovo"
+                },
+                "id": "-99",
+                "arcs": [
+                    [-18, 405, 406, 407]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Kuwait"
+                },
+                "id": "KWT",
+                "arcs": [
+                    [408, 409, -364]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Laos"
+                },
+                "id": "LAO",
+                "arcs": [
+                    [410, 411, -172, 412, -401]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Lebanon"
+                },
+                "id": "LBN",
+                "arcs": [
+                    [-374, 413, 414]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Liberia"
+                },
+                "id": "LBR",
+                "arcs": [
+                    [415, 416, -297, -186]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Libya"
+                },
+                "id": "LBY",
+                "arcs": [
+                    [417, -245, 418, 419, -250, 420, 421]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Sri Lanka"
+                },
+                "id": "LKA",
+                "arcs": [
+                    [422]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Lesotho"
+                },
+                "id": "LSO",
+                "arcs": [
+                    [423]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Lithuania"
+                },
+                "id": "LTU",
+                "arcs": [
+                    [424, 425, 426, -93, 427]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Luxembourg"
+                },
+                "id": "LUX",
+                "arcs": [
+                    [-226, -279, -65]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Latvia"
+                },
+                "id": "LVA",
+                "arcs": [
+                    [428, -262, 429, -94, -427]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Morocco"
+                },
+                "id": "MAR",
+                "arcs": [
+                    [-242, 430, 431]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Moldova"
+                },
+                "id": "MDA",
+                "arcs": [
+                    [432, 433]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Madagascar"
+                },
+                "id": "MDG",
+                "arcs": [
+                    [434]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Mexico"
+                },
+                "id": "MEX",
+                "arcs": [
+                    [435, -98, -314, 436, 437]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Macedonia"
+                },
+                "id": "MKD",
+                "arcs": [
+                    [-408, 438, -85, -310, -14]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Mali"
+                },
+                "id": "MLI",
+                "arcs": [
+                    [439, -239, 440, -74, -188, -302, 441]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Myanmar"
+                },
+                "id": "MMR",
+                "arcs": [
+                    [442, -78, -353, -173, -412, 443]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Montenegro"
+                },
+                "id": "MNE",
+                "arcs": [
+                    [444, -326, -91, 445, -406, -17]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Mongolia"
+                },
+                "id": "MNG",
+                "arcs": [
+                    [446, -183]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Mozambique"
+                },
+                "id": "MOZ",
+                "arcs": [
+                    [447, 448, 449, 450, 451, 452, 453, 454]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Mauritania"
+                },
+                "id": "MRT",
+                "arcs": [
+                    [455, 456, 457, -240, -440]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Malawi"
+                },
+                "id": "MWI",
+                "arcs": [
+                    [-455, 458, 459]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Malaysia"
+                },
+                "id": "MYS",
+                "arcs": [
+                    [
+                        [460, 461]
+                    ],
+                    [
+                        [-349, 462, -115, 463]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Namibia"
+                },
+                "id": "NAM",
+                "arcs": [
+                    [464, -8, 465, -119, 466]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "New Caledonia"
+                },
+                "id": "NCL",
+                "arcs": [
+                    [467]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Niger"
+                },
+                "id": "NER",
+                "arcs": [
+                    [-75, -441, -238, -418, 468, -194, 469, -71]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Nigeria"
+                },
+                "id": "NGA",
+                "arcs": [
+                    [470, -72, -470, -193]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Nicaragua"
+                },
+                "id": "NIC",
+                "arcs": [
+                    [471, -324, 472, -213]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Netherlands"
+                },
+                "id": "NLD",
+                "arcs": [
+                    [-227, -63, 473]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Norway"
+                },
+                "id": "NOR",
+                "arcs": [
+                    [
+                        [474, -272, 475, 476]
+                    ],
+                    [
+                        [477]
+                    ],
+                    [
+                        [478]
+                    ],
+                    [
+                        [479]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Nepal"
+                },
+                "id": "NPL",
+                "arcs": [
+                    [-352, -176]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "New Zealand"
+                },
+                "id": "NZL",
+                "arcs": [
+                    [
+                        [480]
+                    ],
+                    [
+                        [481]
+                    ]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Oman"
+                },
+                "id": "OMN",
+                "arcs": [
+                    [
+                        [482, 483, -22, 484]
+                    ],
+                    [
+                        [-20, 485]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Pakistan"
+                },
+                "id": "PAK",
+                "arcs": [
+                    [-178, -355, 486, -358, -5]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Panama"
+                },
+                "id": "PAN",
+                "arcs": [
+                    [487, -215, 488, -208]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Peru"
+                },
+                "id": "PER",
+                "arcs": [
+                    [-167, 489, -247, -211, -106, -102]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Philippines"
+                },
+                "id": "PHL",
+                "arcs": [
+                    [
+                        [490]
+                    ],
+                    [
+                        [491]
+                    ],
+                    [
+                        [492]
+                    ],
+                    [
+                        [493]
+                    ],
+                    [
+                        [494]
+                    ],
+                    [
+                        [495]
+                    ],
+                    [
+                        [496]
+                    ]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Papua New Guinea"
+                },
+                "id": "PNG",
+                "arcs": [
+                    [
+                        [497]
+                    ],
+                    [
+                        [498]
+                    ],
+                    [
+                        [-345, 499]
+                    ],
+                    [
+                        [500]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Poland"
+                },
+                "id": "POL",
+                "arcs": [
+                    [-224, 501, 502, -428, -97, 503, 504, -221]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Puerto Rico"
+                },
+                "id": "PRI",
+                "arcs": [
+                    [505]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "North Korea"
+                },
+                "id": "PRK",
+                "arcs": [
+                    [506, 507, -405, 508, -169]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Portugal"
+                },
+                "id": "PRT",
+                "arcs": [
+                    [-259, 509]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Paraguay"
+                },
+                "id": "PRY",
+                "arcs": [
+                    [-104, -105, -26]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Qatar"
+                },
+                "id": "QAT",
+                "arcs": [
+                    [510, 511]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Romania"
+                },
+                "id": "ROU",
+                "arcs": [
+                    [512, -434, 513, 514, -81, 515, -333]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Russia"
+                },
+                "id": "RUS",
+                "arcs": [
+                    [
+                        [516]
+                    ],
+                    [
+                        [-503, 517, -425]
+                    ],
+                    [
+                        [518, 519]
+                    ],
+                    [
+                        [520]
+                    ],
+                    [
+                        [521]
+                    ],
+                    [
+                        [522]
+                    ],
+                    [
+                        [523]
+                    ],
+                    [
+                        [524]
+                    ],
+                    [
+                        [525]
+                    ],
+                    [
+                        [526, -507, -184, -447, -182, -391, 527, -59, -293, 528, 529, -95, -430, -261, 530, -269, -475, 531, -520]
+                    ],
+                    [
+                        [532]
+                    ],
+                    [
+                        [533]
+                    ],
+                    [
+                        [534]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Rwanda"
+                },
+                "id": "RWA",
+                "arcs": [
+                    [535, -61, -198, 536]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Western Sahara"
+                },
+                "id": "ESH",
+                "arcs": [
+                    [-241, -458, 537, -431]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Saudi Arabia"
+                },
+                "id": "SAU",
+                "arcs": [
+                    [538, -382, -365, -410, 539, -512, 540, -23, -484, 541]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Sudan"
+                },
+                "id": "SDN",
+                "arcs": [
+                    [542, 543, -123, 544, -421, -249, 545, -254, -268, 546]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "South Sudan"
+                },
+                "id": "SSD",
+                "arcs": [
+                    [547, -266, -396, 548, -203, -125, 549, -543]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Senegal"
+                },
+                "id": "SEN",
+                "arcs": [
+                    [550, -456, -442, -301, -306, 551, -304]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Solomon Islands"
+                },
+                "id": "SLB",
+                "arcs": [
+                    [
+                        [552]
+                    ],
+                    [
+                        [553]
+                    ],
+                    [
+                        [554]
+                    ],
+                    [
+                        [555]
+                    ],
+                    [
+                        [556]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Sierra Leone"
+                },
+                "id": "SLE",
+                "arcs": [
+                    [557, -298, -417]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "El Salvador"
+                },
+                "id": "SLV",
+                "arcs": [
+                    [558, -317, -322]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Somaliland"
+                },
+                "id": "-99",
+                "arcs": [
+                    [-263, -231, 559, 560]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Somalia"
+                },
+                "id": "SOM",
+                "arcs": [
+                    [-397, -264, -561, 561]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Republic of Serbia"
+                },
+                "id": "SRB",
+                "arcs": [
+                    [-86, -439, -407, -446, -90, -325, -334, -516]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Suriname"
+                },
+                "id": "SUR",
+                "arcs": [
+                    [562, -285, 563, -283, -110, -319]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Slovakia"
+                },
+                "id": "SVK",
+                "arcs": [
+                    [-505, 564, -331, -54, -222]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Slovenia"
+                },
+                "id": "SVN",
+                "arcs": [
+                    [-49, -335, -328, 565, -378]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Sweden"
+                },
+                "id": "SWE",
+                "arcs": [
+                    [-476, -271, 566]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Swaziland"
+                },
+                "id": "SWZ",
+                "arcs": [
+                    [567, -451]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Syria"
+                },
+                "id": "SYR",
+                "arcs": [
+                    [-381, -375, -415, 568, 569, -367]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Chad"
+                },
+                "id": "TCD",
+                "arcs": [
+                    [-469, -422, -545, -122, -195]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Togo"
+                },
+                "id": "TGO",
+                "arcs": [
+                    [570, -296, -76, -69]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Thailand"
+                },
+                "id": "THA",
+                "arcs": [
+                    [571, -462, 572, -444, -411, -400]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Tajikistan"
+                },
+                "id": "TJK",
+                "arcs": [
+                    [-398, -179, -3, 573]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Turkmenistan"
+                },
+                "id": "TKM",
+                "arcs": [
+                    [-357, 574, -389, 575, -1]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "East Timor"
+                },
+                "id": "TLS",
+                "arcs": [
+                    [576, -337]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Trinidad and Tobago"
+                },
+                "id": "TTO",
+                "arcs": [
+                    [577]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Tunisia"
+                },
+                "id": "TUN",
+                "arcs": [
+                    [-244, 578, -419]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Turkey"
+                },
+                "id": "TUR",
+                "arcs": [
+                    [
+                        [-294, -36, -361, -368, -570, 579]
+                    ],
+                    [
+                        [-311, -83, 580]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Taiwan"
+                },
+                "id": "TWN",
+                "arcs": [
+                    [581]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "United Republic of Tanzania"
+                },
+                "id": "TZA",
+                "arcs": [
+                    [-394, 582, -448, -460, 583, -199, -62, -536, 584]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Uganda"
+                },
+                "id": "UGA",
+                "arcs": [
+                    [-537, -197, -549, -395, -585]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Ukraine"
+                },
+                "id": "UKR",
+                "arcs": [
+                    [-530, 585, -514, -433, -513, -332, -565, -504, -96]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Uruguay"
+                },
+                "id": "URY",
+                "arcs": [
+                    [-113, 586, -28]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "United States of America"
+                },
+                "id": "USA",
+                "arcs": [
+                    [
+                        [587]
+                    ],
+                    [
+                        [588]
+                    ],
+                    [
+                        [589]
+                    ],
+                    [
+                        [590]
+                    ],
+                    [
+                        [591]
+                    ],
+                    [
+                        [592, -438, 593, -139]
+                    ],
+                    [
+                        [594]
+                    ],
+                    [
+                        [595]
+                    ],
+                    [
+                        [596]
+                    ],
+                    [
+                        [-141, 597]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Uzbekistan"
+                },
+                "id": "UZB",
+                "arcs": [
+                    [-576, -388, -399, -574, -2]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Venezuela"
+                },
+                "id": "VEN",
+                "arcs": [
+                    [598, -320, -108, -210]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Vietnam"
+                },
+                "id": "VNM",
+                "arcs": [
+                    [599, -402, -413, -171]
+                ]
+            }, {
+                "type": "MultiPolygon",
+                "properties": {
+                    "name": "Vanuatu"
+                },
+                "id": "VUT",
+                "arcs": [
+                    [
+                        [600]
+                    ],
+                    [
+                        [601]
+                    ]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "West Bank"
+                },
+                "id": "PSE",
+                "arcs": [
+                    [-384, -371]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Yemen"
+                },
+                "id": "YEM",
+                "arcs": [
+                    [602, -542, -483]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "South Africa"
+                },
+                "id": "ZAF",
+                "arcs": [
+                    [-467, -118, 603, -452, -568, -450, 604],
+                    [-424]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Zambia"
+                },
+                "id": "ZMB",
+                "arcs": [
+                    [-459, -454, 605, -120, -466, -7, -200, -584]
+                ]
+            }, {
+                "type": "Polygon",
+                "properties": {
+                    "name": "Zimbabwe"
+                },
+                "id": "ZWE",
+                "arcs": [
+                    [-604, -121, -606, -453]
+                ]
+            }]
+        }
+    },
+    "arcs": [
+        [
+            [6700, 7164],
+            [28, -23],
+            [21, 8],
+            [6, 27],
+            [22, 9],
+            [15, 18],
+            [6, 47],
+            [23, 11],
+            [5, 21],
+            [13, -15],
+            [8, -2]
+        ],
+        [
+            [6847, 7265],
+            [16, -1],
+            [20, -12]
+        ],
+        [
+            [6883, 7252],
+            [9, -7],
+            [20, 19],
+            [9, -12],
+            [9, 27],
+            [17, -1],
+            [4, 9],
+            [3, 24],
+            [12, 20],
+            [15, -13],
+            [-3, -18],
+            [9, -3],
+            [-3, -50],
+            [11, -19],
+            [10, 12],
+            [12, 6],
+            [17, 27],
+            [19, -5],
+            [29, 0]
+        ],
+        [
+            [7082, 7268],
+            [5, -17]
+        ],
+        [
+            [7087, 7251],
+            [-16, -6],
+            [-14, -11],
+            [-32, -7],
+            [-30, -13],
+            [-16, -25],
+            [6, -25],
+            [4, -30],
+            [-14, -25],
+            [1, -22],
+            [-8, -22],
+            [-26, 2],
+            [11, -39],
+            [-18, -15],
+            [-12, -35],
+            [2, -36],
+            [-11, -16],
+            [-10, 5],
+            [-22, -8],
+            [-3, -16],
+            [-20, 0],
+            [-16, -34],
+            [-1, -50],
+            [-36, -24],
+            [-19, 5],
+            [-6, -13],
+            [-16, 7],
+            [-28, -8],
+            [-47, 30]
+        ],
+        [
+            [6690, 6820],
+            [25, 53],
+            [-2, 38],
+            [-21, 10],
+            [-2, 38],
+            [-9, 47],
+            [12, 32],
+            [-12, 9],
+            [7, 43],
+            [12, 74]
+        ],
+        [
+            [5664, 4412],
+            [3, -18],
+            [-4, -29],
+            [5, -28],
+            [-4, -22],
+            [3, -20],
+            [-58, 1],
+            [-2, -188],
+            [19, -49],
+            [18, -37]
+        ],
+        [
+            [5644, 4022],
+            [-51, -24],
+            [-67, 9],
+            [-19, 28],
+            [-113, -3],
+            [-4, -4],
+            [-17, 27],
+            [-18, 2],
+            [-16, -10],
+            [-14, -12]
+        ],
+        [
+            [5325, 4035],
+            [-2, 38],
+            [4, 51],
+            [9, 55],
+            [2, 25],
+            [9, 53],
+            [6, 24],
+            [16, 39],
+            [9, 26],
+            [3, 44],
+            [-1, 34],
+            [-9, 21],
+            [-7, 36],
+            [-7, 35],
+            [2, 12],
+            [8, 24],
+            [-8, 57],
+            [-6, 39],
+            [-14, 38],
+            [3, 11]
+        ],
+        [
+            [5342, 4697],
+            [11, 8],
+            [8, -1],
+            [10, 7],
+            [82, -1],
+            [7, -44],
+            [8, -35],
+            [6, -19],
+            [11, -31],
+            [18, 5],
+            [9, 8],
+            [16, -8],
+            [4, 14],
+            [7, 35],
+            [17, 2],
+            [2, 10],
+            [14, 1],
+            [-3, -22],
+            [34, 1],
+            [1, -37],
+            [5, -23],
+            [-4, -36],
+            [2, -36],
+            [9, -22],
+            [-1, -70],
+            [7, 5],
+            [12, -1],
+            [17, 8],
+            [13, -3]
+        ],
+        [
+            [5338, 4715],
+            [-8, 45]
+        ],
+        [
+            [5330, 4760],
+            [12, 25],
+            [8, 10],
+            [10, -20]
+        ],
+        [
+            [5360, 4775],
+            [-10, -12],
+            [-4, -16],
+            [-1, -25],
+            [-7, -7]
+        ],
+        [
+            [5571, 7530],
+            [-3, -20],
+            [4, -25],
+            [11, -15]
+        ],
+        [
+            [5583, 7470],
+            [0, -15],
+            [-9, -9],
+            [-2, -19],
+            [-13, -29]
+        ],
+        [
+            [5559, 7398],
+            [-5, 5],
+            [0, 13],
+            [-15, 19],
+            [-3, 29],
+            [2, 40],
+            [4, 18],
+            [-4, 10]
+        ],
+        [
+            [5538, 7532],
+            [-2, 18],
+            [12, 29],
+            [1, -11],
+            [8, 6]
+        ],
+        [
+            [5557, 7574],
+            [6, -16],
+            [7, -6],
+            [1, -22]
+        ],
+        [
+            [6432, 6490],
+            [5, 3],
+            [1, -16],
+            [22, 9],
+            [23, -2],
+            [17, -1],
+            [19, 39],
+            [20, 38],
+            [18, 37]
+        ],
+        [
+            [6557, 6597],
+            [5, -20]
+        ],
+        [
+            [6562, 6577],
+            [4, -47]
+        ],
+        [
+            [6566, 6530],
+            [-14, 0],
+            [-3, -39],
+            [5, -8],
+            [-12, -12],
+            [0, -24],
+            [-8, -24],
+            [-1, -24]
+        ],
+        [
+            [6533, 6399],
+            [-6, -12],
+            [-83, 29],
+            [-11, 60],
+            [-1, 14]
+        ],
+        [
+            [3140, 1814],
+            [-17, 2],
+            [-30, 0],
+            [0, 132]
+        ],
+        [
+            [3093, 1948],
+            [11, -27],
+            [14, -45],
+            [36, -35],
+            [39, -15],
+            [-13, -30],
+            [-26, -2],
+            [-14, 20]
+        ],
+        [
+            [3258, 3743],
+            [51, -96],
+            [23, -9],
+            [34, -44],
+            [29, -23],
+            [4, -26],
+            [-28, -90],
+            [28, -16],
+            [32, -9],
+            [22, 10],
+            [25, 45],
+            [4, 52]
+        ],
+        [
+            [3482, 3537],
+            [14, 11],
+            [14, -34],
+            [-1, -47],
+            [-23, -33],
+            [-19, -24],
+            [-31, -57],
+            [-37, -81]
+        ],
+        [
+            [3399, 3272],
+            [-7, -47],
+            [-7, -61],
+            [0, -58],
+            [-6, -14],
+            [-2, -38]
+        ],
+        [
+            [3377, 3054],
+            [-2, -31],
+            [35, -50],
+            [-4, -41],
+            [18, -26],
+            [-2, -29],
+            [-26, -75],
+            [-42, -32],
+            [-55, -12],
+            [-31, 6],
+            [6, -36],
+            [-6, -44],
+            [5, -30],
+            [-16, -20],
+            [-29, -8],
+            [-26, 21],
+            [-11, -15],
+            [4, -59],
+            [18, -18],
+            [16, 19],
+            [8, -31],
+            [-26, -18],
+            [-22, -37],
+            [-4, -59],
+            [-7, -32],
+            [-26, 0],
+            [-22, -31],
+            [-8, -44],
+            [28, -43],
+            [26, -12],
+            [-9, -53],
+            [-33, -33],
+            [-18, -70],
+            [-25, -23],
+            [-12, -28],
+            [9, -61],
+            [19, -34],
+            [-12, 3]
+        ],
+        [
+            [3095, 1968],
+            [-26, 9],
+            [-67, 8],
+            [-11, 34],
+            [0, 45],
+            [-18, -4],
+            [-10, 21],
+            [-3, 63],
+            [22, 26],
+            [9, 37],
+            [-4, 30],
+            [15, 51],
+            [10, 78],
+            [-3, 35],
+            [12, 11],
+            [-3, 22],
+            [-13, 12],
+            [10, 25],
+            [-13, 22],
+            [-6, 68],
+            [11, 12],
+            [-5, 72],
+            [7, 61],
+            [7, 52],
+            [17, 22],
+            [-9, 58],
+            [0, 54],
+            [21, 38],
+            [-1, 50],
+            [16, 57],
+            [0, 55],
+            [-7, 11],
+            [-13, 102],
+            [17, 60],
+            [-2, 58],
+            [10, 53],
+            [18, 56],
+            [20, 36],
+            [-9, 24],
+            [6, 19],
+            [-1, 98],
+            [30, 29],
+            [10, 62],
+            [-3, 14]
+        ],
+        [
+            [3136, 3714],
+            [23, 54],
+            [36, -15],
+            [16, -42],
+            [11, 47],
+            [32, -2],
+            [4, -13]
+        ],
+        [
+            [6210, 7485],
+            [39, 9]
+        ],
+        [
+            [6249, 7494],
+            [5, -15],
+            [11, -10],
+            [-6, -15],
+            [15, -21],
+            [-8, -18],
+            [12, -16],
+            [13, -10],
+            [0, -41]
+        ],
+        [
+            [6291, 7348],
+            [-10, -2]
+        ],
+        [
+            [6281, 7346],
+            [-11, 34],
+            [0, 10],
+            [-12, -1],
+            [-9, 16],
+            [-5, -1]
+        ],
+        [
+            [6244, 7404],
+            [-11, 17],
+            [-21, 15],
+            [3, 28],
+            [-5, 21]
+        ],
+        [
+            [3345, 329],
+            [-8, -30],
+            [-8, -27],
+            [-59, 8],
+            [-62, -3],
+            [-34, 20],
+            [0, 2],
+            [-16, 17],
+            [63, -2],
+            [60, -6],
+            [20, 24],
+            [15, 21],
+            [29, -24]
+        ],
+        [
+            [577, 361],
+            [-53, -8],
+            [-36, 21],
+            [-17, 21],
+            [-1, 3],
+            [-18, 16],
+            [17, 22],
+            [52, -9],
+            [28, -18],
+            [21, -21],
+            [7, -27]
+        ],
+        [
+            [3745, 447],
+            [35, -26],
+            [12, -36],
+            [3, -25],
+            [1, -30],
+            [-43, -19],
+            [-45, -15],
+            [-52, -14],
+            [-59, -11],
+            [-65, 3],
+            [-37, 20],
+            [5, 24],
+            [59, 16],
+            [24, 20],
+            [18, 26],
+            [12, 22],
+            [17, 20],
+            [18, 25],
+            [14, 0],
+            [41, 12],
+            [42, -12]
+        ],
+        [
+            [1633, 715],
+            [36, -9],
+            [33, 10],
+            [-16, -20],
+            [-26, -15],
+            [-39, 4],
+            [-27, 21],
+            [6, 20],
+            [33, -11]
+        ],
+        [
+            [1512, 716],
+            [43, -23],
+            [-17, 3],
+            [-36, 5],
+            [-38, 17],
+            [20, 12],
+            [28, -14]
+        ],
+        [
+            [2250, 808],
+            [31, -8],
+            [30, 7],
+            [17, -34],
+            [-22, 5],
+            [-34, -2],
+            [-34, 2],
+            [-38, -4],
+            [-28, 12],
+            [-15, 24],
+            [18, 11],
+            [35, -8],
+            [40, -5]
+        ],
+        [
+            [3098, 866],
+            [4, -27],
+            [-5, -23],
+            [-8, -22],
+            [-33, -8],
+            [-31, -12],
+            [-36, 1],
+            [14, 24],
+            [-33, -9],
+            [-31, -8],
+            [-21, 18],
+            [-2, 24],
+            [30, 23],
+            [20, 7],
+            [32, -2],
+            [8, 30],
+            [1, 22],
+            [0, 47],
+            [16, 28],
+            [25, 9],
+            [15, -22],
+            [6, -22],
+            [12, -26],
+            [10, -26],
+            [7, -26]
+        ],
+        [
+            [3371, 1268],
+            [-11, -13],
+            [-21, 9],
+            [-23, -6],
+            [-19, -14],
+            [-20, -15],
+            [-14, -17],
+            [-4, -23],
+            [2, -22],
+            [13, -20],
+            [-19, -14],
+            [-26, -4],
+            [-15, -20],
+            [-17, -19],
+            [-17, -25],
+            [-4, -22],
+            [9, -24],
+            [15, -19],
+            [23, -14],
+            [21, -18],
+            [12, -23],
+            [6, -22],
+            [8, -24],
+            [13, -19],
+            [8, -22],
+            [4, -55],
+            [8, -22],
+            [2, -23],
+            [9, -23],
+            [-4, -31],
+            [-15, -24],
+            [-17, -20],
+            [-37, -8],
+            [-12, -21],
+            [-17, -20],
+            [-42, -22],
+            [-37, -9],
+            [-35, -13],
+            [-37, -13],
+            [-22, -24],
+            [-45, -2],
+            [-49, 2],
+            [-44, -4],
+            [-47, 0],
+            [9, -24],
+            [42, -10],
+            [31, -16],
+            [18, -21],
+            [-31, -19],
+            [-48, 6],
+            [-40, -15],
+            [-2, -24],
+            [-1, -23],
+            [33, -20],
+            [6, -22],
+            [35, -22],
+            [59, -9],
+            [50, -16],
+            [40, -19],
+            [50, -18],
+            [70, -10],
+            [68, -16],
+            [47, -17],
+            [52, -20],
+            [27, -28],
+            [13, -22],
+            [34, 21],
+            [46, 17],
+            [48, 19],
+            [58, 15],
+            [49, 16],
+            [69, 1],
+            [68, -8],
+            [56, -14],
+            [18, 26],
+            [39, 17],
+            [70, 1],
+            [55, 13],
+            [52, 13],
+            [58, 8],
+            [62, 10],
+            [43, 15],
+            [-20, 21],
+            [-12, 21],
+            [0, 22],
+            [-54, -2],
+            [-57, -10],
+            [-54, 0],
+            [-8, 22],
+            [4, 44],
+            [12, 13],
+            [40, 14],
+            [47, 14],
+            [34, 17],
+            [33, 18],
+            [25, 23],
+            [38, 10],
+            [38, 8],
+            [19, 5],
+            [43, 2],
+            [41, 8],
+            [34, 12],
+            [34, 14],
+            [30, 14],
+            [39, 18],
+            [24, 20],
+            [26, 17],
+            [9, 24],
+            [-30, 13],
+            [10, 25],
+            [18, 18],
+            [29, 12],
+            [31, 14],
+            [28, 18],
+            [22, 23],
+            [13, 28],
+            [21, 16],
+            [33, -3],
+            [13, -20],
+            [34, -2],
+            [1, 22],
+            [14, 23],
+            [30, -6],
+            [7, -22],
+            [33, -3],
+            [36, 10],
+            [35, 7],
+            [31, -3],
+            [12, -25],
+            [31, 20],
+            [28, 10],
+            [31, 9],
+            [31, 8],
+            [29, 14],
+            [31, 9],
+            [24, 13],
+            [17, 20],
+            [20, -15],
+            [29, 8],
+            [20, -27],
+            [16, -21],
+            [32, 11],
+            [12, 24],
+            [28, 16],
+            [37, -4],
+            [11, -22],
+            [22, 22],
+            [30, 7],
+            [33, 3],
+            [29, -2],
+            [31, -7],
+            [30, -3],
+            [13, -20],
+            [18, -17],
+            [31, 10],
+            [32, 3],
+            [32, 0],
+            [31, 1],
+            [28, 8],
+            [29, 7],
+            [25, 16],
+            [26, 11],
+            [28, 5],
+            [21, 17],
+            [15, 32],
+            [16, 20],
+            [29, -10],
+            [11, -21],
+            [24, -13],
+            [29, 4],
+            [19, -21],
+            [21, -15],
+            [28, 14],
+            [10, 26],
+            [25, 10],
+            [29, 20],
+            [27, 8],
+            [33, 11],
+            [22, 13],
+            [22, 14],
+            [22, 13],
+            [26, -7],
+            [25, 21],
+            [18, 16],
+            [26, -1],
+            [23, 14],
+            [6, 21],
+            [23, 16],
+            [23, 11],
+            [28, 10],
+            [25, 4],
+            [25, -3],
+            [26, -6],
+            [22, -16],
+            [3, -26],
+            [24, -19],
+            [17, -17],
+            [33, -7],
+            [19, -16],
+            [23, -16],
+            [26, -3],
+            [23, 11],
+            [24, 24],
+            [26, -12],
+            [27, -7],
+            [26, -7],
+            [27, -5],
+            [28, 0],
+            [23, -61],
+            [-1, -15],
+            [-4, -27],
+            [-26, -15],
+            [-22, -22],
+            [4, -23],
+            [31, 1],
+            [-4, -23],
+            [-14, -22],
+            [-13, -24],
+            [21, -19],
+            [32, -6],
+            [32, 11],
+            [15, 23],
+            [10, 22],
+            [15, 18],
+            [17, 18],
+            [7, 21],
+            [15, 29],
+            [18, 5],
+            [31, 3],
+            [28, 7],
+            [28, 9],
+            [14, 23],
+            [8, 22],
+            [19, 22],
+            [27, 15],
+            [23, 12],
+            [16, 19],
+            [15, 11],
+            [21, 9],
+            [27, -6],
+            [25, 6],
+            [28, 7],
+            [30, -4],
+            [20, 17],
+            [14, 39],
+            [11, -16],
+            [13, -28],
+            [23, -12],
+            [27, -4],
+            [26, 7],
+            [29, -5],
+            [26, -1],
+            [17, 6],
+            [24, -4],
+            [21, -12],
+            [25, 8],
+            [30, 0],
+            [25, 8],
+            [29, -8],
+            [19, 19],
+            [14, 20],
+            [19, 16],
+            [35, 44],
+            [18, -8],
+            [21, -16],
+            [18, -21],
+            [36, -36],
+            [27, -1],
+            [25, 0],
+            [30, 7],
+            [30, 8],
+            [23, 16],
+            [19, 18],
+            [31, 2],
+            [21, 13],
+            [22, -12],
+            [14, -18],
+            [19, -19],
+            [31, 2],
+            [19, -15],
+            [33, -15],
+            [35, -5],
+            [29, 4],
+            [21, 19],
+            [19, 18],
+            [25, 5],
+            [25, -8],
+            [29, -6],
+            [26, 9],
+            [25, 0],
+            [24, -6],
+            [26, -5],
+            [25, 10],
+            [30, 9],
+            [28, 3],
+            [32, 0],
+            [25, 5],
+            [25, 5],
+            [8, 29],
+            [1, 24],
+            [17, -16],
+            [5, -27],
+            [10, -24],
+            [11, -20],
+            [23, -10],
+            [32, 4],
+            [36, 1],
+            [25, 3],
+            [37, 0],
+            [26, 1],
+            [36, -2],
+            [31, -5],
+            [20, -18],
+            [-5, -22],
+            [18, -18],
+            [30, -13],
+            [31, -15],
+            [35, -11],
+            [38, -9],
+            [28, -9],
+            [32, -2],
+            [18, 20],
+            [24, -16],
+            [21, -19],
+            [25, -13],
+            [34, -6],
+            [32, -7],
+            [13, -23],
+            [32, -14],
+            [21, -21],
+            [31, -9],
+            [32, 1],
+            [30, -4],
+            [33, 1],
+            [34, -4],
+            [31, -8],
+            [28, -14],
+            [29, -12],
+            [20, -17],
+            [-3, -23],
+            [-15, -21],
+            [-13, -27],
+            [-9, -21],
+            [-14, -24],
+            [-36, -9],
+            [-16, -21],
+            [-36, -13],
+            [-13, -23],
+            [-19, -22],
+            [-20, -18],
+            [-11, -25],
+            [-7, -22],
+            [-3, -26],
+            [0, -22],
+            [16, -23],
+            [6, -22],
+            [13, -21],
+            [52, -8],
+            [11, -26],
+            [-50, -9],
+            [-43, -13],
+            [-52, -2],
+            [-24, -34],
+            [-5, -27],
+            [-12, -22],
+            [-14, -22],
+            [37, -20],
+            [14, -24],
+            [24, -22],
+            [33, -20],
+            [39, -19],
+            [42, -18],
+            [64, -19],
+            [14, -29],
+            [80, -12],
+            [5, -5],
+            [21, -17],
+            [77, 15],
+            [63, -19],
+            [48, -14],
+            [-9997, -1],
+            [24, 35],
+            [50, -19],
+            [3, 2],
+            [30, 19],
+            [4, 0],
+            [3, -1],
+            [40, -25],
+            [35, 25],
+            [7, 3],
+            [81, 11],
+            [27, -14],
+            [13, -7],
+            [41, -20],
+            [79, -15],
+            [63, -18],
+            [107, -14],
+            [80, 16],
+            [118, -11],
+            [67, -19],
+            [73, 17],
+            [78, 17],
+            [6, 27],
+            [-110, 3],
+            [-89, 14],
+            [-24, 23],
+            [-74, 12],
+            [5, 27],
+            [10, 24],
+            [10, 22],
+            [-5, 25],
+            [-46, 16],
+            [-22, 21],
+            [-43, 18],
+            [68, -3],
+            [64, 9],
+            [40, -20],
+            [50, 18],
+            [45, 22],
+            [23, 19],
+            [-10, 25],
+            [-36, 16],
+            [-41, 17],
+            [-57, 4],
+            [-50, 8],
+            [-54, 6],
+            [-18, 22],
+            [-36, 18],
+            [-21, 21],
+            [-9, 67],
+            [14, -6],
+            [25, -18],
+            [45, 6],
+            [44, 8],
+            [23, -26],
+            [44, 6],
+            [37, 13],
+            [35, 16],
+            [32, 20],
+            [41, 5],
+            [-1, 22],
+            [-9, 22],
+            [8, 21],
+            [36, 11],
+            [16, -20],
+            [42, 12],
+            [32, 15],
+            [40, 1],
+            [38, 6],
+            [37, 13],
+            [30, 13],
+            [34, 13],
+            [22, -4],
+            [19, -4],
+            [41, 8],
+            [37, -10],
+            [38, 1],
+            [37, 8],
+            [37, -6],
+            [41, -6],
+            [39, 3],
+            [40, -2],
+            [42, -1],
+            [38, 3],
+            [28, 17],
+            [34, 9],
+            [35, -13],
+            [33, 11],
+            [30, 21],
+            [18, -19],
+            [9, -21],
+            [18, -19],
+            [29, 17],
+            [33, -22],
+            [38, -7],
+            [32, -16],
+            [39, 3],
+            [36, 11],
+            [41, -3],
+            [38, -8],
+            [38, -10],
+            [15, 25],
+            [-18, 20],
+            [-14, 21],
+            [-36, 5],
+            [-15, 22],
+            [-6, 22],
+            [-10, 43],
+            [21, -8],
+            [36, -3],
+            [36, 3],
+            [33, -9],
+            [28, -17],
+            [12, -21],
+            [38, -4],
+            [36, 9],
+            [38, 11],
+            [34, 7],
+            [28, -14],
+            [37, 5],
+            [24, 45],
+            [23, -27],
+            [32, -10],
+            [34, 6],
+            [23, -23],
+            [37, -3],
+            [33, -7],
+            [34, -12],
+            [21, 22],
+            [11, 20],
+            [28, -23],
+            [38, 6],
+            [28, -13],
+            [19, -19],
+            [37, 5],
+            [29, 13],
+            [29, 15],
+            [33, 8],
+            [39, 7],
+            [36, 8],
+            [27, 13],
+            [16, 19],
+            [7, 25],
+            [-3, 24],
+            [-9, 24],
+            [-10, 23],
+            [-9, 23],
+            [-7, 21],
+            [-1, 23],
+            [2, 23],
+            [13, 22],
+            [11, 24],
+            [5, 23],
+            [-6, 26],
+            [-3, 23],
+            [14, 27],
+            [15, 17],
+            [18, 22],
+            [19, 19],
+            [22, 17],
+            [11, 25],
+            [15, 17],
+            [18, 15],
+            [26, 3],
+            [18, 19],
+            [19, 11],
+            [23, 7],
+            [20, 15],
+            [16, 19],
+            [22, 7],
+            [16, -15],
+            [-10, -20],
+            [-29, -17]
+        ],
+        [
+            [6914, 2185],
+            [18, -19],
+            [26, -7],
+            [1, -11],
+            [-7, -27],
+            [-43, -4],
+            [-1, 31],
+            [4, 25],
+            [2, 12]
+        ],
+        [
+            [9038, 2648],
+            [27, -21],
+            [15, 8],
+            [22, 12],
+            [16, -4],
+            [2, -70],
+            [-9, -21],
+            [-3, -47],
+            [-10, 16],
+            [-19, -41],
+            [-6, 3],
+            [-17, 2],
+            [-17, 50],
+            [-4, 39],
+            [-16, 52],
+            [1, 27],
+            [18, -5]
+        ],
+        [
+            [8987, 4244],
+            [10, -46],
+            [18, 22],
+            [9, -25],
+            [13, -23],
+            [-3, -26],
+            [6, -51],
+            [5, -29],
+            [7, -7],
+            [7, -51],
+            [-3, -30],
+            [9, -40],
+            [31, -31],
+            [19, -28],
+            [19, -26],
+            [-4, -14],
+            [16, -37],
+            [11, -64],
+            [11, 13],
+            [11, -26],
+            [7, 9],
+            [5, -63],
+            [19, -36],
+            [13, -22],
+            [22, -48],
+            [8, -48],
+            [1, -33],
+            [-2, -37],
+            [13, -50],
+            [-2, -52],
+            [-5, -28],
+            [-7, -52],
+            [1, -34],
+            [-6, -43],
+            [-12, -53],
+            [-21, -29],
+            [-10, -46],
+            [-9, -29],
+            [-8, -51],
+            [-11, -30],
+            [-7, -44],
+            [-4, -41],
+            [2, -18],
+            [-16, -21],
+            [-31, -2],
+            [-26, -24],
+            [-13, -23],
+            [-17, -26],
+            [-23, 27],
+            [-17, 10],
+            [5, 31],
+            [-15, -11],
+            [-25, -43],
+            [-24, 16],
+            [-15, 9],
+            [-16, 4],
+            [-27, 17],
+            [-18, 37],
+            [-5, 45],
+            [-7, 30],
+            [-13, 24],
+            [-27, 7],
+            [9, 28],
+            [-7, 44],
+            [-13, -41],
+            [-25, -11],
+            [14, 33],
+            [5, 34],
+            [10, 29],
+            [-2, 44],
+            [-22, -50],
+            [-18, -21],
+            [-10, -47],
+            [-22, 25],
+            [1, 31],
+            [-18, 43],
+            [-14, 22],
+            [5, 14],
+            [-36, 35],
+            [-19, 2],
+            [-27, 29],
+            [-50, -6],
+            [-36, -21],
+            [-31, -20],
+            [-27, 4],
+            [-29, -30],
+            [-24, -14],
+            [-6, -31],
+            [-10, -24],
+            [-23, -1],
+            [-18, -5],
+            [-24, 10],
+            [-20, -6],
+            [-19, -3],
+            [-17, -31],
+            [-8, 2],
+            [-14, -16],
+            [-13, -19],
+            [-21, 2],
+            [-18, 0],
+            [-30, 38],
+            [-15, 11],
+            [1, 34],
+            [14, 8],
+            [4, 14],
+            [-1, 21],
+            [4, 41],
+            [-3, 35],
+            [-15, 60],
+            [-4, 33],
+            [1, 34],
+            [-11, 38],
+            [-1, 18],
+            [-12, 23],
+            [-4, 47],
+            [-16, 46],
+            [-4, 26],
+            [13, -26],
+            [-10, 55],
+            [14, -17],
+            [8, -23],
+            [0, 30],
+            [-14, 47],
+            [-3, 18],
+            [-6, 18],
+            [3, 34],
+            [6, 15],
+            [4, 29],
+            [-3, 35],
+            [11, 42],
+            [2, -45],
+            [12, 41],
+            [22, 20],
+            [14, 25],
+            [21, 22],
+            [13, 4],
+            [7, -7],
+            [22, 22],
+            [17, 6],
+            [4, 13],
+            [8, 6],
+            [15, -2],
+            [29, 18],
+            [15, 26],
+            [7, 31],
+            [17, 30],
+            [1, 24],
+            [1, 32],
+            [19, 50],
+            [12, -51],
+            [12, 12],
+            [-10, 28],
+            [9, 29],
+            [12, -13],
+            [3, 45],
+            [15, 29],
+            [7, 23],
+            [14, 10],
+            [0, 17],
+            [13, -7],
+            [0, 15],
+            [12, 8],
+            [14, 8],
+            [20, -27],
+            [16, -35],
+            [17, 0],
+            [18, -6],
+            [-6, 33],
+            [13, 47],
+            [13, 15],
+            [-5, 15],
+            [12, 34],
+            [17, 21],
+            [14, -7],
+            [24, 11],
+            [-1, 30],
+            [-20, 19],
+            [15, 9],
+            [18, -15],
+            [15, -24],
+            [23, -15],
+            [8, 6],
+            [17, -18],
+            [17, 17],
+            [10, -5],
+            [7, 11],
+            [12, -29],
+            [-7, -32],
+            [-11, -24],
+            [-9, -2],
+            [3, -23],
+            [-8, -30],
+            [-10, -29],
+            [2, -17],
+            [22, -32],
+            [21, -19],
+            [15, -20],
+            [20, -35],
+            [8, 0],
+            [14, -15],
+            [4, -19],
+            [27, -20],
+            [18, 20],
+            [6, 32],
+            [5, 26],
+            [4, 33],
+            [8, 47],
+            [-4, 28],
+            [2, 17],
+            [-3, 34],
+            [4, 45],
+            [5, 12],
+            [-4, 20],
+            [7, 31],
+            [5, 32],
+            [1, 17],
+            [10, 22],
+            [8, -29],
+            [2, -37],
+            [7, -7],
+            [1, -25],
+            [10, -30],
+            [2, -33],
+            [-1, -22]
+        ],
+        [
+            [5471, 7900],
+            [-2, -24],
+            [-16, 0],
+            [6, -13],
+            [-9, -38]
+        ],
+        [
+            [5450, 7825],
+            [-6, -10],
+            [-24, -1],
+            [-14, -13],
+            [-23, 4]
+        ],
+        [
+            [5383, 7805],
+            [-40, 15],
+            [-6, 21],
+            [-27, -10],
+            [-4, -12],
+            [-16, 9]
+        ],
+        [
+            [5290, 7828],
+            [-15, 1],
+            [-12, 11],
+            [4, 15],
+            [-1, 10]
+        ],
+        [
+            [5266, 7865],
+            [8, 3],
+            [14, -16],
+            [4, 16],
+            [25, -3],
+            [20, 11],
+            [13, -2],
+            [9, -12],
+            [2, 10],
+            [-4, 38],
+            [10, 8],
+            [10, 27]
+        ],
+        [
+            [5377, 7945],
+            [21, -19],
+            [15, 24],
+            [10, 5],
+            [22, -18],
+            [13, 3],
+            [13, -12]
+        ],
+        [
+            [5471, 7928],
+            [-3, -7],
+            [3, -21]
+        ],
+        [
+            [6281, 7346],
+            [-19, 8],
+            [-14, 27],
+            [-4, 23]
+        ],
+        [
+            [6349, 7527],
+            [15, -31],
+            [14, -42],
+            [13, -2],
+            [8, -16],
+            [-23, -5],
+            [-5, -46],
+            [-4, -21],
+            [-11, -13],
+            [1, -30]
+        ],
+        [
+            [6357, 7321],
+            [-7, -3],
+            [-17, 31],
+            [10, 30],
+            [-9, 17],
+            [-10, -4],
+            [-33, -44]
+        ],
+        [
+            [6249, 7494],
+            [6, 10],
+            [21, -17],
+            [15, -4],
+            [4, 7],
+            [-14, 32],
+            [7, 9]
+        ],
+        [
+            [6288, 7531],
+            [8, -2],
+            [19, -36],
+            [13, -4],
+            [4, 15],
+            [17, 23]
+        ],
+        [
+            [5814, 4792],
+            [-1, 71],
+            [-7, 27]
+        ],
+        [
+            [5806, 4890],
+            [17, -5],
+            [8, 34],
+            [15, -4]
+        ],
+        [
+            [5846, 4915],
+            [1, -23],
+            [6, -14],
+            [1, -19],
+            [-7, -12],
+            [-11, -31],
+            [-10, -22],
+            [-12, -2]
+        ],
+        [
+            [5092, 8091],
+            [20, -5],
+            [26, 12],
+            [17, -25],
+            [16, -14]
+        ],
+        [
+            [5171, 8059],
+            [-4, -40]
+        ],
+        [
+            [5167, 8019],
+            [-7, -2],
+            [-3, -33]
+        ],
+        [
+            [5157, 7984],
+            [-24, 26],
+            [-14, -4],
+            [-20, 28],
+            [-13, 23],
+            [-13, 1],
+            [-4, 21]
+        ],
+        [
+            [5069, 8079],
+            [23, 12]
+        ],
+        [
+            [5074, 5427],
+            [-23, -7]
+        ],
+        [
+            [5051, 5420],
+            [-7, 41],
+            [2, 136],
+            [-6, 12],
+            [-1, 29],
+            [-10, 21],
+            [-8, 17],
+            [3, 31]
+        ],
+        [
+            [5024, 5707],
+            [10, 7],
+            [6, 26],
+            [13, 5],
+            [6, 18]
+        ],
+        [
+            [5059, 5763],
+            [10, 17],
+            [10, 0],
+            [21, -34]
+        ],
+        [
+            [5100, 5746],
+            [-1, -19],
+            [6, -35],
+            [-6, -24],
+            [3, -16],
+            [-13, -37],
+            [-9, -18],
+            [-5, -37],
+            [1, -38],
+            [-2, -95]
+        ],
+        [
+            [4921, 5627],
+            [-19, 15],
+            [-13, -2],
+            [-10, -15],
+            [-12, 13],
+            [-5, 19],
+            [-13, 13]
+        ],
+        [
+            [4849, 5670],
+            [-1, 34],
+            [7, 26],
+            [-1, 20],
+            [23, 48],
+            [4, 41],
+            [7, 14],
+            [14, -8],
+            [11, 12],
+            [4, 16],
+            [22, 26],
+            [5, 19],
+            [26, 24],
+            [15, 9],
+            [7, -12],
+            [18, 0]
+        ],
+        [
+            [5010, 5939],
+            [-2, -28],
+            [3, -27],
+            [16, -39],
+            [1, -28],
+            [32, -14],
+            [-1, -40]
+        ],
+        [
+            [5024, 5707],
+            [-24, 1]
+        ],
+        [
+            [5000, 5708],
+            [-13, 5],
+            [-9, -9],
+            [-12, 4],
+            [-48, -3],
+            [-1, -33],
+            [4, -45]
+        ],
+        [
+            [7573, 6360],
+            [0, -43],
+            [-10, 9],
+            [2, -47]
+        ],
+        [
+            [7565, 6279],
+            [-8, 30],
+            [-1, 31],
+            [-6, 28],
+            [-11, 34],
+            [-26, 3],
+            [3, -25],
+            [-9, -32],
+            [-12, 12],
+            [-4, -11],
+            [-8, 6],
+            [-11, 5]
+        ],
+        [
+            [7472, 6360],
+            [-4, 49],
+            [-10, 45],
+            [5, 35],
+            [-17, 16],
+            [6, 22],
+            [18, 22],
+            [-20, 31],
+            [9, 40],
+            [22, -26],
+            [14, -3],
+            [2, -41],
+            [26, -8],
+            [26, 1],
+            [16, -10],
+            [-13, -50],
+            [-12, -3],
+            [-9, -34],
+            [16, -31],
+            [4, 38],
+            [8, 0],
+            [14, -93]
+        ],
+        [
+            [5629, 7671],
+            [8, -25],
+            [11, 5],
+            [21, -9],
+            [41, -4],
+            [13, 16],
+            [33, 13],
+            [20, -21],
+            [17, -6]
+        ],
+        [
+            [5793, 7640],
+            [-15, -25],
+            [-10, -42],
+            [9, -34]
+        ],
+        [
+            [5777, 7539],
+            [-24, 8],
+            [-28, -18]
+        ],
+        [
+            [5725, 7529],
+            [0, -30],
+            [-26, -5],
+            [-19, 20],
+            [-22, -16],
+            [-21, 2]
+        ],
+        [
+            [5637, 7500],
+            [-2, 39],
+            [-14, 19]
+        ],
+        [
+            [5621, 7558],
+            [5, 8],
+            [-3, 7],
+            [4, 19],
+            [11, 18],
+            [-14, 26],
+            [-2, 21],
+            [7, 14]
+        ],
+        [
+            [2846, 6461],
+            [-7, -3],
+            [-7, 34],
+            [-10, 17],
+            [6, 38],
+            [8, -3],
+            [10, -49],
+            [0, -34]
+        ],
+        [
+            [2838, 6628],
+            [-30, -10],
+            [-2, 22],
+            [13, 5],
+            [18, -2],
+            [1, -15]
+        ],
+        [
+            [2861, 6628],
+            [-5, -42],
+            [-5, 8],
+            [0, 31],
+            [-12, 23],
+            [0, 7],
+            [22, -27]
+        ],
+        [
+            [5527, 7708],
+            [10, 0],
+            [-7, -26],
+            [14, -23],
+            [-4, -28],
+            [-7, -2]
+        ],
+        [
+            [5533, 7629],
+            [-5, -6],
+            [-9, -13],
+            [-4, -33]
+        ],
+        [
+            [5515, 7577],
+            [-25, 23],
+            [-10, 24],
+            [-11, 13],
+            [-12, 22],
+            [-6, 19],
+            [-14, 27],
+            [6, 25],
+            [10, -14],
+            [6, 12],
+            [13, 2],
+            [24, -10],
+            [19, 1],
+            [12, -13]
+        ],
+        [
+            [5652, 8242],
+            [27, 0],
+            [30, 22],
+            [6, 34],
+            [23, 19],
+            [-3, 26]
+        ],
+        [
+            [5735, 8343],
+            [17, 10],
+            [30, 23]
+        ],
+        [
+            [5782, 8376],
+            [29, -15],
+            [4, -15],
+            [15, 7],
+            [27, -14],
+            [3, -27],
+            [-6, -16],
+            [17, -39],
+            [12, -11],
+            [-2, -11],
+            [19, -10],
+            [8, -16],
+            [-11, -13],
+            [-23, 2],
+            [-5, -5],
+            [7, -20],
+            [6, -37]
+        ],
+        [
+            [5882, 8136],
+            [-23, -4],
+            [-9, -13],
+            [-2, -30],
+            [-11, 6],
+            [-25, -3],
+            [-7, 14],
+            [-11, -10],
+            [-10, 8],
+            [-22, 1],
+            [-31, 15],
+            [-28, 4],
+            [-22, -1],
+            [-15, -16],
+            [-13, -2]
+        ],
+        [
+            [5653, 8105],
+            [-1, 26],
+            [-8, 27],
+            [17, 12],
+            [0, 24],
+            [-8, 22],
+            [-1, 26]
+        ],
+        [
+            [2524, 6110],
+            [-1, 8],
+            [4, 3],
+            [5, -7],
+            [10, 36],
+            [5, 0]
+        ],
+        [
+            [2547, 6150],
+            [0, -8],
+            [5, -1],
+            [0, -16],
+            [-5, -25],
+            [3, -9],
+            [-3, -21],
+            [2, -6],
+            [-4, -30],
+            [-5, -16],
+            [-5, -1],
+            [-6, -21]
+        ],
+        [
+            [2529, 5996],
+            [-8, 0],
+            [2, 67],
+            [1, 47]
+        ],
+        [
+            [3136, 3714],
+            [-20, -8],
+            [-11, 82],
+            [-15, 66],
+            [9, 57],
+            [-15, 25],
+            [-4, 43],
+            [-13, 40]
+        ],
+        [
+            [3067, 4019],
+            [17, 64],
+            [-12, 49],
+            [7, 20],
+            [-5, 22],
+            [10, 30],
+            [1, 50],
+            [1, 41],
+            [6, 20],
+            [-24, 96]
+        ],
+        [
+            [3068, 4411],
+            [21, -5],
+            [14, 1],
+            [6, 18],
+            [25, 24],
+            [14, 22],
+            [37, 10],
+            [-3, -44],
+            [3, -23],
+            [-2, -40],
+            [30, -53],
+            [31, -9],
+            [11, -23],
+            [19, -11],
+            [11, -17],
+            [18, 0],
+            [16, -17],
+            [1, -34],
+            [6, -18],
+            [0, -25],
+            [-8, -1],
+            [11, -69],
+            [53, -2],
+            [-4, -35],
+            [3, -23],
+            [15, -16],
+            [6, -37],
+            [-4, -47],
+            [-8, -26],
+            [3, -33],
+            [-9, -12]
+        ],
+        [
+            [3384, 3866],
+            [-1, 18],
+            [-25, 30],
+            [-26, 1],
+            [-49, -17],
+            [-13, -52],
+            [-1, -32],
+            [-11, -71]
+        ],
+        [
+            [3482, 3537],
+            [6, 34],
+            [3, 35],
+            [1, 32],
+            [-10, 11],
+            [-11, -9],
+            [-10, 2],
+            [-4, 23],
+            [-2, 54],
+            [-5, 18],
+            [-19, 16],
+            [-11, -12],
+            [-30, 11],
+            [2, 81],
+            [-8, 33]
+        ],
+        [
+            [3068, 4411],
+            [-15, -11],
+            [-13, 7],
+            [2, 90],
+            [-23, -35],
+            [-24, 2],
+            [-11, 31],
+            [-18, 4],
+            [5, 25],
+            [-15, 36],
+            [-11, 53],
+            [7, 11],
+            [0, 25],
+            [17, 17],
+            [-3, 32],
+            [7, 20],
+            [2, 28],
+            [32, 40],
+            [22, 11],
+            [4, 9],
+            [25, -2]
+        ],
+        [
+            [3058, 4804],
+            [13, 162],
+            [0, 25],
+            [-4, 34],
+            [-12, 22],
+            [0, 42],
+            [15, 10],
+            [6, -6],
+            [1, 23],
+            [-16, 6],
+            [-1, 37],
+            [54, -2],
+            [10, 21],
+            [7, -19],
+            [6, -35],
+            [5, 8]
+        ],
+        [
+            [3142, 5132],
+            [15, -32],
+            [22, 4],
+            [5, 18],
+            [21, 14],
+            [11, 10],
+            [4, 25],
+            [19, 17],
+            [-1, 12],
+            [-24, 5],
+            [-3, 37],
+            [1, 40],
+            [-13, 15],
+            [5, 6],
+            [21, -8],
+            [22, -15],
+            [8, 14],
+            [20, 9],
+            [31, 23],
+            [10, 22],
+            [-3, 17]
+        ],
+        [
+            [3313, 5365],
+            [14, 2],
+            [7, -13],
+            [-4, -26],
+            [9, -9],
+            [7, -28],
+            [-8, -20],
+            [-4, -51],
+            [7, -30],
+            [2, -27],
+            [17, -28],
+            [14, -3],
+            [3, 12],
+            [8, 3],
+            [13, 10],
+            [9, 16],
+            [15, -5],
+            [7, 2]
+        ],
+        [
+            [3429, 5170],
+            [15, -5],
+            [3, 12],
+            [-5, 12],
+            [3, 17],
+            [11, -5],
+            [13, 6],
+            [16, -13]
+        ],
+        [
+            [3485, 5194],
+            [12, -12],
+            [9, 16],
+            [6, -3],
+            [4, -16],
+            [13, 4],
+            [11, 22],
+            [8, 44],
+            [17, 54]
+        ],
+        [
+            [3565, 5303],
+            [9, 3],
+            [7, -33],
+            [16, -103],
+            [14, -10],
+            [1, -41],
+            [-21, -48],
+            [9, -18],
+            [49, -9],
+            [1, -60],
+            [21, 39],
+            [35, -21],
+            [46, -36],
+            [14, -35],
+            [-5, -32],
+            [33, 18],
+            [54, -32],
+            [41, 3],
+            [41, -49],
+            [36, -66],
+            [21, -17],
+            [24, -3],
+            [10, -18],
+            [9, -76],
+            [5, -35],
+            [-11, -98],
+            [-14, -39],
+            [-39, -82],
+            [-18, -67],
+            [-21, -51],
+            [-7, -1],
+            [-7, -43],
+            [2, -111],
+            [-8, -91],
+            [-3, -39],
+            [-9, -23],
+            [-5, -79],
+            [-28, -77],
+            [-5, -61],
+            [-22, -26],
+            [-7, -35],
+            [-30, 0],
+            [-44, -23],
+            [-19, -26],
+            [-31, -18],
+            [-33, -47],
+            [-23, -58],
+            [-5, -44],
+            [5, -33],
+            [-5, -60],
+            [-6, -28],
+            [-20, -33],
+            [-31, -104],
+            [-24, -47],
+            [-19, -27],
+            [-13, -57],
+            [-18, -33]
+        ],
+        [
+            [3517, 3063],
+            [-8, 33],
+            [13, 28],
+            [-16, 40],
+            [-22, 33],
+            [-29, 38],
+            [-10, -2],
+            [-28, 46],
+            [-18, -7]
+        ],
+        [
+            [8172, 5325],
+            [11, 22],
+            [23, 32]
+        ],
+        [
+            [8206, 5379],
+            [-1, -29],
+            [-2, -37],
+            [-13, 1],
+            [-6, -20],
+            [-12, 31]
+        ],
+        [
+            [7546, 6698],
+            [12, -19],
+            [-2, -36],
+            [-23, -2],
+            [-23, 4],
+            [-18, -9],
+            [-25, 22],
+            [-1, 12]
+        ],
+        [
+            [7466, 6670],
+            [19, 44],
+            [15, 15],
+            [20, -14],
+            [14, -1],
+            [12, -16]
+        ],
+        [
+            [5817, 3752],
+            [-39, -43],
+            [-25, -44],
+            [-10, -40],
+            [-8, -22],
+            [-15, -4],
+            [-5, -29],
+            [-3, -18],
+            [-17, -14],
+            [-23, 3],
+            [-13, 17],
+            [-12, 7],
+            [-14, -14],
+            [-6, -28],
+            [-14, -18],
+            [-13, -26],
+            [-20, -6],
+            [-6, 20],
+            [2, 36],
+            [-16, 56],
+            [-8, 9]
+        ],
+        [
+            [5552, 3594],
+            [0, 173],
+            [27, 2],
+            [1, 210],
+            [21, 2],
+            [43, 21],
+            [10, -24],
+            [18, 23],
+            [9, 0],
+            [15, 13]
+        ],
+        [
+            [5696, 4014],
+            [5, -4]
+        ],
+        [
+            [5701, 4010],
+            [11, -48],
+            [5, -10],
+            [9, -34],
+            [32, -65],
+            [12, -7],
+            [0, -20],
+            [8, -38],
+            [21, -9],
+            [18, -27]
+        ],
+        [
+            [5424, 5496],
+            [23, 4],
+            [5, 16],
+            [5, -2],
+            [7, -13],
+            [34, 23],
+            [12, 23],
+            [15, 20],
+            [-3, 21],
+            [8, 6],
+            [27, -4],
+            [26, 27],
+            [20, 65],
+            [14, 24],
+            [18, 10]
+        ],
+        [
+            [5635, 5716],
+            [3, -26],
+            [16, -36],
+            [0, -25],
+            [-5, -24],
+            [2, -18],
+            [10, -18]
+        ],
+        [
+            [5661, 5569],
+            [21, -25]
+        ],
+        [
+            [5682, 5544],
+            [15, -24],
+            [0, -19],
+            [19, -31],
+            [12, -26],
+            [7, -35],
+            [20, -24],
+            [5, -18]
+        ],
+        [
+            [5760, 5367],
+            [-9, -7],
+            [-18, 2],
+            [-21, 6],
+            [-10, -5],
+            [-5, -14],
+            [-9, -2],
+            [-10, 12],
+            [-31, -29],
+            [-13, 6],
+            [-4, -5],
+            [-8, -35],
+            [-21, 11],
+            [-20, 6],
+            [-18, 22],
+            [-23, 20],
+            [-15, -19],
+            [-10, -30],
+            [-3, -41]
+        ],
+        [
+            [5512, 5265],
+            [-18, 3],
+            [-19, 10],
+            [-16, -32],
+            [-15, -55]
+        ],
+        [
+            [5444, 5191],
+            [-3, 18],
+            [-1, 27],
+            [-13, 19],
+            [-10, 30],
+            [-2, 21],
+            [-13, 31],
+            [2, 18],
+            [-3, 25],
+            [2, 45],
+            [7, 11],
+            [14, 60]
+        ],
+        [
+            [3231, 7808],
+            [20, -8],
+            [26, 1],
+            [-14, -24],
+            [-10, -4],
+            [-35, 25],
+            [-7, 20],
+            [10, 18],
+            [10, -28]
+        ],
+        [
+            [3283, 7958],
+            [-14, -1],
+            [-36, 19],
+            [-26, 28],
+            [10, 5],
+            [37, -15],
+            [28, -25],
+            [1, -11]
+        ],
+        [
+            [1569, 7923],
+            [-14, -8],
+            [-46, 27],
+            [-8, 21],
+            [-25, 21],
+            [-5, 16],
+            [-28, 11],
+            [-11, 32],
+            [2, 14],
+            [30, -13],
+            [17, -9],
+            [26, -6],
+            [9, -21],
+            [14, -28],
+            [28, -24],
+            [11, -33]
+        ],
+        [
+            [3440, 8052],
+            [-18, -52],
+            [18, 20],
+            [19, -12],
+            [-10, -21],
+            [25, -16],
+            [12, 14],
+            [28, -18],
+            [-8, -43],
+            [19, 10],
+            [4, -32],
+            [8, -36],
+            [-11, -52],
+            [-13, -2],
+            [-18, 11],
+            [6, 48],
+            [-8, 8],
+            [-32, -52],
+            [-17, 2],
+            [20, 28],
+            [-27, 14],
+            [-30, -3],
+            [-54, 2],
+            [-4, 17],
+            [17, 21],
+            [-12, 16],
+            [24, 36],
+            [28, 94],
+            [18, 33],
+            [24, 21],
+            [13, -3],
+            [-6, -16],
+            [-15, -37]
+        ],
+        [
+            [1313, 8250],
+            [27, 5],
+            [-8, -67],
+            [24, -48],
+            [-11, 0],
+            [-17, 27],
+            [-10, 27],
+            [-14, 19],
+            [-5, 26],
+            [1, 19],
+            [13, -8]
+        ],
+        [
+            [2798, 8730],
+            [-11, -31],
+            [-12, 5],
+            [-8, 17],
+            [2, 4],
+            [10, 18],
+            [12, -1],
+            [7, -12]
+        ],
+        [
+            [2725, 8762],
+            [-33, -32],
+            [-19, 1],
+            [-6, 16],
+            [20, 27],
+            [38, 0],
+            [0, -12]
+        ],
+        [
+            [2634, 8936],
+            [5, -26],
+            [15, 9],
+            [16, -15],
+            [30, -20],
+            [32, -19],
+            [2, -28],
+            [21, 5],
+            [20, -20],
+            [-25, -18],
+            [-43, 14],
+            [-16, 26],
+            [-27, -31],
+            [-40, -31],
+            [-9, 35],
+            [-38, -6],
+            [24, 30],
+            [4, 46],
+            [9, 54],
+            [20, -5]
+        ],
+        [
+            [2892, 9024],
+            [-31, -3],
+            [-7, 29],
+            [12, 34],
+            [26, 8],
+            [21, -17],
+            [1, -25],
+            [-4, -8],
+            [-18, -18]
+        ],
+        [
+            [2343, 9140],
+            [-17, -21],
+            [-38, 18],
+            [-22, -6],
+            [-38, 26],
+            [24, 19],
+            [19, 25],
+            [30, -16],
+            [17, -11],
+            [8, -11],
+            [17, -23]
+        ],
+        [
+            [3135, 7724],
+            [-18, 33],
+            [0, 81],
+            [-13, 17],
+            [-18, -10],
+            [-10, 16],
+            [-21, -45],
+            [-8, -46],
+            [-10, -27],
+            [-12, -9],
+            [-9, -3],
+            [-3, -15],
+            [-51, 0],
+            [-42, 0],
+            [-12, -11],
+            [-30, -42],
+            [-3, -5],
+            [-9, -23],
+            [-26, 0],
+            [-27, 0],
+            [-12, -10],
+            [4, -11],
+            [2, -18],
+            [0, -6],
+            [-36, -30],
+            [-29, -9],
+            [-32, -31],
+            [-7, 0],
+            [-10, 9],
+            [-3, 8],
+            [1, 6],
+            [6, 21],
+            [13, 33],
+            [8, 35],
+            [-5, 51],
+            [-6, 53],
+            [-29, 28],
+            [3, 11],
+            [-4, 7],
+            [-8, 0],
+            [-5, 9],
+            [-2, 14],
+            [-5, -6],
+            [-7, 2],
+            [1, 6],
+            [-6, 6],
+            [-3, 15],
+            [-21, 19],
+            [-23, 20],
+            [-27, 23],
+            [-26, 21],
+            [-25, -17],
+            [-9, 0],
+            [-34, 15],
+            [-23, -8],
+            [-27, 19],
+            [-28, 9],
+            [-19, 4],
+            [-9, 10],
+            [-5, 32],
+            [-9, 0],
+            [-1, -23],
+            [-57, 0],
+            [-95, 0],
+            [-94, 0],
+            [-84, 0],
+            [-83, 0],
+            [-82, 0],
+            [-85, 0],
+            [-27, 0],
+            [-82, 0],
+            [-79, 0]
+        ],
+        [
+            [1588, 7952],
+            [-4, 0],
+            [-54, 58],
+            [-20, 26],
+            [-50, 24],
+            [-15, 53],
+            [3, 36],
+            [-35, 25],
+            [-5, 48],
+            [-34, 43],
+            [0, 30]
+        ],
+        [
+            [1374, 8295],
+            [15, 29],
+            [0, 37],
+            [-48, 37],
+            [-28, 68],
+            [-17, 42],
+            [-26, 27],
+            [-19, 24],
+            [-14, 31],
+            [-28, -20],
+            [-27, -33],
+            [-25, 39],
+            [-19, 26],
+            [-27, 16],
+            [-28, 2],
+            [0, 337],
+            [1, 219]
+        ],
+        [
+            [1084, 9176],
+            [51, -14],
+            [44, -29],
+            [29, -5],
+            [24, 24],
+            [34, 19],
+            [41, -7],
+            [42, 26],
+            [45, 14],
+            [20, -24],
+            [20, 14],
+            [6, 27],
+            [20, -6],
+            [47, -53],
+            [37, 40],
+            [3, -45],
+            [34, 10],
+            [11, 17],
+            [34, -3],
+            [42, -25],
+            [65, -22],
+            [38, -10],
+            [28, 4],
+            [37, -30],
+            [-39, -29],
+            [50, -13],
+            [75, 7],
+            [24, 11],
+            [29, -36],
+            [31, 30],
+            [-29, 25],
+            [18, 20],
+            [34, 3],
+            [22, 6],
+            [23, -14],
+            [28, -32],
+            [31, 5],
+            [49, -27],
+            [43, 9],
+            [40, -1],
+            [-3, 37],
+            [25, 10],
+            [43, -20],
+            [0, -56],
+            [17, 47],
+            [23, -1],
+            [12, 59],
+            [-30, 36],
+            [-32, 24],
+            [2, 65],
+            [33, 43],
+            [37, -9],
+            [28, -26],
+            [38, -67],
+            [-25, -29],
+            [52, -12],
+            [-1, -60],
+            [38, 46],
+            [33, -38],
+            [-9, -44],
+            [27, -40],
+            [29, 43],
+            [21, 51],
+            [1, 65],
+            [40, -5],
+            [41, -8],
+            [37, -30],
+            [2, -29],
+            [-21, -31],
+            [20, -32],
+            [-4, -29],
+            [-54, -41],
+            [-39, -9],
+            [-29, 18],
+            [-8, -30],
+            [-27, -50],
+            [-8, -26],
+            [-32, -40],
+            [-40, -4],
+            [-22, -25],
+            [-2, -38],
+            [-32, -7],
+            [-34, -48],
+            [-30, -67],
+            [-11, -46],
+            [-1, -69],
+            [40, -10],
+            [13, -55],
+            [13, -45],
+            [39, 12],
+            [51, -26],
+            [28, -22],
+            [20, -28],
+            [35, -17],
+            [29, -24],
+            [46, -4],
+            [30, -6],
+            [-4, -51],
+            [8, -59],
+            [21, -66],
+            [41, -56],
+            [21, 19],
+            [15, 61],
+            [-14, 93],
+            [-20, 31],
+            [45, 28],
+            [31, 41],
+            [16, 41],
+            [-3, 40],
+            [-19, 50],
+            [-33, 44],
+            [32, 62],
+            [-12, 54],
+            [-9, 92],
+            [19, 14],
+            [48, -16],
+            [29, -6],
+            [23, 15],
+            [25, -20],
+            [35, -34],
+            [8, -23],
+            [50, -4],
+            [-1, -50],
+            [9, -74],
+            [25, -10],
+            [21, -35],
+            [40, 33],
+            [26, 65],
+            [19, 28],
+            [21, -53],
+            [36, -75],
+            [31, -71],
+            [-11, -37],
+            [37, -33],
+            [25, -34],
+            [44, -15],
+            [18, -19],
+            [11, -50],
+            [22, -8],
+            [11, -22],
+            [2, -67],
+            [-20, -22],
+            [-20, -21],
+            [-46, -21],
+            [-35, -48],
+            [-47, -10],
+            [-59, 13],
+            [-42, 0],
+            [-29, -4],
+            [-23, -43],
+            [-35, -26],
+            [-40, -78],
+            [-32, -54],
+            [23, 9],
+            [45, 78],
+            [58, 49],
+            [42, 6],
+            [24, -29],
+            [-26, -40],
+            [9, -63],
+            [9, -45],
+            [36, -29],
+            [46, 8],
+            [28, 67],
+            [2, -43],
+            [17, -22],
+            [-34, -38],
+            [-61, -36],
+            [-28, -23],
+            [-31, -43],
+            [-21, 4],
+            [-1, 50],
+            [48, 49],
+            [-44, -2],
+            [-31, -7]
+        ],
+        [
+            [1829, 9377],
+            [-14, -27],
+            [61, 17],
+            [39, -29],
+            [31, 30],
+            [26, -20],
+            [23, -58],
+            [14, 25],
+            [-20, 60],
+            [24, 9],
+            [28, -9],
+            [31, -24],
+            [17, -58],
+            [9, -41],
+            [47, -30],
+            [50, -28],
+            [-3, -26],
+            [-46, -4],
+            [18, -23],
+            [-9, -22],
+            [-51, 9],
+            [-48, 16],
+            [-32, -3],
+            [-52, -20],
+            [-70, -9],
+            [-50, -6],
+            [-15, 28],
+            [-38, 16],
+            [-24, -6],
+            [-35, 47],
+            [19, 6],
+            [43, 10],
+            [39, -3],
+            [36, 11],
+            [-54, 13],
+            [-59, -4],
+            [-39, 1],
+            [-15, 22],
+            [64, 23],
+            [-42, -1],
+            [-49, 16],
+            [23, 44],
+            [20, 24],
+            [74, 36],
+            [29, -12]
+        ],
+        [
+            [2097, 9395],
+            [-24, -39],
+            [-44, 41],
+            [10, 9],
+            [37, 2],
+            [21, -13]
+        ],
+        [
+            [2879, 9376],
+            [3, -16],
+            [-30, 2],
+            [-30, 1],
+            [-30, -8],
+            [-8, 3],
+            [-31, 32],
+            [1, 21],
+            [14, 4],
+            [63, -6],
+            [48, -33]
+        ],
+        [
+            [2595, 9379],
+            [22, -36],
+            [26, 47],
+            [70, 24],
+            [48, -61],
+            [-4, -38],
+            [55, 17],
+            [26, 23],
+            [62, -30],
+            [38, -28],
+            [3, -25],
+            [52, 13],
+            [29, -38],
+            [67, -23],
+            [24, -24],
+            [26, -55],
+            [-51, -28],
+            [66, -38],
+            [44, -13],
+            [40, -55],
+            [44, -3],
+            [-9, -42],
+            [-49, -69],
+            [-34, 26],
+            [-44, 57],
+            [-36, -8],
+            [-3, -34],
+            [29, -34],
+            [38, -27],
+            [11, -16],
+            [18, -58],
+            [-9, -43],
+            [-35, 16],
+            [-70, 47],
+            [39, -51],
+            [29, -35],
+            [5, -21],
+            [-76, 24],
+            [-59, 34],
+            [-34, 29],
+            [10, 17],
+            [-42, 30],
+            [-40, 29],
+            [0, -18],
+            [-80, -9],
+            [-23, 20],
+            [18, 44],
+            [52, 1],
+            [57, 7],
+            [-9, 21],
+            [10, 30],
+            [36, 57],
+            [-8, 27],
+            [-11, 20],
+            [-42, 29],
+            [-57, 20],
+            [18, 15],
+            [-29, 36],
+            [-25, 4],
+            [-22, 20],
+            [-14, -18],
+            [-51, -7],
+            [-101, 13],
+            [-59, 17],
+            [-45, 9],
+            [-23, 21],
+            [29, 27],
+            [-39, 0],
+            [-9, 60],
+            [21, 53],
+            [29, 24],
+            [72, 16],
+            [-21, -39]
+        ],
+        [
+            [2212, 9420],
+            [33, -12],
+            [50, 7],
+            [7, -17],
+            [-26, -28],
+            [42, -26],
+            [-5, -53],
+            [-45, -23],
+            [-27, 5],
+            [-19, 23],
+            [-69, 45],
+            [0, 19],
+            [57, -7],
+            [-31, 38],
+            [33, 29]
+        ],
+        [
+            [2411, 9357],
+            [-30, -45],
+            [-32, 3],
+            [-17, 52],
+            [1, 29],
+            [14, 25],
+            [28, 16],
+            [58, -2],
+            [53, -14],
+            [-42, -53],
+            [-33, -11]
+        ],
+        [
+            [1654, 9275],
+            [-73, -29],
+            [-15, 26],
+            [-64, 31],
+            [12, 25],
+            [19, 43],
+            [24, 39],
+            [-27, 36],
+            [94, 10],
+            [39, -13],
+            [71, -3],
+            [27, -17],
+            [30, -25],
+            [-35, -15],
+            [-68, -41],
+            [-34, -42],
+            [0, -25]
+        ],
+        [
+            [2399, 9487],
+            [-15, -23],
+            [-40, 5],
+            [-34, 15],
+            [15, 27],
+            [40, 16],
+            [24, -21],
+            [10, -19]
+        ],
+        [
+            [2264, 9590],
+            [21, -27],
+            [1, -31],
+            [-13, -44],
+            [-46, -6],
+            [-30, 10],
+            [1, 34],
+            [-45, -4],
+            [-2, 45],
+            [30, -2],
+            [41, 21],
+            [40, -4],
+            [2, 8]
+        ],
+        [
+            [1994, 9559],
+            [11, -21],
+            [25, 10],
+            [29, -2],
+            [5, -29],
+            [-17, -28],
+            [-94, -10],
+            [-70, -25],
+            [-43, -2],
+            [-3, 20],
+            [57, 26],
+            [-125, -7],
+            [-39, 10],
+            [38, 58],
+            [26, 17],
+            [78, -20],
+            [50, -35],
+            [48, -5],
+            [-40, 57],
+            [26, 21],
+            [29, -7],
+            [9, -28]
+        ],
+        [
+            [2370, 9612],
+            [30, -19],
+            [55, 0],
+            [24, -19],
+            [-6, -22],
+            [32, -14],
+            [17, -14],
+            [38, -2],
+            [40, -5],
+            [44, 13],
+            [57, 5],
+            [45, -5],
+            [30, -22],
+            [6, -24],
+            [-17, -16],
+            [-42, -13],
+            [-35, 8],
+            [-80, -10],
+            [-57, -1],
+            [-45, 8],
+            [-74, 19],
+            [-9, 32],
+            [-4, 29],
+            [-27, 26],
+            [-58, 7],
+            [-32, 19],
+            [10, 24],
+            [58, -4]
+        ],
+        [
+            [1772, 9645],
+            [-4, -46],
+            [-21, -20],
+            [-26, -3],
+            [-52, -26],
+            [-44, -9],
+            [-38, 13],
+            [47, 44],
+            [57, 39],
+            [43, -1],
+            [38, 9]
+        ],
+        [
+            [2393, 9637],
+            [-13, -2],
+            [-52, 4],
+            [-7, 17],
+            [56, -1],
+            [19, -11],
+            [-3, -7]
+        ],
+        [
+            [1939, 9648],
+            [-52, -17],
+            [-41, 19],
+            [23, 19],
+            [40, 6],
+            [39, -10],
+            [-9, -17]
+        ],
+        [
+            [1954, 9701],
+            [-34, -11],
+            [-46, 0],
+            [0, 8],
+            [29, 18],
+            [14, -3],
+            [37, -12]
+        ],
+        [
+            [2338, 9669],
+            [-41, -12],
+            [-23, 13],
+            [-12, 23],
+            [-2, 24],
+            [36, -2],
+            [16, -4],
+            [33, -21],
+            [-7, -21]
+        ],
+        [
+            [2220, 9685],
+            [11, -25],
+            [-45, 7],
+            [-46, 19],
+            [-62, 2],
+            [27, 18],
+            [-34, 14],
+            [-2, 22],
+            [55, -8],
+            [75, -21],
+            [21, -28]
+        ],
+        [
+            [2583, 9764],
+            [33, -20],
+            [-38, -17],
+            [-51, -45],
+            [-50, -4],
+            [-57, 8],
+            [-30, 24],
+            [0, 21],
+            [22, 16],
+            [-50, 0],
+            [-31, 19],
+            [-18, 27],
+            [20, 26],
+            [19, 18],
+            [28, 4],
+            [-12, 14],
+            [65, 3],
+            [35, -32],
+            [47, -12],
+            [46, -11],
+            [22, -39]
+        ],
+        [
+            [3097, 9967],
+            [74, -4],
+            [60, -8],
+            [51, -16],
+            [-2, -16],
+            [-67, -25],
+            [-68, -12],
+            [-25, -14],
+            [61, 1],
+            [-66, -36],
+            [-45, -17],
+            [-48, -48],
+            [-57, -10],
+            [-18, -12],
+            [-84, -6],
+            [39, -8],
+            [-20, -10],
+            [23, -29],
+            [-26, -21],
+            [-43, -16],
+            [-13, -24],
+            [-39, -17],
+            [4, -14],
+            [48, 3],
+            [0, -15],
+            [-74, -35],
+            [-73, 16],
+            [-81, -9],
+            [-42, 7],
+            [-52, 3],
+            [-4, 29],
+            [52, 13],
+            [-14, 43],
+            [17, 4],
+            [74, -26],
+            [-38, 38],
+            [-45, 11],
+            [23, 23],
+            [49, 14],
+            [8, 21],
+            [-39, 23],
+            [-12, 31],
+            [76, -3],
+            [22, -6],
+            [43, 21],
+            [-62, 7],
+            [-98, -4],
+            [-49, 20],
+            [-23, 24],
+            [-32, 17],
+            [-6, 21],
+            [41, 11],
+            [32, 2],
+            [55, 9],
+            [41, 22],
+            [34, -3],
+            [30, -16],
+            [21, 32],
+            [37, 9],
+            [50, 7],
+            [85, 2],
+            [14, -6],
+            [81, 10],
+            [60, -4],
+            [60, -4]
+        ],
+        [
+            [5290, 7828],
+            [-3, -24],
+            [-12, -10],
+            [-20, 7],
+            [-6, -24],
+            [-14, -2],
+            [-5, 10],
+            [-15, -20],
+            [-13, -3],
+            [-12, 13]
+        ],
+        [
+            [5190, 7775],
+            [-10, 25],
+            [-13, -9],
+            [0, 27],
+            [21, 33],
+            [-1, 15],
+            [12, -5],
+            [8, 10]
+        ],
+        [
+            [5207, 7871],
+            [24, -1],
+            [5, 13],
+            [30, -18]
+        ],
+        [
+            [3140, 1814],
+            [-10, -24],
+            [-23, -18],
+            [-14, 2],
+            [-16, 5],
+            [-21, 18],
+            [-29, 8],
+            [-35, 33],
+            [-28, 32],
+            [-38, 66],
+            [23, -12],
+            [39, -40],
+            [36, -21],
+            [15, 27],
+            [9, 41],
+            [25, 24],
+            [20, -7]
+        ],
+        [
+            [3095, 1968],
+            [-25, 0],
+            [-13, -14],
+            [-25, -22],
+            [-5, -55],
+            [-11, -1],
+            [-32, 19],
+            [-32, 41],
+            [-34, 34],
+            [-9, 37],
+            [8, 35],
+            [-14, 39],
+            [-4, 101],
+            [12, 57],
+            [30, 45],
+            [-43, 18],
+            [27, 52],
+            [9, 98],
+            [31, -21],
+            [15, 123],
+            [-19, 15],
+            [-9, -73],
+            [-17, 8],
+            [9, 84],
+            [9, 110],
+            [13, 40],
+            [-8, 58],
+            [-2, 66],
+            [11, 2],
+            [17, 96],
+            [20, 94],
+            [11, 88],
+            [-6, 89],
+            [8, 49],
+            [-3, 72],
+            [16, 73],
+            [5, 114],
+            [9, 123],
+            [9, 132],
+            [-2, 96],
+            [-6, 84]
+        ],
+        [
+            [3045, 3974],
+            [14, 15],
+            [8, 30]
+        ],
+        [
+            [8064, 6161],
+            [-24, -28],
+            [-23, 18],
+            [0, 51],
+            [13, 26],
+            [31, 17],
+            [16, -1],
+            [6, -23],
+            [-12, -26],
+            [-7, -34]
+        ],
+        [
+            [8628, 7562],
+            [-18, 35],
+            [-11, -33],
+            [-43, -26],
+            [4, -31],
+            [-24, 2],
+            [-13, 19],
+            [-19, -42],
+            [-30, -32],
+            [-23, -38]
+        ],
+        [
+            [8451, 7416],
+            [-39, -17],
+            [-20, -27],
+            [-30, -17],
+            [15, 28],
+            [-6, 23],
+            [22, 40],
+            [-15, 30],
+            [-24, -20],
+            [-32, -41],
+            [-17, -39],
+            [-27, -2],
+            [-14, -28],
+            [15, -40],
+            [22, -10],
+            [1, -26],
+            [22, -17],
+            [31, 42],
+            [25, -23],
+            [18, -2],
+            [4, -31],
+            [-39, -16],
+            [-13, -32],
+            [-27, -30],
+            [-14, -41],
+            [30, -33],
+            [11, -58],
+            [17, -54],
+            [18, -45],
+            [0, -44],
+            [-17, -16],
+            [6, -32],
+            [17, -18],
+            [-5, -48],
+            [-7, -47],
+            [-15, -5],
+            [-21, -64],
+            [-22, -78],
+            [-26, -70],
+            [-38, -55],
+            [-39, -50],
+            [-31, -6],
+            [-17, -27],
+            [-10, 20],
+            [-15, -30],
+            [-39, -29],
+            [-29, -9],
+            [-10, -63],
+            [-15, -3],
+            [-8, 43],
+            [7, 22],
+            [-37, 19],
+            [-13, -9]
+        ],
+        [
+            [8001, 6331],
+            [-28, 15],
+            [-14, 24],
+            [5, 34],
+            [-26, 11],
+            [-13, 22],
+            [-24, -31],
+            [-27, -7],
+            [-22, 0],
+            [-15, -14]
+        ],
+        [
+            [7837, 6385],
+            [-14, -9],
+            [4, -68],
+            [-15, 2],
+            [-2, 14]
+        ],
+        [
+            [7810, 6324],
+            [-1, 24],
+            [-20, -17],
+            [-12, 11],
+            [-21, 22],
+            [8, 49],
+            [-18, 12],
+            [-6, 54],
+            [-30, -10],
+            [4, 70],
+            [26, 50],
+            [1, 48],
+            [-1, 46],
+            [-12, 14],
+            [-9, 35],
+            [-16, -5]
+        ],
+        [
+            [7703, 6727],
+            [-30, 9],
+            [9, 25],
+            [-13, 36],
+            [-20, -24],
+            [-23, 14],
+            [-32, -37],
+            [-25, -44],
+            [-23, -8]
+        ],
+        [
+            [7466, 6670],
+            [-2, 47],
+            [-17, -13]
+        ],
+        [
+            [7447, 6704],
+            [-32, 6],
+            [-32, 14],
+            [-22, 26],
+            [-22, 11],
+            [-9, 29],
+            [-16, 8],
+            [-28, 39],
+            [-22, 18],
+            [-12, -14]
+        ],
+        [
+            [7252, 6841],
+            [-38, 41],
+            [-28, 37],
+            [-7, 65],
+            [20, -7],
+            [1, 30],
+            [-12, 30],
+            [3, 48],
+            [-30, 69]
+        ],
+        [
+            [7161, 7154],
+            [-45, 24],
+            [-8, 46],
+            [-21, 27]
+        ],
+        [
+            [7082, 7268],
+            [-4, 34],
+            [1, 23],
+            [-17, 13],
+            [-9, -6],
+            [-7, 55]
+        ],
+        [
+            [7046, 7387],
+            [8, 13],
+            [-4, 14],
+            [26, 28],
+            [20, 12],
+            [29, -8],
+            [11, 38],
+            [35, 7],
+            [10, 23],
+            [44, 32],
+            [4, 13]
+        ],
+        [
+            [7229, 7559],
+            [-2, 34],
+            [19, 15],
+            [-25, 103],
+            [55, 24],
+            [14, 13],
+            [20, 106],
+            [55, -20],
+            [15, 27],
+            [2, 59],
+            [23, 6],
+            [21, 39]
+        ],
+        [
+            [7426, 7965],
+            [11, 5]
+        ],
+        [
+            [7437, 7970],
+            [7, -41],
+            [23, -32],
+            [40, -22],
+            [19, -47],
+            [-10, -70],
+            [10, -25],
+            [33, -10],
+            [37, -8],
+            [33, -37],
+            [18, -7],
+            [12, -54],
+            [17, -35],
+            [30, 1],
+            [58, -13],
+            [36, 8],
+            [28, -9],
+            [41, -36],
+            [34, 0],
+            [12, -18],
+            [32, 32],
+            [45, 20],
+            [42, 2],
+            [32, 21],
+            [20, 32],
+            [20, 20],
+            [-5, 19],
+            [-9, 23],
+            [15, 38],
+            [15, -5],
+            [29, -12],
+            [28, 31],
+            [42, 23],
+            [20, 39],
+            [20, 17],
+            [40, 8],
+            [22, -7],
+            [3, 21],
+            [-25, 41],
+            [-22, 19],
+            [-22, -22],
+            [-27, 10],
+            [-16, -8],
+            [-7, 24],
+            [20, 59],
+            [13, 45]
+        ],
+        [
+            [8240, 8005],
+            [34, -23],
+            [39, 38],
+            [-1, 26],
+            [26, 62],
+            [15, 19],
+            [0, 33],
+            [-16, 14],
+            [23, 29],
+            [35, 11],
+            [37, 2],
+            [41, -18],
+            [25, -22],
+            [17, -59],
+            [10, -26],
+            [10, -36],
+            [10, -58],
+            [49, -19],
+            [32, -42],
+            [12, -55],
+            [42, 0],
+            [24, 23],
+            [46, 17],
+            [-15, -53],
+            [-11, -21],
+            [-9, -65],
+            [-19, -58],
+            [-33, 11],
+            [-24, -21],
+            [7, -51],
+            [-4, -69],
+            [-14, -2],
+            [0, -30]
+        ],
+        [
+            [4920, 5353],
+            [-12, -1],
+            [-20, 12],
+            [-18, -1],
+            [-33, -10],
+            [-19, -18],
+            [-27, -21],
+            [-6, 1]
+        ],
+        [
+            [4785, 5315],
+            [2, 49],
+            [3, 7],
+            [-1, 24],
+            [-12, 24],
+            [-8, 4],
+            [-8, 17],
+            [6, 26],
+            [-3, 28],
+            [1, 18]
+        ],
+        [
+            [4765, 5512],
+            [5, 0],
+            [1, 25],
+            [-2, 12],
+            [3, 8],
+            [10, 7],
+            [-7, 47],
+            [-6, 25],
+            [2, 20],
+            [5, 4]
+        ],
+        [
+            [4776, 5660],
+            [4, 6],
+            [8, -9],
+            [21, -1],
+            [5, 18],
+            [5, -1],
+            [8, 6],
+            [4, -25],
+            [7, 7],
+            [11, 9]
+        ],
+        [
+            [4921, 5627],
+            [7, -84],
+            [-11, -50],
+            [-8, -66],
+            [12, -51],
+            [-1, -23]
+        ],
+        [
+            [5363, 5191],
+            [-4, 4],
+            [-16, -8],
+            [-17, 8],
+            [-13, -4]
+        ],
+        [
+            [5313, 5191],
+            [-45, 1]
+        ],
+        [
+            [5268, 5192],
+            [4, 47],
+            [-11, 39],
+            [-13, 10],
+            [-6, 27],
+            [-7, 8],
+            [1, 16]
+        ],
+        [
+            [5236, 5339],
+            [7, 42],
+            [13, 57],
+            [8, 1],
+            [17, 34],
+            [10, 1],
+            [16, -24],
+            [19, 20],
+            [2, 25],
+            [7, 23],
+            [4, 30],
+            [15, 25],
+            [5, 41],
+            [6, 13],
+            [4, 31],
+            [7, 37],
+            [24, 46],
+            [1, 20],
+            [3, 10],
+            [-11, 24]
+        ],
+        [
+            [5393, 5795],
+            [1, 19],
+            [8, 3]
+        ],
+        [
+            [5402, 5817],
+            [11, -38],
+            [2, -39],
+            [-1, -39],
+            [15, -54],
+            [-15, 1],
+            [-8, -4],
+            [-13, 6],
+            [-6, -28],
+            [16, -35],
+            [13, -10],
+            [3, -24],
+            [9, -41],
+            [-4, -16]
+        ],
+        [
+            [5444, 5191],
+            [-2, -31],
+            [-22, 14],
+            [-22, 15],
+            [-35, 2]
+        ],
+        [
+            [5856, 5265],
+            [-2, -69],
+            [11, -8],
+            [-9, -21],
+            [-10, -16],
+            [-11, -31],
+            [-6, -27],
+            [-1, -48],
+            [-7, -22],
+            [0, -45]
+        ],
+        [
+            [5821, 4978],
+            [-8, -16],
+            [-1, -35],
+            [-4, -5],
+            [-2, -32]
+        ],
+        [
+            [5814, 4792],
+            [5, -55],
+            [-2, -30],
+            [5, -35],
+            [16, -33],
+            [15, -74]
+        ],
+        [
+            [5853, 4565],
+            [-11, 6],
+            [-37, -10],
+            [-7, -7],
+            [-8, -38],
+            [6, -26],
+            [-5, -70],
+            [-3, -59],
+            [7, -11],
+            [19, -23],
+            [8, 11],
+            [2, -64],
+            [-21, 1],
+            [-11, 32],
+            [-10, 25],
+            [-22, 9],
+            [-6, 31],
+            [-17, -19],
+            [-22, 8],
+            [-10, 27],
+            [-17, 6],
+            [-13, -2],
+            [-2, 19],
+            [-9, 1]
+        ],
+        [
+            [5342, 4697],
+            [-4, 18]
+        ],
+        [
+            [5360, 4775],
+            [8, -6],
+            [9, 23],
+            [15, -1],
+            [2, -17],
+            [11, -10],
+            [16, 37],
+            [16, 29],
+            [7, 19],
+            [-1, 48],
+            [12, 58],
+            [13, 30],
+            [18, 29],
+            [3, 18],
+            [1, 22],
+            [5, 21],
+            [-2, 33],
+            [4, 52],
+            [5, 37],
+            [8, 32],
+            [2, 36]
+        ],
+        [
+            [5760, 5367],
+            [17, -49],
+            [12, -7],
+            [8, 10],
+            [12, -4],
+            [16, 12],
+            [6, -25],
+            [25, -39]
+        ],
+        [
+            [5330, 4760],
+            [-22, 62]
+        ],
+        [
+            [5308, 4822],
+            [21, 33],
+            [-11, 39],
+            [10, 15],
+            [19, 7],
+            [2, 26],
+            [15, -28],
+            [24, -2],
+            [9, 27],
+            [3, 40],
+            [-3, 46],
+            [-13, 35],
+            [12, 68],
+            [-7, 12],
+            [-21, -5],
+            [-7, 31],
+            [2, 25]
+        ],
+        [
+            [2906, 5049],
+            [-12, 14],
+            [-14, 19],
+            [-7, -9],
+            [-24, 8],
+            [-7, 25],
+            [-5, -1],
+            [-28, 34]
+        ],
+        [
+            [2809, 5139],
+            [-3, 18],
+            [10, 5],
+            [-1, 29],
+            [6, 22],
+            [14, 4],
+            [12, 37],
+            [10, 31],
+            [-10, 14],
+            [5, 34],
+            [-6, 54],
+            [6, 16],
+            [-4, 50],
+            [-12, 31]
+        ],
+        [
+            [2836, 5484],
+            [4, 29],
+            [9, -4],
+            [5, 17],
+            [-6, 35],
+            [3, 9]
+        ],
+        [
+            [2851, 5570],
+            [14, -2],
+            [21, 41],
+            [12, 6],
+            [0, 20],
+            [5, 50],
+            [16, 27],
+            [17, 1],
+            [3, 13],
+            [21, -5],
+            [22, 30],
+            [11, 13],
+            [14, 28],
+            [9, -3],
+            [8, -16],
+            [-6, -20]
+        ],
+        [
+            [3018, 5753],
+            [-18, -10],
+            [-7, -29],
+            [-10, -17],
+            [-8, -22],
+            [-4, -42],
+            [-8, -35],
+            [15, -4],
+            [3, -27],
+            [6, -13],
+            [3, -24],
+            [-4, -22],
+            [1, -12],
+            [7, -5],
+            [7, -20],
+            [36, 5],
+            [16, -7],
+            [19, -51],
+            [11, 6],
+            [20, -3],
+            [16, 7],
+            [10, -10],
+            [-5, -32],
+            [-6, -20],
+            [-2, -42],
+            [5, -40],
+            [8, -17],
+            [1, -13],
+            [-14, -30],
+            [10, -13],
+            [8, -21],
+            [8, -58]
+        ],
+        [
+            [3058, 4804],
+            [-14, 31],
+            [-8, 1],
+            [18, 61],
+            [-21, 27],
+            [-17, -5],
+            [-10, 10],
+            [-15, -15],
+            [-21, 7],
+            [-16, 62],
+            [-13, 15],
+            [-9, 28],
+            [-19, 28],
+            [-7, -5]
+        ],
+        [
+            [2695, 5543],
+            [-15, 14],
+            [-6, 12],
+            [4, 10],
+            [-1, 13],
+            [-8, 14],
+            [-11, 12],
+            [-10, 8],
+            [-1, 17],
+            [-8, 10],
+            [2, -17],
+            [-5, -14],
+            [-7, 17],
+            [-9, 5],
+            [-4, 12],
+            [1, 18],
+            [3, 19],
+            [-8, 8],
+            [7, 12]
+        ],
+        [
+            [2619, 5713],
+            [4, 7],
+            [18, -15],
+            [7, 7],
+            [9, -5],
+            [4, -12],
+            [8, -4],
+            [7, 13]
+        ],
+        [
+            [2676, 5704],
+            [7, -32],
+            [11, -24],
+            [13, -25]
+        ],
+        [
+            [2707, 5623],
+            [-11, -6],
+            [0, -23],
+            [6, -9],
+            [-4, -7],
+            [1, -11],
+            [-2, -12],
+            [-2, -12]
+        ],
+        [
+            [2715, 6427],
+            [23, -4],
+            [22, 0],
+            [26, -21],
+            [11, -21],
+            [26, 6],
+            [10, -13],
+            [24, -37],
+            [17, -27],
+            [9, 1],
+            [17, -12],
+            [-2, -17],
+            [20, -2],
+            [21, -24],
+            [-3, -14],
+            [-19, -7],
+            [-18, -3],
+            [-19, 4],
+            [-40, -5],
+            [18, 32],
+            [-11, 16],
+            [-18, 4],
+            [-9, 17],
+            [-7, 33],
+            [-16, -2],
+            [-26, 16],
+            [-8, 12],
+            [-36, 10],
+            [-10, 11],
+            [11, 15],
+            [-28, 3],
+            [-20, -31],
+            [-11, -1],
+            [-4, -14],
+            [-14, -7],
+            [-12, 6],
+            [15, 18],
+            [6, 22],
+            [13, 13],
+            [14, 11],
+            [21, 6],
+            [7, 6]
+        ],
+        [
+            [5909, 7133],
+            [2, 1],
+            [4, 14],
+            [20, -1],
+            [25, 18],
+            [-19, -25],
+            [2, -11]
+        ],
+        [
+            [5943, 7129],
+            [-3, 2],
+            [-5, -5],
+            [-4, 1],
+            [-2, -2],
+            [0, 6],
+            [-2, 4],
+            [-6, 0],
+            [-7, -5],
+            [-5, 3]
+        ],
+        [
+            [5943, 7129],
+            [1, -5],
+            [-28, -24],
+            [-14, 8],
+            [-7, 23],
+            [14, 2]
+        ],
+        [
+            [5377, 7945],
+            [-16, 25],
+            [-14, 15],
+            [-3, 25],
+            [-5, 17],
+            [21, 13],
+            [10, 15],
+            [20, 11],
+            [7, 11],
+            [7, -6],
+            [13, 6]
+        ],
+        [
+            [5417, 8077],
+            [13, -19],
+            [21, -5],
+            [-2, -17],
+            [15, -12],
+            [4, 15],
+            [19, -6],
+            [3, -19],
+            [20, -3],
+            [13, -29]
+        ],
+        [
+            [5523, 7982],
+            [-8, 0],
+            [-4, -11],
+            [-7, -3],
+            [-2, -13],
+            [-5, -3],
+            [-1, -5],
+            [-9, -7],
+            [-12, 1],
+            [-4, -13]
+        ],
+        [
+            [5275, 8306],
+            [1, -23],
+            [28, -14],
+            [-1, -21],
+            [29, 11],
+            [15, 16],
+            [32, -23],
+            [13, -19]
+        ],
+        [
+            [5392, 8233],
+            [6, -30],
+            [-8, -16],
+            [11, -21],
+            [6, -31],
+            [-2, -21],
+            [12, -37]
+        ],
+        [
+            [5207, 7871],
+            [3, 42],
+            [14, 40],
+            [-40, 11],
+            [-13, 16]
+        ],
+        [
+            [5171, 7980],
+            [2, 26],
+            [-6, 13]
+        ],
+        [
+            [5171, 8059],
+            [-5, 62],
+            [17, 0],
+            [7, 22],
+            [6, 54],
+            [-5, 20]
+        ],
+        [
+            [5191, 8217],
+            [6, 13],
+            [23, 3],
+            [5, -13],
+            [19, 29],
+            [-6, 22],
+            [-2, 34]
+        ],
+        [
+            [5236, 8305],
+            [21, -8],
+            [18, 9]
+        ],
+        [
+            [6196, 5808],
+            [7, -19],
+            [-1, -24],
+            [-16, -14],
+            [12, -16]
+        ],
+        [
+            [6198, 5735],
+            [-10, -32]
+        ],
+        [
+            [6188, 5703],
+            [-7, 11],
+            [-6, -5],
+            [-16, 1],
+            [0, 18],
+            [-2, 17],
+            [9, 27],
+            [10, 26]
+        ],
+        [
+            [6176, 5798],
+            [12, -5],
+            [8, 15]
+        ],
+        [
+            [5352, 8343],
+            [-17, -48],
+            [-29, 33],
+            [-4, 25],
+            [41, 19],
+            [9, -29]
+        ],
+        [
+            [5236, 8305],
+            [-11, 32],
+            [-1, 61],
+            [5, 16],
+            [8, 17],
+            [24, 4],
+            [10, 16],
+            [22, 17],
+            [-1, -30],
+            [-8, -20],
+            [4, -16],
+            [15, -9],
+            [-7, -22],
+            [-8, 6],
+            [-20, -42],
+            [7, -29]
+        ],
+        [
+            [3008, 6222],
+            [3, 10],
+            [22, 0],
+            [16, -15],
+            [8, 1],
+            [5, -21],
+            [15, 1],
+            [-1, -17],
+            [12, -2],
+            [14, -22],
+            [-10, -24],
+            [-14, 13],
+            [-12, -3],
+            [-9, 3],
+            [-5, -11],
+            [-11, -3],
+            [-4, 14],
+            [-10, -8],
+            [-11, -41],
+            [-7, 10],
+            [-1, 17]
+        ],
+        [
+            [3008, 6124],
+            [0, 16],
+            [-7, 17],
+            [7, 10],
+            [2, 23],
+            [-2, 32]
+        ],
+        [
+            [5333, 6444],
+            [-95, -112],
+            [-81, -117],
+            [-39, -26]
+        ],
+        [
+            [5118, 6189],
+            [-31, -6],
+            [0, 38],
+            [-13, 10],
+            [-17, 16],
+            [-7, 28],
+            [-94, 129],
+            [-93, 129]
+        ],
+        [
+            [4863, 6533],
+            [-105, 143]
+        ],
+        [
+            [4758, 6676],
+            [1, 11],
+            [0, 4]
+        ],
+        [
+            [4759, 6691],
+            [0, 70],
+            [44, 44],
+            [28, 9],
+            [23, 16],
+            [11, 29],
+            [32, 24],
+            [1, 44],
+            [16, 5],
+            [13, 22],
+            [36, 9],
+            [5, 23],
+            [-7, 13],
+            [-10, 62],
+            [-1, 36],
+            [-11, 38]
+        ],
+        [
+            [4939, 7135],
+            [27, 32],
+            [30, 11],
+            [17, 24],
+            [27, 18],
+            [47, 11],
+            [46, 4],
+            [14, -8],
+            [26, 23],
+            [30, 0],
+            [11, -13],
+            [19, 3]
+        ],
+        [
+            [5233, 7240],
+            [-5, -30],
+            [4, -56],
+            [-6, -49],
+            [-18, -33],
+            [3, -45],
+            [23, -35],
+            [0, -14],
+            [17, -24],
+            [12, -106]
+        ],
+        [
+            [5263, 6848],
+            [9, -52],
+            [1, -28],
+            [-5, -48],
+            [2, -27],
+            [-3, -32],
+            [2, -37],
+            [-11, -25],
+            [17, -43],
+            [1, -25],
+            [10, -33],
+            [13, 11],
+            [22, -28],
+            [12, -37]
+        ],
+        [
+            [2769, 4856],
+            [15, 45],
+            [-6, 25],
+            [-11, -27],
+            [-16, 26],
+            [5, 16],
+            [-4, 54],
+            [9, 9],
+            [5, 37],
+            [11, 38],
+            [-2, 24],
+            [15, 13],
+            [19, 23]
+        ],
+        [
+            [2906, 5049],
+            [4, -45],
+            [-9, -39],
+            [-30, -62],
+            [-33, -23],
+            [-17, -51],
+            [-6, -40],
+            [-15, -24],
+            [-12, 29],
+            [-11, 7],
+            [-12, -5],
+            [-1, 22],
+            [8, 14],
+            [-3, 24]
+        ],
+        [
+            [5969, 6800],
+            [-7, -23],
+            [-6, -45],
+            [-8, -31],
+            [-6, -10],
+            [-10, 19],
+            [-12, 26],
+            [-20, 85],
+            [-3, -5],
+            [12, -63],
+            [17, -59],
+            [21, -92],
+            [10, -32],
+            [9, -34],
+            [25, -65],
+            [-6, -10],
+            [1, -39],
+            [33, -53],
+            [4, -12]
+        ],
+        [
+            [6023, 6357],
+            [-110, 0],
+            [-107, 0],
+            [-112, 0]
+        ],
+        [
+            [5694, 6357],
+            [0, 218],
+            [0, 210],
+            [-8, 47],
+            [7, 37],
+            [-5, 25],
+            [10, 29]
+        ],
+        [
+            [5698, 6923],
+            [37, 0],
+            [27, -15],
+            [28, -18],
+            [13, -9],
+            [21, 19],
+            [11, 17],
+            [25, 5],
+            [20, -8],
+            [7, -29],
+            [7, 19],
+            [22, -14],
+            [22, -3],
+            [13, 15]
+        ],
+        [
+            [5951, 6902],
+            [18, -102]
+        ],
+        [
+            [6176, 5798],
+            [-10, 20],
+            [-11, 34],
+            [-12, 19],
+            [-8, 21],
+            [-24, 23],
+            [-19, 1],
+            [-7, 12],
+            [-16, -14],
+            [-17, 27],
+            [-8, -44],
+            [-33, 13]
+        ],
+        [
+            [6011, 5910],
+            [-3, 23],
+            [12, 87],
+            [3, 39],
+            [9, 18],
+            [20, 10],
+            [14, 34]
+        ],
+        [
+            [6066, 6121],
+            [16, -69],
+            [8, -54],
+            [15, -29],
+            [38, -55],
+            [16, -34],
+            [15, -34],
+            [8, -20],
+            [14, -18]
+        ],
+        [
+            [4749, 7532],
+            [1, 42],
+            [-11, 25],
+            [39, 43],
+            [34, -11],
+            [37, 1],
+            [30, -10],
+            [23, 3],
+            [45, -2]
+        ],
+        [
+            [4947, 7623],
+            [11, -23],
+            [51, -27],
+            [10, 13],
+            [31, -27],
+            [32, 8]
+        ],
+        [
+            [5082, 7567],
+            [2, -35],
+            [-26, -39],
+            [-36, -12],
+            [-2, -20],
+            [-18, -33],
+            [-10, -48],
+            [11, -34],
+            [-16, -26],
+            [-6, -39],
+            [-21, -11],
+            [-20, -46],
+            [-35, -1],
+            [-27, 1],
+            [-17, -21],
+            [-11, -22],
+            [-13, 5],
+            [-11, 20],
+            [-8, 34],
+            [-26, 9]
+        ],
+        [
+            [4792, 7249],
+            [-2, 20],
+            [10, 22],
+            [4, 16],
+            [-9, 17],
+            [7, 39],
+            [-11, 36],
+            [12, 5],
+            [1, 27],
+            [5, 9],
+            [0, 46],
+            [13, 16],
+            [-8, 30],
+            [-16, 2],
+            [-5, -8],
+            [-16, 0],
+            [-7, 29],
+            [-11, -8],
+            [-10, -15]
+        ],
+        [
+            [5675, 8472],
+            [3, 35],
+            [-10, -8],
+            [-18, 21],
+            [-2, 34],
+            [35, 17],
+            [35, 8],
+            [30, -10],
+            [29, 2]
+        ],
+        [
+            [5777, 8571],
+            [4, -10],
+            [-20, -34],
+            [8, -55],
+            [-12, -19]
+        ],
+        [
+            [5757, 8453],
+            [-22, 0],
+            [-24, 22],
+            [-13, 7],
+            [-23, -10]
+        ],
+        [
+            [6188, 5703],
+            [-6, -21],
+            [10, -32],
+            [10, -29],
+            [11, -21],
+            [90, -70],
+            [24, 0]
+        ],
+        [
+            [6327, 5530],
+            [-79, -177],
+            [-36, -3],
+            [-25, -41],
+            [-17, -1],
+            [-8, -19]
+        ],
+        [
+            [6162, 5289],
+            [-19, 0],
+            [-11, 20],
+            [-26, -25],
+            [-8, -24],
+            [-18, 4],
+            [-6, 7],
+            [-7, -1],
+            [-9, 0],
+            [-35, 50],
+            [-19, 0],
+            [-10, 20],
+            [0, 33],
+            [-14, 10]
+        ],
+        [
+            [5980, 5383],
+            [-17, 64],
+            [-12, 14],
+            [-5, 23],
+            [-14, 29],
+            [-17, 4],
+            [9, 34],
+            [15, 2],
+            [4, 18]
+        ],
+        [
+            [5943, 5571],
+            [0, 53]
+        ],
+        [
+            [5943, 5624],
+            [8, 62],
+            [13, 16],
+            [3, 24],
+            [12, 45],
+            [17, 30],
+            [11, 58],
+            [4, 51]
+        ],
+        [
+            [5794, 9138],
+            [-4, -42],
+            [42, -39],
+            [-26, -45],
+            [33, -67],
+            [-19, -51],
+            [25, -43],
+            [-11, -39],
+            [41, -40],
+            [-11, -31],
+            [-25, -34],
+            [-60, -75]
+        ],
+        [
+            [5779, 8632],
+            [-50, -5],
+            [-49, -21],
+            [-45, -13],
+            [-16, 32],
+            [-27, 20],
+            [6, 58],
+            [-14, 53],
+            [14, 35],
+            [25, 37],
+            [63, 64],
+            [19, 12],
+            [-3, 25],
+            [-39, 28]
+        ],
+        [
+            [5663, 8957],
+            [-9, 23],
+            [-1, 91],
+            [-43, 40],
+            [-37, 29]
+        ],
+        [
+            [5573, 9140],
+            [17, 16],
+            [30, -32],
+            [37, 3],
+            [30, -14],
+            [26, 26],
+            [14, 44],
+            [43, 20],
+            [35, -24],
+            [-11, -41]
+        ],
+        [
+            [9954, 4033],
+            [9, -17],
+            [-4, -31],
+            [-17, -8],
+            [-16, 7],
+            [-2, 26],
+            [10, 21],
+            [13, -8],
+            [7, 10]
+        ],
+        [
+            [0, 4079],
+            [9981, -14],
+            [-17, -13],
+            [-4, 23],
+            [14, 12],
+            [9, 3],
+            [-9983, 18]
+        ],
+        [
+            [0, 4108],
+            [0, -29]
+        ],
+        [
+            [0, 4108],
+            [6, 3],
+            [-4, -28],
+            [-2, -4]
+        ],
+        [
+            [3300, 1994],
+            [33, 36],
+            [24, -15],
+            [16, 24],
+            [22, -27],
+            [-8, -21],
+            [-37, -17],
+            [-13, 20],
+            [-23, -26],
+            [-14, 26]
+        ],
+        [
+            [5265, 7548],
+            [-9, -46],
+            [-13, 12],
+            [-6, 40],
+            [5, 22],
+            [18, 22],
+            [5, -50]
+        ],
+        [
+            [5157, 7984],
+            [6, -6],
+            [8, 2]
+        ],
+        [
+            [5190, 7775],
+            [-2, -17],
+            [9, -22],
+            [-10, -18],
+            [7, -46],
+            [15, -8],
+            [-3, -25]
+        ],
+        [
+            [5206, 7639],
+            [-25, -34],
+            [-55, 16],
+            [-40, -19],
+            [-4, -35]
+        ],
+        [
+            [4947, 7623],
+            [14, 35],
+            [5, 118],
+            [-28, 62],
+            [-21, 30],
+            [-42, 23],
+            [-3, 43],
+            [36, 12],
+            [47, -15],
+            [-9, 67],
+            [26, -25],
+            [65, 46],
+            [8, 48],
+            [24, 12]
+        ],
+        [
+            [3485, 5194],
+            [7, 25],
+            [3, 27]
+        ],
+        [
+            [3495, 5246],
+            [4, 26],
+            [-10, 34]
+        ],
+        [
+            [3489, 5306],
+            [-3, 41],
+            [15, 51]
+        ],
+        [
+            [3501, 5398],
+            [9, -7],
+            [21, -14],
+            [29, -50],
+            [5, -24]
+        ],
+        [
+            [5308, 4822],
+            [-29, 60],
+            [-18, 49],
+            [-17, 61],
+            [1, 19],
+            [6, 19],
+            [7, 43],
+            [5, 44]
+        ],
+        [
+            [5263, 5117],
+            [10, 4],
+            [40, -1],
+            [0, 71]
+        ],
+        [
+            [4827, 8240],
+            [-21, 12],
+            [-17, -1],
+            [6, 32],
+            [-6, 32]
+        ],
+        [
+            [4789, 8315],
+            [23, 2],
+            [30, -37],
+            [-15, -40]
+        ],
+        [
+            [4916, 8521],
+            [-30, -63],
+            [29, 8],
+            [30, -1],
+            [-7, -48],
+            [-25, -53],
+            [29, -4],
+            [2, -6],
+            [25, -69],
+            [19, -10],
+            [17, -67],
+            [8, -24],
+            [33, -11],
+            [-3, -38],
+            [-14, -17],
+            [11, -30],
+            [-25, -31],
+            [-37, 0],
+            [-48, -16],
+            [-13, 12],
+            [-18, -28],
+            [-26, 7],
+            [-19, -23],
+            [-15, 12],
+            [41, 62],
+            [25, 13],
+            [-1, 0],
+            [-43, 9],
+            [-8, 24],
+            [29, 18],
+            [-15, 32],
+            [5, 39],
+            [42, -6],
+            [4, 35],
+            [-19, 36],
+            [0, 1],
+            [-34, 10],
+            [-7, 16],
+            [10, 27],
+            [-9, 16],
+            [-15, -28],
+            [-1, 57],
+            [-14, 30],
+            [10, 61],
+            [21, 48],
+            [23, -4],
+            [33, 4]
+        ],
+        [
+            [6154, 7511],
+            [4, 26],
+            [-7, 40],
+            [-16, 22],
+            [-16, 6],
+            [-10, 19]
+        ],
+        [
+            [6109, 7624],
+            [4, 6],
+            [23, -10],
+            [41, -9],
+            [38, -28],
+            [5, -11],
+            [17, 9],
+            [25, -13],
+            [9, -24],
+            [17, -13]
+        ],
+        [
+            [6210, 7485],
+            [-27, 29],
+            [-29, -3]
+        ],
+        [
+            [5029, 5408],
+            [-44, -35],
+            [-15, -20],
+            [-25, -17],
+            [-25, 17]
+        ],
+        [
+            [5000, 5708],
+            [-2, -18],
+            [12, -30],
+            [0, -43],
+            [2, -47],
+            [7, -21],
+            [-6, -54],
+            [2, -29],
+            [8, -37],
+            [6, -21]
+        ],
+        [
+            [4765, 5512],
+            [-8, 1],
+            [-5, -24],
+            [-8, 1],
+            [-6, 12],
+            [2, 24],
+            [-11, 36],
+            [-8, -7],
+            [-6, -1]
+        ],
+        [
+            [4715, 5554],
+            [-7, -3],
+            [0, 21],
+            [-4, 16],
+            [0, 17],
+            [-6, 25],
+            [-7, 21],
+            [-23, 0],
+            [-6, -11],
+            [-8, -1],
+            [-4, -13],
+            [-4, -17],
+            [-14, -26]
+        ],
+        [
+            [4632, 5583],
+            [-13, 35],
+            [-10, 24],
+            [-8, 7],
+            [-6, 12],
+            [-4, 26],
+            [-4, 13],
+            [-8, 10]
+        ],
+        [
+            [4579, 5710],
+            [13, 29],
+            [8, -2],
+            [7, 10],
+            [6, 0],
+            [5, 8],
+            [-3, 20],
+            [3, 6],
+            [1, 20]
+        ],
+        [
+            [4619, 5801],
+            [13, -1],
+            [20, -14],
+            [6, 1],
+            [3, 7],
+            [15, -5],
+            [4, 4]
+        ],
+        [
+            [4680, 5793],
+            [1, -22],
+            [5, 0],
+            [7, 8],
+            [5, -2],
+            [7, -15],
+            [12, -5],
+            [8, 13],
+            [9, 8],
+            [6, 8],
+            [6, -1],
+            [6, -13],
+            [3, -17],
+            [12, -24],
+            [-6, -16],
+            [-1, -19],
+            [6, 6],
+            [3, -7],
+            [-1, -17],
+            [8, -18]
+        ],
+        [
+            [4532, 5834],
+            [3, 27]
+        ],
+        [
+            [4535, 5861],
+            [31, 1],
+            [6, 14],
+            [9, 1],
+            [11, -14],
+            [8, -1],
+            [9, 10],
+            [6, -17],
+            [-12, -13],
+            [-12, 1],
+            [-12, 13],
+            [-10, -14],
+            [-5, -1],
+            [-7, -8],
+            [-25, 1]
+        ],
+        [
+            [4579, 5710],
+            [-15, 24],
+            [-11, 4],
+            [-7, 17],
+            [1, 9],
+            [-9, 13],
+            [-2, 12]
+        ],
+        [
+            [4536, 5789],
+            [15, 10],
+            [9, -2],
+            [8, 7],
+            [51, -3]
+        ],
+        [
+            [5263, 5117],
+            [-5, 9],
+            [10, 66]
+        ],
+        [
+            [5658, 7167],
+            [15, -20],
+            [22, 3],
+            [20, -4],
+            [0, -10],
+            [15, 7],
+            [-4, -18],
+            [-40, -5],
+            [1, 10],
+            [-34, 12],
+            [5, 25]
+        ],
+        [
+            [5723, 7469],
+            [-17, 2],
+            [-14, 6],
+            [-34, -16],
+            [19, -33],
+            [-14, -10],
+            [-15, 0],
+            [-15, 31],
+            [-5, -13],
+            [6, -36],
+            [14, -27],
+            [-10, -13],
+            [15, -27],
+            [14, -18],
+            [0, -33],
+            [-25, 16],
+            [8, -30],
+            [-18, -7],
+            [11, -52],
+            [-19, -1],
+            [-23, 26],
+            [-10, 47],
+            [-5, 40],
+            [-11, 27],
+            [-14, 34],
+            [-2, 16]
+        ],
+        [
+            [5583, 7470],
+            [18, 6],
+            [11, 13],
+            [15, -2],
+            [5, 11],
+            [5, 2]
+        ],
+        [
+            [5725, 7529],
+            [13, -16],
+            [-8, -37],
+            [-7, -7]
+        ],
+        [
+            [3701, 9939],
+            [93, 35],
+            [97, -2],
+            [36, 21],
+            [98, 6],
+            [222, -7],
+            [174, -47],
+            [-52, -23],
+            [-106, -3],
+            [-150, -5],
+            [14, -11],
+            [99, 7],
+            [83, -21],
+            [54, 18],
+            [23, -21],
+            [-30, -34],
+            [71, 22],
+            [135, 23],
+            [83, -12],
+            [15, -25],
+            [-113, -42],
+            [-16, -14],
+            [-88, -10],
+            [64, -3],
+            [-32, -43],
+            [-23, -38],
+            [1, -66],
+            [33, -38],
+            [-43, -3],
+            [-46, -19],
+            [52, -31],
+            [6, -50],
+            [-30, -6],
+            [36, -50],
+            [-61, -5],
+            [32, -24],
+            [-9, -20],
+            [-39, -10],
+            [-39, 0],
+            [35, -40],
+            [0, -26],
+            [-55, 24],
+            [-14, -15],
+            [37, -15],
+            [37, -36],
+            [10, -48],
+            [-49, -11],
+            [-22, 22],
+            [-34, 34],
+            [10, -40],
+            [-33, -31],
+            [73, -2],
+            [39, -3],
+            [-75, -52],
+            [-75, -46],
+            [-81, -21],
+            [-31, 0],
+            [-29, -23],
+            [-38, -62],
+            [-60, -42],
+            [-19, -2],
+            [-37, -15],
+            [-40, -13],
+            [-24, -37],
+            [0, -41],
+            [-15, -39],
+            [-45, -47],
+            [11, -47],
+            [-12, -48],
+            [-14, -58],
+            [-39, -4],
+            [-41, 49],
+            [-56, 0],
+            [-27, 32],
+            [-18, 58],
+            [-49, 73],
+            [-14, 39],
+            [-3, 53],
+            [-39, 54],
+            [10, 44],
+            [-18, 21],
+            [27, 69],
+            [42, 22],
+            [11, 25],
+            [6, 46],
+            [-32, -21],
+            [-15, -9],
+            [-25, -8],
+            [-34, 19],
+            [-2, 40],
+            [11, 31],
+            [25, 1],
+            [57, -15],
+            [-48, 37],
+            [-24, 20],
+            [-28, -8],
+            [-23, 15],
+            [31, 55],
+            [-17, 22],
+            [-22, 41],
+            [-34, 62],
+            [-35, 23],
+            [0, 25],
+            [-74, 34],
+            [-59, 5],
+            [-74, -3],
+            [-68, -4],
+            [-32, 19],
+            [-49, 37],
+            [73, 19],
+            [56, 3],
+            [-119, 15],
+            [-62, 24],
+            [3, 23],
+            [106, 28],
+            [101, 29],
+            [11, 21],
+            [-75, 22],
+            [24, 23],
+            [97, 41],
+            [40, 7],
+            [-12, 26],
+            [66, 16],
+            [86, 9],
+            [85, 1],
+            [30, -19],
+            [74, 33],
+            [66, -22],
+            [39, -5],
+            [58, -19],
+            [-66, 32],
+            [4, 25]
+        ],
+        [
+            [2497, 5869],
+            [-14, 10],
+            [-17, 1],
+            [-13, 12],
+            [-15, 24]
+        ],
+        [
+            [2438, 5916],
+            [1, 18],
+            [3, 13],
+            [-4, 12],
+            [13, 48],
+            [36, 0],
+            [1, 20],
+            [-5, 4],
+            [-3, 12],
+            [-10, 14],
+            [-11, 20],
+            [13, 0],
+            [0, 33],
+            [26, 0],
+            [26, 0]
+        ],
+        [
+            [2529, 5996],
+            [10, -11],
+            [2, 9],
+            [8, -7]
+        ],
+        [
+            [2549, 5987],
+            [-13, -23],
+            [-13, -16],
+            [-2, -12],
+            [2, -11],
+            [-5, -15]
+        ],
+        [
+            [2518, 5910],
+            [-7, -4],
+            [2, -7],
+            [-6, -6],
+            [-9, -15],
+            [-1, -9]
+        ],
+        [
+            [3340, 5552],
+            [18, -22],
+            [17, -38],
+            [1, -31],
+            [10, -1],
+            [15, -29],
+            [11, -21]
+        ],
+        [
+            [3412, 5410],
+            [-4, -53],
+            [-17, -15],
+            [1, -14],
+            [-5, -31],
+            [13, -42],
+            [9, -1],
+            [3, -33],
+            [17, -51]
+        ],
+        [
+            [3313, 5365],
+            [-19, 45],
+            [7, 16],
+            [0, 27],
+            [17, 10],
+            [7, 11],
+            [-10, 22],
+            [3, 21],
+            [22, 35]
+        ],
+        [
+            [2574, 5825],
+            [-5, 18],
+            [-8, 5]
+        ],
+        [
+            [2561, 5848],
+            [2, 24],
+            [-4, 6],
+            [-6, 4],
+            [-12, -7],
+            [-1, 8],
+            [-8, 10],
+            [-6, 12],
+            [-8, 5]
+        ],
+        [
+            [2549, 5987],
+            [3, -3],
+            [6, 11],
+            [8, 1],
+            [3, -5],
+            [4, 3],
+            [13, -6],
+            [13, 2],
+            [9, 6],
+            [3, 7],
+            [9, -3],
+            [6, -4],
+            [8, 1],
+            [5, 5],
+            [13, -8],
+            [4, -1],
+            [9, -11],
+            [8, -13],
+            [10, -9],
+            [7, -17]
+        ],
+        [
+            [2690, 5943],
+            [-9, 2],
+            [-4, -8],
+            [-10, -8],
+            [-7, 0],
+            [-6, -8],
+            [-6, 3],
+            [-4, 9],
+            [-3, -2],
+            [-4, -14],
+            [-3, 1],
+            [0, -12],
+            [-10, -17],
+            [-5, -7],
+            [-3, -7],
+            [-8, 12],
+            [-6, -16],
+            [-6, 1],
+            [-6, -2],
+            [0, -29],
+            [-4, 0],
+            [-3, -14],
+            [-9, -2]
+        ],
+        [
+            [5522, 7770],
+            [7, -23],
+            [9, -17],
+            [-11, -22]
+        ],
+        [
+            [5515, 7577],
+            [-3, -10]
+        ],
+        [
+            [5512, 7567],
+            [-26, 22],
+            [-16, 21],
+            [-26, 18],
+            [-23, 43],
+            [6, 5],
+            [-13, 25],
+            [-1, 19],
+            [-17, 10],
+            [-9, -26],
+            [-8, 20],
+            [0, 21],
+            [1, 1]
+        ],
+        [
+            [5380, 7746],
+            [20, -2],
+            [5, 9],
+            [9, -9],
+            [11, -1],
+            [0, 16],
+            [10, 6],
+            [2, 24],
+            [23, 16]
+        ],
+        [
+            [5460, 7805],
+            [8, -7],
+            [21, -26],
+            [23, -11],
+            [10, 9]
+        ],
+        [
+            [3008, 6124],
+            [-19, 10],
+            [-13, -5],
+            [-17, 5],
+            [-13, -11],
+            [-15, 18],
+            [3, 19],
+            [25, -8],
+            [21, -5],
+            [10, 13],
+            [-12, 26],
+            [0, 23],
+            [-18, 9],
+            [7, 16],
+            [17, -3],
+            [24, -9]
+        ],
+        [
+            [5471, 7900],
+            [14, -15],
+            [10, -6],
+            [24, 7],
+            [2, 12],
+            [11, 2],
+            [14, 9],
+            [3, -4],
+            [13, 8],
+            [6, 13],
+            [9, 4],
+            [30, -18],
+            [6, 6]
+        ],
+        [
+            [5613, 7918],
+            [15, -16],
+            [2, -16]
+        ],
+        [
+            [5630, 7886],
+            [-17, -12],
+            [-13, -40],
+            [-17, -40],
+            [-22, -11]
+        ],
+        [
+            [5561, 7783],
+            [-17, 2],
+            [-22, -15]
+        ],
+        [
+            [5460, 7805],
+            [-6, 20],
+            [-4, 0]
+        ],
+        [
+            [8352, 4453],
+            [-11, -2],
+            [-37, 42],
+            [26, 11],
+            [14, -18],
+            [10, -17],
+            [-2, -16]
+        ],
+        [
+            [8471, 4532],
+            [2, -11],
+            [1, -18]
+        ],
+        [
+            [8474, 4503],
+            [-18, -45],
+            [-24, -13],
+            [-3, 8],
+            [2, 20],
+            [12, 36],
+            [28, 23]
+        ],
+        [
+            [8274, 4579],
+            [10, -16],
+            [17, 5],
+            [7, -25],
+            [-32, -12],
+            [-19, -8],
+            [-15, 1],
+            [10, 34],
+            [15, 0],
+            [7, 21]
+        ],
+        [
+            [8413, 4579],
+            [-4, -32],
+            [-42, -17],
+            [-37, 7],
+            [0, 22],
+            [22, 12],
+            [18, -18],
+            [18, 5],
+            [25, 21]
+        ],
+        [
+            [8017, 4657],
+            [53, -6],
+            [6, 25],
+            [51, -29],
+            [10, -38],
+            [42, -11],
+            [34, -35],
+            [-31, -23],
+            [-31, 24],
+            [-25, -1],
+            [-29, 4],
+            [-26, 11],
+            [-32, 22],
+            [-21, 6],
+            [-11, -7],
+            [-51, 24],
+            [-5, 25],
+            [-25, 5],
+            [19, 56],
+            [34, -3],
+            [22, -23],
+            [12, -5],
+            [4, -21]
+        ],
+        [
+            [8741, 4690],
+            [-14, -40],
+            [-3, 45],
+            [5, 21],
+            [6, 20],
+            [7, -17],
+            [-1, -29]
+        ],
+        [
+            [8534, 4853],
+            [-11, -19],
+            [-19, 10],
+            [-5, 26],
+            [28, 3],
+            [7, -20]
+        ],
+        [
+            [8623, 4875],
+            [10, -45],
+            [-23, 24],
+            [-23, 5],
+            [-16, -4],
+            [-19, 2],
+            [6, 33],
+            [35, 2],
+            [30, -17]
+        ],
+        [
+            [8916, 4904],
+            [0, -193],
+            [1, -192]
+        ],
+        [
+            [8917, 4519],
+            [-25, 48],
+            [-28, 12],
+            [-7, -17],
+            [-35, -1],
+            [12, 48],
+            [17, 16],
+            [-7, 64],
+            [-14, 50],
+            [-53, 50],
+            [-23, 5],
+            [-42, 54],
+            [-8, -28],
+            [-11, -5],
+            [-6, 21],
+            [0, 26],
+            [-21, 29],
+            [29, 21],
+            [20, -1],
+            [-2, 16],
+            [-41, 0],
+            [-11, 35],
+            [-25, 11],
+            [-11, 29],
+            [37, 14],
+            [14, 20],
+            [45, -25],
+            [4, -22],
+            [8, -95],
+            [29, -35],
+            [23, 62],
+            [32, 36],
+            [25, 0],
+            [23, -21],
+            [21, -21],
+            [30, -11]
+        ],
+        [
+            [8478, 5141],
+            [-22, -58],
+            [-21, -12],
+            [-27, 12],
+            [-46, -3],
+            [-24, -8],
+            [-4, -45],
+            [24, -53],
+            [15, 27],
+            [52, 20],
+            [-2, -27],
+            [-12, 9],
+            [-12, -35],
+            [-25, -23],
+            [27, -76],
+            [-5, -20],
+            [25, -68],
+            [-1, -39],
+            [-14, -17],
+            [-11, 20],
+            [13, 49],
+            [-27, -23],
+            [-7, 16],
+            [3, 23],
+            [-20, 35],
+            [3, 57],
+            [-19, -18],
+            [2, -69],
+            [1, -84],
+            [-17, -9],
+            [-12, 18],
+            [8, 54],
+            [-4, 57],
+            [-12, 1],
+            [-9, 40],
+            [12, 39],
+            [4, 47],
+            [14, 89],
+            [5, 24],
+            [24, 44],
+            [22, -18],
+            [35, -8],
+            [32, 3],
+            [27, 43],
+            [5, -14]
+        ],
+        [
+            [8574, 5124],
+            [-2, -51],
+            [-14, 6],
+            [-4, -36],
+            [11, -32],
+            [-8, -7],
+            [-11, 38],
+            [-8, 75],
+            [6, 47],
+            [9, 22],
+            [2, -32],
+            [16, -5],
+            [3, -25]
+        ],
+        [
+            [8045, 5176],
+            [5, -39],
+            [19, -34],
+            [18, 12],
+            [18, -4],
+            [16, 30],
+            [13, 5],
+            [26, -17],
+            [23, 13],
+            [14, 82],
+            [11, 21],
+            [10, 67],
+            [32, 0],
+            [24, -10]
+        ],
+        [
+            [8274, 5302],
+            [-16, -53],
+            [20, -56],
+            [-5, -28],
+            [32, -54],
+            [-33, -7],
+            [-10, -40],
+            [2, -54],
+            [-27, -40],
+            [-1, -59],
+            [-10, -91],
+            [-5, 21],
+            [-31, -26],
+            [-11, 36],
+            [-20, 3],
+            [-14, 19],
+            [-33, -21],
+            [-10, 29],
+            [-18, -4],
+            [-23, 7],
+            [-4, 79],
+            [-14, 17],
+            [-13, 50],
+            [-4, 52],
+            [3, 55],
+            [16, 39]
+        ],
+        [
+            [7939, 4712],
+            [-31, -1],
+            [-24, 49],
+            [-35, 48],
+            [-12, 36],
+            [-21, 48],
+            [-14, 44],
+            [-21, 83],
+            [-24, 49],
+            [-9, 51],
+            [-10, 46],
+            [-25, 37],
+            [-14, 51],
+            [-21, 33],
+            [-29, 65],
+            [-3, 30],
+            [18, -2],
+            [43, -12],
+            [25, -57],
+            [21, -40],
+            [16, -25],
+            [26, -63],
+            [28, -1],
+            [23, -41],
+            [16, -49],
+            [22, -27],
+            [-12, -49],
+            [16, -20],
+            [10, -2],
+            [5, -41],
+            [10, -33],
+            [20, -5],
+            [14, -37],
+            [-7, -74],
+            [-1, -91]
+        ],
+        [
+            [7252, 6841],
+            [-17, -27],
+            [-11, -55],
+            [27, -23],
+            [26, -29],
+            [36, -33],
+            [38, -8],
+            [16, -30],
+            [22, -5],
+            [33, -14],
+            [23, 1],
+            [4, 23],
+            [-4, 38],
+            [2, 25]
+        ],
+        [
+            [7703, 6727],
+            [2, -22],
+            [-10, -11],
+            [2, -36],
+            [-19, 10],
+            [-36, -41],
+            [0, -33],
+            [-15, -50],
+            [-1, -29],
+            [-13, -48],
+            [-21, 13],
+            [-1, -61],
+            [-7, -20],
+            [3, -25],
+            [-14, -14]
+        ],
+        [
+            [7472, 6360],
+            [-4, -21],
+            [-19, 1],
+            [-34, -13],
+            [2, -44],
+            [-15, -35],
+            [-40, -40],
+            [-31, -69],
+            [-21, -38],
+            [-28, -38],
+            [0, -27],
+            [-13, -15],
+            [-26, -21],
+            [-12, -3],
+            [-9, -45],
+            [6, -77],
+            [1, -49],
+            [-11, -56],
+            [0, -101],
+            [-15, -2],
+            [-12, -46],
+            [8, -19],
+            [-25, -17],
+            [-10, -40],
+            [-11, -17],
+            [-26, 55],
+            [-13, 83],
+            [-11, 60],
+            [-9, 28],
+            [-15, 56],
+            [-7, 74],
+            [-5, 37],
+            [-25, 81],
+            [-12, 115],
+            [-8, 75],
+            [0, 72],
+            [-5, 55],
+            [-41, -35],
+            [-19, 7],
+            [-36, 71],
+            [13, 22],
+            [-8, 23],
+            [-33, 50]
+        ],
+        [
+            [6893, 6457],
+            [19, 40],
+            [61, -1],
+            [-6, 51],
+            [-15, 30],
+            [-4, 46],
+            [-18, 26],
+            [31, 62],
+            [32, -4],
+            [29, 61],
+            [18, 60],
+            [27, 60],
+            [-1, 42],
+            [24, 34],
+            [-23, 29],
+            [-9, 40],
+            [-10, 52],
+            [14, 25],
+            [42, -14],
+            [31, 9],
+            [26, 49]
+        ],
+        [
+            [4827, 8240],
+            [5, -42],
+            [-21, -53],
+            [-49, -35],
+            [-40, 9],
+            [23, 62],
+            [-15, 60],
+            [38, 46],
+            [21, 28]
+        ],
+        [
+            [6497, 7255],
+            [25, 12],
+            [19, 33],
+            [19, -1],
+            [12, 11],
+            [20, -6],
+            [31, -30],
+            [22, -6],
+            [31, -53],
+            [21, -2],
+            [3, -49]
+        ],
+        [
+            [6690, 6820],
+            [14, -31],
+            [11, -36],
+            [27, -26],
+            [1, -52],
+            [13, -10],
+            [2, -27],
+            [-40, -30],
+            [-10, -69]
+        ],
+        [
+            [6708, 6539],
+            [-53, 18],
+            [-30, 13],
+            [-31, 8],
+            [-12, 73],
+            [-13, 10],
+            [-22, -11],
+            [-28, -28],
+            [-34, 20],
+            [-28, 45],
+            [-27, 17],
+            [-18, 56],
+            [-21, 79],
+            [-15, -10],
+            [-17, 20],
+            [-11, -24]
+        ],
+        [
+            [6348, 6825],
+            [-15, 32],
+            [0, 31],
+            [-9, 0],
+            [5, 43],
+            [-15, 45],
+            [-34, 32],
+            [-19, 56],
+            [6, 46],
+            [14, 21],
+            [-2, 34],
+            [-18, 18],
+            [-18, 70]
+        ],
+        [
+            [6243, 7253],
+            [-15, 48],
+            [5, 18],
+            [-8, 68],
+            [19, 17]
+        ],
+        [
+            [6357, 7321],
+            [9, -43],
+            [26, -13],
+            [20, -29],
+            [39, -10],
+            [44, 15],
+            [2, 14]
+        ],
+        [
+            [6348, 6825],
+            [-16, 3]
+        ],
+        [
+            [6332, 6828],
+            [-19, 5],
+            [-20, -56]
+        ],
+        [
+            [6293, 6777],
+            [-52, 4],
+            [-78, 119],
+            [-41, 41],
+            [-34, 16]
+        ],
+        [
+            [6088, 6957],
+            [-11, 72]
+        ],
+        [
+            [6077, 7029],
+            [61, 62],
+            [11, 71],
+            [-3, 43],
+            [16, 15],
+            [14, 37]
+        ],
+        [
+            [6176, 7257],
+            [12, 9],
+            [32, -8],
+            [10, -15],
+            [13, 10]
+        ],
+        [
+            [4597, 8984],
+            [-7, -39],
+            [31, -40],
+            [-36, -45],
+            [-80, -41],
+            [-24, -10],
+            [-36, 8],
+            [-78, 19],
+            [28, 26],
+            [-61, 29],
+            [49, 12],
+            [-1, 17],
+            [-58, 14],
+            [19, 38],
+            [42, 9],
+            [43, -40],
+            [42, 32],
+            [35, -17],
+            [45, 32],
+            [47, -4]
+        ],
+        [
+            [5992, 6990],
+            [-5, -19]
+        ],
+        [
+            [5987, 6971],
+            [-10, 8],
+            [-6, -39],
+            [7, -7],
+            [-7, -8],
+            [-1, -15],
+            [13, 8]
+        ],
+        [
+            [5983, 6918],
+            [0, -23],
+            [-14, -95]
+        ],
+        [
+            [5951, 6902],
+            [8, 19],
+            [-2, 4],
+            [8, 27],
+            [5, 45],
+            [4, 15],
+            [1, 0]
+        ],
+        [
+            [5975, 7012],
+            [9, 0],
+            [3, 11],
+            [7, 0]
+        ],
+        [
+            [5994, 7023],
+            [1, -24],
+            [-4, -9],
+            [1, 0]
+        ],
+        [
+            [5431, 7316],
+            [-10, -46],
+            [4, -19],
+            [-6, -30],
+            [-21, 22],
+            [-14, 7],
+            [-39, 30],
+            [4, 30],
+            [32, -6],
+            [28, 7],
+            [22, 5]
+        ],
+        [
+            [5255, 7492],
+            [17, -42],
+            [-4, -78],
+            [-13, 4],
+            [-11, -20],
+            [-10, 16],
+            [-2, 71],
+            [-6, 34],
+            [15, -3],
+            [14, 18]
+        ],
+        [
+            [5383, 7805],
+            [-3, -29],
+            [7, -25]
+        ],
+        [
+            [5387, 7751],
+            [-22, 8],
+            [-23, -20],
+            [1, -30],
+            [-3, -17],
+            [9, -30],
+            [26, -29],
+            [14, -49],
+            [31, -48],
+            [22, 0],
+            [7, -13],
+            [-8, -11],
+            [25, -22],
+            [20, -18],
+            [24, -30],
+            [3, -11],
+            [-5, -22],
+            [-16, 28],
+            [-24, 10],
+            [-12, -39],
+            [20, -21],
+            [-3, -31],
+            [-11, -4],
+            [-15, -50],
+            [-12, -5],
+            [0, 18],
+            [6, 32],
+            [6, 12],
+            [-11, 35],
+            [-8, 29],
+            [-12, 8],
+            [-8, 25],
+            [-18, 11],
+            [-12, 24],
+            [-21, 4],
+            [-21, 26],
+            [-26, 39],
+            [-19, 34],
+            [-8, 58],
+            [-14, 7],
+            [-23, 20],
+            [-12, -8],
+            [-16, -28],
+            [-12, -4]
+        ],
+        [
+            [2845, 6150],
+            [19, -5],
+            [14, -15],
+            [5, -16],
+            [-19, -1],
+            [-9, -10],
+            [-15, 10],
+            [-16, 21],
+            [3, 14],
+            [12, 4],
+            [6, -2]
+        ],
+        [
+            [5992, 6990],
+            [31, -24],
+            [54, 63]
+        ],
+        [
+            [6088, 6957],
+            [-5, -8],
+            [-56, -30],
+            [28, -59],
+            [-9, -10],
+            [-5, -20],
+            [-21, -8],
+            [-7, -21],
+            [-12, -19],
+            [-31, 10]
+        ],
+        [
+            [5970, 6792],
+            [-1, 8]
+        ],
+        [
+            [5983, 6918],
+            [4, 17],
+            [0, 36]
+        ],
+        [
+            [8739, 7075],
+            [4, -20],
+            [-16, -36],
+            [-11, 19],
+            [-15, -14],
+            [-7, -34],
+            [-18, 16],
+            [0, 28],
+            [15, 36],
+            [16, -7],
+            [12, 25],
+            [20, -13]
+        ],
+        [
+            [8915, 7252],
+            [-10, -47],
+            [4, -30],
+            [-14, -42],
+            [-35, -27],
+            [-49, -4],
+            [-40, -67],
+            [-19, 22],
+            [-1, 44],
+            [-48, -13],
+            [-33, -27],
+            [-32, -2],
+            [28, -43],
+            [-19, -101],
+            [-18, -24],
+            [-13, 23],
+            [7, 53],
+            [-18, 17],
+            [-11, 41],
+            [26, 18],
+            [15, 37],
+            [28, 30],
+            [20, 41],
+            [55, 17],
+            [30, -12],
+            [29, 105],
+            [19, -28],
+            [40, 59],
+            [16, 23],
+            [18, 72],
+            [-5, 67],
+            [11, 37],
+            [30, 11],
+            [15, -82],
+            [-1, -48],
+            [-25, -59],
+            [0, -61]
+        ],
+        [
+            [8997, 7667],
+            [19, -12],
+            [20, 25],
+            [6, -67],
+            [-41, -16],
+            [-25, -59],
+            [-43, 41],
+            [-15, -65],
+            [-31, -1],
+            [-4, 59],
+            [14, 46],
+            [29, 3],
+            [8, 82],
+            [9, 46],
+            [32, -62],
+            [22, -20]
+        ],
+        [
+            [6970, 7554],
+            [-15, -10],
+            [-37, -42],
+            [-12, -42],
+            [-11, 0],
+            [-7, 28],
+            [-36, 2],
+            [-5, 48],
+            [-14, 0],
+            [2, 60],
+            [-33, 43],
+            [-48, -5],
+            [-32, -8],
+            [-27, 53],
+            [-22, 22],
+            [-43, 43],
+            [-6, 5],
+            [-71, -35],
+            [1, -218]
+        ],
+        [
+            [6554, 7498],
+            [-14, -3],
+            [-20, 46],
+            [-18, 17],
+            [-32, -12],
+            [-12, -20]
+        ],
+        [
+            [6458, 7526],
+            [-2, 14],
+            [7, 25],
+            [-5, 21],
+            [-32, 20],
+            [-13, 53],
+            [-15, 15],
+            [-1, 19],
+            [27, -6],
+            [1, 44],
+            [23, 9],
+            [25, -9],
+            [5, 58],
+            [-5, 36],
+            [-28, -2],
+            [-24, 14],
+            [-32, -26],
+            [-26, -12]
+        ],
+        [
+            [6363, 7799],
+            [-14, 9],
+            [3, 31],
+            [-18, 39],
+            [-20, -2],
+            [-24, 40],
+            [16, 45],
+            [-8, 12],
+            [22, 65],
+            [29, -34],
+            [3, 43],
+            [58, 64],
+            [43, 2],
+            [61, -41],
+            [33, -24],
+            [30, 25],
+            [44, 1],
+            [35, -30],
+            [8, 17],
+            [39, -2],
+            [7, 28],
+            [-45, 40],
+            [27, 29],
+            [-5, 16],
+            [26, 15],
+            [-20, 41],
+            [13, 20],
+            [104, 21],
+            [13, 14],
+            [70, 22],
+            [25, 24],
+            [50, -12],
+            [9, -61],
+            [29, 14],
+            [35, -20],
+            [-2, -32],
+            [27, 3],
+            [69, 56],
+            [-10, -19],
+            [35, -46],
+            [62, -150],
+            [15, 31],
+            [39, -34],
+            [39, 16],
+            [16, -11],
+            [13, -34],
+            [20, -12],
+            [11, -25],
+            [36, 8],
+            [15, -36]
+        ],
+        [
+            [7229, 7559],
+            [-17, 9],
+            [-14, 21],
+            [-42, 6],
+            [-46, 2],
+            [-10, -6],
+            [-39, 24],
+            [-16, -12],
+            [-4, -35],
+            [-46, 21],
+            [-18, -9],
+            [-7, -26]
+        ],
+        [
+            [6155, 4958],
+            [-20, -24],
+            [-7, -24],
+            [-10, -4],
+            [-4, -42],
+            [-9, -24],
+            [-5, -39],
+            [-12, -20]
+        ],
+        [
+            [6088, 4781],
+            [-40, 59],
+            [-1, 35],
+            [-101, 120],
+            [-5, 6]
+        ],
+        [
+            [5941, 5001],
+            [0, 63],
+            [8, 24],
+            [14, 39],
+            [10, 43],
+            [-13, 68],
+            [-3, 30],
+            [-13, 41]
+        ],
+        [
+            [5944, 5309],
+            [17, 35],
+            [19, 39]
+        ],
+        [
+            [6162, 5289],
+            [-24, -67],
+            [0, -215],
+            [17, -49]
+        ],
+        [
+            [7046, 7387],
+            [-53, -9],
+            [-34, 19],
+            [-30, -4],
+            [3, 34],
+            [30, -10],
+            [10, 18]
+        ],
+        [
+            [6972, 7435],
+            [21, -6],
+            [36, 43],
+            [-33, 31],
+            [-20, -15],
+            [-21, 22],
+            [24, 39],
+            [-9, 5]
+        ],
+        [
+            [7849, 5777],
+            [-7, 72],
+            [18, 49],
+            [36, 11],
+            [26, -8]
+        ],
+        [
+            [7922, 5901],
+            [23, -23],
+            [12, 40],
+            [25, -21]
+        ],
+        [
+            [7982, 5897],
+            [6, -40],
+            [-3, -71],
+            [-47, -45],
+            [13, -36],
+            [-30, -4],
+            [-24, -24]
+        ],
+        [
+            [7897, 5677],
+            [-23, 9],
+            [-11, 30],
+            [-14, 61]
+        ],
+        [
+            [8564, 7339],
+            [24, -70],
+            [7, -38],
+            [0, -68],
+            [-10, -33],
+            [-25, -11],
+            [-22, -25],
+            [-25, -5],
+            [-3, 32],
+            [5, 45],
+            [-13, 61],
+            [21, 10],
+            [-19, 51]
+        ],
+        [
+            [8504, 7288],
+            [2, 5],
+            [12, -2],
+            [11, 27],
+            [20, 2],
+            [11, 4],
+            [4, 15]
+        ],
+        [
+            [5557, 7574],
+            [5, 13]
+        ],
+        [
+            [5562, 7587],
+            [7, 4],
+            [4, 20],
+            [5, 3],
+            [4, -8],
+            [5, -4],
+            [3, -10],
+            [5, -2],
+            [5, -11],
+            [4, 0],
+            [-3, -14],
+            [-3, -7],
+            [1, -5]
+        ],
+        [
+            [5599, 7553],
+            [-6, -2],
+            [-17, -9],
+            [-1, -12],
+            [-4, 0]
+        ],
+        [
+            [6332, 6828],
+            [6, -26],
+            [-3, -13],
+            [9, -45]
+        ],
+        [
+            [6344, 6744],
+            [-19, -1],
+            [-7, 28],
+            [-25, 6]
+        ],
+        [
+            [7922, 5901],
+            [9, 26],
+            [1, 50],
+            [-22, 52],
+            [-2, 58],
+            [-21, 48],
+            [-21, 4],
+            [-6, -20],
+            [-16, -2],
+            [-8, 10],
+            [-30, -35],
+            [0, 53],
+            [7, 62],
+            [-19, 3],
+            [-2, 36],
+            [-12, 18]
+        ],
+        [
+            [7780, 6264],
+            [6, 21],
+            [24, 39]
+        ],
+        [
+            [7837, 6385],
+            [17, -47],
+            [12, -54],
+            [34, 0],
+            [11, -52],
+            [-18, -15],
+            [-8, -21],
+            [34, -36],
+            [23, -70],
+            [17, -52],
+            [21, -41],
+            [7, -41],
+            [-5, -59]
+        ],
+        [
+            [5975, 7012],
+            [10, 49],
+            [14, 41],
+            [0, 2]
+        ],
+        [
+            [5999, 7104],
+            [13, -3],
+            [4, -23],
+            [-15, -22],
+            [-7, -33]
+        ],
+        [
+            [4785, 5315],
+            [-7, 0],
+            [-29, 28],
+            [-25, 45],
+            [-24, 32],
+            [-18, 38]
+        ],
+        [
+            [4682, 5458],
+            [6, 19],
+            [2, 17],
+            [12, 33],
+            [13, 27]
+        ],
+        [
+            [5412, 6408],
+            [-20, -22],
+            [-15, 33],
+            [-44, 25]
+        ],
+        [
+            [5263, 6848],
+            [13, 14],
+            [3, 25],
+            [-3, 24],
+            [19, 23],
+            [8, 19],
+            [14, 17],
+            [2, 45]
+        ],
+        [
+            [5319, 7015],
+            [32, -20],
+            [12, 5],
+            [23, -10],
+            [37, -26],
+            [13, -53],
+            [25, -11],
+            [39, -25],
+            [30, -29],
+            [13, 15],
+            [13, 27],
+            [-6, 45],
+            [9, 29],
+            [20, 28],
+            [19, 8],
+            [37, -12],
+            [10, -27],
+            [10, 0],
+            [9, -10],
+            [28, -7],
+            [6, -19]
+        ],
+        [
+            [5694, 6357],
+            [0, -118],
+            [-32, 0],
+            [0, -25]
+        ],
+        [
+            [5662, 6214],
+            [-111, 113],
+            [-111, 113],
+            [-28, -32]
+        ],
+        [
+            [7271, 5502],
+            [-4, -62],
+            [-12, -16],
+            [-24, -14],
+            [-13, 47],
+            [-5, 85],
+            [13, 96],
+            [19, -33],
+            [13, -42],
+            [13, -61]
+        ],
+        [
+            [5804, 3347],
+            [10, -18],
+            [-9, -29],
+            [-4, -19],
+            [-16, -9],
+            [-5, -19],
+            [-10, -6],
+            [-21, 46],
+            [15, 37],
+            [15, 23],
+            [13, 12],
+            [12, -18]
+        ],
+        [
+            [5631, 8267],
+            [-2, 15],
+            [3, 16],
+            [-13, 10],
+            [-29, 10]
+        ],
+        [
+            [5590, 8318],
+            [-6, 50]
+        ],
+        [
+            [5584, 8368],
+            [32, 18],
+            [47, -4],
+            [27, 6],
+            [4, -12],
+            [15, -4],
+            [26, -29]
+        ],
+        [
+            [5652, 8242],
+            [-7, 19],
+            [-14, 6]
+        ],
+        [
+            [5584, 8368],
+            [1, 44],
+            [14, 37],
+            [26, 20],
+            [22, -44],
+            [22, 1],
+            [6, 46]
+        ],
+        [
+            [5757, 8453],
+            [14, -14],
+            [2, -28],
+            [9, -35]
+        ],
+        [
+            [4759, 6691],
+            [-4, 0],
+            [0, -31],
+            [-17, -2],
+            [-9, -14],
+            [-13, 0],
+            [-10, 8],
+            [-23, -6],
+            [-9, -46],
+            [-9, -5],
+            [-13, -74],
+            [-38, -64],
+            [-9, -81],
+            [-12, -27],
+            [-3, -21],
+            [-63, -5]
+        ],
+        [
+            [4527, 6323],
+            [1, 27],
+            [11, 17],
+            [9, 30],
+            [-2, 20],
+            [10, 42],
+            [15, 38],
+            [9, 9],
+            [8, 35],
+            [0, 31],
+            [10, 37],
+            [19, 21],
+            [18, 60],
+            [0, 1],
+            [14, 23],
+            [26, 6],
+            [22, 41],
+            [14, 16],
+            [23, 49],
+            [-7, 73],
+            [10, 51],
+            [4, 31],
+            [18, 40],
+            [28, 27],
+            [21, 25],
+            [18, 61],
+            [9, 36],
+            [20, 0],
+            [17, -25],
+            [26, 4],
+            [29, -13],
+            [12, -1]
+        ],
+        [
+            [5739, 7906],
+            [6, 9],
+            [19, 6],
+            [20, -19],
+            [12, -2],
+            [12, -16],
+            [-2, -20],
+            [11, -9],
+            [4, -25],
+            [9, -15],
+            [-2, -9],
+            [5, -6],
+            [-7, -4],
+            [-16, 1],
+            [-3, 9],
+            [-6, -5],
+            [2, -11],
+            [-7, -19],
+            [-5, -20],
+            [-7, -6]
+        ],
+        [
+            [5784, 7745],
+            [-5, 27],
+            [3, 25],
+            [-1, 26],
+            [-16, 35],
+            [-9, 25],
+            [-9, 17],
+            [-8, 6]
+        ],
+        [
+            [6376, 4321],
+            [7, -25],
+            [7, -39],
+            [4, -71],
+            [7, -28],
+            [-2, -28],
+            [-5, -18],
+            [-10, 35],
+            [-5, -18],
+            [5, -43],
+            [-2, -25],
+            [-8, -14],
+            [-1, -50],
+            [-11, -69],
+            [-14, -81],
+            [-17, -112],
+            [-11, -82],
+            [-12, -69],
+            [-23, -14],
+            [-24, -25],
+            [-16, 15],
+            [-22, 21],
+            [-8, 31],
+            [-2, 53],
+            [-10, 47],
+            [-2, 42],
+            [5, 43],
+            [13, 10],
+            [0, 20],
+            [13, 45],
+            [2, 37],
+            [-6, 28],
+            [-5, 38],
+            [-2, 54],
+            [9, 33],
+            [4, 38],
+            [14, 2],
+            [15, 12],
+            [11, 10],
+            [12, 1],
+            [16, 34],
+            [23, 36],
+            [8, 30],
+            [-4, 25],
+            [12, -7],
+            [15, 41],
+            [1, 36],
+            [9, 26],
+            [10, -25]
+        ],
+        [
+            [2301, 6586],
+            [-10, -52],
+            [-5, -43],
+            [-2, -79],
+            [-3, -29],
+            [5, -32],
+            [9, -29],
+            [5, -45],
+            [19, -44],
+            [6, -34],
+            [11, -29],
+            [29, -16],
+            [12, -25],
+            [24, 17],
+            [21, 6],
+            [21, 11],
+            [18, 10],
+            [17, 24],
+            [7, 34],
+            [2, 50],
+            [5, 17],
+            [19, 16],
+            [29, 13],
+            [25, -2],
+            [17, 5],
+            [6, -12],
+            [-1, -29],
+            [-15, -35],
+            [-6, -36],
+            [5, -10],
+            [-4, -26],
+            [-7, -46],
+            [-7, 15],
+            [-6, -1]
+        ],
+        [
+            [2438, 5916],
+            [-32, 64],
+            [-14, 19],
+            [-23, 16],
+            [-15, -5],
+            [-22, -22],
+            [-14, -6],
+            [-20, 16],
+            [-21, 11],
+            [-26, 27],
+            [-21, 8],
+            [-31, 28],
+            [-23, 28],
+            [-7, 16],
+            [-16, 3],
+            [-28, 19],
+            [-12, 27],
+            [-30, 34],
+            [-14, 37],
+            [-6, 29],
+            [9, 5],
+            [-3, 17],
+            [7, 16],
+            [0, 20],
+            [-10, 27],
+            [-2, 23],
+            [-9, 30],
+            [-25, 59],
+            [-28, 46],
+            [-13, 37],
+            [-24, 24],
+            [-5, 14],
+            [4, 37],
+            [-14, 13],
+            [-17, 29],
+            [-7, 41],
+            [-14, 5],
+            [-17, 31],
+            [-13, 29],
+            [-1, 19],
+            [-15, 44],
+            [-10, 45],
+            [1, 23],
+            [-20, 23],
+            [-10, -2],
+            [-15, 16],
+            [-5, -24],
+            [5, -28],
+            [2, -45],
+            [10, -24],
+            [21, -41],
+            [4, -14],
+            [4, -4],
+            [4, -20],
+            [5, 1],
+            [6, -38],
+            [8, -15],
+            [6, -21],
+            [17, -30],
+            [10, -55],
+            [8, -26],
+            [8, -28],
+            [1, -31],
+            [13, -2],
+            [12, -27],
+            [10, -26],
+            [-1, -11],
+            [-12, -21],
+            [-5, 0],
+            [-7, 36],
+            [-18, 33],
+            [-20, 29],
+            [-14, 15],
+            [1, 43],
+            [-5, 32],
+            [-13, 19],
+            [-19, 26],
+            [-4, -8],
+            [-7, 16],
+            [-17, 14],
+            [-16, 34],
+            [2, 5],
+            [11, -4],
+            [11, 22],
+            [1, 27],
+            [-22, 42],
+            [-16, 17],
+            [-10, 36],
+            [-11, 39],
+            [-12, 47],
+            [-12, 54]
+        ],
+        [
+            [1746, 6980],
+            [32, 4],
+            [35, 7],
+            [-2, -12],
+            [41, -29],
+            [64, -41],
+            [55, 0],
+            [22, 0],
+            [0, 24],
+            [48, 0],
+            [10, -20],
+            [15, -19],
+            [16, -26],
+            [9, -31],
+            [7, -32],
+            [15, -18],
+            [23, -18],
+            [17, 47],
+            [23, 1],
+            [19, -24],
+            [14, -40],
+            [10, -35],
+            [16, -34],
+            [6, -41],
+            [8, -28],
+            [22, -18],
+            [20, -13],
+            [10, 2]
+        ],
+        [
+            [5599, 7553],
+            [9, 4],
+            [13, 1]
+        ],
+        [
+            [4661, 5921],
+            [10, 11],
+            [4, 35],
+            [9, 1],
+            [20, -16],
+            [15, 11],
+            [11, -4],
+            [4, 13],
+            [112, 1],
+            [6, 42],
+            [-5, 7],
+            [-13, 255],
+            [-14, 255],
+            [43, 1]
+        ],
+        [
+            [5118, 6189],
+            [0, -136],
+            [-15, -39],
+            [-2, -37],
+            [-25, -9],
+            [-38, -5],
+            [-10, -21],
+            [-18, -3]
+        ],
+        [
+            [4680, 5793],
+            [1, 18],
+            [-2, 23],
+            [-11, 16],
+            [-5, 34],
+            [-2, 37]
+        ],
+        [
+            [7737, 5644],
+            [-3, 44],
+            [9, 45],
+            [-10, 35],
+            [3, 65],
+            [-12, 30],
+            [-9, 71],
+            [-5, 75],
+            [-12, 49],
+            [-18, -30],
+            [-32, -42],
+            [-15, 5],
+            [-17, 14],
+            [9, 73],
+            [-6, 56],
+            [-21, 68],
+            [3, 21],
+            [-16, 7],
+            [-20, 49]
+        ],
+        [
+            [7780, 6264],
+            [-16, -14],
+            [-16, -26],
+            [-20, -2],
+            [-12, -64],
+            [-12, -11],
+            [14, -52],
+            [17, -43],
+            [12, -39],
+            [-11, -51],
+            [-9, -11],
+            [6, -30],
+            [19, -47],
+            [3, -33],
+            [0, -27],
+            [11, -54],
+            [-16, -55],
+            [-13, -61]
+        ],
+        [
+            [5538, 7532],
+            [-6, 4],
+            [-8, 19],
+            [-12, 12]
+        ],
+        [
+            [5533, 7629],
+            [8, -10],
+            [4, -9],
+            [9, -6],
+            [10, -12],
+            [-2, -5]
+        ],
+        [
+            [7437, 7970],
+            [29, 10],
+            [53, 51],
+            [42, 28],
+            [24, -18],
+            [29, -1],
+            [19, -28],
+            [28, -2],
+            [40, -15],
+            [27, 41],
+            [-11, 35],
+            [28, 61],
+            [31, -24],
+            [26, -7],
+            [32, -15],
+            [6, -44],
+            [39, -25],
+            [26, 11],
+            [36, 7],
+            [27, -7],
+            [28, -29],
+            [16, -30],
+            [26, 1],
+            [35, -10],
+            [26, 15],
+            [36, 9],
+            [41, 42],
+            [17, -6],
+            [14, -20],
+            [33, 5]
+        ],
+        [
+            [5959, 4377],
+            [21, 5],
+            [34, -17],
+            [7, 8],
+            [19, 1],
+            [10, 18],
+            [17, -1],
+            [30, 23],
+            [22, 34]
+        ],
+        [
+            [6119, 4448],
+            [5, -26],
+            [-1, -59],
+            [3, -52],
+            [1, -92],
+            [5, -29],
+            [-8, -43],
+            [-11, -41],
+            [-18, -36],
+            [-25, -23],
+            [-31, -28],
+            [-32, -64],
+            [-10, -11],
+            [-20, -42],
+            [-11, -13],
+            [-3, -42],
+            [14, -45],
+            [5, -35],
+            [0, -17],
+            [5, 3],
+            [-1, -58],
+            [-4, -28],
+            [6, -10],
+            [-4, -25],
+            [-11, -21],
+            [-23, -20],
+            [-34, -32],
+            [-12, -21],
+            [3, -25],
+            [7, -4],
+            [-3, -31]
+        ],
+        [
+            [5911, 3478],
+            [-21, 0]
+        ],
+        [
+            [5890, 3478],
+            [-2, 26],
+            [-4, 27]
+        ],
+        [
+            [5884, 3531],
+            [-3, 21],
+            [5, 66],
+            [-7, 42],
+            [-13, 83]
+        ],
+        [
+            [5866, 3743],
+            [29, 67],
+            [7, 43],
+            [5, 5],
+            [3, 35],
+            [-5, 17],
+            [1, 44],
+            [6, 41],
+            [0, 75],
+            [-15, 19],
+            [-13, 4],
+            [-6, 15],
+            [-13, 12],
+            [-23, -1],
+            [-2, 22]
+        ],
+        [
+            [5840, 4141],
+            [-2, 42],
+            [84, 49]
+        ],
+        [
+            [5922, 4232],
+            [16, -28],
+            [8, 5],
+            [11, -15],
+            [1, -23],
+            [-6, -28],
+            [2, -42],
+            [19, -36],
+            [8, 41],
+            [12, 12],
+            [-2, 76],
+            [-12, 43],
+            [-10, 19],
+            [-10, -1],
+            [-7, 77],
+            [7, 45]
+        ],
+        [
+            [4661, 5921],
+            [-18, 41],
+            [-17, 43],
+            [-18, 16],
+            [-13, 17],
+            [-16, -1],
+            [-13, -12],
+            [-14, 5],
+            [-10, -19]
+        ],
+        [
+            [4542, 6011],
+            [-2, 32],
+            [8, 29],
+            [3, 55],
+            [-3, 59],
+            [-3, 29],
+            [2, 30],
+            [-7, 28],
+            [-14, 25]
+        ],
+        [
+            [4526, 6298],
+            [6, 20],
+            [108, -1],
+            [-5, 86],
+            [7, 30],
+            [26, 5],
+            [-1, 152],
+            [91, -4],
+            [0, 90]
+        ],
+        [
+            [5922, 4232],
+            [-15, 15],
+            [9, 55],
+            [9, 21],
+            [-6, 49],
+            [6, 48],
+            [5, 16],
+            [-7, 50],
+            [-14, 26]
+        ],
+        [
+            [5909, 4512],
+            [28, -11],
+            [5, -16],
+            [10, -28],
+            [7, -80]
+        ],
+        [
+            [7836, 5425],
+            [7, -5],
+            [16, -36],
+            [12, -40],
+            [2, -39],
+            [-3, -27],
+            [2, -21],
+            [2, -35],
+            [10, -16],
+            [11, -52],
+            [-1, -20],
+            [-19, -4],
+            [-27, 44],
+            [-32, 47],
+            [-4, 30],
+            [-16, 39],
+            [-4, 49],
+            [-10, 32],
+            [4, 43],
+            [-7, 25]
+        ],
+        [
+            [7779, 5439],
+            [5, 11],
+            [23, -26],
+            [2, -30],
+            [18, 7],
+            [9, 24]
+        ],
+        [
+            [8045, 5176],
+            [21, -20],
+            [21, 11],
+            [6, 50],
+            [12, 11],
+            [33, 13],
+            [20, 47],
+            [14, 37]
+        ],
+        [
+            [8206, 5379],
+            [22, 41],
+            [14, 47],
+            [11, 0],
+            [14, -30],
+            [1, -26],
+            [19, -16],
+            [23, -18],
+            [-2, -23],
+            [-19, -3],
+            [5, -29],
+            [-20, -20]
+        ],
+        [
+            [5453, 3369],
+            [-20, 45],
+            [-11, 43],
+            [-6, 58],
+            [-7, 42],
+            [-9, 91],
+            [-1, 71],
+            [-3, 32],
+            [-11, 25],
+            [-15, 48],
+            [-14, 71],
+            [-6, 37],
+            [-23, 58],
+            [-2, 45]
+        ],
+        [
+            [5644, 4022],
+            [23, 14],
+            [18, -4],
+            [11, -13],
+            [0, -5]
+        ],
+        [
+            [5552, 3594],
+            [0, -218],
+            [-25, -30],
+            [-15, -4],
+            [-17, 11],
+            [-13, 4],
+            [-4, 25],
+            [-11, 17],
+            [-14, -30]
+        ],
+        [
+            [9604, 3812],
+            [23, -36],
+            [14, -28],
+            [-10, -14],
+            [-16, 16],
+            [-19, 27],
+            [-18, 31],
+            [-19, 42],
+            [-4, 20],
+            [12, -1],
+            [16, -20],
+            [12, -20],
+            [9, -17]
+        ],
+        [
+            [5412, 6408],
+            [7, -92],
+            [10, -15],
+            [1, -19],
+            [11, -20],
+            [-6, -25],
+            [-11, -120],
+            [-1, -77],
+            [-35, -56],
+            [-12, -78],
+            [11, -22],
+            [0, -38],
+            [18, -1],
+            [-3, -28]
+        ],
+        [
+            [5393, 5795],
+            [-5, -1],
+            [-19, 64],
+            [-6, 3],
+            [-22, -33],
+            [-21, 17],
+            [-15, 3],
+            [-8, -8],
+            [-17, 2],
+            [-16, -25],
+            [-14, -2],
+            [-34, 31],
+            [-13, -15],
+            [-14, 1],
+            [-10, 23],
+            [-28, 22],
+            [-30, -7],
+            [-7, -13],
+            [-4, -34],
+            [-8, -24],
+            [-2, -53]
+        ],
+        [
+            [5236, 5339],
+            [-29, -21],
+            [-11, 3],
+            [-10, -13],
+            [-23, 1],
+            [-15, 37],
+            [-9, 43],
+            [-19, 39],
+            [-21, -1],
+            [-25, 0]
+        ],
+        [
+            [2619, 5713],
+            [-10, 18],
+            [-13, 24],
+            [-6, 20],
+            [-12, 19],
+            [-13, 26],
+            [3, 9],
+            [4, -9],
+            [2, 5]
+        ],
+        [
+            [2690, 5943],
+            [-2, -5],
+            [-2, -13],
+            [3, -22],
+            [-6, -20],
+            [-3, -24],
+            [-1, -26],
+            [1, -15],
+            [1, -27],
+            [-4, -6],
+            [-3, -25],
+            [2, -15],
+            [-6, -16],
+            [2, -16],
+            [4, -9]
+        ],
+        [
+            [5092, 8091],
+            [14, 16],
+            [24, 87],
+            [38, 25],
+            [23, -2]
+        ],
+        [
+            [5863, 9167],
+            [-47, -24],
+            [-22, -5]
+        ],
+        [
+            [5573, 9140],
+            [-17, -2],
+            [-4, -39],
+            [-53, 9],
+            [-7, -33],
+            [-27, 1],
+            [-18, -42],
+            [-28, -66],
+            [-43, -83],
+            [10, -20],
+            [-10, -24],
+            [-27, 1],
+            [-18, -55],
+            [2, -79],
+            [17, -29],
+            [-9, -70],
+            [-23, -40],
+            [-12, -34]
+        ],
+        [
+            [5306, 8535],
+            [-19, 36],
+            [-55, -69],
+            [-37, -13],
+            [-38, 30],
+            [-10, 63],
+            [-9, 137],
+            [26, 38],
+            [73, 49],
+            [55, 61],
+            [51, 82],
+            [66, 115],
+            [47, 44],
+            [76, 74],
+            [61, 26],
+            [46, -3],
+            [42, 49],
+            [51, -3],
+            [50, 12],
+            [87, -43],
+            [-36, -16],
+            [30, -37]
+        ],
+        [
+            [5686, 9657],
+            [-62, -24],
+            [-49, 13],
+            [19, 16],
+            [-16, 19],
+            [57, 11],
+            [11, -22],
+            [40, -13]
+        ],
+        [
+            [5506, 9766],
+            [92, -44],
+            [-70, -23],
+            [-15, -44],
+            [-25, -11],
+            [-13, -49],
+            [-34, -2],
+            [-59, 36],
+            [25, 21],
+            [-42, 17],
+            [-54, 50],
+            [-21, 46],
+            [75, 21],
+            [16, -20],
+            [39, 0],
+            [11, 21],
+            [40, 2],
+            [35, -21]
+        ],
+        [
+            [5706, 9808],
+            [55, -21],
+            [-41, -32],
+            [-81, -7],
+            [-82, 10],
+            [-5, 16],
+            [-40, 1],
+            [-30, 27],
+            [86, 17],
+            [40, -14],
+            [28, 17],
+            [70, -14]
+        ],
+        [
+            [9805, 2640],
+            [6, -24],
+            [20, 24],
+            [8, -25],
+            [0, -25],
+            [-10, -27],
+            [-18, -44],
+            [-14, -24],
+            [10, -28],
+            [-22, -1],
+            [-23, -22],
+            [-8, -39],
+            [-16, -60],
+            [-21, -26],
+            [-14, -17],
+            [-26, 1],
+            [-18, 20],
+            [-30, 4],
+            [-5, 22],
+            [15, 43],
+            [35, 59],
+            [18, 11],
+            [20, 22],
+            [24, 31],
+            [16, 31],
+            [13, 44],
+            [10, 15],
+            [5, 33],
+            [19, 27],
+            [6, -25]
+        ],
+        [
+            [9849, 2922],
+            [20, -63],
+            [1, 41],
+            [13, -16],
+            [4, -45],
+            [22, -19],
+            [19, -5],
+            [16, 22],
+            [14, -6],
+            [-7, -53],
+            [-8, -34],
+            [-22, 1],
+            [-7, -18],
+            [3, -25],
+            [-4, -11],
+            [-11, -32],
+            [-14, -41],
+            [-21, -23],
+            [-5, 15],
+            [-12, 9],
+            [16, 48],
+            [-9, 33],
+            [-30, 23],
+            [1, 22],
+            [20, 20],
+            [5, 46],
+            [-1, 38],
+            [-12, 40],
+            [1, 10],
+            [-13, 25],
+            [-22, 52],
+            [-12, 42],
+            [11, 4],
+            [15, -33],
+            [21, -15],
+            [8, -52]
+        ],
+        [
+            [6475, 6041],
+            [-9, 41],
+            [-22, 98]
+        ],
+        [
+            [6444, 6180],
+            [83, 59],
+            [19, 118],
+            [-13, 42]
+        ],
+        [
+            [6566, 6530],
+            [12, -40],
+            [16, -22],
+            [20, -8],
+            [17, -10],
+            [12, -34],
+            [8, -20],
+            [10, -7],
+            [0, -13],
+            [-10, -36],
+            [-5, -16],
+            [-12, -19],
+            [-10, -41],
+            [-13, 3],
+            [-5, -14],
+            [-5, -30],
+            [4, -39],
+            [-3, -7],
+            [-13, 0],
+            [-17, -22],
+            [-3, -29],
+            [-6, -12],
+            [-18, 0],
+            [-10, -15],
+            [0, -24],
+            [-14, -16],
+            [-15, 5],
+            [-19, -19],
+            [-12, -4]
+        ],
+        [
+            [6557, 6597],
+            [8, 20],
+            [3, -5],
+            [-2, -25],
+            [-4, -10]
+        ],
+        [
+            [6893, 6457],
+            [-20, 15],
+            [-9, 43],
+            [-21, 45],
+            [-51, -12],
+            [-45, -1],
+            [-39, -8]
+        ],
+        [
+            [2836, 5484],
+            [-9, 17],
+            [-6, 32],
+            [7, 16],
+            [-7, 4],
+            [-5, 20],
+            [-14, 16],
+            [-12, -4],
+            [-6, -20],
+            [-11, -15],
+            [-6, -2],
+            [-3, -13],
+            [13, -32],
+            [-7, -7],
+            [-4, -9],
+            [-13, -3],
+            [-5, 35],
+            [-4, -10],
+            [-9, 4],
+            [-5, 24],
+            [-12, 3],
+            [-7, 7],
+            [-12, 0],
+            [-1, -13],
+            [-3, 9]
+        ],
+        [
+            [2707, 5623],
+            [10, -22],
+            [-1, -12],
+            [11, -3],
+            [3, 5],
+            [8, -14],
+            [13, 4],
+            [12, 15],
+            [17, 12],
+            [9, 17],
+            [16, -3],
+            [-1, -6],
+            [15, -2],
+            [12, -10],
+            [10, -18],
+            [10, -16]
+        ],
+        [
+            [3045, 3974],
+            [-28, 33],
+            [-2, 25],
+            [-55, 59],
+            [-50, 65],
+            [-22, 36],
+            [-11, 49],
+            [4, 17],
+            [-23, 77],
+            [-28, 109],
+            [-26, 118],
+            [-11, 27],
+            [-9, 43],
+            [-21, 39],
+            [-20, 24],
+            [9, 26],
+            [-14, 57],
+            [9, 41],
+            [22, 37]
+        ],
+        [
+            [8510, 5555],
+            [2, -40],
+            [2, -33],
+            [-9, -54],
+            [-11, 60],
+            [-13, -30],
+            [9, -43],
+            [-8, -28],
+            [-32, 35],
+            [-8, 42],
+            [8, 28],
+            [-17, 28],
+            [-9, -24],
+            [-13, 2],
+            [-21, -33],
+            [-4, 17],
+            [11, 50],
+            [17, 17],
+            [15, 22],
+            [10, -27],
+            [21, 17],
+            [5, 26],
+            [19, 1],
+            [-1, 46],
+            [22, -28],
+            [3, -30],
+            [2, -21]
+        ],
+        [
+            [8443, 5665],
+            [-10, -20],
+            [-9, -37],
+            [-8, -17],
+            [-17, 40],
+            [5, 16],
+            [7, 17],
+            [3, 36],
+            [16, 4],
+            [-5, -40],
+            [21, 57],
+            [-3, -56]
+        ],
+        [
+            [8291, 5608],
+            [-37, -56],
+            [14, 41],
+            [20, 37],
+            [16, 41],
+            [15, 58],
+            [5, -48],
+            [-18, -33],
+            [-15, -40]
+        ],
+        [
+            [8385, 5760],
+            [16, -18],
+            [18, 0],
+            [0, -25],
+            [-13, -25],
+            [-18, -18],
+            [-1, 28],
+            [2, 30],
+            [-4, 28]
+        ],
+        [
+            [8485, 5776],
+            [8, -66],
+            [-21, 16],
+            [0, -20],
+            [7, -37],
+            [-13, -13],
+            [-1, 42],
+            [-9, 3],
+            [-4, 36],
+            [16, -5],
+            [0, 22],
+            [-17, 45],
+            [27, -1],
+            [7, -22]
+        ],
+        [
+            [8375, 5830],
+            [-7, -51],
+            [-12, 29],
+            [-15, 45],
+            [24, -2],
+            [10, -21]
+        ],
+        [
+            [8369, 6151],
+            [17, -17],
+            [9, 15],
+            [2, -15],
+            [-4, -24],
+            [9, -43],
+            [-7, -49],
+            [-16, -19],
+            [-5, -48],
+            [7, -47],
+            [14, -7],
+            [13, 7],
+            [34, -32],
+            [-2, -32],
+            [9, -15],
+            [-3, -27],
+            [-22, 29],
+            [-10, 31],
+            [-7, -22],
+            [-18, 36],
+            [-25, -9],
+            [-14, 13],
+            [1, 25],
+            [9, 15],
+            [-8, 13],
+            [-4, -21],
+            [-14, 34],
+            [-4, 26],
+            [-1, 56],
+            [11, -19],
+            [3, 92],
+            [9, 54],
+            [17, 0]
+        ],
+        [
+            [9329, 4655],
+            [-8, -6],
+            [-12, 22],
+            [-12, 38],
+            [-6, 45],
+            [4, 6],
+            [3, -18],
+            [8, -13],
+            [14, -38],
+            [13, -20],
+            [-4, -16]
+        ],
+        [
+            [9221, 4734],
+            [-15, -5],
+            [-4, -17],
+            [-15, -14],
+            [-15, -14],
+            [-14, 0],
+            [-23, 18],
+            [-16, 16],
+            [2, 18],
+            [25, -8],
+            [15, 4],
+            [5, 29],
+            [4, 1],
+            [2, -31],
+            [16, 4],
+            [8, 20],
+            [16, 21],
+            [-4, 35],
+            [17, 1],
+            [6, -9],
+            [-1, -33],
+            [-9, -36]
+        ],
+        [
+            [8916, 4904],
+            [48, -41],
+            [51, -34],
+            [19, -30],
+            [16, -30],
+            [4, -34],
+            [46, -37],
+            [7, -31],
+            [-25, -7],
+            [6, -39],
+            [25, -39],
+            [18, -62],
+            [15, 2],
+            [-1, -27],
+            [22, -10],
+            [-9, -11],
+            [30, -25],
+            [-3, -17],
+            [-18, -4],
+            [-7, 16],
+            [-24, 6],
+            [-28, 9],
+            [-22, 38],
+            [-16, 32],
+            [-14, 52],
+            [-36, 26],
+            [-24, -17],
+            [-17, -20],
+            [4, -43],
+            [-22, -20],
+            [-16, 9],
+            [-28, 3]
+        ],
+        [
+            [9253, 4792],
+            [-9, -16],
+            [-5, 35],
+            [-6, 23],
+            [-13, 19],
+            [-16, 25],
+            [-20, 18],
+            [8, 14],
+            [15, -17],
+            [9, -13],
+            [12, -14],
+            [11, -25],
+            [11, -19],
+            [3, -30]
+        ],
+        [
+            [5392, 8233],
+            [19, 18],
+            [43, 27],
+            [35, 20],
+            [28, -10],
+            [2, -14],
+            [27, -1]
+        ],
+        [
+            [5546, 8273],
+            [34, -7],
+            [51, 1]
+        ],
+        [
+            [5653, 8105],
+            [14, -52],
+            [-3, -17],
+            [-14, -6],
+            [-25, -50],
+            [7, -26],
+            [-6, 3]
+        ],
+        [
+            [5626, 7957],
+            [-26, 23],
+            [-20, -8],
+            [-13, 6],
+            [-17, -13],
+            [-14, 21],
+            [-11, -8],
+            [-2, 4]
+        ],
+        [
+            [3159, 6151],
+            [14, -5],
+            [5, -12],
+            [-7, -15],
+            [-21, 1],
+            [-17, -2],
+            [-1, 25],
+            [4, 9],
+            [23, -1]
+        ],
+        [
+            [8628, 7562],
+            [4, -10]
+        ],
+        [
+            [8632, 7552],
+            [-11, 3],
+            [-12, -20],
+            [-8, -20],
+            [1, -42],
+            [-14, -13],
+            [-5, -11],
+            [-11, -17],
+            [-18, -10],
+            [-12, -16],
+            [-1, -25],
+            [-3, -7],
+            [11, -9],
+            [15, -26]
+        ],
+        [
+            [8504, 7288],
+            [-13, 11],
+            [-4, -11],
+            [-8, -5],
+            [-1, 11],
+            [-7, 5],
+            [-8, 10],
+            [8, 26],
+            [7, 7],
+            [-3, 11],
+            [7, 31],
+            [-2, 10],
+            [-16, 7],
+            [-13, 15]
+        ],
+        [
+            [4792, 7249],
+            [-11, -15],
+            [-14, 8],
+            [-15, -6],
+            [5, 46],
+            [-3, 36],
+            [-12, 6],
+            [-7, 22],
+            [2, 39],
+            [11, 21],
+            [2, 24],
+            [6, 36],
+            [-1, 25],
+            [-5, 21],
+            [-1, 20]
+        ],
+        [
+            [6411, 6520],
+            [-2, 43],
+            [7, 31],
+            [8, 6],
+            [8, -18],
+            [1, -35],
+            [-6, -35]
+        ],
+        [
+            [6427, 6512],
+            [-8, -4],
+            [-8, 12]
+        ],
+        [
+            [5630, 7886],
+            [12, 13],
+            [17, -7],
+            [18, 0],
+            [13, -14],
+            [10, 9],
+            [20, 5],
+            [7, 14],
+            [12, 0]
+        ],
+        [
+            [5784, 7745],
+            [12, -11],
+            [13, 9],
+            [13, -10]
+        ],
+        [
+            [5822, 7733],
+            [0, -15],
+            [-13, -13],
+            [-9, 6],
+            [-7, -71]
+        ],
+        [
+            [5629, 7671],
+            [-5, 10],
+            [6, 10],
+            [-7, 7],
+            [-8, -13],
+            [-17, 17],
+            [-2, 25],
+            [-17, 14],
+            [-3, 18],
+            [-15, 24]
+        ],
+        [
+            [8989, 8056],
+            [28, -105],
+            [-41, 19],
+            [-17, -85],
+            [27, -61],
+            [-1, -41],
+            [-21, 36],
+            [-18, -46],
+            [-5, 50],
+            [3, 57],
+            [-3, 64],
+            [6, 45],
+            [2, 79],
+            [-17, 58],
+            [3, 80],
+            [25, 28],
+            [-11, 27],
+            [13, 8],
+            [7, -39],
+            [10, -57],
+            [-1, -58],
+            [11, -59]
+        ],
+        [
+            [5546, 8273],
+            [6, 26],
+            [38, 19]
+        ],
+        [
+            [0, 9132],
+            [68, -45],
+            [73, -59],
+            [-3, -37],
+            [19, -15],
+            [-6, 43],
+            [75, -8],
+            [55, -56],
+            [-28, -26],
+            [-46, -6],
+            [0, -57],
+            [-11, -13],
+            [-26, 2],
+            [-22, 21],
+            [-36, 17],
+            [-7, 26],
+            [-28, 9],
+            [-31, -7],
+            [-16, 20],
+            [6, 22],
+            [-33, -14],
+            [13, -28],
+            [-16, -25]
+        ],
+        [
+            [0, 8896],
+            [0, 236]
+        ],
+        [
+            [0, 9282],
+            [9999, -40],
+            [-30, -3],
+            [-5, 19],
+            [-9964, 24]
+        ],
+        [
+            [0, 9282],
+            [4, 3],
+            [23, 0],
+            [40, -17],
+            [-2, -8],
+            [-29, -14],
+            [-36, -4],
+            [0, 40]
+        ],
+        [
+            [8988, 9383],
+            [-42, -1],
+            [-57, 7],
+            [-5, 3],
+            [27, 23],
+            [34, 6],
+            [40, -23],
+            [3, -15]
+        ],
+        [
+            [9186, 9493],
+            [-32, -23],
+            [-44, 5],
+            [-52, 23],
+            [7, 20],
+            [51, -9],
+            [70, -16]
+        ],
+        [
+            [9029, 9522],
+            [-22, -44],
+            [-102, 1],
+            [-46, -14],
+            [-55, 39],
+            [15, 40],
+            [37, 11],
+            [73, -2],
+            [100, -31]
+        ],
+        [
+            [6598, 9235],
+            [-17, -5],
+            [-91, 8],
+            [-7, 26],
+            [-50, 16],
+            [-4, 32],
+            [28, 13],
+            [-1, 32],
+            [55, 50],
+            [-25, 7],
+            [66, 52],
+            [-7, 27],
+            [62, 31],
+            [91, 38],
+            [93, 11],
+            [48, 22],
+            [54, 8],
+            [19, -23],
+            [-19, -19],
+            [-98, -29],
+            [-85, -28],
+            [-86, -57],
+            [-42, -57],
+            [-43, -57],
+            [5, -49],
+            [54, -49]
+        ],
+        [
+            [0, 8896],
+            [9963, -26],
+            [-36, 4],
+            [25, -31],
+            [17, -49],
+            [13, -16],
+            [3, -24],
+            [-7, -16],
+            [-52, 13],
+            [-78, -44],
+            [-25, -7],
+            [-42, -42],
+            [-40, -36],
+            [-11, -27],
+            [-39, 41],
+            [-73, -46],
+            [-12, 22],
+            [-27, -26],
+            [-37, 8],
+            [-9, -38],
+            [-33, -58],
+            [1, -24],
+            [31, -13],
+            [-4, -86],
+            [-25, -2],
+            [-12, -49],
+            [11, -26],
+            [-48, -30],
+            [-10, -67],
+            [-41, -15],
+            [-9, -60],
+            [-40, -55],
+            [-10, 41],
+            [-12, 86],
+            [-15, 131],
+            [13, 82],
+            [23, 35],
+            [2, 28],
+            [43, 13],
+            [50, 75],
+            [47, 60],
+            [50, 48],
+            [23, 83],
+            [-34, -5],
+            [-17, -49],
+            [-70, -65],
+            [-23, 73],
+            [-72, -20],
+            [-69, -99],
+            [23, -36],
+            [-62, -16],
+            [-43, -6],
+            [2, 43],
+            [-43, 9],
+            [-35, -29],
+            [-85, 10],
+            [-91, -18],
+            [-90, -115],
+            [-106, -139],
+            [43, -8],
+            [14, -37],
+            [27, -13],
+            [18, 30],
+            [30, -4],
+            [40, -65],
+            [1, -50],
+            [-21, -59],
+            [-3, -71],
+            [-12, -94],
+            [-42, -86],
+            [-9, -41],
+            [-38, -69],
+            [-38, -68],
+            [-18, -35],
+            [-37, -34],
+            [-17, -1],
+            [-17, 29],
+            [-38, -44],
+            [-4, -19]
+        ],
+        [
+            [6363, 7799],
+            [-12, -35],
+            [-27, -10],
+            [-28, -61],
+            [25, -56],
+            [-2, -40],
+            [30, -70]
+        ],
+        [
+            [6109, 7624],
+            [-35, 49],
+            [-32, 23],
+            [-24, 34],
+            [20, 10],
+            [23, 49],
+            [-15, 24],
+            [41, 24],
+            [-1, 13],
+            [-25, -10]
+        ],
+        [
+            [6061, 7840],
+            [1, 26],
+            [14, 17],
+            [27, 4],
+            [5, 20],
+            [-7, 33],
+            [12, 30],
+            [-1, 18],
+            [-41, 19],
+            [-16, -1],
+            [-17, 28],
+            [-21, -9],
+            [-35, 20],
+            [0, 12],
+            [-10, 26],
+            [-22, 3],
+            [-2, 18],
+            [7, 12],
+            [-18, 33],
+            [-29, -5],
+            [-8, 3],
+            [-7, -14],
+            [-11, 3]
+        ],
+        [
+            [5777, 8571],
+            [31, 33],
+            [-29, 28]
+        ],
+        [
+            [5863, 9167],
+            [29, 20],
+            [46, -35],
+            [76, -14],
+            [105, -67],
+            [21, -28],
+            [2, -40],
+            [-31, -31],
+            [-45, -15],
+            [-124, 44],
+            [-21, -7],
+            [45, -43],
+            [2, -28],
+            [2, -60],
+            [36, -18],
+            [22, -15],
+            [3, 28],
+            [-17, 26],
+            [18, 22],
+            [67, -37],
+            [24, 15],
+            [-19, 43],
+            [65, 58],
+            [25, -4],
+            [26, -20],
+            [16, 40],
+            [-23, 35],
+            [14, 36],
+            [-21, 36],
+            [78, -18],
+            [16, -34],
+            [-35, -7],
+            [0, -33],
+            [22, -20],
+            [43, 13],
+            [7, 38],
+            [58, 28],
+            [97, 50],
+            [20, -3],
+            [-27, -35],
+            [35, -7],
+            [19, 21],
+            [52, 1],
+            [42, 25],
+            [31, -36],
+            [32, 39],
+            [-29, 35],
+            [14, 19],
+            [82, -18],
+            [39, -18],
+            [100, -68],
+            [19, 31],
+            [-28, 31],
+            [-1, 13],
+            [-34, 6],
+            [10, 28],
+            [-15, 46],
+            [-1, 19],
+            [51, 53],
+            [18, 54],
+            [21, 11],
+            [74, -15],
+            [5, -33],
+            [-26, -48],
+            [17, -19],
+            [9, -41],
+            [-6, -81],
+            [31, -36],
+            [-12, -40],
+            [-55, -84],
+            [32, -8],
+            [11, 21],
+            [31, 15],
+            [7, 29],
+            [24, 29],
+            [-16, 33],
+            [13, 39],
+            [-31, 5],
+            [-6, 33],
+            [22, 59],
+            [-36, 48],
+            [50, 40],
+            [-7, 42],
+            [14, 2],
+            [15, -33],
+            [-11, -57],
+            [29, -11],
+            [-12, 43],
+            [46, 23],
+            [58, 3],
+            [51, -34],
+            [-25, 49],
+            [-2, 63],
+            [48, 12],
+            [67, -2],
+            [60, 7],
+            [-23, 31],
+            [33, 39],
+            [31, 2],
+            [54, 29],
+            [74, 8],
+            [9, 16],
+            [73, 6],
+            [23, -14],
+            [62, 32],
+            [51, -1],
+            [8, 25],
+            [26, 25],
+            [66, 25],
+            [48, -19],
+            [-38, -15],
+            [63, -9],
+            [7, -29],
+            [25, 14],
+            [82, -1],
+            [62, -29],
+            [23, -22],
+            [-7, -30],
+            [-31, -18],
+            [-73, -33],
+            [-21, -17],
+            [35, -8],
+            [41, -15],
+            [25, 11],
+            [14, -38],
+            [12, 15],
+            [44, 10],
+            [90, -10],
+            [6, -28],
+            [116, -9],
+            [2, 46],
+            [59, -11],
+            [44, 1],
+            [45, -32],
+            [13, -37],
+            [-17, -25],
+            [35, -47],
+            [44, -24],
+            [27, 62],
+            [44, -26],
+            [48, 16],
+            [53, -18],
+            [21, 16],
+            [45, -8],
+            [-20, 55],
+            [37, 25],
+            [251, -38],
+            [24, -35],
+            [72, -45],
+            [112, 11],
+            [56, -10],
+            [23, -24],
+            [-4, -44],
+            [35, -16],
+            [37, 12],
+            [49, 1],
+            [52, -11],
+            [53, 6],
+            [49, -52],
+            [34, 19],
+            [-23, 37],
+            [13, 27],
+            [88, -17],
+            [58, 4],
+            [80, -29],
+            [-9960, -25]
+        ],
+        [
+            [7918, 9684],
+            [-157, -23],
+            [51, 77],
+            [23, 7],
+            [21, -4],
+            [70, -33],
+            [-8, -24]
+        ],
+        [
+            [6420, 9816],
+            [-37, -8],
+            [-25, -4],
+            [-4, -10],
+            [-33, -10],
+            [-30, 14],
+            [16, 19],
+            [-62, 2],
+            [54, 10],
+            [43, 1],
+            [5, -16],
+            [16, 14],
+            [26, 10],
+            [42, -13],
+            [-11, -9]
+        ],
+        [
+            [7775, 9718],
+            [-60, -8],
+            [-78, 17],
+            [-46, 23],
+            [-21, 42],
+            [-38, 12],
+            [72, 40],
+            [60, 14],
+            [54, -30],
+            [64, -57],
+            [-7, -53]
+        ],
+        [
+            [5844, 4990],
+            [11, -33],
+            [-1, -35],
+            [-8, -7]
+        ],
+        [
+            [5821, 4978],
+            [7, -6],
+            [16, 18]
+        ],
+        [
+            [4526, 6298],
+            [1, 25]
+        ],
+        [
+            [6188, 6023],
+            [-4, 26],
+            [-8, 17],
+            [-2, 24],
+            [-15, 21],
+            [-15, 50],
+            [-7, 48],
+            [-20, 40],
+            [-12, 10],
+            [-18, 56],
+            [-4, 41],
+            [2, 35],
+            [-16, 66],
+            [-13, 23],
+            [-15, 12],
+            [-10, 34],
+            [2, 13],
+            [-8, 31],
+            [-8, 13],
+            [-11, 44],
+            [-17, 48],
+            [-14, 40],
+            [-14, 0],
+            [5, 33],
+            [1, 20],
+            [3, 24]
+        ],
+        [
+            [6344, 6744],
+            [11, -51],
+            [14, -13],
+            [5, -21],
+            [18, -25],
+            [2, -24],
+            [-3, -20],
+            [4, -20],
+            [8, -16],
+            [4, -20],
+            [4, -14]
+        ],
+        [
+            [6427, 6512],
+            [5, -22]
+        ],
+        [
+            [6444, 6180],
+            [-80, -23],
+            [-26, -26],
+            [-20, -62],
+            [-13, -10],
+            [-7, 20],
+            [-11, -3],
+            [-27, 6],
+            [-5, 5],
+            [-32, -1],
+            [-7, -5],
+            [-12, 15],
+            [-7, -29],
+            [3, -25],
+            [-12, -19]
+        ],
+        [
+            [5943, 5617],
+            [-4, 1],
+            [0, 29],
+            [-3, 20],
+            [-14, 24],
+            [-4, 42],
+            [4, 44],
+            [-13, 4],
+            [-2, -13],
+            [-17, -3],
+            [7, -17],
+            [2, -36],
+            [-15, -32],
+            [-14, -43],
+            [-14, -6],
+            [-23, 34],
+            [-11, -12],
+            [-3, -17],
+            [-14, -11],
+            [-1, -12],
+            [-28, 0],
+            [-3, 12],
+            [-20, 2],
+            [-10, -10],
+            [-8, 5],
+            [-14, 34],
+            [-5, 17],
+            [-20, -9],
+            [-8, -27],
+            [-7, -53],
+            [-10, -11],
+            [-8, -6]
+        ],
+        [
+            [5663, 5567],
+            [-2, 2]
+        ],
+        [
+            [5635, 5716],
+            [0, 14],
+            [-10, 17],
+            [-1, 35],
+            [-5, 23],
+            [-10, -4],
+            [3, 22],
+            [7, 25],
+            [-3, 24],
+            [9, 18],
+            [-6, 14],
+            [7, 36],
+            [13, 44],
+            [24, -4],
+            [-1, 234]
+        ],
+        [
+            [6023, 6357],
+            [9, -58],
+            [-6, -10],
+            [4, -61],
+            [11, -71],
+            [10, -14],
+            [15, -22]
+        ],
+        [
+            [5943, 5624],
+            [0, -7]
+        ],
+        [
+            [5943, 5617],
+            [0, -46]
+        ],
+        [
+            [5944, 5309],
+            [-17, -28],
+            [-20, 1],
+            [-22, -14],
+            [-18, 13],
+            [-11, -16]
+        ],
+        [
+            [5682, 5544],
+            [-19, 23]
+        ],
+        [
+            [4535, 5861],
+            [-11, 46],
+            [-14, 21],
+            [12, 11],
+            [14, 41],
+            [6, 31]
+        ],
+        [
+            [4536, 5789],
+            [-4, 45]
+        ],
+        [
+            [9502, 4438],
+            [8, -20],
+            [-19, 0],
+            [-11, 37],
+            [17, -15],
+            [5, -2]
+        ],
+        [
+            [9467, 4474],
+            [-11, -1],
+            [-17, 6],
+            [-5, 9],
+            [1, 23],
+            [19, -9],
+            [9, -12],
+            [4, -16]
+        ],
+        [
+            [9490, 4490],
+            [-4, -11],
+            [-21, 52],
+            [-5, 35],
+            [9, 0],
+            [10, -47],
+            [11, -29]
+        ],
+        [
+            [9440, 4565],
+            [1, -12],
+            [-22, 25],
+            [-15, 21],
+            [-10, 20],
+            [4, 6],
+            [13, -14],
+            [23, -27],
+            [6, -19]
+        ],
+        [
+            [9375, 4623],
+            [-5, -3],
+            [-13, 14],
+            [-11, 24],
+            [1, 10],
+            [17, -25],
+            [11, -20]
+        ],
+        [
+            [4682, 5458],
+            [-8, 5],
+            [-20, 24],
+            [-14, 31],
+            [-5, 22],
+            [-3, 43]
+        ],
+        [
+            [2561, 5848],
+            [-3, -14],
+            [-16, 1],
+            [-10, 6],
+            [-12, 12],
+            [-15, 3],
+            [-8, 13]
+        ],
+        [
+            [6198, 5735],
+            [9, -11],
+            [5, -25],
+            [13, -24],
+            [14, -1],
+            [26, 16],
+            [30, 7],
+            [25, 18],
+            [13, 4],
+            [10, 11],
+            [16, 2]
+        ],
+        [
+            [6359, 5732],
+            [0, -1],
+            [0, -25],
+            [0, -59],
+            [0, -31],
+            [-13, -36],
+            [-19, -50]
+        ],
+        [
+            [6359, 5732],
+            [9, 1],
+            [13, 9],
+            [14, 6],
+            [14, 20],
+            [10, 0],
+            [1, -16],
+            [-3, -35],
+            [0, -31],
+            [-6, -21],
+            [-7, -64],
+            [-14, -66],
+            [-17, -75],
+            [-24, -87],
+            [-23, -66],
+            [-33, -81],
+            [-28, -48],
+            [-42, -58],
+            [-25, -45],
+            [-31, -72],
+            [-6, -31],
+            [-6, -14]
+        ],
+        [
+            [3412, 5410],
+            [34, -11],
+            [2, 10],
+            [23, 4],
+            [30, -15]
+        ],
+        [
+            [3489, 5306],
+            [10, -35],
+            [-4, -25]
+        ],
+        [
+            [5626, 7957],
+            [-8, -15],
+            [-5, -24]
+        ],
+        [
+            [5380, 7746],
+            [7, 5]
+        ],
+        [
+            [5663, 8957],
+            [-47, -17],
+            [-27, -41],
+            [4, -36],
+            [-44, -48],
+            [-54, -50],
+            [-20, -84],
+            [20, -41],
+            [26, -33],
+            [-25, -67],
+            [-29, -14],
+            [-11, -99],
+            [-15, -55],
+            [-34, 6],
+            [-16, -47],
+            [-32, -3],
+            [-9, 56],
+            [-23, 67],
+            [-21, 84]
+        ],
+        [
+            [5890, 3478],
+            [-5, -26],
+            [-17, -6],
+            [-16, 32],
+            [0, 20],
+            [7, 22],
+            [3, 17],
+            [8, 5],
+            [14, -11]
+        ],
+        [
+            [5999, 7104],
+            [-2, 45],
+            [7, 25]
+        ],
+        [
+            [6004, 7174],
+            [7, 13],
+            [7, 13],
+            [2, 33],
+            [9, -12],
+            [31, 17],
+            [14, -12],
+            [23, 1],
+            [32, 22],
+            [15, -1],
+            [32, 9]
+        ],
+        [
+            [5051, 5420],
+            [-22, -12]
+        ],
+        [
+            [7849, 5777],
+            [-25, 28],
+            [-24, -2],
+            [4, 47],
+            [-24, 0],
+            [-2, -65],
+            [-15, -87],
+            [-10, -52],
+            [2, -43],
+            [18, -2],
+            [12, -53],
+            [5, -52],
+            [15, -33],
+            [17, -7],
+            [14, -31]
+        ],
+        [
+            [7779, 5439],
+            [-11, 23],
+            [-4, 29],
+            [-15, 34],
+            [-14, 28],
+            [-4, -35],
+            [-5, 33],
+            [3, 37],
+            [8, 56]
+        ],
+        [
+            [6883, 7252],
+            [16, 60],
+            [-6, 44],
+            [-20, 14],
+            [7, 26],
+            [23, -3],
+            [13, 33],
+            [9, 38],
+            [37, 13],
+            [-6, -27],
+            [4, -17],
+            [12, 2]
+        ],
+        [
+            [6497, 7255],
+            [-5, 42],
+            [4, 62],
+            [-22, 20],
+            [8, 40],
+            [-19, 4],
+            [6, 49],
+            [26, -14],
+            [25, 19],
+            [-20, 35],
+            [-8, 34],
+            [-23, -15],
+            [-3, -43],
+            [-8, 38]
+        ],
+        [
+            [6554, 7498],
+            [31, 1],
+            [-4, 29],
+            [24, 21],
+            [23, 34],
+            [37, -31],
+            [3, -47],
+            [11, -12],
+            [30, 2],
+            [9, -10],
+            [14, -61],
+            [32, -41],
+            [18, -28],
+            [29, -29],
+            [37, -25],
+            [-1, -36]
+        ],
+        [
+            [8471, 4532],
+            [3, 14],
+            [24, 13],
+            [19, 2],
+            [9, 8],
+            [10, -8],
+            [-10, -16],
+            [-29, -25],
+            [-23, -17]
+        ],
+        [
+            [3286, 5693],
+            [16, 8],
+            [6, -2],
+            [-1, -44],
+            [-23, -7],
+            [-5, 6],
+            [8, 16],
+            [-1, 23]
+        ],
+        [
+            [5233, 7240],
+            [31, 24],
+            [19, -7],
+            [-1, -30],
+            [24, 22],
+            [2, -12],
+            [-14, -29],
+            [0, -27],
+            [9, -15],
+            [-3, -51],
+            [-19, -29],
+            [6, -33],
+            [14, -1],
+            [7, -28],
+            [11, -9]
+        ],
+        [
+            [6004, 7174],
+            [-11, 27],
+            [11, 22],
+            [-17, -5],
+            [-23, 13],
+            [-19, -34],
+            [-43, -6],
+            [-22, 31],
+            [-30, 2],
+            [-6, -24],
+            [-20, -7],
+            [-26, 31],
+            [-31, -1],
+            [-16, 59],
+            [-21, 33],
+            [14, 46],
+            [-18, 28],
+            [31, 56],
+            [43, 3],
+            [12, 45],
+            [53, -8],
+            [33, 38],
+            [32, 17],
+            [46, 1],
+            [49, -42],
+            [40, -22],
+            [32, 9],
+            [24, -6],
+            [33, 31]
+        ],
+        [
+            [5777, 7539],
+            [3, -23],
+            [25, -19],
+            [-5, -14],
+            [-33, -3],
+            [-12, -19],
+            [-23, -31],
+            [-9, 27],
+            [0, 12]
+        ],
+        [
+            [8382, 6499],
+            [-17, -95],
+            [-12, -49],
+            [-14, 50],
+            [-4, 44],
+            [17, 58],
+            [22, 45],
+            [13, -18],
+            [-5, -35]
+        ],
+        [
+            [6088, 4781],
+            [-12, -73],
+            [1, -33],
+            [18, -22],
+            [1, -15],
+            [-8, -36],
+            [2, -18],
+            [-2, -28],
+            [10, -37],
+            [11, -58],
+            [10, -13]
+        ],
+        [
+            [5909, 4512],
+            [-15, 18],
+            [-18, 10],
+            [-11, 10],
+            [-12, 15]
+        ],
+        [
+            [5844, 4990],
+            [10, 8],
+            [31, -1],
+            [56, 4]
+        ],
+        [
+            [6061, 7840],
+            [-22, -5],
+            [-18, -19],
+            [-26, -3],
+            [-24, -22],
+            [1, -37],
+            [14, -14],
+            [28, 4],
+            [-5, -21],
+            [-31, -11],
+            [-37, -34],
+            [-16, 12],
+            [6, 28],
+            [-30, 17],
+            [5, 12],
+            [26, 19],
+            [-8, 14],
+            [-43, 15],
+            [-2, 22],
+            [-25, -8],
+            [-11, -32],
+            [-21, -44]
+        ],
+        [
+            [3517, 3063],
+            [-12, -38],
+            [-31, -32],
+            [-21, 11],
+            [-15, -6],
+            [-26, 25],
+            [-18, -1],
+            [-17, 32]
+        ],
+        [
+            [679, 6185],
+            [-4, -10],
+            [-7, 8],
+            [1, 17],
+            [-4, 21],
+            [1, 7],
+            [5, 10],
+            [-2, 11],
+            [1, 6],
+            [3, -1],
+            [10, -10],
+            [5, -5],
+            [5, -8],
+            [7, -21],
+            [-1, -3],
+            [-11, -13],
+            [-9, -9]
+        ],
+        [
+            [664, 6277],
+            [-9, -4],
+            [-5, 12],
+            [-3, 5],
+            [0, 4],
+            [3, 5],
+            [9, -6],
+            [8, -9],
+            [-3, -7]
+        ],
+        [
+            [646, 6309],
+            [-1, -7],
+            [-15, 2],
+            [2, 7],
+            [14, -2]
+        ],
+        [
+            [621, 6317],
+            [-2, -3],
+            [-2, 1],
+            [-9, 2],
+            [-4, 13],
+            [-1, 2],
+            [7, 8],
+            [3, -3],
+            [8, -20]
+        ],
+        [
+            [574, 6356],
+            [-4, -6],
+            [-9, 11],
+            [1, 4],
+            [5, 6],
+            [6, -1],
+            [1, -14]
+        ],
+        [
+            [3135, 7724],
+            [5, -19],
+            [-30, -29],
+            [-29, -20],
+            [-29, -18],
+            [-15, -35],
+            [-4, -13],
+            [-1, -31],
+            [10, -32],
+            [11, -1],
+            [-3, 21],
+            [8, -13],
+            [-2, -17],
+            [-19, -9],
+            [-13, 1],
+            [-20, -10],
+            [-12, -3],
+            [-17, -3],
+            [-23, -17],
+            [41, 11],
+            [8, -11],
+            [-39, -18],
+            [-17, 0],
+            [0, 7],
+            [-8, -16],
+            [8, -3],
+            [-6, -43],
+            [-20, -45],
+            [-2, 15],
+            [-6, 3],
+            [-9, 15],
+            [5, -32],
+            [7, -10],
+            [1, -23],
+            [-9, -23],
+            [-16, -47],
+            [-2, 3],
+            [8, 40],
+            [-14, 22],
+            [-3, 49],
+            [-5, -25],
+            [5, -38],
+            [-18, 10],
+            [19, -19],
+            [1, -57],
+            [8, -4],
+            [3, -20],
+            [4, -59],
+            [-17, -44],
+            [-29, -18],
+            [-18, -34],
+            [-14, -4],
+            [-14, -22],
+            [-4, -20],
+            [-31, -38],
+            [-16, -28],
+            [-13, -35],
+            [-4, -42],
+            [5, -41],
+            [9, -51],
+            [13, -41],
+            [0, -26],
+            [13, -69],
+            [-1, -39],
+            [-1, -23],
+            [-7, -36],
+            [-8, -8],
+            [-14, 7],
+            [-4, 26],
+            [-11, 14],
+            [-15, 51],
+            [-13, 45],
+            [-4, 23],
+            [6, 39],
+            [-8, 33],
+            [-22, 49],
+            [-10, 9],
+            [-28, -27],
+            [-5, 3],
+            [-14, 28],
+            [-17, 14],
+            [-32, -7],
+            [-24, 7],
+            [-21, -5],
+            [-12, -9],
+            [5, -15],
+            [0, -24],
+            [5, -12],
+            [-5, -8],
+            [-10, 9],
+            [-11, -11],
+            [-20, 2],
+            [-20, 31],
+            [-25, -8],
+            [-20, 14],
+            [-17, -4],
+            [-24, -14],
+            [-25, -44],
+            [-27, -25],
+            [-16, -28],
+            [-6, -27],
+            [0, -41],
+            [1, -28],
+            [5, -20]
+        ],
+        [
+            [1746, 6980],
+            [-4, 30],
+            [-18, 34],
+            [-13, 7],
+            [-3, 17],
+            [-16, 3],
+            [-10, 16],
+            [-26, 6],
+            [-7, 9],
+            [-3, 32],
+            [-27, 60],
+            [-23, 82],
+            [1, 14],
+            [-13, 19],
+            [-21, 50],
+            [-4, 48],
+            [-15, 32],
+            [6, 49],
+            [-1, 51],
+            [-8, 45],
+            [10, 56],
+            [4, 53],
+            [3, 54],
+            [-5, 79],
+            [-9, 51],
+            [-8, 27],
+            [4, 12],
+            [40, -20],
+            [15, -56],
+            [7, 15],
+            [-5, 49],
+            [-9, 48]
+        ],
+        [
+            [750, 8432],
+            [-28, -23],
+            [-14, 15],
+            [-4, 28],
+            [25, 21],
+            [15, 9],
+            [18, -4],
+            [12, -18],
+            [-24, -28]
+        ],
+        [
+            [401, 8597],
+            [-18, -9],
+            [-18, 11],
+            [-17, 16],
+            [28, 10],
+            [22, -6],
+            [3, -22]
+        ],
+        [
+            [230, 8826],
+            [17, -12],
+            [17, 6],
+            [23, -15],
+            [27, -8],
+            [-2, -7],
+            [-21, -12],
+            [-21, 13],
+            [-11, 11],
+            [-24, -4],
+            [-7, 5],
+            [2, 23]
+        ],
+        [
+            [1374, 8295],
+            [-15, 22],
+            [-25, 19],
+            [-8, 52],
+            [-36, 47],
+            [-15, 56],
+            [-26, 4],
+            [-44, 2],
+            [-33, 17],
+            [-57, 61],
+            [-27, 11],
+            [-49, 21],
+            [-38, -5],
+            [-55, 27],
+            [-33, 25],
+            [-30, -12],
+            [5, -41],
+            [-15, -4],
+            [-32, -12],
+            [-25, -20],
+            [-30, -13],
+            [-4, 35],
+            [12, 58],
+            [30, 18],
+            [-8, 15],
+            [-35, -33],
+            [-19, -39],
+            [-40, -42],
+            [20, -29],
+            [-26, -42],
+            [-30, -25],
+            [-28, -18],
+            [-7, -26],
+            [-43, -31],
+            [-9, -28],
+            [-32, -25],
+            [-20, 5],
+            [-25, -17],
+            [-29, -20],
+            [-23, -20],
+            [-47, -16],
+            [-5, 9],
+            [31, 28],
+            [27, 18],
+            [29, 33],
+            [35, 6],
+            [14, 25],
+            [38, 35],
+            [6, 12],
+            [21, 21],
+            [5, 44],
+            [14, 35],
+            [-32, -18],
+            [-9, 11],
+            [-15, -22],
+            [-18, 30],
+            [-8, -21],
+            [-10, 29],
+            [-28, -23],
+            [-17, 0],
+            [-3, 35],
+            [5, 21],
+            [-17, 22],
+            [-37, -12],
+            [-23, 28],
+            [-19, 14],
+            [0, 34],
+            [-22, 25],
+            [11, 34],
+            [23, 33],
+            [10, 30],
+            [22, 4],
+            [19, -9],
+            [23, 28],
+            [20, -5],
+            [21, 19],
+            [-5, 27],
+            [-16, 10],
+            [21, 23],
+            [-17, -1],
+            [-30, -13],
+            [-8, -13],
+            [-22, 13],
+            [-39, -6],
+            [-41, 14],
+            [-12, 24],
+            [-35, 34],
+            [39, 25],
+            [62, 29],
+            [23, 0],
+            [-4, -30],
+            [59, 2],
+            [-23, 37],
+            [-34, 23],
+            [-20, 29],
+            [-26, 25],
+            [-38, 19],
+            [15, 31],
+            [49, 2],
+            [35, 27],
+            [7, 29],
+            [28, 28],
+            [28, 6],
+            [52, 27],
+            [26, -4],
+            [42, 31],
+            [42, -12],
+            [21, -27],
+            [12, 11],
+            [47, -3],
+            [-2, -14],
+            [43, -10],
+            [28, 6],
+            [59, -18],
+            [53, -6],
+            [21, -8],
+            [37, 10],
+            [42, -18],
+            [31, -8]
+        ],
+        [
+            [3018, 5753],
+            [-1, -14],
+            [-16, -7],
+            [9, -26],
+            [0, -31],
+            [-12, -35],
+            [10, -47],
+            [12, 4],
+            [6, 43],
+            [-8, 21],
+            [-2, 45],
+            [35, 24],
+            [-4, 27],
+            [10, 19],
+            [10, -41],
+            [19, -1],
+            [18, -33],
+            [1, -20],
+            [25, 0],
+            [30, 6],
+            [16, -27],
+            [21, -7],
+            [16, 18],
+            [0, 15],
+            [34, 4],
+            [34, 1],
+            [-24, -18],
+            [10, -28],
+            [22, -4],
+            [21, -29],
+            [4, -48],
+            [15, 2],
+            [11, -14]
+        ],
+        [
+            [8001, 6331],
+            [-37, -51],
+            [-24, -56],
+            [-6, -41],
+            [22, -62],
+            [25, -77],
+            [26, -37],
+            [17, -47],
+            [12, -109],
+            [-3, -104],
+            [-24, -39],
+            [-31, -38],
+            [-23, -49],
+            [-35, -55],
+            [-10, 37],
+            [8, 40],
+            [-21, 34]
+        ],
+        [
+            [9661, 4085],
+            [-9, -8],
+            [-9, 26],
+            [1, 16],
+            [17, -34]
+        ],
+        [
+            [9641, 4175],
+            [4, -47],
+            [-7, 7],
+            [-6, -3],
+            [-4, 16],
+            [0, 45],
+            [13, -18]
+        ],
+        [
+            [6475, 6041],
+            [-21, -16],
+            [-5, -26],
+            [-1, -20],
+            [-27, -25],
+            [-45, -28],
+            [-24, -41],
+            [-13, -3],
+            [-8, 3],
+            [-16, -25],
+            [-18, -11],
+            [-23, -3],
+            [-7, -3],
+            [-6, -16],
+            [-8, -4],
+            [-4, -15],
+            [-14, 1],
+            [-9, -8],
+            [-19, 3],
+            [-7, 35],
+            [1, 32],
+            [-5, 17],
+            [-5, 44],
+            [-8, 24],
+            [5, 3],
+            [-2, 27],
+            [3, 12],
+            [-1, 25]
+        ],
+        [
+            [5817, 3752],
+            [11, 0],
+            [14, -10],
+            [9, 7],
+            [15, -6]
+        ],
+        [
+            [5911, 3478],
+            [-7, -43],
+            [-3, -49],
+            [-7, -27],
+            [-19, -30],
+            [-5, -8],
+            [-12, -30],
+            [-8, -31],
+            [-16, -42],
+            [-31, -61],
+            [-20, -36],
+            [-21, -26],
+            [-29, -23],
+            [-14, -3],
+            [-3, -17],
+            [-17, 9],
+            [-14, -11],
+            [-30, 11],
+            [-17, -7],
+            [-12, 3],
+            [-28, -23],
+            [-24, -10],
+            [-17, -22],
+            [-13, -1],
+            [-11, 21],
+            [-10, 1],
+            [-12, 26],
+            [-1, -8],
+            [-4, 16],
+            [0, 34],
+            [-9, 40],
+            [9, 11],
+            [0, 45],
+            [-19, 55],
+            [-14, 50],
+            [0, 1],
+            [-20, 76]
+        ],
+        [
+            [5840, 4141],
+            [-21, -8],
+            [-15, -23],
+            [-4, -21],
+            [-10, -4],
+            [-24, -49],
+            [-15, -38],
+            [-10, -2],
+            [-9, 7],
+            [-31, 7]
+        ]
+    ],
+    "transform": {
+        "scale": [0.036003600360036005, 0.016927109510951093],
+        "translate": [-180, -85.609038]
+    }
+}
+;
+  Datamap.prototype.usaTopo = '__USA__';
+
+  /**************************************
+                Utilities
+  ***************************************/
+
+  //convert lat/lng coords to X / Y coords
+  Datamap.prototype.latLngToXY = function(lat, lng) {
+     return this.projection([lng, lat]);
+  };
+
+  //add <g> layer to root SVG
+  Datamap.prototype.addLayer = function( className, id, first ) {
+    var layer;
+    if ( first ) {
+      layer = this.svg.insert('g', ':first-child')
+    }
+    else {
+      layer = this.svg.append('g')
+    }
+    return layer.attr('id', id || '')
+      .attr('class', className || '');
+  };
+
+  Datamap.prototype.updateChoropleth = function(data) {
+    var svg = this.svg;
+    for ( var subunit in data ) {
+      if ( data.hasOwnProperty(subunit) ) {
+        var color;
+        var subunitData = data[subunit]
+        if ( ! subunit ) {
+          continue;
+        }
+        else if ( typeof subunitData === "string" ) {
+          color = subunitData;
+        }
+        else if ( typeof subunitData.color === "string" ) {
+          color = subunitData.color;
+        }
+        else {
+          color = this.options.fills[ subunitData.fillKey ];
+        }
+        //if it's an object, overriding the previous data
+        if ( subunitData === Object(subunitData) ) {
+          this.options.data[subunit] = defaults(subunitData, this.options.data[subunit] || {});
+          var geo = this.svg.select('.' + subunit).attr('data-info', JSON.stringify(this.options.data[subunit]));
+        }
+        svg
+          .selectAll('.' + subunit)
+          .transition()
+            .style('fill', color);
+      }
+    }
+  };
+
+  Datamap.prototype.updatePopup = function (element, d, options) {
+    var self = this;
+    element.on('mousemove', null);
+    element.on('mousemove', function() {
+      var position = d3.mouse(this);
+      d3.select(self.svg[0][0].parentNode).select('.datamaps-hoverover')
+        .style('top', ( (position[1] + 30)) + "px")
+        .html(function() {
+          var data = JSON.parse(element.attr('data-info'));
+          //if ( !data ) return '';
+          return options.popupTemplate(d, data);
+        })
+        .style('left', ( position[0]) + "px");
+    });
+
+    d3.select(self.svg[0][0].parentNode).select('.datamaps-hoverover').style('display', 'block');
+  };
+
+  Datamap.prototype.addPlugin = function( name, pluginFn ) {
+    var self = this;
+    if ( typeof Datamap.prototype[name] === "undefined" ) {
+      Datamap.prototype[name] = function(data, options, callback, createNewLayer) {
+        var layer;
+        if ( typeof createNewLayer === "undefined" ) {
+          createNewLayer = false;
+        }
+
+        if ( typeof options === 'function' ) {
+          callback = options;
+          options = undefined;
+        }
+
+        options = defaults(options || {}, defaultOptions[name + 'Config']);
+
+        //add a single layer, reuse the old layer
+        if ( !createNewLayer && this.options[name + 'Layer'] ) {
+          layer = this.options[name + 'Layer'];
+          options = options || this.options[name + 'Options'];
+        }
+        else {
+          layer = this.addLayer(name);
+          this.options[name + 'Layer'] = layer;
+          this.options[name + 'Options'] = options;
+        }
+        pluginFn.apply(this, [layer, data, options]);
+        if ( callback ) {
+          callback(layer);
+        }
+      };
+    }
+  };
+
+  // expose library
+  if ( typeof define === "function" && define.amd ) {
+    define( "datamaps",['require','d3','topojson'], function(require) { d3 = require('d3'); topojson = require('topojson'); return Datamap; } );
+  }
+  else {
+    window.Datamap = window.Datamaps = Datamap;
+  }
+
+  if ( window.jQuery ) {
+    window.jQuery.fn.datamaps = function(options, callback) {
+      options = options || {};
+      options.element = this[0];
+      var datamap = new Datamap(options);
+      if ( typeof callback === "function" ) {
+        callback(datamap, options);
+      }
+      return this;
+    };
+  }
+})();
 define('views/visualizations/map',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
-    "leaflet",
-    "leaflet.markercluster",
+    "datamaps",
     "utils/template",
     "core/api",
     "views/visualizations/base"
-], function(_, $, hr, L, MarkerClusterGroup, template, api, BaseVisualization) {
-    L.Icon.Default.imagePath = 'static/leaflet/';
-
+], function(_, $, hr, Datamap, template, api, BaseVisualization) {
     var Visualization = BaseVisualization.extend({
         className: "visualization visualization-map",
         defaults: {},
@@ -40225,22 +52799,6 @@ define('views/visualizations/map',[
                 "class": "map"
             });
             this.$map.appendTo(this.$el);
-
-            this.map = L.map(this.$map.get(0), {
-                zoomControl: false
-            });
-            this.map.dragging.disable();
-            this.map.touchZoom.disable();
-            this.map.doubleClickZoom.disable();
-            this.map.scrollWheelZoom.disable();
-
-            L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-                maxZoom: 18,
-                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-                    '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-                    'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-                id: 'examples.map-i86knfo3'
-            }).addTo(this.map);
         },
 
         finish: function() {
@@ -40249,33 +52807,39 @@ define('views/visualizations/map',[
             var tplMessage = that.model.getConf("message") || "<%- $.date(date) %>";
 
             try {
-                // Remove old markers
-                if (this.markers) this.map.removeLayer(this.markers);
-
-                // Create new layer
-                this.markers = new L.MarkerClusterGroup();
-                this.map.addLayer(this.markers);
-
-                // Add marker to layer
-                _.each(this.data, function(e) {
-                    if (!e.properties.position || !e.properties.position.latitude || !e.properties.position.longitude) return;
-
-                    latLngs.push([
-                        e.properties.position.latitude,
-                        e.properties.position.longitude
-                    ]);
-
-                    var marker = L.marker([
-                        e.properties.position.latitude,
-                        e.properties.position.longitude
-                    ]).bindPopup(template(tplMessage, e));
-                    that.markers.addLayer(marker);
+                var map = new Datamap({
+                    element: this.$map.get(0),
+                    scope: 'world',
+                    fills: {
+                        defaultFill: '#f3f5f9',
+                        marker: "#a6d87a"
+                    },
+                    geographyConfig: {
+                        borderWidth: 1,
+                        borderColor: "#e0e4e8",
+                        highlightOnHover: false,
+                        popupOnHover: false
+                    }
                 });
 
 
-                // Fit the map
-                var bounds = new L.LatLngBounds(latLngs);
-                this.map.fitBounds(this.markers.getBounds());
+                map.bubbles(
+                    _.chain(this.data)
+                    .map(function(e) {
+                        if (!e.properties.position || !e.properties.position.latitude || !e.properties.position.longitude) return null;
+
+                        return {
+                            name: template(tplMessage, e),
+                            latitude: e.properties.position.latitude,
+                            longitude: e.properties.position.longitude,
+                            radius: 5,
+                            fillKey: 'marker'
+                        };
+                    })
+                    .compact()
+                    .value()
+                );
+
             } catch (e) {
                 console.error(e);
             }
