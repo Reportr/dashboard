@@ -85,6 +85,7 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 | Type | Description |
 | ---- | ----------- |
 | webhook | Post an HTTP request to a specific url with the data encoded in the body |
+| mail | Send an email notification |
 
 #### Condition
 
