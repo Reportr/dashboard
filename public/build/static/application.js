@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404127471284,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404128358227,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -52801,48 +52801,47 @@ define('views/visualizations/map',[
             this.$map.appendTo(this.$el);
         },
 
+        prepareMap: function() {
+            if (this.map) return;
+
+            this.map = new Datamap({
+                element: this.$map.get(0),
+                scope: 'world',
+                fills: {
+                    defaultFill: '#f3f5f9',
+                    marker: "#a6d87a"
+                },
+                geographyConfig: {
+                    borderWidth: 1,
+                    borderColor: "#e0e4e8",
+                    highlightOnHover: false,
+                    popupOnHover: false
+                }
+            });
+        },
+
         finish: function() {
-            var that = this;
+            this.prepareMap();
+
             var latLngs = [];
-            var tplMessage = that.model.getConf("message") || "<%- $.date(date) %>";
+            var tplMessage = this.model.getConf("message") || "<%- $.date(date) %>";
 
-            try {
-                var map = new Datamap({
-                    element: this.$map.get(0),
-                    scope: 'world',
-                    fills: {
-                        defaultFill: '#f3f5f9',
-                        marker: "#a6d87a"
-                    },
-                    geographyConfig: {
-                        borderWidth: 1,
-                        borderColor: "#e0e4e8",
-                        highlightOnHover: false,
-                        popupOnHover: false
-                    }
-                });
+            this.map.bubbles(
+                _.chain(this.data)
+                .map(function(e) {
+                    if (!e.properties.position || !e.properties.position.latitude || !e.properties.position.longitude) return null;
 
-
-                map.bubbles(
-                    _.chain(this.data)
-                    .map(function(e) {
-                        if (!e.properties.position || !e.properties.position.latitude || !e.properties.position.longitude) return null;
-
-                        return {
-                            name: template(tplMessage, e),
-                            latitude: e.properties.position.latitude,
-                            longitude: e.properties.position.longitude,
-                            radius: 5,
-                            fillKey: 'marker'
-                        };
-                    })
-                    .compact()
-                    .value()
-                );
-
-            } catch (e) {
-                console.error(e);
-            }
+                    return {
+                        name: template(tplMessage, e),
+                        latitude: e.properties.position.latitude,
+                        longitude: e.properties.position.longitude,
+                        radius: 5,
+                        fillKey: 'marker'
+                    };
+                })
+                .compact()
+                .value()
+            );
 
             return Visualization.__super__.finish.apply(this, arguments);
         },
