@@ -25,7 +25,8 @@ define([
             })
         },
 
-        removeAlert: function() {
+        removeAlert: function(e) {
+            if (e) e.preventDefault();
             var that = this;
 
             dialogs.confirm("Do you want to remove this alert '"+_.escape(this.model.get("title"))+"' ?")
