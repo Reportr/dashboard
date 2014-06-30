@@ -29,7 +29,7 @@ module.exports = function (grunt) {
                 "name": "Reportr",
 
                 // Mode debug
-                "debug": process.env.DEBUG != null,
+                "debug": true,
 
                 // Main entry point for application
                 "main": "main",
