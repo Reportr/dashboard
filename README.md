@@ -18,7 +18,7 @@ $ git clone https://github.com/Reportr/dashboard.git
 $ npm install .
 ```
 
-To run it locally (configuration can be stored in a .env file):
+To run it locally, you should use [foreman](http://ddollar.github.io/foreman/) (configuration can be stored in a [.env file](https://devcenter.heroku.com/articles/config-vars#local-setup)):
 
 ```
 $ foreman start
