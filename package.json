@@ -41,7 +41,7 @@
         "test": "export TESTING=true; mocha --reporter list"
     },
     "engines": {
-        "node": "0.8.x",
-        "npm":  "1.1.x"
+        "node": "0.10.x",
+        "npm":  "1.4.x"
     }
 }
