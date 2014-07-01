@@ -3,6 +3,7 @@
     top: 0px;
     bottom: 0px;
     left: 0px;
+    z-index: 10;
     width: @main-toolbar-width;
 
     background: @main-toolbar-background;
@@ -26,6 +27,30 @@
         &.secondary {
             position: absolute;
             bottom: 0px;
+        }
+    }
+
+    @media (max-width: @screen-sm-min) {
+        top: @main-header-height;
+        left: 0px;
+        right: 0px;
+        width: auto;
+        height: @main-header-height;
+        .clearfix();
+        border-right: none;
+        border-bottom: 1px solid @main-toolbar-border;
+        text-align: left;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.9);
+
+        .group-actions {
+            position: static;
+            float: left;
+
+            &.secondary {
+                position: static;
+                float: right;
+            }
         }
     }
 }

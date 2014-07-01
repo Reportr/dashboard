@@ -5,7 +5,7 @@
     left: @main-toolbar-width - 1;
     right: 0px;
     height: @main-header-height;
-    z-index: 1;
+    z-index: 11;
 
     border-bottom: 1px solid @main-header-border;
     background: @main-header-background;
@@ -17,5 +17,13 @@
         line-height: @main-header-height;
         margin: 0px;
         text-align: center;
+    }
+
+    @media (max-width: @screen-sm-min) {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        width: auto;
+        height: @main-header-height;
     }
 }

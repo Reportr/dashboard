@@ -5,6 +5,14 @@
     left: @main-toolbar-width;
     right: 0px;
     overflow: auto;
+    z-index: 1;
 
     padding: @main-body-padding;
+
+    @media (max-width: @screen-sm-min) {
+        overflow: visible;
+        overflow-x: hidden;
+        position: static;
+        margin-top: @main-header-height*2;
+    }
 }
