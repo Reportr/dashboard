@@ -52,6 +52,13 @@ Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
 | /api/alerts | GET | List all alerts |  |
 | /api/alerts | POST | Create an alert | `<string>type`, `<string>eventName`, `<string>condition`, `<string>title` |
 
+#### Special Events
+
+| Name | Description | Properties |
+| ---- | ----------- | ---------- |
+| reportr.alert | Triggered when an alert is triggered | `<string>type`, `<string>eventName` |
+
+
 ## Configuration
 
 Reportr is configured using environment variables.
@@ -97,3 +104,4 @@ Condition for alerts are really easy to write, for example: `COUNT > 9`, this co
 ## Scale it
 
 Reportr can easily be scaled on Heroku (and compatibles), use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
+
