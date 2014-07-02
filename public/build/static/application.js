@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404227303195,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404297260220,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -53056,6 +53056,17 @@ define('models/alert',[
             });
         },
 
+        // Toggle alert
+        toggle: function() {
+            var that = this;
+
+            return api.execute("put:alert/"+this.get("id")+"/toggle")
+            .then(function(_data) {
+                that.set("enabled", _data.enabled);
+                return that;
+            });
+        },
+
         // Open configuration dialogs
         configure: function() {
             var that = this;
@@ -53547,7 +53558,7 @@ define('views/lists/visualizations',[
 
     return VisualizationsList;
 });
-define('text!resources/templates/alert.html',[],function () { return '<div class="row">\n    <div class="col-md-4"><%- model.get("title") %></div>\n    <div class="col-md-3"><%- model.get("condition") %></div>\n    <div class="col-md-3"><%- model.get("interval") %> min</div>\n    <div class="col-md-1">\n        <a href="#" class="action-alert-edit">Edit</a>\n    </div>\n    <div class="col-md-1">\n        <a href="#" class="action-alert-remove">Remove</a>\n    </div>\n</div>';});
+define('text!resources/templates/alert.html',[],function () { return '<div class="row">\n    <div class="col-md-4"><%- model.get("title") %></div>\n    <div class="col-md-3"><%- model.get("condition") %></div>\n    <div class="col-md-2"><%- model.get("interval") %> min</div>\n    <div class="col-md-1">\n        <a href="#" class="action-alert-edit">Edit</a>\n    </div>\n    <div class="col-md-1">\n        <a href="#" class="action-alert-remove">Remove</a>\n    </div>\n    <div class="col-md-1">\n        <a href="#" class="action-alert-toggle"><% if (model.get("enabled")) { %>Disable<% } else { %>Enable<% } %></a>\n    </div>\n</div>';});
 
 define('views/lists/alerts',[
     "hr/utils",
@@ -53563,7 +53574,8 @@ define('views/lists/alerts',[
         defaults: {},
         events: {
             "click .action-alert-edit": "editConfig",
-            "click .action-alert-remove": "removeAlert"
+            "click .action-alert-remove": "removeAlert",
+            "click .action-alert-toggle": "toggleAlert"
         },
         template: template,
 
@@ -53584,6 +53596,13 @@ define('views/lists/alerts',[
             .then(function() {
                 return that.model.remove();
             });
+        },
+
+        toggleAlert: function(e) {
+            if (e) e.preventDefault();
+            var that = this;
+
+            that.model.toggle();
         }
     });
 

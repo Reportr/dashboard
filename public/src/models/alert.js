@@ -36,6 +36,17 @@ define([
             });
         },
 
+        // Toggle alert
+        toggle: function() {
+            var that = this;
+
+            return api.execute("put:alert/"+this.get("id")+"/toggle")
+            .then(function(_data) {
+                that.set("enabled", _data.enabled);
+                return that;
+            });
+        },
+
         // Open configuration dialogs
         configure: function() {
             var that = this;

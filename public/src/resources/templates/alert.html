@@ -1,11 +1,14 @@
 <div class="row">
     <div class="col-md-4"><%- model.get("title") %></div>
     <div class="col-md-3"><%- model.get("condition") %></div>
-    <div class="col-md-3"><%- model.get("interval") %> min</div>
+    <div class="col-md-2"><%- model.get("interval") %> min</div>
     <div class="col-md-1">
         <a href="#" class="action-alert-edit">Edit</a>
     </div>
     <div class="col-md-1">
         <a href="#" class="action-alert-remove">Remove</a>
+    </div>
+    <div class="col-md-1">
+        <a href="#" class="action-alert-toggle"><% if (model.get("enabled")) { %>Disable<% } else { %>Enable<% } %></a>
     </div>
 </div>

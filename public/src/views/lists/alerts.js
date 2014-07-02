@@ -12,7 +12,8 @@ define([
         defaults: {},
         events: {
             "click .action-alert-edit": "editConfig",
-            "click .action-alert-remove": "removeAlert"
+            "click .action-alert-remove": "removeAlert",
+            "click .action-alert-toggle": "toggleAlert"
         },
         template: template,
 
@@ -33,6 +34,13 @@ define([
             .then(function() {
                 return that.model.remove();
             });
+        },
+
+        toggleAlert: function(e) {
+            if (e) e.preventDefault();
+            var that = this;
+
+            that.model.toggle();
         }
     });
 
