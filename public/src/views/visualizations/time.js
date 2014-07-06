@@ -65,6 +65,7 @@ define([
 
         pull: function() {
             return api.execute("get:stats/time", {
+                limit: this.model.getConf("limit"),
                 type: this.model.get("eventName"),
                 fields: this.model.getConf("fields"),
                 interval: this.model.getConf("interval"),
@@ -81,6 +82,14 @@ define([
                 'type': "text",
                 'label': "Fields",
                 'help': "Separated by comas"
+            },
+            'limit': {
+                'type': "number",
+                'label': "Limit",
+                'help': "Max number of events",
+                'default': 1000,
+                'min': 100,
+                'max': 1000000
             },
             'interval': {
                 'type': "select",

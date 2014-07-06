@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404300427806,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404669491002,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -40137,6 +40137,7 @@ define('views/visualizations/time',[
 
         pull: function() {
             return api.execute("get:stats/time", {
+                limit: this.model.getConf("limit"),
                 type: this.model.get("eventName"),
                 fields: this.model.getConf("fields"),
                 interval: this.model.getConf("interval"),
@@ -40153,6 +40154,14 @@ define('views/visualizations/time',[
                 'type': "text",
                 'label': "Fields",
                 'help': "Separated by comas"
+            },
+            'limit': {
+                'type': "number",
+                'label': "Limit",
+                'help': "Max number of events",
+                'default': 1000,
+                'min': 100,
+                'max': 1000000
             },
             'interval': {
                 'type': "select",
