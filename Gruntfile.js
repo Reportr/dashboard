@@ -54,7 +54,8 @@ module.exports = function (grunt) {
                     'rickshaw': "vendors/rickshaw/rickshaw",
                     'd3': "vendors/d3/d3",
                     "datamaps": "vendors/datamaps/dist/datamaps.world",
-                    "topojson": "vendors/topojson/topojson"
+                    "topojson": "vendors/topojson/topojson",
+                    "moment": "vendors/moment/moment"
                 },
                 "shim": {
                     "main": {
