@@ -23230,7 +23230,7 @@ define('hr/history',[
      * @extends Class
      * @constructor
      */
-    var History = Class.extend({   
+    var History = Class.extend({
         initialize: function() {
             this.handlers = [];
             this.started = false;
@@ -23238,7 +23238,7 @@ define('hr/history',[
 
         /**
          * Add a new navigation route
-         * 
+         *
          * @method route
          * @param {regex} route regex for the route
          * @param {function} callback function to call as a navigation callback
@@ -23255,7 +23255,7 @@ define('hr/history',[
 
         /**
          * Add the navigation handling
-         * 
+         *
          * @method start
          * @chainable
          */
@@ -23272,15 +23272,15 @@ define('hr/history',[
             logging.log("start routing history");
             $window.bind('hashchange', _.bind(this._handleCurrentState, this));
 
-            this._handleCurrentState();
+            var ret = this._handleCurrentState();
             this.started = true;
 
-            return true;
+            return ret;
         },
 
         /**
          * Navigation to a specific route
-         * 
+         *
          * @method navigate
          * @param {string} route to navigate to
          * @param {object} [args] arguments for the route
@@ -23306,9 +23306,10 @@ define('hr/history',[
                     handler.callback(url);
                     return true;
                 }
+                return false;
             });
             logging.log("handle state ", url, matched != null);
-            return this;
+            return matched;
         },
 
         /*
@@ -23385,8 +23386,7 @@ define('hr/router',[
          */
         start: function() {
             logging.log("start routing");
-            History.start();
-            return this;
+            return History.start();
         },
 
         /*
@@ -23517,7 +23517,6 @@ define('hr/application',[
             this.route(_.result(this, "routes"));
             this.on("ready", _.once(function() {
                 logging.log("Application is ready");
-                if (this.router) this.router.start();
             }), this);
 
             return this;
@@ -23525,7 +23524,7 @@ define('hr/application',[
 
         /**
          * Start this application: prepare cache and render the application
-         * 
+         *
          * @method run
          */
         run: function() {
@@ -23534,14 +23533,14 @@ define('hr/application',[
             var hr = require("hr/hr");
             hr.Cache.init();
             hr.app = this;
-            
+
             this.update();
             return this;
         },
 
         /**
          * Set page title
-         * 
+         *
          * @method title
          * @param {string} [title] new page title
          * @return {string} page title
@@ -23552,7 +23551,7 @@ define('hr/application',[
 
         /**
          * Add new route
-         * 
+         *
          * @method route
          * @param {string} route regex or route string
          * @param {string} name method to use as a route callback
@@ -25933,7 +25932,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404764693116,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404767254743,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26578,7 +26577,7 @@ define('utils/dialogs',[
 
     return Dialogs;
 });
-define('text!resources/langs/en.json',[],function () { return '{\n    "id": "en",\n    "language": "English",\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report",\n        "settings": "Settings"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        },\n        "create": {\n            "title": "Create a new alert",\n            "fields": {\n                "title": {\n                    "label": "Title"\n                },\n                "eventName": {\n                    "label": "Event"\n                },\n                "type": {\n                    "label": "Type"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "help": "Minimum interval for notifications in minutes."\n                },\n                "condition": {\n                    "label": "Condition",\n                    "help": "Learn more about alert conditions in the documentation"\n                }\n            }\n        }\n    },\n    "reports": {\n        "select": {\n            "title": "Select a report",\n            "message": "Choose a new report to open."\n        },\n        "create": {\n            "title": "Create a new report",\n            "fields": {\n                "title": "Title"\n            }\n        },\n        "edit": {\n            "title": "Edit report",\n            "fields": {\n                "title": "Title"\n            }\n        },\n        "remove": {\n            "title": "Remove this report?"\n        }\n    },\n    "visualization": {\n        "create": {\n            "title": "New visualization",\n            "fields": {\n                "eventName": "Event",\n                "type": "Type"\n            }\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        },\n        "time": {\n            "title": "Time Chart",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit",\n                    "help": "Max number of events"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "minute": "Minute",\n                    "hour": "Hour",\n                    "day": "Day",\n                    "week": "Week",\n                    "month": "Month"\n                },\n                "name": {\n                    "label": "Name",\n                    "help": "Template for the hover serie name, see documentation for more infos about templates."\n                },\n                "interpolation": {\n                    "label": "Interpolation",\n                    "linear": "Linear - straight lines between points",\n                    "step-after": "Step After - square steps from point to point",\n                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",\n                    "basis": "Basis - smooth curves via B-splines"\n                },\n                "fillEmpty": {\n                    "label": "Fill Empty",\n                    "help": "Fill when there is no events with zero values."\n                }\n            }\n        },\n        "value": {\n            "title": "Last Value",\n            "config": {\n                "field": {\n                    "label": "Field"\n                },\n                "value": {\n                    "label": "Value",\n                    "help": "Template for the value display, see documentation for more infos about templates."\n                },\n                "label": {\n                    "label": "Label",\n                    "help": "Template for the label, see documentation for more infos about templates."\n                }\n            }\n        }\n    },\n    "settings": {\n        "title": "Settings",\n        "language": {\n            "label": "Language"\n        }\n    }\n}';});
+define('text!resources/langs/en.json',[],function () { return '{\n    "id": "en",\n    "language": "English",\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report",\n        "settings": "Settings"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        },\n        "create": {\n            "title": "Create a new alert",\n            "fields": {\n                "title": {\n                    "label": "Title"\n                },\n                "eventName": {\n                    "label": "Event"\n                },\n                "type": {\n                    "label": "Type"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "help": "Minimum interval for notifications in minutes."\n                },\n                "condition": {\n                    "label": "Condition",\n                    "help": "Learn more about alert conditions in the documentation"\n                }\n            }\n        }\n    },\n    "reports": {\n        "select": {\n            "title": "Select a report",\n            "message": "Choose a new report to open."\n        },\n        "create": {\n            "title": "Create a new report",\n            "fields": {\n                "title": "Title"\n            }\n        },\n        "edit": {\n            "title": "Edit report",\n            "fields": {\n                "title": "Title"\n            }\n        },\n        "remove": {\n            "title": "Remove this report?"\n        },\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "visualization": {\n        "create": {\n            "title": "New visualization",\n            "fields": {\n                "eventName": "Event",\n                "type": "Type"\n            }\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        },\n        "time": {\n            "title": "Time Chart",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit",\n                    "help": "Max number of events"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "minute": "Minute",\n                    "hour": "Hour",\n                    "day": "Day",\n                    "week": "Week",\n                    "month": "Month"\n                },\n                "name": {\n                    "label": "Name",\n                    "help": "Template for the hover serie name, see documentation for more infos about templates."\n                },\n                "interpolation": {\n                    "label": "Interpolation",\n                    "linear": "Linear - straight lines between points",\n                    "step-after": "Step After - square steps from point to point",\n                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",\n                    "basis": "Basis - smooth curves via B-splines"\n                },\n                "fillEmpty": {\n                    "label": "Fill Empty",\n                    "help": "Fill when there is no events with zero values."\n                }\n            }\n        },\n        "value": {\n            "title": "Last Value",\n            "config": {\n                "field": {\n                    "label": "Field"\n                },\n                "value": {\n                    "label": "Value",\n                    "help": "Template for the value display, see documentation for more infos about templates."\n                },\n                "label": {\n                    "label": "Label",\n                    "help": "Template for the label, see documentation for more infos about templates."\n                }\n            }\n        }\n    },\n    "settings": {\n        "title": "Settings",\n        "language": {\n            "label": "Language"\n        }\n    }\n}';});
 
 define('utils/i18n',[
     "hr/hr",
@@ -56404,6 +56403,9 @@ require([
             "click .action-alert-create": "createAlert",
             "click .action-settings": "settings"
         },
+        routes: {
+            "report/:id": "routeReport"
+        },
 
 
         initialize: function() {
@@ -56434,9 +56436,14 @@ require([
         },
 
         render: function() {
-            if (this.report.get("id") == null && this.reports.size() > 0) {
-                return this.setReport(this.reports.first());
+            if (!hr.History.started) {
+                if (!this.router.start() && this.reports.size() > 0) {
+                    console.log("no route");
+                    return this.setReport(this.reports.first());
+                }
+                return this.render();
             }
+
             this.visualizations.$el.detach();
 
             return Application.__super__.render.apply(this, arguments);
@@ -56453,6 +56460,7 @@ require([
 
             this.report.del("visualizations", { silent: true });
             this.report.set(r);
+            hr.History.navigate("report/"+this.report.get("id"));
         },
 
         // Change current report
@@ -56474,8 +56482,7 @@ require([
                 );
             })
             .then(function(rId) {
-                that.setReport(that.reports.get(rId));
-                return that.report;
+                hr.History.navigate("report/"+rId);
             });
         },
 
@@ -56646,6 +56653,15 @@ require([
             .then(function() {
                 location.reload();
             });
+        },
+
+        routeReport: function(rId) {
+            var report = this.reports.get(rId);
+            if (!report) {
+                report = this.reports.first();
+            }
+
+            if (report) this.setReport(report);
         }
     });
 

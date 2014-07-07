@@ -94,6 +94,10 @@
         },
         "remove": {
             "title": "Remove this report?"
+        },
+        "empty": {
+            "message": "There is no reports yet to show.",
+            "create": "Create a report"
         }
     },
     "visualization": {

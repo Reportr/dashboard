@@ -34,6 +34,9 @@ require([
             "click .action-alert-create": "createAlert",
             "click .action-settings": "settings"
         },
+        routes: {
+            "report/:id": "routeReport"
+        },
 
 
         initialize: function() {
@@ -64,9 +67,14 @@ require([
         },
 
         render: function() {
-            if (this.report.get("id") == null && this.reports.size() > 0) {
-                return this.setReport(this.reports.first());
+            if (!hr.History.started) {
+                if (!this.router.start() && this.reports.size() > 0) {
+                    console.log("no route");
+                    return this.setReport(this.reports.first());
+                }
+                return this.render();
             }
+
             this.visualizations.$el.detach();
 
             return Application.__super__.render.apply(this, arguments);
@@ -83,6 +91,7 @@ require([
 
             this.report.del("visualizations", { silent: true });
             this.report.set(r);
+            hr.History.navigate("report/"+this.report.get("id"));
         },
 
         // Change current report
@@ -104,8 +113,7 @@ require([
                 );
             })
             .then(function(rId) {
-                that.setReport(that.reports.get(rId));
-                return that.report;
+                hr.History.navigate("report/"+rId);
             });
         },
 
@@ -276,6 +284,15 @@ require([
             .then(function() {
                 location.reload();
             });
+        },
+
+        routeReport: function(rId) {
+            var report = this.reports.get(rId);
+            if (!report) {
+                report = this.reports.first();
+            }
+
+            if (report) this.setReport(report);
         }
     });
 
