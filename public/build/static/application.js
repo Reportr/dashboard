@@ -25932,7 +25932,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404767254743,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404768642537,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
