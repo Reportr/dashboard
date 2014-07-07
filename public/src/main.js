@@ -76,6 +76,7 @@ require([
             }
 
             this.visualizations.$el.detach();
+            this.title(this.report.get("title"));
 
             return Application.__super__.render.apply(this, arguments);
         },
