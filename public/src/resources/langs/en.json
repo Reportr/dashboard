@@ -7,5 +7,47 @@
         "editReport": "Edit report",
         "help": "Help",
         "removeReport": "Remove report"
+    },
+    "reports": {
+        "empty": {
+            "message": "There is no reports yet to show.",
+            "create": "Create a report"
+        }
+    },
+    "alert": {
+        "edit": "Edit",
+        "remove": "Remove",
+        "disable": "Disable",
+        "enable": "Enable"
+    },
+    "dialogs": {
+        "alert": {
+            "title": "Alert",
+            "close": "Close"
+        },
+        "confirm": {
+            "title": "Confirm",
+            "cancel": "Cancel",
+            "ok": "Ok"
+        },
+        "prompt": {
+            "title": "Input",
+            "ok": "Ok"
+        },
+        "select": {
+            "title": "Select",
+            "ok": "Ok"
+        },
+        "fields": {
+            "title": "Input",
+            "ok": "Ok"
+        }
+    },
+    "alerts": {
+        "manage": {
+            "title": "Manage alerts",
+            "create": "Create a new alert",
+            "ok": "Ok"
+        }
     }
 }

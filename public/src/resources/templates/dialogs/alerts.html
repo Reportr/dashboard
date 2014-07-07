@@ -2,16 +2,16 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Manage Alerts</h4>
+            <h4 class="modal-title"><%- hr.i18n.t("alerts.manage.title") %></h4>
         </div>
         <div class="modal-body">
             <% if (n > 0) { %>
-            <a href="#" class="action-alert-create">Create a new alert</a>
+            <a href="#" class="action-alert-create"><%- hr.i18n.t("alerts.manage.create") %></a>
             <% } %>
             <div class="alerts-container"></div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-default action-confirm">OK</button>
+            <button class="btn btn-default action-confirm"><%- hr.i18n.t("alerts.manage.ok") %></button>
         </div>
     </div>
 </div>

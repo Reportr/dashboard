@@ -2,14 +2,14 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		    <h4 class="modal-title"><%- options.title || "Input" %></h4>
+		    <h4 class="modal-title"><%- options.title || hr.i18n.t("dialogs.prompt.title") %></h4>
 		</div>
 		<div class="modal-body">
 		    <p><%= options.message %></p>
 		    <input type="text" class="input form-control" value="<%- options.default || "" %>" placeholder="<%- options.placeholder || "" %>" />
 		</div>
 		<div class="modal-footer">
-		    <button class="btn btn-default action-confirm">OK</button>
+		    <button class="btn btn-default action-confirm"><%- hr.i18n.t("dialogs.prompt.cancel") %></button>
 		</div>
 	</div>
 </div>

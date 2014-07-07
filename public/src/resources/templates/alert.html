@@ -3,12 +3,12 @@
     <div class="col-md-3"><%- model.get("condition") %></div>
     <div class="col-md-2"><%- model.get("interval") %> min</div>
     <div class="col-md-1">
-        <a href="#" class="action-alert-edit">Edit</a>
+        <a href="#" class="action-alert-edit"><%- hr.i18n.t("alert.edit") %></a>
     </div>
     <div class="col-md-1">
-        <a href="#" class="action-alert-remove">Remove</a>
+        <a href="#" class="action-alert-remove"><%- hr.i18n.t("alert.remove") %></a>
     </div>
     <div class="col-md-1">
-        <a href="#" class="action-alert-toggle"><% if (model.get("enabled")) { %>Disable<% } else { %>Enable<% } %></a>
+        <a href="#" class="action-alert-toggle"><% if (model.get("enabled")) { %><%- hr.i18n.t("alert.disable") %><% } else { %><%- hr.i18n.t("alert.enable") %><% } %></a>
     </div>
 </div>
