@@ -1,0 +1,11 @@
+{
+    "toolbar": {
+        "createReport": "Create a report",
+        "createVisualization": "Create a visualization",
+        "manageAlerts": "Manage alerts",
+        "createAlert": "Create an alert",
+        "editReport": "Edit report",
+        "help": "Help",
+        "removeReport": "Remove report"
+    }
+}

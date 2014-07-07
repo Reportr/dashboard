@@ -6,6 +6,7 @@ require([
     "hr/args",
     "core/api",
     "models/report",
+    "resources/init",
     "collections/alerts",
     "collections/reports",
     "utils/dialogs",
@@ -13,13 +14,9 @@ require([
     "views/visualizations/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
-
-    hr.Resources.addNamespace("templates", {
-        loader: "text"
-    });
 
     // Define base application
     var Application = hr.Application.extend({
@@ -270,5 +267,5 @@ require([
     });
 
     var app = new Application();
-    app.reports.loadAll().then(app.run.bind(app), dialogs.error);
+    app.reports.loadAll().then(initResources).then(app.run.bind(app), dialogs.error);
 });

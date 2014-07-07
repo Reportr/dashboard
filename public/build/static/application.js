@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404739897914,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404746675511,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -55639,6 +55639,27 @@ define('models/report',[
 
     return Report;
 });
+define('text!resources/langs/en.json',[],function () { return '{\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    }\n}';});
+
+define('resources/init',[
+    "hr/hr",
+    "text!resources/langs/en.json"
+], function(hr) {
+
+    hr.Resources.addNamespace("templates", {
+        loader: "text"
+    });
+
+    hr.Resources.addNamespace("i18n", {
+        loader: "require",
+        base: "resources/langs/",
+        extension: ".json"
+    });
+
+    return function() {
+        return hr.I18n.loadLocale(["en"]);
+    };
+});
 define('models/alert',[
     "hr/hr",
     "utils/dialogs",
@@ -56286,7 +56307,7 @@ define('views/dialogs/alerts',[
 
     return AlertsDialog;
 });
-define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="Create a report"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="Edit"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="Manage alerts"><span class="octicon octicon-rss"></span></button>\n        <button class="btn btn-link action-alert-create" title="Create an alert"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-report-edit" title="Edit"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="Help"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="Remove"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-container">\n    <div class="main-body">\n        <div class="report-body"></div>\n    </div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
+define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="<%- hr.i18n.t("toolbar.createReport") %>"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="<%- hr.i18n.t("toolbar.createVisualization") %>"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="<%- hr.i18n.t("toolbar.manageAlerts") %>"><span class="octicon octicon-rss"></span></button>\n        <button class="btn btn-link action-alert-create" title="<%- hr.i18n.t("toolbar.createAlert") %>"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-report-edit" title="<%- hr.i18n.t("toolbar.editReport") %>"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="<%- hr.i18n.t("toolbar.help") %>"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="<%- hr.i18n.t("toolbar.removeReport") %>"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-container">\n    <div class="main-body">\n        <div class="report-body"></div>\n    </div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p>There is no reports yet to show.</p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create">Create a report</button>\n        </p>\n    </div>\n</div>\n<% } %>';});
 
 require([
     "hr/utils",
@@ -56296,6 +56317,7 @@ require([
     "hr/args",
     "core/api",
     "models/report",
+    "resources/init",
     "collections/alerts",
     "collections/reports",
     "utils/dialogs",
@@ -56303,13 +56325,9 @@ require([
     "views/visualizations/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
-
-    hr.Resources.addNamespace("templates", {
-        loader: "text"
-    });
 
     // Define base application
     var Application = hr.Application.extend({
@@ -56560,7 +56578,7 @@ require([
     });
 
     var app = new Application();
-    app.reports.loadAll().then(app.run.bind(app), dialogs.error);
+    app.reports.loadAll().then(initResources).then(app.run.bind(app), dialogs.error);
 });
 
 define("main", ["hr/dom","vendors/bootstrap/js/carousel","vendors/bootstrap/js/dropdown","vendors/bootstrap/js/button","vendors/bootstrap/js/modal","vendors/bootstrap/js/affix","vendors/bootstrap/js/alert","vendors/bootstrap/js/collapse","vendors/bootstrap/js/tooltip","vendors/bootstrap/js/popover","vendors/bootstrap/js/scrollspy","vendors/bootstrap/js/tab","vendors/bootstrap/js/transition"], function(){});
