@@ -1,4 +1,6 @@
 {
+    "id": "en",
+    "lang": "English",
     "toolbar": {
         "createReport": "Create a report",
         "createVisualization": "Create a visualization",
@@ -77,6 +79,42 @@
                 },
                 "limit": {
                     "label": "Limit"
+                }
+            }
+        },
+        "time": {
+            "title": "Time Chart",
+            "config": {
+                "fields": {
+                    "label": "Fields",
+                    "help": "Separated by comas"
+                },
+                "limit": {
+                    "label": "Limit",
+                    "help": "Max number of events"
+                },
+                "interval": {
+                    "label": "Interval",
+                    "minute": "Minute",
+                    "hour": "Hour",
+                    "day": "Day",
+                    "week": "Week",
+                    "month": "Month"
+                },
+                "name": {
+                    "label": "Name",
+                    "help": "Template for the hover serie name, see documentation for more infos about templates."
+                },
+                "interpolation": {
+                    "label": "Interpolation",
+                    "linear": "Linear - straight lines between points",
+                    "step-after": "Step After - square steps from point to point",
+                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",
+                    "basis": "Basis - smooth curves via B-splines"
+                },
+                "fillEmpty": {
+                    "label": "Fill Empty",
+                    "help": "Fill when there is no events with zero values."
                 }
             }
         }

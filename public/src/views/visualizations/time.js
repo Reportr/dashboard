@@ -5,11 +5,15 @@ define([
     "d3",
     "rickshaw",
     "core/api",
+    "utils/i18n",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, d3, Rickshaw, api, i18n, template, BaseVisualization, templateFile) {
     window.d3 = d3;
+
+    var INTERVALS = ["minute", "hour", "day", "week", "month"];
+    var INTERPOLATIONS = ['linear', 'step-after', 'cardinal', 'basis'];
 
     var TimeVisualization = BaseVisualization.extend({
         className: "visualization visualization-time",
@@ -75,54 +79,43 @@ define([
     });
 
     return {
-        title: "Time Chart",
+        title: i18n.t("visualizations.time.title"),
         View: TimeVisualization,
         config: {
             'fields': {
                 'type': "text",
-                'label': "Fields",
-                'help': "Separated by comas"
+                'label': i18n.t("visualizations.time.config.fields.label"),
+                'help': i18n.t("visualizations.time.config.fields.help")
             },
             'limit': {
                 'type': "number",
-                'label': "Limit",
-                'help': "Max number of events",
+                'label': i18n.t("visualizations.time.config.limit.label"),
+                'help': i18n.t("visualizations.time.config.limit.help"),
                 'default': 1000,
                 'min': 100,
                 'max': 1000000
             },
             'interval': {
                 'type': "select",
-                'label': "Interval",
+                'label': i18n.t("visualizations.time.config.interval.label"),
                 'default': "hour",
-                'options': {
-                    "minute": "Minute",
-                    "hour": "Hour",
-                    "day": "Day",
-                    "week": "Week",
-                    "month": "Month"
-                }
+                'options': _.chain(INTERVALS). map(function(i) { return [i, i18n.t("visualizations.time.config.interval."+i)] }).object().value()
             },
             'name': {
                 'type': "text",
-                'label': "Name",
-                'help': "Template for the hover serie name, see documentation for more infos about templates."
+                'label': i18n.t("visualizations.time.config.name.label"),
+                'help': i18n.t("visualizations.time.config.name.help")
             },
             'interpolation': {
                 'type': "select",
-                'label': "Interpolation",
+                'label': i18n.t("visualizations.time.config.interpolation.label"),
                 'default': "cardinal",
-                'options': {
-                    'linear': "Linear - straight lines between points",
-                    'step-after': "Step After - square steps from point to point",
-                    'cardinal': "Cardinal - smooth curves via cardinal splines (default)",
-                    'basis': "Basis - smooth curves via B-splines"
-                }
+                'options': _.chain(INTERPOLATIONS). map(function(i) { return [i, i18n.t("visualizations.time.config.interpolation."+i)] }).object().value()
             },
             'fillEmpty': {
                 'type': "checkbox",
-                'label': "Fill Empty",
-                'help': "Fill when there is no events with zero values.",
+                'label': i18n.t("visualizations.time.config.fillEmpty.label"),
+                'help': i18n.t("visualizations.time.config.fillEmpty.help"),
                 'default': true
             }
         }

@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404757515756,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404758852759,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26596,7 +26596,7 @@ define('resources/init',[
         return Q();
     };
 });
-define('text!resources/langs/en.json',[],function () { return '{\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        }\n    }\n}';});
+define('text!resources/langs/en.json',[],function () { return '{\n    "id": "en",\n    "lang": "English",\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        },\n        "time": {\n            "title": "Time Chart",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit",\n                    "help": "Max number of events"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "minute": "Minute",\n                    "hour": "Hour",\n                    "day": "Day",\n                    "week": "Week",\n                    "month": "Month"\n                },\n                "name": {\n                    "label": "Name",\n                    "help": "Template for the hover serie name, see documentation for more infos about templates."\n                },\n                "interpolation": {\n                    "label": "Interpolation",\n                    "linear": "Linear - straight lines between points",\n                    "step-after": "Step After - square steps from point to point",\n                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",\n                    "basis": "Basis - smooth curves via B-splines"\n                },\n                "fillEmpty": {\n                    "label": "Fill Empty",\n                    "help": "Fill when there is no events with zero values."\n                }\n            }\n        }\n    }\n}';});
 
 define('utils/i18n',[
     "hr/hr",
@@ -42729,11 +42729,15 @@ define('views/visualizations/time',[
     "d3",
     "rickshaw",
     "core/api",
+    "utils/i18n",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/time.html"
-], function(_, $, hr, d3, Rickshaw, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, d3, Rickshaw, api, i18n, template, BaseVisualization, templateFile) {
     window.d3 = d3;
+
+    var INTERVALS = ["minute", "hour", "day", "week", "month"];
+    var INTERPOLATIONS = ['linear', 'step-after', 'cardinal', 'basis'];
 
     var TimeVisualization = BaseVisualization.extend({
         className: "visualization visualization-time",
@@ -42799,54 +42803,43 @@ define('views/visualizations/time',[
     });
 
     return {
-        title: "Time Chart",
+        title: i18n.t("visualizations.time.title"),
         View: TimeVisualization,
         config: {
             'fields': {
                 'type': "text",
-                'label': "Fields",
-                'help': "Separated by comas"
+                'label': i18n.t("visualizations.time.config.fields.label"),
+                'help': i18n.t("visualizations.time.config.fields.help")
             },
             'limit': {
                 'type': "number",
-                'label': "Limit",
-                'help': "Max number of events",
+                'label': i18n.t("visualizations.time.config.limit.label"),
+                'help': i18n.t("visualizations.time.config.limit.help"),
                 'default': 1000,
                 'min': 100,
                 'max': 1000000
             },
             'interval': {
                 'type': "select",
-                'label': "Interval",
+                'label': i18n.t("visualizations.time.config.interval.label"),
                 'default': "hour",
-                'options': {
-                    "minute": "Minute",
-                    "hour": "Hour",
-                    "day": "Day",
-                    "week": "Week",
-                    "month": "Month"
-                }
+                'options': _.chain(INTERVALS). map(function(i) { return [i, i18n.t("visualizations.time.config.interval."+i)] }).object().value()
             },
             'name': {
                 'type': "text",
-                'label': "Name",
-                'help': "Template for the hover serie name, see documentation for more infos about templates."
+                'label': i18n.t("visualizations.time.config.name.label"),
+                'help': i18n.t("visualizations.time.config.name.help")
             },
             'interpolation': {
                 'type': "select",
-                'label': "Interpolation",
+                'label': i18n.t("visualizations.time.config.interpolation.label"),
                 'default': "cardinal",
-                'options': {
-                    'linear': "Linear - straight lines between points",
-                    'step-after': "Step After - square steps from point to point",
-                    'cardinal': "Cardinal - smooth curves via cardinal splines (default)",
-                    'basis': "Basis - smooth curves via B-splines"
-                }
+                'options': _.chain(INTERPOLATIONS). map(function(i) { return [i, i18n.t("visualizations.time.config.interpolation."+i)] }).object().value()
             },
             'fillEmpty': {
                 'type': "checkbox",
-                'label': "Fill Empty",
-                'help': "Fill when there is no events with zero values.",
+                'label': i18n.t("visualizations.time.config.fillEmpty.label"),
+                'help': i18n.t("visualizations.time.config.fillEmpty.help"),
                 'default': true
             }
         }
