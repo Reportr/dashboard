@@ -11,11 +11,12 @@ require([
     "collections/alerts",
     "collections/reports",
     "utils/dialogs",
+    "utils/i18n",
     "views/lists/visualizations",
     "views/visualizations/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, i18n, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -90,7 +91,9 @@ require([
 
             return that.reports.loadAll()
             .then(function() {
-                return dialogs.select("Select a report", "Choose a new report to open.",
+                return dialogs.select(
+                    i18n.t("reports.select.title"),
+                    i18n.t("reports.select.message"),
                     _.object(that.reports.map(function(r) {
                         return [
                             r.get("id"),
@@ -110,9 +113,9 @@ require([
         createReport: function() {
             var that = this;
 
-            return dialogs.fields("Create a new report", {
+            return dialogs.fields(i18n.t("reports.create.title"), {
                 "title": {
-                    label: "Title",
+                    label: i18n.t("reports.create.fields.title"),
                     type: "text"
                 }
             })
@@ -124,9 +127,9 @@ require([
         // Edit current report
         editReport: function() {
             var that = this;
-            return dialogs.fields("Edit report", {
+            return dialogs.fields(i18n.t("reports.edit.title"), {
                 "title": {
-                    label: "Title",
+                    label: i18n.t("reports.edit.fields.title"),
                     type: "text"
                 }
             }, this.report.toJSON())
@@ -139,7 +142,7 @@ require([
         removeReport: function() {
             var that = this;
 
-            return dialogs.confirm("Remove this report?")
+            return dialogs.confirm(i18n.t("reports.remove.title"))
             .then(function() {
                 return that.report.remove();
             })
@@ -159,9 +162,9 @@ require([
 
             return api.execute("get:types")
             .then(function(types) {
-                return dialogs.fields("New visualization", {
+                return dialogs.fields(i18n.t("visualization.create.title"), {
                     "eventName": {
-                        'label': "Event",
+                        'label': i18n.t("visualization.create.fields.eventName"),
                         'type': "select",
                         'options': _.chain(types)
                         .map(function(type) {
@@ -171,7 +174,7 @@ require([
                         .value()
                     },
                     "type": {
-                        'label': "Type",
+                        'label': i18n.t("visualization.create.fields.type"),
                         'type': "select",
                         'options': _.chain(allVisualizations)
                         .map(function(visualization, vId) {
@@ -216,13 +219,13 @@ require([
             .fail(dialogs.error)
             .spread(function(events, types) {
 
-                return dialogs.fields("Create a new alert", {
+                return dialogs.fields(i18n.t("alerts.create.title"), {
                     "title": {
-                        "label": "Title",
+                        "label": i18n.t("alerts.create.fields.title.label"),
                         "type": "text"
                     },
                     "eventName": {
-                        'label': "Event",
+                        'label': i18n.t("alerts.create.fields.eventName.label"),
                         'type': "select",
                         'options': _.chain(events)
                         .map(function(type) {
@@ -232,7 +235,7 @@ require([
                         .value()
                     },
                     "type": {
-                        'label': "Type",
+                        'label': i18n.t("alerts.create.fields.type.label"),
                         'type': "select",
                         'options': _.chain(types)
                         .map(function(a) {
@@ -242,16 +245,16 @@ require([
                         .value()
                     },
                     "interval": {
-                        "label": "Interval",
+                        "label": i18n.t("alerts.create.fields.interval.label"),
                         "type": "number",
                         'min': 1,
                         'default': 1,
-                        'help': "Minimum interval for notifications in minutes."
+                        'help': i18n.t("alerts.create.fields.interval.help")
                     },
                     "condition": {
-                        "label": "Condition",
+                        "label": i18n.t("alerts.create.fields.condition.label"),
                         "type": "text",
-                        "help": "Learn more about alert conditions in the documentation"
+                        "help": i18n.t("alerts.create.fields.condition.help")
                     },
                 });
             })
