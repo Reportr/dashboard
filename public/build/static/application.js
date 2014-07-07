@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404748091534,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404757515756,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26578,6 +26578,44 @@ define('utils/dialogs',[
 
     return Dialogs;
 });
+define('resources/init',[
+    "hr/hr",
+    "hr/promise"
+], function(hr, Q) {
+    hr.Resources.addNamespace("templates", {
+        loader: "text"
+    });
+
+    hr.Resources.addNamespace("i18n", {
+        loader: "require",
+        base: "resources/langs/",
+        extension: ".json"
+    });
+
+    return function() {
+        return Q();
+    };
+});
+define('text!resources/langs/en.json',[],function () { return '{\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        }\n    }\n}';});
+
+define('utils/i18n',[
+    "hr/hr",
+    "hr/promise",
+
+    // Load locals
+    "text!resources/langs/en.json"
+], function(hr, Q, en) {
+    var translations = {
+        "en": en
+    };
+
+    hr.I18n.translations = _.transform(translations, function(result, content, key) {
+        result[key] = eval('('+content+')');
+    });
+    hr.I18n.locales = _.keys(hr.I18n.translations);
+
+    return hr.I18n;
+});
 define('views/visualizations/base',[
     "hr/utils",
     "hr/dom",
@@ -26628,10 +26666,11 @@ define('views/visualizations/bar',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "core/api",
     "views/visualizations/base",
     "text!resources/templates/visualizations/bar.html"
-], function(_, $, hr, api, BaseVisualization, templateFile) {
+], function(_, $, hr, i18n, api, BaseVisualization, templateFile) {
 
     var BarVisualization = BaseVisualization.extend({
         className: "visualization visualization-bar",
@@ -26653,16 +26692,16 @@ define('views/visualizations/bar',[
     });
 
     return {
-        title: "Bar Chart",
+        title: i18n.t("visualizations.bar.title"),
         View: BarVisualization,
         config: {
             'field': {
                 'type': "text",
-                'label': "Field"
+                'label': i18n.t("visualizations.bar.config.field")
             },
             'max': {
                 'type': "number",
-                'label': "Max Bars",
+                'label': i18n.t("visualizations.bar.config.max"),
                 'min': 1,
                 'max': 100,
                 'default': 4
@@ -29311,17 +29350,18 @@ define('utils/template',[
 
     return template;
 });
-define('text!resources/templates/visualizations/table.html',[],function () { return '<div class="table-container">\n    <table class="table table-striped">\n        <thead>\n            <tr>\n                <th style="width: <%- twidth %>%;">Date</th>\n                <% _.each(fields, function(field) { %>\n                <th style="width: <%- twidth %>%;"><%- field %></th>\n                <% }); %>\n            </tr>\n        </thead>\n        <tbody>\n            <% _.each(data, function(e) { %>\n            <tr>\n                <td style="width: <%- twidth %>%;"><%- $.date(e.date) %></td>\n                <% _.each(fields, function(field) { %>\n                <td style="width: <%- twidth %>%;"><%- e.properties[field] %></td>\n                <% }); %>\n            </tr>\n            <% }); %>\n        </tbody>\n    </table>\n</div>';});
+define('text!resources/templates/visualizations/table.html',[],function () { return '<div class="table-container">\n    <table class="table table-striped">\n        <thead>\n            <tr>\n                <th style="width: <%- twidth %>%;"><%- hr.i18n.t("visualizations.table.date") %></th>\n                <% _.each(fields, function(field) { %>\n                <th style="width: <%- twidth %>%;"><%- field %></th>\n                <% }); %>\n            </tr>\n        </thead>\n        <tbody>\n            <% _.each(data, function(e) { %>\n            <tr>\n                <td style="width: <%- twidth %>%;"><%- $.date(e.date) %></td>\n                <% _.each(fields, function(field) { %>\n                <td style="width: <%- twidth %>%;"><%- e.properties[field] %></td>\n                <% }); %>\n            </tr>\n            <% }); %>\n        </tbody>\n    </table>\n</div>';});
 
 define('views/visualizations/table',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "core/api",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/table.html"
-], function(_, $, hr, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, i18n, api, template, BaseVisualization, templateFile) {
 
     var Visualization = BaseVisualization.extend({
         className: "visualization visualization-table",
@@ -29349,17 +29389,17 @@ define('views/visualizations/table',[
     });
 
     return {
-        title: "Table",
+        title: i18n.t("visualizations.table.title"),
         View: Visualization,
         config: {
             'fields': {
                 'type': "text",
-                'label': "Fields",
-                'help': "Separated by comas"
+                'label': i18n.t("visualizations.table.config.fields.label"),
+                'help': i18n.t("visualizations.table.config.fields.help")
             },
             'limit': {
                 'type': "number",
-                'label': "Limit",
+                'label': i18n.t("visualizations.table.config.limit.label"),
                 'default': 50
             }
         }
@@ -55410,11 +55450,12 @@ define('views/visualizations/map',[
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "datamaps",
     "utils/template",
     "core/api",
     "views/visualizations/base"
-], function(_, $, hr, Datamap, template, api, BaseVisualization) {
+], function(_, $, hr, i18n, Datamap, template, api, BaseVisualization) {
     var Visualization = BaseVisualization.extend({
         className: "visualization visualization-map",
         defaults: {},
@@ -55488,24 +55529,25 @@ define('views/visualizations/map',[
     });
 
     return {
-        title: "Map",
+        title: i18n.t("visualizations.map.title"),
         View: Visualization,
         config: {
             'message': {
                 'type': "text",
-                'label': "Marker Message",
-                'help': "Template for the message, see documentation for more infos about templates."
+                'label': i18n.t("visualizations.map.config.message.label"),
+                'help': i18n.t("visualizations.map.config.message.help")
             }
         }
     };
 });
 define('views/visualizations/all',[
+    "resources/init",
     "views/visualizations/bar",
     "views/visualizations/table",
     "views/visualizations/value",
     "views/visualizations/time",
     "views/visualizations/map"
-], function(bar, table, value, time, map) {
+], function(resources, bar, table, value, time, map) {
 
     return {
         'time': time,
@@ -55638,27 +55680,6 @@ define('models/report',[
     });
 
     return Report;
-});
-define('text!resources/langs/en.json',[],function () { return '{\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    }\n}';});
-
-define('resources/init',[
-    "hr/hr",
-    "text!resources/langs/en.json"
-], function(hr) {
-
-    hr.Resources.addNamespace("templates", {
-        loader: "text"
-    });
-
-    hr.Resources.addNamespace("i18n", {
-        loader: "require",
-        base: "resources/langs/",
-        extension: ".json"
-    });
-
-    return function() {
-        return hr.I18n.loadLocale(["en"]);
-    };
 });
 define('models/alert',[
     "hr/hr",

@@ -49,5 +49,36 @@
             "create": "Create a new alert",
             "ok": "Ok"
         }
+    },
+    "visualizations": {
+        "bar": {
+            "title": "Bar Chart",
+            "config": {
+                "field": "Field",
+                "max": "Max Bars"
+            }
+        },
+        "map": {
+            "title": "Map",
+            "config": {
+                "message": {
+                    "label": "Marker Message",
+                    "help": "Template for the message, see documentation for more infos about templates."
+                }
+            }
+        },
+        "table": {
+            "title": "Table",
+            "date": "Date",
+            "config": {
+                "fields": {
+                    "label": "Fields",
+                    "help": "Separated by comas"
+                },
+                "limit": {
+                    "label": "Limit"
+                }
+            }
+        }
     }
 }

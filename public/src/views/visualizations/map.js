@@ -2,11 +2,12 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "datamaps",
     "utils/template",
     "core/api",
     "views/visualizations/base"
-], function(_, $, hr, Datamap, template, api, BaseVisualization) {
+], function(_, $, hr, i18n, Datamap, template, api, BaseVisualization) {
     var Visualization = BaseVisualization.extend({
         className: "visualization visualization-map",
         defaults: {},
@@ -80,13 +81,13 @@ define([
     });
 
     return {
-        title: "Map",
+        title: i18n.t("visualizations.map.title"),
         View: Visualization,
         config: {
             'message': {
                 'type': "text",
-                'label': "Marker Message",
-                'help': "Template for the message, see documentation for more infos about templates."
+                'label': i18n.t("visualizations.map.config.message.label"),
+                'help': i18n.t("visualizations.map.config.message.help")
             }
         }
     };

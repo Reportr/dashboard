@@ -2,10 +2,11 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "core/api",
     "views/visualizations/base",
     "text!resources/templates/visualizations/bar.html"
-], function(_, $, hr, api, BaseVisualization, templateFile) {
+], function(_, $, hr, i18n, api, BaseVisualization, templateFile) {
 
     var BarVisualization = BaseVisualization.extend({
         className: "visualization visualization-bar",
@@ -27,16 +28,16 @@ define([
     });
 
     return {
-        title: "Bar Chart",
+        title: i18n.t("visualizations.bar.title"),
         View: BarVisualization,
         config: {
             'field': {
                 'type': "text",
-                'label': "Field"
+                'label': i18n.t("visualizations.bar.config.field")
             },
             'max': {
                 'type': "number",
-                'label': "Max Bars",
+                'label': i18n.t("visualizations.bar.config.max"),
                 'min': 1,
                 'max': 100,
                 'default': 4

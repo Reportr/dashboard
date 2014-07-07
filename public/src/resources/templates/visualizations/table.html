@@ -2,7 +2,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th style="width: <%- twidth %>%;">Date</th>
+                <th style="width: <%- twidth %>%;"><%- hr.i18n.t("visualizations.table.date") %></th>
                 <% _.each(fields, function(field) { %>
                 <th style="width: <%- twidth %>%;"><%- field %></th>
                 <% }); %>

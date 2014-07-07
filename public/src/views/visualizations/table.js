@@ -2,11 +2,12 @@ define([
     "hr/utils",
     "hr/dom",
     "hr/hr",
+    "utils/i18n",
     "core/api",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/table.html"
-], function(_, $, hr, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, i18n, api, template, BaseVisualization, templateFile) {
 
     var Visualization = BaseVisualization.extend({
         className: "visualization visualization-table",
@@ -34,17 +35,17 @@ define([
     });
 
     return {
-        title: "Table",
+        title: i18n.t("visualizations.table.title"),
         View: Visualization,
         config: {
             'fields': {
                 'type': "text",
-                'label': "Fields",
-                'help': "Separated by comas"
+                'label': i18n.t("visualizations.table.config.fields.label"),
+                'help': i18n.t("visualizations.table.config.fields.help")
             },
             'limit': {
                 'type': "number",
-                'label': "Limit",
+                'label': i18n.t("visualizations.table.config.limit.label"),
                 'default': 50
             }
         }
