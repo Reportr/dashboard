@@ -3,10 +3,11 @@ define([
     "hr/dom",
     "hr/hr",
     "core/api",
+    "utils/i18n",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, api, i18n, template, BaseVisualization, templateFile) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
@@ -34,22 +35,22 @@ define([
     });
 
     return {
-        title: "Last Value",
+        title: i18n.t("visualizations.value.title"),
         View: ValueVisualization,
         config: {
             field: {
                 type: "text",
-                label: "Field"
+                label: i18n.t("visualizations.value.config.field.label")
             },
             value: {
                 type: "text",
-                label: "Value",
-                help: "Template for the value display, see documentation for more infos about templates."
+                label: i18n.t("visualizations.value.config.value.label"),
+                help: i18n.t("visualizations.value.config.value.help")
             },
             label: {
                 type: "text",
-                label: "Label",
-                help: "Template for the label, see documentation for more infos about templates."
+                label: i18n.t("visualizations.value.config.label.label"),
+                help: i18n.t("visualizations.value.config.label.help")
             }
         }
     };

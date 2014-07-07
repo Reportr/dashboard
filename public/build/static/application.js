@@ -25933,7 +25933,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404758852759,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404763565945,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -26578,25 +26578,7 @@ define('utils/dialogs',[
 
     return Dialogs;
 });
-define('resources/init',[
-    "hr/hr",
-    "hr/promise"
-], function(hr, Q) {
-    hr.Resources.addNamespace("templates", {
-        loader: "text"
-    });
-
-    hr.Resources.addNamespace("i18n", {
-        loader: "require",
-        base: "resources/langs/",
-        extension: ".json"
-    });
-
-    return function() {
-        return Q();
-    };
-});
-define('text!resources/langs/en.json',[],function () { return '{\n    "id": "en",\n    "lang": "English",\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        },\n        "time": {\n            "title": "Time Chart",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit",\n                    "help": "Max number of events"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "minute": "Minute",\n                    "hour": "Hour",\n                    "day": "Day",\n                    "week": "Week",\n                    "month": "Month"\n                },\n                "name": {\n                    "label": "Name",\n                    "help": "Template for the hover serie name, see documentation for more infos about templates."\n                },\n                "interpolation": {\n                    "label": "Interpolation",\n                    "linear": "Linear - straight lines between points",\n                    "step-after": "Step After - square steps from point to point",\n                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",\n                    "basis": "Basis - smooth curves via B-splines"\n                },\n                "fillEmpty": {\n                    "label": "Fill Empty",\n                    "help": "Fill when there is no events with zero values."\n                }\n            }\n        }\n    }\n}';});
+define('text!resources/langs/en.json',[],function () { return '{\n    "id": "en",\n    "language": "English",\n    "toolbar": {\n        "createReport": "Create a report",\n        "createVisualization": "Create a visualization",\n        "manageAlerts": "Manage alerts",\n        "createAlert": "Create an alert",\n        "editReport": "Edit report",\n        "help": "Help",\n        "removeReport": "Remove report",\n        "settings": "Settings"\n    },\n    "reports": {\n        "empty": {\n            "message": "There is no reports yet to show.",\n            "create": "Create a report"\n        }\n    },\n    "alert": {\n        "edit": "Edit",\n        "remove": "Remove",\n        "disable": "Disable",\n        "enable": "Enable"\n    },\n    "dialogs": {\n        "alert": {\n            "title": "Alert",\n            "close": "Close"\n        },\n        "confirm": {\n            "title": "Confirm",\n            "cancel": "Cancel",\n            "ok": "Ok"\n        },\n        "prompt": {\n            "title": "Input",\n            "ok": "Ok"\n        },\n        "select": {\n            "title": "Select",\n            "ok": "Ok"\n        },\n        "fields": {\n            "title": "Input",\n            "ok": "Ok"\n        }\n    },\n    "alerts": {\n        "manage": {\n            "title": "Manage alerts",\n            "create": "Create a new alert",\n            "ok": "Ok"\n        }\n    },\n    "visualizations": {\n        "bar": {\n            "title": "Bar Chart",\n            "config": {\n                "field": "Field",\n                "max": "Max Bars"\n            }\n        },\n        "map": {\n            "title": "Map",\n            "config": {\n                "message": {\n                    "label": "Marker Message",\n                    "help": "Template for the message, see documentation for more infos about templates."\n                }\n            }\n        },\n        "table": {\n            "title": "Table",\n            "date": "Date",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit"\n                }\n            }\n        },\n        "time": {\n            "title": "Time Chart",\n            "config": {\n                "fields": {\n                    "label": "Fields",\n                    "help": "Separated by comas"\n                },\n                "limit": {\n                    "label": "Limit",\n                    "help": "Max number of events"\n                },\n                "interval": {\n                    "label": "Interval",\n                    "minute": "Minute",\n                    "hour": "Hour",\n                    "day": "Day",\n                    "week": "Week",\n                    "month": "Month"\n                },\n                "name": {\n                    "label": "Name",\n                    "help": "Template for the hover serie name, see documentation for more infos about templates."\n                },\n                "interpolation": {\n                    "label": "Interpolation",\n                    "linear": "Linear - straight lines between points",\n                    "step-after": "Step After - square steps from point to point",\n                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",\n                    "basis": "Basis - smooth curves via B-splines"\n                },\n                "fillEmpty": {\n                    "label": "Fill Empty",\n                    "help": "Fill when there is no events with zero values."\n                }\n            }\n        },\n        "value": {\n            "title": "Last Value",\n            "config": {\n                "field": {\n                    "label": "Field"\n                },\n                "value": {\n                    "label": "Value",\n                    "help": "Template for the value display, see documentation for more infos about templates."\n                },\n                "label": {\n                    "label": "Label",\n                    "help": "Template for the label, see documentation for more infos about templates."\n                }\n            }\n        }\n    },\n    "settings": {\n        "title": "Settings",\n        "language": {\n            "label": "Language"\n        }\n    }\n}';});
 
 define('utils/i18n',[
     "hr/hr",
@@ -26615,6 +26597,68 @@ define('utils/i18n',[
     hr.I18n.locales = _.keys(hr.I18n.translations);
 
     return hr.I18n;
+});
+define('core/settings',[
+    "hr/utils",
+    "hr/hr",
+    "utils/dialogs",
+    "utils/i18n"
+], function(_, hr, dialogs, i18n) {
+    var Settings = hr.Model.extend({
+        defaults: {
+            language: "en"
+        },
+
+        save: function() {
+            hr.Storage.set("settings", this.toJSON());
+        },
+        load: function() {
+            this.reset(hr.Storage.get("settings"));
+        },
+
+        dialog: function() {
+            var that = this;
+
+            return dialogs.fields(i18n.t("settings.title"), {
+                "language": {
+                    label: i18n.t("settings.language.label"),
+                    type: "select",
+                    options: _.chain(i18n.translations)
+                        .map(function(t, lang) {
+                            return [lang, t.language];
+                        })
+                        .object()
+                        .value()
+                }
+            }, that.toJSON())
+            .then(function(data) {
+                that.reset(data);
+                return that.save();
+            });
+        }
+    });
+
+    var settings = new Settings();
+    settings.load();
+    return settings;
+});
+define('resources/init',[
+    "hr/hr",
+    "hr/promise"
+], function(hr, Q) {
+    hr.Resources.addNamespace("templates", {
+        loader: "text"
+    });
+
+    hr.Resources.addNamespace("i18n", {
+        loader: "require",
+        base: "resources/langs/",
+        extension: ".json"
+    });
+
+    return function() {
+        return Q();
+    };
 });
 define('views/visualizations/base',[
     "hr/utils",
@@ -29412,10 +29456,11 @@ define('views/visualizations/value',[
     "hr/dom",
     "hr/hr",
     "core/api",
+    "utils/i18n",
     "utils/template",
     "views/visualizations/base",
     "text!resources/templates/visualizations/value.html"
-], function(_, $, hr, api, template, BaseVisualization, templateFile) {
+], function(_, $, hr, api, i18n, template, BaseVisualization, templateFile) {
 
     var ValueVisualization = BaseVisualization.extend({
         className: "visualization visualization-value",
@@ -29443,22 +29488,22 @@ define('views/visualizations/value',[
     });
 
     return {
-        title: "Last Value",
+        title: i18n.t("visualizations.value.title"),
         View: ValueVisualization,
         config: {
             field: {
                 type: "text",
-                label: "Field"
+                label: i18n.t("visualizations.value.config.field.label")
             },
             value: {
                 type: "text",
-                label: "Value",
-                help: "Template for the value display, see documentation for more infos about templates."
+                label: i18n.t("visualizations.value.config.value.label"),
+                help: i18n.t("visualizations.value.config.value.help")
             },
             label: {
                 type: "text",
-                label: "Label",
-                help: "Template for the label, see documentation for more infos about templates."
+                label: i18n.t("visualizations.value.config.label.label"),
+                help: i18n.t("visualizations.value.config.label.help")
             }
         }
     };
@@ -56321,7 +56366,7 @@ define('views/dialogs/alerts',[
 
     return AlertsDialog;
 });
-define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="<%- hr.i18n.t("toolbar.createReport") %>"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="<%- hr.i18n.t("toolbar.createVisualization") %>"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="<%- hr.i18n.t("toolbar.manageAlerts") %>"><span class="octicon octicon-rss"></span></button>\n        <button class="btn btn-link action-alert-create" title="<%- hr.i18n.t("toolbar.createAlert") %>"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-report-edit" title="<%- hr.i18n.t("toolbar.editReport") %>"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="<%- hr.i18n.t("toolbar.help") %>"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="<%- hr.i18n.t("toolbar.removeReport") %>"><span class="octicon octicon-trashcan"></span></button>\n    </div>\n</div>\n<div class="main-container">\n    <div class="main-body">\n        <div class="report-body"></div>\n    </div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p><%- hr.i18n.t("reports.empty.message") %></p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create"><%- hr.i18n.t("reports.empty.create") %></button>\n        </p>\n    </div>\n</div>\n<% } %>';});
+define('text!resources/templates/main.html',[],function () { return '<% if (hasReport) { %>\n<div class="main-header">\n    <div class="container">\n        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>\n    </div>\n</div>\n<div class="main-toolbar">\n    <div class="group-actions primary">\n        <button class="btn btn-link action-report-create" title="<%- hr.i18n.t("toolbar.createReport") %>"><span class="octicon octicon-pulse"></span></button>\n        <button class="btn btn-link action-visualization-create" title="<%- hr.i18n.t("toolbar.createVisualization") %>"><span class="octicon octicon-plus"></span></button>\n        <button class="btn btn-link action-alert-manage" title="<%- hr.i18n.t("toolbar.manageAlerts") %>"><span class="octicon octicon-rss"></span></button>\n        <button class="btn btn-link action-alert-create" title="<%- hr.i18n.t("toolbar.createAlert") %>"><span class="octicon octicon-mail"></span></button>\n        <button class="btn btn-link action-report-edit" title="<%- hr.i18n.t("toolbar.editReport") %>"><span class="octicon octicon-gear"></span></button>\n    </div>\n    <div class="group-actions secondary">\n        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="<%- hr.i18n.t("toolbar.help") %>"><span class="octicon octicon-question"></span></a>\n        <button class="btn btn-link action-report-remove" title="<%- hr.i18n.t("toolbar.removeReport") %>"><span class="octicon octicon-trashcan"></span></button>\n        <button class="btn btn-link action-settings" title="<%- hr.i18n.t("toolbar.settings") %>"><span class="octicon octicon-settings"></span></button>\n    </div>\n</div>\n<div class="main-container">\n    <div class="main-body">\n        <div class="report-body"></div>\n    </div>\n</div>\n<% } else { %>\n<div class="main-start">\n    <div class="message-no-reports">\n        <div class="icon">\n            <span class="octicon octicon-pulse"></span>\n        </div>\n        <p><%- hr.i18n.t("reports.empty.message") %></p>\n        <p>\n            <button class="btn btn-default btn-lg action-report-create"><%- hr.i18n.t("reports.empty.create") %></button>\n        </p>\n    </div>\n</div>\n<% } %>';});
 
 require([
     "hr/utils",
@@ -56330,6 +56375,7 @@ require([
     "hr/hr",
     "hr/args",
     "core/api",
+    "core/settings",
     "models/report",
     "resources/init",
     "collections/alerts",
@@ -56339,7 +56385,7 @@ require([
     "views/visualizations/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -56354,7 +56400,8 @@ require([
             "click .action-report-remove": "removeReport",
             "click .action-visualization-create": "createVisualization",
             "click .action-alert-manage": "manageAlerts",
-            "click .action-alert-create": "createAlert"
+            "click .action-alert-create": "createAlert",
+            "click .action-settings": "settings"
         },
 
 
@@ -56587,6 +56634,14 @@ require([
                     'type': data.type
                 })
                 .then(that.manageAlerts.bind(that), dialogs.error)
+            });
+        },
+
+        // Open settings dialog
+        settings: function() {
+            settings.dialog()
+            .then(function() {
+                location.reload();
             });
         }
     });

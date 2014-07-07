@@ -5,6 +5,7 @@ require([
     "hr/hr",
     "hr/args",
     "core/api",
+    "core/settings",
     "models/report",
     "resources/init",
     "collections/alerts",
@@ -14,7 +15,7 @@ require([
     "views/visualizations/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -29,7 +30,8 @@ require([
             "click .action-report-remove": "removeReport",
             "click .action-visualization-create": "createVisualization",
             "click .action-alert-manage": "manageAlerts",
-            "click .action-alert-create": "createAlert"
+            "click .action-alert-create": "createAlert",
+            "click .action-settings": "settings"
         },
 
 
@@ -262,6 +264,14 @@ require([
                     'type': data.type
                 })
                 .then(that.manageAlerts.bind(that), dialogs.error)
+            });
+        },
+
+        // Open settings dialog
+        settings: function() {
+            settings.dialog()
+            .then(function() {
+                location.reload();
             });
         }
     });

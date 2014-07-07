@@ -1,6 +1,6 @@
 {
     "id": "en",
-    "lang": "English",
+    "language": "English",
     "toolbar": {
         "createReport": "Create a report",
         "createVisualization": "Create a visualization",
@@ -8,7 +8,8 @@
         "createAlert": "Create an alert",
         "editReport": "Edit report",
         "help": "Help",
-        "removeReport": "Remove report"
+        "removeReport": "Remove report",
+        "settings": "Settings"
     },
     "reports": {
         "empty": {
@@ -117,6 +118,28 @@
                     "help": "Fill when there is no events with zero values."
                 }
             }
+        },
+        "value": {
+            "title": "Last Value",
+            "config": {
+                "field": {
+                    "label": "Field"
+                },
+                "value": {
+                    "label": "Value",
+                    "help": "Template for the value display, see documentation for more infos about templates."
+                },
+                "label": {
+                    "label": "Label",
+                    "help": "Template for the label, see documentation for more infos about templates."
+                }
+            }
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "language": {
+            "label": "Language"
         }
     }
 }
