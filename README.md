@@ -101,6 +101,14 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 
 Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
 
+## Visualizations
+
+#### Templates
+
+Visualizations accept templates as most of rendering options. Template are processed using [lodash's _.template method](http://lodash.com/docs#template) with some special functions:
+
+- `$.date(date)`: returns a beautiful date
+
 ## Scale it
 
 Reportr can easily be scaled on Heroku (and compatibles), use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
