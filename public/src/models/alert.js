@@ -1,8 +1,9 @@
 define([
     "hr/hr",
     "utils/dialogs",
-    "core/api"
-], function(hr, dialogs, api) {
+    "core/api",
+    "views/alerts/all"
+], function(hr, dialogs, api, allAlerts) {
     var Alert = hr.Model.extend({
         defaults: {
             type: null,
@@ -62,7 +63,7 @@ define([
                         'type': "text"
                     }
                 },
-                this.get("options")
+                allAlerts[this.get("type")].config
             ], _.extend({}, this.get("configuration"), {
                 'title': this.get("title"),
                 'condition': this.get("condition")

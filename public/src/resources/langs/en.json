@@ -73,6 +73,38 @@
                     "help": "Learn more about alert conditions in the documentation"
                 }
             }
+        },
+        "types": {
+            "mail": {
+                "title": "Mail",
+                "config": {
+                    "to": {
+                        "label": "To",
+                        "help": "Addresses separated by commas"
+                    }
+                }
+            },
+            "sms": {
+                "title": "SMS",
+                "config": {
+                    "to": {
+                        "label": "To",
+                        "help": "Phone number"
+                    },
+                    "body": {
+                        "label": "Message",
+                        "help": "Template for the message body."
+                    }
+                }
+            },
+            "webhook": {
+                "title": "Webhook",
+                "config": {
+                    "url": {
+                        "label": "Url"
+                    }
+                }
+            }
         }
     },
     "reports": {
