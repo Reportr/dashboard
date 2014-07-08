@@ -25932,7 +25932,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1404814993447,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1404829957285,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -42826,7 +42826,10 @@ define('views/visualizations/time',[
 
                 // Build hover details
                 var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-                    graph: graph
+                    graph: graph,
+                    xFormatter: function(x) {
+                        return template("<%- $.date(x) %>", {'x': x});
+                    }
                 });
             } catch(e) {
                 console.error(e);

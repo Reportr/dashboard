@@ -58,7 +58,10 @@ define([
 
                 // Build hover details
                 var hoverDetail = new Rickshaw.Graph.HoverDetail( {
-                    graph: graph
+                    graph: graph,
+                    xFormatter: function(x) {
+                        return template("<%- $.date(x) %>", {'x': x});
+                    }
                 });
             } catch(e) {
                 console.error(e);
