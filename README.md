@@ -73,17 +73,28 @@ Reportr is configured using environment variables.
 
 See [types](#types) for informations about alert configurations.
 
-## Concepts
+## Events
 
-* **Event**: an event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
+An event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
 
 ```
 $ curl -X POST --data '{ "type":"home.temperature", "properties": { "temperature": 66 } }' http://localhost:5000/api/events
 ```
 
-* **Report**: a report is a collection of event visualizations, it groups in the dashboard visualizations that are related, for example: I can have 2 reports: "My Home Activity" and "My GitHub Activity"
-* **Visualization**: a visualization is a configured way to show data, for example in a pie, bar chart or time graph.
-* **Alert**: an alert represent a way to send notifications for specific events (by email, sms, webhook, ...)
+## Visualizations
+
+A visualization is a configured way to show data, for example in a pie, bar chart or time graph.
+
+#### Types
+
+| Type | Description |
+| ---- | ----------- |
+
+#### Templates
+
+Visualizations accept templates as most of rendering options. Template are processed using [lodash's _.template method](http://lodash.com/docs#template) with some special functions:
+
+- `$.date(date)`: returns a beautiful date
 
 ## Alerts
 
@@ -100,14 +111,6 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 #### Condition
 
 Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
-
-## Visualizations
-
-#### Templates
-
-Visualizations accept templates as most of rendering options. Template are processed using [lodash's _.template method](http://lodash.com/docs#template) with some special functions:
-
-- `$.date(date)`: returns a beautiful date
 
 ## Scale it
 
