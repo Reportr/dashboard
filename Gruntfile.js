@@ -22,6 +22,8 @@ module.exports = function (grunt) {
         },
         "hr": {
             "app": {
+                "source": path.resolve(__dirname, "node_modules/happyrhino"),
+
                 // Base directory for the application
                 "base": srcPath,
 
