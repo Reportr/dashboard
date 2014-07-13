@@ -75,7 +75,8 @@ define([
 
         pull: function() {
             return api.execute("get:events", {
-                type: this.model.get("eventName")
+                type: this.model.get("eventName"),
+                has: ["position.longitude", "position.latitude"].join(",")
             });
         }
     });

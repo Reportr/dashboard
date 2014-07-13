@@ -20964,7 +20964,7 @@ define("vendors/bootstrap/js/transition", function(){});
 
     // define as an anonymous module so, through path mapping, it can be
     // referenced as the "underscore" module
-    define('underscore',[],function() {
+    define('lodash',[],function() {
       return _;
     });
   }
@@ -20990,14 +20990,14 @@ define("vendors/bootstrap/js/transition", function(){});
  * @module hr/utils
  */
 define('hr/utils',[
-    "underscore",
+    "lodash",
     "hr/dom",
 ], function(_, $) {
     if(!Function.prototype.bind) {
         Function.prototype.bind = function(newThis) {
                 var that = this;
-                return function(){ 
-                        return that.apply(newThis, arguments); 
+                return function(){
+                        return that.apply(newThis, arguments);
                 };
         }
     }
@@ -23584,6 +23584,16 @@ define('hr/application',[
             if (!this.router) this.router = new this.Router();
             this.router.route(route, name, _.bind(handler, this));
             return this;
+        },
+
+        /*
+         * Return a query string paramater value
+         */
+        getQuery: function(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
         }
     });
 
@@ -25932,7 +25942,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1405188096046,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1405275614307,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -55563,7 +55573,8 @@ define('views/visualizations/map',[
 
         pull: function() {
             return api.execute("get:events", {
-                type: this.model.get("eventName")
+                type: this.model.get("eventName"),
+                has: ["position.longitude", "position.latitude"].join(",")
             });
         }
     });
