@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     var srcPath = path.resolve(__dirname, "public/src");
 
     // Load grunt modules
-    grunt.loadNpmTasks('hr.js');
+    grunt.loadNpmTasks('grunt-hr-builder');
     grunt.loadNpmTasks("grunt-bower-install-simple");
 
     // Init GRUNT configuraton
