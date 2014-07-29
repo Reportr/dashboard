@@ -45,6 +45,7 @@ Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
 | /api/types | GET | Return all event types |  |
 | /api/events | POST | Post a new event | `<string>type`, `<object>properties` |
 | /api/events | GET | List all events | `<string>type`, `<int>start(0)`, `<int>limit` |
+| /api/events/:type/:date | PUT | Update an event | `<object>properties` |
 | /api/stats/categories | GET | Get categorized events stats | `<string>type`,`<string>field` |
 | /api/stats/time | GET | Get time stats | `<string>type`,`<string>fields`, `<string>interval`, `<string>func` |
 | /api/reports | POST | Create a new report | `<string>title` |
