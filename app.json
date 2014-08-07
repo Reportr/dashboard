@@ -4,7 +4,7 @@
     "website": "http://www.reportr.io/",
     "repository": "https://github.com/Reportr/dashboard",
     "logo": "https://avatars2.githubusercontent.com/u/7984166?v=2&s=200",
-    "keywords": ["node", "dashboard", "analytic],
+    "keywords": ["node", "dashboard", "analytic"],
     "addons": ["mongolab"],
     "env": {
         "RAILS_ENV": "production",
