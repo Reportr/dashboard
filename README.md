@@ -5,7 +5,7 @@ Reportr
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity or your real-life activity (with hardware trackers or applications like Runkeeper), some trackers are available on this organization.
+Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity or your real-life activity (with hardware trackers or applications like Runkeeper), some trackers are available on [this organization](https://github.com/Reportr).
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku. 
 
@@ -114,7 +114,17 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 
 Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
 
+## Trackers
+
+| Description | Link |
+| ---- | ----------- |
+| Google Chrome Navigation | https://github.com/Reportr/tracker-googlechrome |
+| Home ambient (temperature, humidity, light) | https://github.com/Reportr/tracker-home-ambient |
+| Memory and CPU of computer | https://github.com/Reportr/tracker-machine |
+| Battery data | https://github.com/hughrawlinson/tracker-machine-battery |
+
 ## Scale it
 
 Reportr can easily be scaled on Heroku (and compatibles), use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
+
 
