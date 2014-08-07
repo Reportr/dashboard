@@ -7,7 +7,6 @@
     "keywords": ["node", "dashboard", "analytic"],
     "addons": ["mongolab"],
     "env": {
-        "RAILS_ENV": "production",
         "AUTH_USERNAME": {
                 "description": "Username"
         },
