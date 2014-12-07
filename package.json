@@ -39,7 +39,8 @@
         "reportr": "./bin/reportr.js"
     },
     "scripts": {
-        "test": "export TESTING=true; mocha --reporter list"
+        "test": "export TESTING=true; mocha --reporter list",
+        "grunt": "grunt"
     },
     "engines": {
         "node": "0.10.x",
