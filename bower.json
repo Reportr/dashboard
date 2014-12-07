@@ -6,7 +6,9 @@
         "d3": "3.4.8",
         "rickshaw": "1.4.6",
         "datamaps": "0.3.3",
-        "moment": "2.7.0"
+        "moment": "2.7.0",
+        "leaflet": "~0.7.3",
+        "leaflet.markercluster": "~0.4.0"
     },
     "resolutions": {
         "d3": "3.4.8"
