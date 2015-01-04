@@ -80,7 +80,7 @@ See [types](#types) for informations about alert configurations.
 An event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
 
 ```
-$ curl -X POST --data '{ "type":"home.temperature", "properties": { "temperature": 66 } }' http://localhost:5000/api/events
+$ curl -X POST -H "Content-Type: application/json" --data '{ "type":"home.temperature", "properties": { "temperature": 66 } }' http://localhost:5000/api/events
 ```
 
 ## Visualizations
