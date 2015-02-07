@@ -3,8 +3,6 @@ Reportr
 
 > "Your life's personal dashboard."
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity or your real-life activity (with hardware trackers or applications like Runkeeper), some trackers are available on [this organization](https://github.com/Reportr).
 
 The project is entirely open source and you can host your own Reportr instance on your own server or Heroku.
@@ -16,7 +14,7 @@ The project is entirely open source and you can host your own Reportr instance o
 Reportr is really easy to run locally or on heroku-compatible services.
 
 ```
-$ git clone https://github.com/Reportr/dashboard.git
+$ git clone https://github.com/Reportr/your-instance.git
 $ npm install .
 ```
 
