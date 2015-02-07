@@ -1,9 +1,8 @@
 define([
     "hr/hr",
     "utils/dialogs",
-    "core/api",
-    "views/alerts/all"
-], function(hr, dialogs, api, allAlerts) {
+    "core/api"
+], function(hr, dialogs, api) {
     var Alert = hr.Model.extend({
         defaults: {
             type: null,
@@ -48,26 +47,40 @@ define([
             });
         },
 
+        // Return details about the type of alert
+        type: function() {
+            var that = this;
+            return api.execute("get:alerts/types")
+            .then(function(alertTypes) {
+                var alertType = _.find(alertTypes, { id: that.get("type") })
+                if (!alertType) throw "Invalid alert type";
+                return alertType;
+            });
+        },
+
         // Open configuration dialogs
         configure: function() {
             var that = this;
 
-            return dialogs.fields("Edit", [
-                {
-                    "title": {
-                        'label': "Title",
-                        'type': "text"
+            return that.type()
+            .then(function(alertType) {
+                return dialogs.fields("Edit", [
+                    {
+                        "title": {
+                            'label': "Title",
+                            'type': "text"
+                        },
+                        "condition": {
+                            'label': "Condition",
+                            'type': "text"
+                        }
                     },
-                    "condition": {
-                        'label': "Condition",
-                        'type': "text"
-                    }
-                },
-                allAlerts[this.get("type")].config
-            ], _.extend({}, this.get("configuration"), {
-                'title': this.get("title"),
-                'condition': this.get("condition")
-            }))
+                    alertType.options
+                ], _.extend({}, this.get("configuration"), {
+                    'title': this.get("title"),
+                    'condition': this.get("condition")
+                }));
+            })
             .then(function(data) {
                 that.set("title", data.title);
                 that.set("condition", data.condition);

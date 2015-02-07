@@ -14,10 +14,9 @@ require([
     "utils/i18n",
     "views/lists/visualizations",
     "views/visualizations/all",
-    "views/alerts/all",
     "views/dialogs/alerts",
     "text!resources/templates/main.html",
-], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, i18n, VisualizationsList, allVisualizations, allAlerts, AlertsDialog, template) {
+], function(_, $, Q, hr, args, api, settings, Report, initResources, Alerts, Reports, dialogs, i18n, VisualizationsList, allVisualizations, AlertsDialog, template) {
     // Configure hr
     hr.configure(args);
 
@@ -222,9 +221,12 @@ require([
             if (e) e.preventDefault();
             var that = this;
 
-            return api.execute("get:types")
+            return Q.all([
+                api.execute("get:types"),
+                api.execute("get:alerts/types")
+            ])
             .fail(dialogs.error)
-            .then(function(events) {
+            .spread(function(events, alertsTypes) {
 
                 return dialogs.fields(i18n.t("alerts.create.title"), {
                     "title": {
@@ -244,9 +246,9 @@ require([
                     "type": {
                         'label': i18n.t("alerts.create.fields.type.label"),
                         'type': "select",
-                        'options': _.chain(allAlerts)
-                        .map(function(a, aId) {
-                            return [aId, a.title];
+                        'options': _.chain(alertsTypes)
+                        .map(function(a) {
+                            return [a.id, a.title];
                         })
                         .object()
                         .value()
