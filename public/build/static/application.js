@@ -25940,7 +25940,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1423322525146,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1423323122883,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -55732,9 +55732,10 @@ define('models/report',[
 });
 define('models/alert',[
     "hr/hr",
+    "hr/utils",
     "utils/dialogs",
     "core/api"
-], function(hr, dialogs, api) {
+], function(hr, _, dialogs, api) {
     var Alert = hr.Model.extend({
         defaults: {
             type: null,
@@ -55808,9 +55809,9 @@ define('models/alert',[
                         }
                     },
                     alertType.options
-                ], _.extend({}, this.get("configuration"), {
-                    'title': this.get("title"),
-                    'condition': this.get("condition")
+                ], _.extend({}, that.get("configuration"), {
+                    'title': that.get("title"),
+                    'condition': that.get("condition")
                 }));
             })
             .then(function(data) {
@@ -55839,7 +55840,6 @@ define('collections/alerts',[
 
             return api.execute("get:alerts")
             .then(function(data) {
-                console.log("alerts", data);
                 that.reset(data);
                 return that;
             });

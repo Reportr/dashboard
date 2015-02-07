@@ -1,8 +1,9 @@
 define([
     "hr/hr",
+    "hr/utils",
     "utils/dialogs",
     "core/api"
-], function(hr, dialogs, api) {
+], function(hr, _, dialogs, api) {
     var Alert = hr.Model.extend({
         defaults: {
             type: null,
@@ -76,9 +77,9 @@ define([
                         }
                     },
                     alertType.options
-                ], _.extend({}, this.get("configuration"), {
-                    'title': this.get("title"),
-                    'condition': this.get("condition")
+                ], _.extend({}, that.get("configuration"), {
+                    'title': that.get("title"),
+                    'condition': that.get("condition")
                 }));
             })
             .then(function(data) {
