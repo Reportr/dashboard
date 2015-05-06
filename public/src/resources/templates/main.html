@@ -1,0 +1,38 @@
+<% if (hasReport) { %>
+<div class="main-header">
+    <div class="container">
+        <h1 class="report-title action-report-select"><%- report.get("title") %></h1>
+    </div>
+</div>
+<div class="main-toolbar">
+    <div class="group-actions primary">
+        <button class="btn btn-link action-report-create" title="<%- hr.i18n.t("toolbar.createReport") %>"><span class="octicon octicon-pulse"></span></button>
+        <button class="btn btn-link action-visualization-create" title="<%- hr.i18n.t("toolbar.createVisualization") %>"><span class="octicon octicon-plus"></span></button>
+        <button class="btn btn-link action-alert-manage" title="<%- hr.i18n.t("toolbar.manageAlerts") %>"><span class="octicon octicon-rss"></span></button>
+        <button class="btn btn-link action-alert-create" title="<%- hr.i18n.t("toolbar.createAlert") %>"><span class="octicon octicon-mail"></span></button>
+        <button class="btn btn-link action-report-edit" title="<%- hr.i18n.t("toolbar.editReport") %>"><span class="octicon octicon-gear"></span></button>
+    </div>
+    <div class="group-actions secondary">
+        <a href="https://github.com/Reportr/dashboard" class="btn btn-link" target="_blank" title="<%- hr.i18n.t("toolbar.help") %>"><span class="octicon octicon-question"></span></a>
+        <button class="btn btn-link action-report-remove" title="<%- hr.i18n.t("toolbar.removeReport") %>"><span class="octicon octicon-trashcan"></span></button>
+        <button class="btn btn-link action-settings" title="<%- hr.i18n.t("toolbar.settings") %>"><span class="octicon octicon-settings"></span></button>
+    </div>
+</div>
+<div class="main-container">
+    <div class="main-body">
+        <div class="report-body"></div>
+    </div>
+</div>
+<% } else { %>
+<div class="main-start">
+    <div class="message-no-reports">
+        <div class="icon">
+            <span class="octicon octicon-pulse"></span>
+        </div>
+        <p><%- hr.i18n.t("reports.empty.message") %></p>
+        <p>
+            <button class="btn btn-default btn-lg action-report-create"><%- hr.i18n.t("reports.empty.create") %></button>
+        </p>
+    </div>
+</div>
+<% } %>

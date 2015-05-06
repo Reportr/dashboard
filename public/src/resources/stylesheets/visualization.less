@@ -1,0 +1,92 @@
+.visualizations-list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+
+    .visualization-el {
+        padding: @grid-gutter-width/2;
+
+        &.move,
+        &.active.move {
+            position: fixed;
+            z-index: 100000;
+            pointer-events:none;
+
+            * {
+                pointer-events:none;
+            }
+        }
+
+        &.dragover {
+            &.col-md-6 {
+                border-left: 2px solid @brand-success;
+            }
+
+            &.col-md-12 {
+                border-top: 2px solid @brand-success;
+            }
+        }
+
+        .visualization-container {
+            padding: 0px;
+            margin: 0px;
+            margin-bottom: @grid-gutter-width;
+            background: #fff;
+            border-radius: 2px;
+            border: 1px solid #ebeff6;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+
+            .visualization-header {
+                padding: 5px 15px;
+                .clearfix();
+
+                h3 {
+                    margin: 0px;
+                    padding: 0px;
+
+                    font-size: 15px;
+                    line-height: 34px;
+                }
+
+                .btn-link {
+                    color: @visualization-action-color;
+
+                    &:hover, &:focus {
+                        color: darken(@visualization-action-color, 15%);
+                    }
+                    &.active {
+                        color: @brand-success;
+                        .box-shadow(none);
+                    }
+                }
+
+                .visualization-actions {
+                    opacity: 0;
+                    .transition(all ease @transition-duration);
+                }
+
+                &:hover {
+                    .visualization-actions {
+                        opacity: 1;
+                    }
+                }
+            }
+
+            .visualization-body {
+                min-height: 80px;
+
+                .visualization {
+                    height: @visualization-content-height;
+                    padding: @visualization-content-padding;
+                }
+            }
+        }
+
+
+        &.size-big {
+            .visualization-container .visualization-body .visualization {
+                height: @visualization-content-big-height;
+            }
+        }
+    }
+}

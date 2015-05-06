@@ -1,0 +1,68 @@
+@import "../../vendors/bootstrap/less/bootstrap.less";
+@import (less) "../../vendors/rickshaw/rickshaw.css";
+@import (less) "../../vendors/leaflet/dist/leaflet.css";
+@import (less) "../../vendors/leaflet.markercluster/dist/MarkerCluster.css";
+@import (less) "../../vendors/leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+@import "variables.less";
+
+@import "intro.less";
+@import "header.less";
+@import "toolbar.less";
+@import "body.less";
+@import "start.less";
+@import "alerts.less";
+
+@import "visualization.less";
+@import "visualizations/time.less";
+@import "visualizations/bar.less";
+@import "visualizations/value.less";
+@import "visualizations/map.less";
+@import "visualizations/table.less";
+
+* {
+    -webkit-overflow-scrolling: touch;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: none;
+    -webkit-touch-callout: none;
+    -webkit-font-smoothing: antialiased;
+}
+
+body .octicon {
+    font-size: inherit;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: @main-body-background;
+
+    .modal-content {
+        .box-shadow(none);
+        border-radius: 1px;
+    }
+
+    .btn, .btn:focus, .btn:hover {
+        outline: none !important;
+    }
+}
+
+.message-list-empty {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto;
+    text-align: center;
+
+    span {
+        font-size: 80px;
+        line-height: 120px;
+        color: #b3b3b1;
+    }
+
+    p {
+        color: #b3b3b1;
+    }
+}
+

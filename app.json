@@ -1,0 +1,17 @@
+{
+    "name": "Reportr",
+    "description": "Your life's personal dashboard.",
+    "website": "http://www.reportr.io/",
+    "repository": "https://github.com/Reportr/dashboard",
+    "logo": "https://avatars2.githubusercontent.com/u/7984166?v=2&s=200",
+    "keywords": ["node", "dashboard", "analytic"],
+    "addons": ["mongolab"],
+    "env": {
+        "AUTH_USERNAME": {
+                "description": "Username"
+        },
+        "AUTH_PASSWORD": {
+                "description": "Password"
+        }
+    }
+}

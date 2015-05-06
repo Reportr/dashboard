@@ -1,0 +1,233 @@
+{
+    "id": "en",
+    "language": "English",
+    "toolbar": {
+        "createReport": "Create a report",
+        "createVisualization": "Create a visualization",
+        "manageAlerts": "Manage alerts",
+        "createAlert": "Create an alert",
+        "editReport": "Edit report",
+        "help": "Help",
+        "removeReport": "Remove report",
+        "settings": "Settings"
+    },
+    "reports": {
+        "empty": {
+            "message": "There is no reports yet to show.",
+            "create": "Create a report"
+        }
+    },
+    "alert": {
+        "edit": "Edit",
+        "remove": "Remove",
+        "disable": "Disable",
+        "enable": "Enable"
+    },
+    "dialogs": {
+        "alert": {
+            "title": "Alert",
+            "close": "Close"
+        },
+        "confirm": {
+            "title": "Confirm",
+            "cancel": "Cancel",
+            "ok": "Ok"
+        },
+        "prompt": {
+            "title": "Input",
+            "ok": "Ok"
+        },
+        "select": {
+            "title": "Select",
+            "ok": "Ok"
+        },
+        "fields": {
+            "title": "Input",
+            "ok": "Ok"
+        }
+    },
+    "alerts": {
+        "manage": {
+            "title": "Manage alerts",
+            "create": "Create a new alert",
+            "ok": "Ok"
+        },
+        "create": {
+            "title": "Create a new alert",
+            "fields": {
+                "title": {
+                    "label": "Title"
+                },
+                "eventName": {
+                    "label": "Event"
+                },
+                "type": {
+                    "label": "Type"
+                },
+                "interval": {
+                    "label": "Interval",
+                    "help": "Minimum interval for notifications in minutes."
+                },
+                "condition": {
+                    "label": "Condition",
+                    "help": "Learn more about alert conditions in the documentation"
+                }
+            }
+        },
+        "types": {
+            "mail": {
+                "title": "Mail",
+                "config": {
+                    "to": {
+                        "label": "To",
+                        "help": "Addresses separated by commas"
+                    }
+                }
+            },
+            "sms": {
+                "title": "SMS",
+                "config": {
+                    "to": {
+                        "label": "To",
+                        "help": "Phone number"
+                    },
+                    "body": {
+                        "label": "Message",
+                        "help": "Template for the message body."
+                    }
+                }
+            },
+            "webhook": {
+                "title": "Webhook",
+                "config": {
+                    "url": {
+                        "label": "Url"
+                    }
+                }
+            }
+        }
+    },
+    "reports": {
+        "select": {
+            "title": "Select a report",
+            "message": "Choose a new report to open."
+        },
+        "create": {
+            "title": "Create a new report",
+            "fields": {
+                "title": "Title"
+            }
+        },
+        "edit": {
+            "title": "Edit report",
+            "fields": {
+                "title": "Title"
+            }
+        },
+        "remove": {
+            "title": "Remove this report?"
+        },
+        "empty": {
+            "message": "There is no reports yet to show.",
+            "create": "Create a report"
+        }
+    },
+    "visualization": {
+        "create": {
+            "title": "New visualization",
+            "fields": {
+                "eventName": "Event",
+                "type": "Type"
+            }
+        }
+    },
+    "visualizations": {
+        "bar": {
+            "title": "Bar Chart",
+            "config": {
+                "field": "Field",
+                "max": "Max Bars"
+            }
+        },
+        "map": {
+            "title": "Map",
+            "config": {
+                "message": {
+                    "label": "Marker Message",
+                    "help": "Template for the message, see documentation for more infos about templates."
+                }
+            }
+        },
+        "table": {
+            "title": "Table",
+            "date": "Date",
+            "config": {
+                "fields": {
+                    "label": "Fields",
+                    "help": "Separated by comas"
+                },
+                "limit": {
+                    "label": "Limit"
+                }
+            }
+        },
+        "time": {
+            "title": "Time Chart",
+            "config": {
+                "fields": {
+                    "label": "Fields",
+                    "help": "Separated by comas"
+                },
+                "limit": {
+                    "label": "Limit",
+                    "help": "Max number of events"
+                },
+                "interval": {
+                    "label": "Interval",
+                    "minute": "Minute",
+                    "hour": "Hour",
+                    "day": "Day",
+                    "week": "Week",
+                    "month": "Month"
+                },
+                "name": {
+                    "label": "Name",
+                    "help": "Template for the hover serie name, see documentation for more infos about templates."
+                },
+                "interpolation": {
+                    "label": "Interpolation",
+                    "linear": "Linear - straight lines between points",
+                    "step-after": "Step After - square steps from point to point",
+                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",
+                    "basis": "Basis - smooth curves via B-splines"
+                },
+                "fillEmpty": {
+                    "label": "Fill Empty",
+                    "help": "Fill when there is no events with zero values."
+                }
+            }
+        },
+        "value": {
+            "title": "Last Value",
+            "config": {
+                "field": {
+                    "label": "Field"
+                },
+                "value": {
+                    "label": "Value",
+                    "help": "Template for the value display, see documentation for more infos about templates."
+                },
+                "label": {
+                    "label": "Label",
+                    "help": "Template for the label, see documentation for more infos about templates."
+                }
+            }
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "language": {
+            "label": "Language"
+        }
+    }
+}

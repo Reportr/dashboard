@@ -1,0 +1,43 @@
+.visualization.visualization-table {
+    width: 100%;
+    position: relative;
+
+    .table-container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: absolute;
+        top: 0px;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+
+        tr {
+            display: block;
+        }
+
+        th, td {
+            display: block;
+            float: left;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        thead {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+        }
+
+        tbody {
+            position: absolute;
+            top: 38px;
+            left: 0;
+            right: 0;
+            overflow: auto;
+            bottom: 0px;
+        }
+    }
+}

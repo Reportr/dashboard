@@ -1,0 +1,58 @@
+.visualization.visualization-bar {
+    position: relative;
+    .clearfix();
+
+    .bar {
+        height: 100%;
+        display: block;
+        vertical-align: baseline;
+        padding-top: @bar-label-height;
+        position: relative;
+        float: left;
+
+        .bar-inner {
+            background: @brand-success;
+            color: #fff;
+
+            margin: 0 2px;
+
+            position: absolute;
+            bottom: @bar-label-height;
+            width: 100%;
+
+            border-radius: 2px;
+            border-right: 2px solid #fff;
+
+            text-align: center;
+            font-size: 20px;
+
+            display: table;
+            overflow: hidden;
+
+            .percent {
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+            }
+        }
+
+        .bar-label {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+            height: @bar-label-height;
+            text-align: center;
+            font-size: 12px;
+            line-height: @bar-label-height;
+            text-overflow: hidden;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        &:hover {
+            .bar-inner {
+                background: darken(@brand-success, 20%);
+            }
+        }
+    }
+}

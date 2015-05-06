@@ -1,0 +1,21 @@
+.main-container {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    -webkit-overflow-scrolling: touch;
+    overflow: auto;
+    z-index: 1;
+}
+
+.main-body {
+    margin-top: @main-header-height;
+    margin-left: @main-toolbar-width;
+    padding: @main-body-padding;
+
+    @media (max-width: @screen-sm-min) {
+        margin-top: @main-header-height*2;
+        margin-left: 0px;
+    }
+}
