@@ -16,7 +16,9 @@ define([
         template: templateFile,
 
         templateContext: function() {
-            var fields = this.model.getConf("fields").split(",");
+            var fields = _.map(this.model.getConf("fields", "").split(","),
+                function (str) { return str.trim() }
+            );
 
             return {
                 model: this.model,

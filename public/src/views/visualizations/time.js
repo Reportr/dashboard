@@ -27,7 +27,11 @@ define([
                 var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var series = _.chain(this.model.getConf("fields", "").split(",")).compact().concat([""])
+                var scale = d3.scale.linear().domain([0, 1]).nice();
+                var fieldNames = _.map(this.model.getConf("fields", "").split(","), 
+                    function (str) { return str.trim() }
+                );
+                var series = _.chain(fieldNames).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
 
@@ -36,6 +40,7 @@ define([
                             'field': field
                         }),
                         color: '#a6d87a',
+                        scale: scale,
                         data: _.map(that.data, function(d) {
                             return {
                                 x: d.date,
