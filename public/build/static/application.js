@@ -25940,7 +25940,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1431021065783,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1431025294882,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -29421,7 +29421,9 @@ define('views/visualizations/table',[
         template: templateFile,
 
         templateContext: function() {
-            var fields = this.model.getConf("fields").split(",");
+            var fields = _.map(this.model.getConf("fields", "").split(","),
+                function (str) { return str.trim() }
+            );
 
             return {
                 model: this.model,
@@ -29456,6 +29458,7 @@ define('views/visualizations/table',[
         }
     };
 });
+
 define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- $.template(templates.value, data) %>\n        </span>\n    </p>\n    <p class="value-label"><%- $.template(templates.label, data) %></p>\n</div>';});
 
 define('views/visualizations/value',[
@@ -42803,7 +42806,6 @@ define('views/visualizations/time',[
                 var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var scale = d3.scale.linear().domain([0, 1]).nice();
                 var fieldNames = _.map(this.model.getConf("fields", "").split(","), 
                     function (str) { return str.trim() }
                 );
@@ -42816,7 +42818,6 @@ define('views/visualizations/time',[
                             'field': field
                         }),
                         color: '#a6d87a',
-                        scale: scale,
                         data: _.map(that.data, function(d) {
                             return {
                                 x: d.date,
