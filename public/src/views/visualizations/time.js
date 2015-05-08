@@ -27,7 +27,10 @@ define([
                 var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var series = _.chain(this.model.getConf("fields", "").split(",")).compact().concat([""])
+                var fieldNames = _.map(this.model.getConf("fields", "").split(","), 
+                    function (str) { return str.trim() }
+                );
+                var series = _.chain(fieldNames).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
 

@@ -24543,7 +24543,7 @@ define('hr/model',[
 
             // Define options
             options = _.defaults(options || {}, {
-                
+
             });
 
             scope = basescope.split(".");
@@ -24594,11 +24594,10 @@ define('hr/model',[
             // Calcul new attributes
             newattributes = _.deepExtend({}, this.attributes || {}, attrs);
             if (!options.silent) {
-                diffs = jsondiffpatch.diff(this._prevAttributes, newattributes);
-                if (_.size(diffs) == 0) diffs = jsondiffpatch.diff(this.attributes, newattributes);
+                diffs = jsondiffpatch.diff(this._prevAttributes || {}, newattributes);
             }
-            this._prevAttributes = this._prevAttributes == null ? _.deepClone(newattributes) : this.attributes;
             this.attributes = newattributes;
+            this._prevAttributes = _.deepClone(this.attributes);
 
             // New unique id
             var oldId = this.id;
@@ -24751,7 +24750,7 @@ define('hr/collection',[
         /**
          * The JSON representation of a Collection is an array of the
          * models' attributes.
-         * 
+         *
          * @method toJSON
          * @return {Array} Array of models' attributes
          */
@@ -24761,7 +24760,7 @@ define('hr/collection',[
 
         /**
          * Get the model at the given index.
-         * 
+         *
          * @method at
          * @param {number} index
          * @return {Model} Model at the given index
@@ -24772,7 +24771,7 @@ define('hr/collection',[
 
         /**
          * Return models with matching attributes. Useful for simple cases of `filter`.
-         * 
+         *
          * @method where
          * @return {Array} Array of models
          */
@@ -24788,7 +24787,7 @@ define('hr/collection',[
 
         /**
          * Pluck an attribute from each model in the collection.
-         * 
+         *
          * @method pluck
          * @param {string} attr name of the attribute to pluck
          * @return {Array} Array of values
@@ -24801,7 +24800,7 @@ define('hr/collection',[
          * Force the collection to re-sort itself. You don't need to call this under
          * normal circumstances, as the set will maintain sort order as each item
          * is added.
-         * 
+         *
          * @method sort
          * @param {object} [options] options for sorting
          * @chainable
@@ -24814,14 +24813,14 @@ define('hr/collection',[
             } else {
                 this.models.sort(_.bind(this.comparator, this));
             }
-            
+
             if (!options.silent) this.trigger('sort', this, options);
             return this;
         },
 
         /**
          * Reset the collection with new models or new data.
-         * 
+         *
          * @method reset
          * @param {array} models array of models or data to set in the collection
          * @param {object} [options] options for reseting
@@ -24858,7 +24857,7 @@ define('hr/collection',[
 
         /**
          * Add a model to the collection (or an array of model)
-         * 
+         *
          * @method add
          * @param {Model} model model or data to add (could also be an array)
          * @param {object} [options] options for adding
@@ -24868,10 +24867,9 @@ define('hr/collection',[
             var index, existing;
 
             if (_.isArray(model)) {
-                _.each(model, function(m) {
-                    this.add(m, _.clone(options));
+                return _.map(model, function(m) {
+                    return this.add(m, _.clone(options));
                 }, this);
-                return this;
             }
 
             // Manage {list:[], n:0} for infinite list
@@ -24909,7 +24907,7 @@ define('hr/collection',[
             this.trigger('add', model, this, options);
 
             if (this.comparator) this.sort({silent: options.silent});
-            return this;
+            return model;
         },
 
         /*
@@ -24922,7 +24920,7 @@ define('hr/collection',[
 
         /**
          * Remove a model from the collection.
-         * 
+         *
          * @method remove
          * @param {Model} model model or data to remove
          * @param {object} [options] options for removing
@@ -24965,7 +24963,7 @@ define('hr/collection',[
         /**
          * Pipe this collection into another one: all the models from this collection
          *  will always also be in the other collection
-         * 
+         *
          * @method pipe
          * @param {Collection} to collection to pipe to
          * @chainable
@@ -24993,7 +24991,7 @@ define('hr/collection',[
 
         /**
          * Add a model at the end of the collection.
-         * 
+         *
          * @method push
          * @param {Model} model model or data to add
          * @param {object} [options] options for adding
@@ -25007,7 +25005,7 @@ define('hr/collection',[
 
         /**
          * Add a model to the beginning of the collection.
-         * 
+         *
          * @method unshift
          * @param {Model} model model or data to add
          * @param {object} [options] options for adding
@@ -25021,7 +25019,7 @@ define('hr/collection',[
 
         /**
          * Remove a model from the end of the collection.
-         * 
+         *
          * @method pop
          * @param {object} [options]
          * @return {Model}
@@ -25034,7 +25032,7 @@ define('hr/collection',[
 
         /**
          * Remove a model from the beginning of the collection.
-         * 
+         *
          * @method shift
          * @param {object} [options]
          * @return {Model}
@@ -25087,7 +25085,7 @@ define('hr/collection',[
 
         /**
          * Get a model from the set by id.
-         * 
+         *
          * @method get
          * @param {string|Model} obj object id or complete object
          * @return {Model}
@@ -25099,7 +25097,7 @@ define('hr/collection',[
 
         /**
          * Return number of elements in the collection
-         * 
+         *
          * @method count
          * @return {number}
          */
@@ -25109,7 +25107,7 @@ define('hr/collection',[
 
         /**
          * Return the total number of elements in the source (for exemple in the database)
-         * 
+         *
          * @method totalCount
          * @return {number}
          */
@@ -25119,7 +25117,7 @@ define('hr/collection',[
 
         /**
          * Check if there is more elements available from the source (database, ...)
-         * 
+         *
          * @method getMore
          * @return {boolean}
          */
@@ -25129,7 +25127,7 @@ define('hr/collection',[
 
         /**
          * Get more elements from an infinite collection
-         * 
+         *
          * @method getMore
          * @chainable
          */
@@ -25165,7 +25163,7 @@ define('hr/collection',[
 
         /**
          * Refresh the collection with data from the source
-         * 
+         *
          * @method refresh
          */
         refresh: function() {
@@ -25203,7 +25201,7 @@ define('hr/list',[
 
     var ItemView = View.extend({
         tagName: "li",
-        
+
         initialize: function() {
             ItemView.__super__.initialize.apply(this, arguments);
             this.collection = this.options.collection;
@@ -25229,7 +25227,7 @@ define('hr/list',[
         events: {
             "click *[data-list-action='showmore']": "getItems"
         },
-        
+
         /*
          *  Initialize the list view
          */
@@ -25309,7 +25307,7 @@ define('hr/list',[
                 item.update();
                 this.applyFilter(item);
             });
-            this.listenTo(model, "id", function() {
+            this.listenTo(model, "id", function(newId, oldId) {
                 this.items[newId] = this.items[oldId];
                 delete this.items[oldId];
             });
@@ -25491,7 +25489,7 @@ define('hr/list',[
             } else {
                 this._filter = null;
             }
-            
+
             return this.count();
         },
 
@@ -25942,7 +25940,7 @@ Logger, Requests, Urls, Storage, Cache, Cookies, Template, Resources, Offline, B
     
     return hr;
 });
-define('hr/args',[],function() { return {"revision":1405275614307,"baseUrl":"/"}; });
+define('hr/args',[],function() { return {"revision":1431025294882,"baseUrl":"/"}; });
 define('core/api',[
     'hr/hr'
 ], function(hr) {
@@ -29423,7 +29421,9 @@ define('views/visualizations/table',[
         template: templateFile,
 
         templateContext: function() {
-            var fields = this.model.getConf("fields").split(",");
+            var fields = _.map(this.model.getConf("fields", "").split(","),
+                function (str) { return str.trim() }
+            );
 
             return {
                 model: this.model,
@@ -29458,6 +29458,7 @@ define('views/visualizations/table',[
         }
     };
 });
+
 define('text!resources/templates/visualizations/value.html',[],function () { return '<div class="content">\n    <p>\n        <span class="value">\n        <%- $.template(templates.value, data) %>\n        </span>\n    </p>\n    <p class="value-label"><%- $.template(templates.label, data) %></p>\n</div>';});
 
 define('views/visualizations/value',[
@@ -42805,7 +42806,10 @@ define('views/visualizations/time',[
                 var tplMessage = that.model.getConf("name") || "<%- (field? field : 'Count') %>";
 
                 // Build series from data
-                var series = _.chain(this.model.getConf("fields", "").split(",")).compact().concat([""])
+                var fieldNames = _.map(this.model.getConf("fields", "").split(","), 
+                    function (str) { return str.trim() }
+                );
+                var series = _.chain(fieldNames).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
 
@@ -42902,6 +42906,7 @@ define('views/visualizations/time',[
         }
     };
 });
+
 !function() {
   var topojson = {
     version: "1.4.9",
