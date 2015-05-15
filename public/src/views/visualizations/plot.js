@@ -12,11 +12,10 @@ define([
 ], function(_, $, hr, d3, Rickshaw, api, i18n, template, BaseVisualization, templateFile) {
     window.d3 = d3;
 
-    var INTERVALS = ["minute", "hour", "day", "week", "month"];
     var INTERPOLATIONS = ['linear', 'step-after', 'cardinal', 'basis'];
 
-    var TimeVisualization = BaseVisualization.extend({
-        className: "visualization visualization-time",
+    var PlotVisualization = BaseVisualization.extend({
+        className: "visualization visualization-plot",
         defaults: {},
         events: {},
         template: templateFile,
@@ -30,6 +29,7 @@ define([
                 var fieldNames = _.map(this.model.getConf("fields", "").split(","), 
                     function (str) { return str.trim() }
                 );
+                var sampleName = this.model.getConf("sample", "").trim();
                 var series = _.chain(fieldNames).compact().concat([""])
                 .map(function(field, i, list) {
                     if (list.length > 1 && !field) return null;
@@ -39,10 +39,18 @@ define([
                             'field': field
                         }),
                         color: '#a6d87a',
-                        data: _.map(that.data, function(d) {
+                        data: _.map(
+                            _.sortBy(
+                                _.filter(
+                                    that.data, 
+                                    function(n) { return n['properties'][field]; }
+                                ), 
+                                function(n) { return n['properties'][sampleName]; }
+                            ), 
+                            function(d) {
                             return {
-                                x: d.date,
-                                y: field? d.fields[field] : d.n
+                                x: d.properties[sampleName],
+                                y: field? d.properties[field] : d.n
                             };
                         })
                     }
@@ -63,67 +71,52 @@ define([
                 var hoverDetail = new Rickshaw.Graph.HoverDetail( {
                     graph: graph,
                     xFormatter: function(x) {
-                        return template("<%- $.date(x) %>", {'x': x});
+                        return template("<%- x %>", {'x': x});
                     }
                 });
             } catch(e) {
                 console.error(e);
             }
 
-            return TimeVisualization.__super__.finish.apply(this, arguments);
+            return PlotVisualization.__super__.finish.apply(this, arguments);
         },
 
         pull: function() {
-            return api.execute("get:stats/time", {
+            return api.execute("get:events", {
                 limit: this.model.getConf("limit"),
                 type: this.model.get("eventName"),
-                fields: this.model.getConf("fields"),
-                interval: this.model.getConf("interval"),
-                fillEmpty: this.model.getConf("fillEmpty", false)? "true" : undefined
             });
         }
     });
 
     return {
-        title: i18n.t("visualizations.time.title"),
-        View: TimeVisualization,
+        title: i18n.t("visualizations.plot.title"),
+        View: PlotVisualization,
         config: {
+            'sample': {
+                'type': "text",
+                'label': i18n.t("visualizations.plot.config.sample.label"),
+                'help': i18n.t("visualizations.plot.config.sample.help")
+            },
             'fields': {
                 'type': "text",
-                'label': i18n.t("visualizations.time.config.fields.label"),
-                'help': i18n.t("visualizations.time.config.fields.help")
+                'label': i18n.t("visualizations.plot.config.fields.label"),
+                'help': i18n.t("visualizations.plot.config.fields.help")
             },
             'limit': {
                 'type': "number",
-                'label': i18n.t("visualizations.time.config.limit.label"),
-                'help': i18n.t("visualizations.time.config.limit.help"),
+                'label': i18n.t("visualizations.plot.config.limit.label"),
+                'help': i18n.t("visualizations.plot.config.limit.help"),
                 'default': 1000,
                 'min': 100,
                 'max': 1000000
             },
-            'interval': {
-                'type': "select",
-                'label': i18n.t("visualizations.time.config.interval.label"),
-                'default': "hour",
-                'options': _.chain(INTERVALS). map(function(i) { return [i, i18n.t("visualizations.time.config.interval."+i)] }).object().value()
-            },
-            'name': {
-                'type': "text",
-                'label': i18n.t("visualizations.time.config.name.label"),
-                'help': i18n.t("visualizations.time.config.name.help")
-            },
             'interpolation': {
                 'type': "select",
-                'label': i18n.t("visualizations.time.config.interpolation.label"),
+                'label': i18n.t("visualizations.plot.config.interpolation.label"),
                 'default': "cardinal",
-                'options': _.chain(INTERPOLATIONS). map(function(i) { return [i, i18n.t("visualizations.time.config.interpolation."+i)] }).object().value()
+                'options': _.chain(INTERPOLATIONS). map(function(i) { return [i, i18n.t("visualizations.plot.config.interpolation."+i)] }).object().value()
             },
-            'fillEmpty': {
-                'type': "checkbox",
-                'label': i18n.t("visualizations.time.config.fillEmpty.label"),
-                'help': i18n.t("visualizations.time.config.fillEmpty.help"),
-                'default': true
-            }
         }
     };
 });
