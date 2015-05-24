@@ -161,6 +161,7 @@ require([
                 return that.reports.loadAll();
             })
             .then(function() {
+                that.setReport(that.reports.first());
                 that.update();
             })
             .fail(dialogs.error);
