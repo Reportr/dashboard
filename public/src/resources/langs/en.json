@@ -207,6 +207,38 @@
                 }
             }
         },
+        "plot": {
+            "title": "Plot Chart",
+            "config": {
+                "sample": {
+                    "label": "Sampling Points",
+                    "help": "X-Axis of this plot"
+                },
+                "fields": {
+                    "label": "Fields",
+                    "help": "Separated by commas"
+                },
+                "limit": {
+                    "label": "Limit",
+                    "help": "Max number of events"
+                },
+                "name": {
+                    "label": "Name",
+                    "help": "Template for the hover series name, see documentation for more infos about templates."
+                },
+                "interpolation": {
+                    "label": "Interpolation",
+                    "linear": "Linear - straight lines between points",
+                    "step-after": "Step After - square steps from point to point",
+                    "cardinal": "Cardinal - smooth curves via cardinal splines (default)",
+                    "basis": "Basis - smooth curves via B-splines"
+                },
+                "fillEmpty": {
+                    "label": "Fill Empty",
+                    "help": "Fill when there is no events with zero values."
+                }
+            }
+        },
         "value": {
             "title": "Last Value",
             "config": {
