@@ -10,6 +10,7 @@
         "url": "https://github.com/Reportr/dashboard.git"
     },
     "dependencies": {
+        "cors": "2.6.0",
         "lodash": "2.4.1",
         "q": "1.0.1",
         "mongoose-q": "0.0.10",
