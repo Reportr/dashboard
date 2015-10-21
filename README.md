@@ -5,15 +5,15 @@ Reportr
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity or your real-life activity (with hardware trackers or applications like Runkeeper), some trackers are available on [this organization](https://github.com/Reportr).
+Reportr is a complete application which works like a dashboard for tracking events in your life (using a very simple API). With a simple interface, it helps you track and display your online activity, or your real-life activity (with hardware trackers or applications like Runkeeper). Some trackers are available on [this organization](https://github.com/Reportr).
 
-The project is entirely open source and you can host your own Reportr instance on your own server or Heroku. 
+The project is entirely open source, and you can host your own Reportr instance on your own server, or Heroku. 
 
 [![Screen Preview](./preview.png)](./preview.png)
 
 ## Start your instance
 
-Reportr is really easy to run locally or on heroku-compatible services.
+Reportr is really easy to run locally, or on heroku-compatible services.
 
 ```
 $ git clone https://github.com/Reportr/dashboard.git
@@ -37,7 +37,7 @@ $ git push heroku master
 
 ## API and Events
 
-Reportr uses an HTTP REST API to track events. Datas are always JSON encoded.
+Reportr uses an HTTP REST API to track events. Data is always JSON encoded.
 
 | Endpoint | HTTP Method | Description | Arguments |
 | -------- | ----------- | ----------- | --------- |
@@ -73,11 +73,11 @@ Reportr is configured using environment variables.
 | AUTH_USERNAME | Username for authentication |
 | AUTH_PASSWORD | Password for authentication |
 
-See [types](#types) for informations about alert configurations.
+See [types](#types) for information about alert configurations.
 
 ## Events
 
-An event represent something to monitor at a defined date. For example if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
+An event represents something to monitor at a defined date. For example, if I'm monitoring the temperature in my home, I'll post an event `home.temperature` with a property `temp`:
 
 ```
 $ curl -X POST -H "Content-Type: application/json" --data '{ "type":"home.temperature", "properties": { "temperature": 66 } }' http://localhost:5000/api/events
@@ -85,7 +85,7 @@ $ curl -X POST -H "Content-Type: application/json" --data '{ "type":"home.temper
 
 ## Visualizations
 
-A visualization is a configured way to show data, for example in a pie, bar chart or time graph.
+A visualization is a configured way to show data. For example, in a pie, bar chart, or time graph.
 
 #### Types
 
@@ -100,7 +100,7 @@ Visualizations accept templates as most of rendering options. Template are proce
 
 ## Alerts
 
-Reportr lets you configure alerts to be triggered when specific condition is valid at a specific interval.
+Reportr lets you configure alerts to be triggered when a specific condition is valid at a specific interval.
 
 #### Types
 
@@ -112,7 +112,7 @@ Reportr lets you configure alerts to be triggered when specific condition is val
 
 #### Condition
 
-Condition for alerts are really easy to write, for example: `COUNT > 9`, this condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object, for example: `event.temperature > 80`.
+Conditions for alerts are really easy to write. For example: `COUNT > 9`. This condition will be valid if at least 10 events have been posted in the alert interval. Conditions can also use the event object. For example: `event.temperature > 80`.
 
 ## Trackers
 
@@ -125,6 +125,6 @@ Condition for alerts are really easy to write, for example: `COUNT > 9`, this co
 
 ## Scale it
 
-Reportr can easily be scaled on Heroku (and compatibles), use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
+Reportr can easily be scaled on Heroku (and compatible services). Use the `REDIS_URL` to enable a task queue between **workers** and **web** processes.
 
 
